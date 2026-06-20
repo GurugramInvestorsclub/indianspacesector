@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Shield } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,12 +17,54 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Sync active section highlight using IntersectionObserver
+  useEffect(() => {
+    const sections = [
+      "overview",
+      "origins",
+      "inflection",
+      "pillars",
+      "deepdive-launch",
+      "deepdive-satellites",
+      "deepdive-ground",
+      "deepdive-applications",
+      "case-studies",
+      "join"
+    ];
+
+    const observerOptions = {
+      root: null, // Viewport
+      rootMargin: "-20% 0px -40% 0px", // Trigger when center of viewport is occupied
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const navLinks = [
-    { label: "OVERVIEW", href: "#overview" },
-    { label: "THE STACK", href: "#stack" },
-    { label: "ANALYSIS", href: "#analysis" },
-    { label: "THE OPPORTUNITY", href: "#opportunity" },
-    { label: "JOIN NOW", href: "#join" },
+    { label: "OVERVIEW", href: "#overview", activeKeys: ["overview", "inflection"] },
+    { label: "ORIGINS", href: "#origins", activeKeys: ["origins"] },
+    { label: "THE STACK", href: "#pillars", activeKeys: ["pillars"] },
+    {
+      label: "DEEP-DIVES",
+      href: "#deepdive-launch",
+      activeKeys: ["deepdive-launch", "deepdive-satellites", "deepdive-ground", "deepdive-applications"]
+    },
+    { label: "CASE STUDIES", href: "#case-studies", activeKeys: ["case-studies"] },
+    { label: "JOIN NOW", href: "#join", activeKeys: ["join"] }
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -42,6 +85,10 @@ export function Navbar() {
     }
   };
 
+  const isLinkActive = (keys: string[]) => {
+    return keys.includes(activeSection);
+  };
+
   return (
     <>
       <header
@@ -55,23 +102,32 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-white font-sans font-bold text-sm md:text-base tracking-[0.2em] uppercase hover:opacity-85 transition-opacity"
+            className="text-white font-sans font-bold text-sm md:text-base tracking-[0.2em] uppercase hover:opacity-85 transition-opacity flex items-center gap-2.5"
           >
-            INDIA'S SPACE REVOLUTION
+            <Shield className="w-4 h-4 text-[#00F0FF] animate-pulse shrink-0" />
+            <span>INDIA'S SPACE REVOLUTION</span>
           </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleScrollTo(e, link.href)}
-                className="text-[11px] font-mono tracking-[0.18em] text-white/55 hover:text-white transition-colors duration-300"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const active = isLinkActive(link.activeKeys);
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleScrollTo(e, link.href)}
+                  className={`text-[11px] font-mono tracking-[0.18em] transition-colors duration-300 relative py-1 ${
+                    active ? "text-[#00F0FF]" : "text-white/50 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#00F0FF]"></span>
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* CTA Button (Desktop) & Mobile Toggle */}
@@ -111,7 +167,9 @@ export function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => handleScrollTo(e, link.href)}
-                className="text-2xl font-sans font-bold tracking-wider text-white/70 hover:text-white transition-colors"
+                className={`text-2xl font-sans font-bold tracking-wider transition-colors ${
+                  isLinkActive(link.activeKeys) ? "text-[#00F0FF]" : "text-white/70 hover:text-white"
+                }`}
                 style={{ animationDelay: `${idx * 75}ms` }}
               >
                 {link.label}
