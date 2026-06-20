@@ -1,41 +1,101 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
-import { motion } from "motion/react";
+import { ChevronDown, Orbit } from "lucide-react";
+import { motion, useTransform, useScroll } from "motion/react";
 
 export function Hero() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Mouse move handler for premium 3D depth parallax
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX - innerWidth / 2) / (innerWidth / 2); // -1 to 1
+      const y = (e.clientY - innerHeight / 2) / (innerHeight / 2); // -1 to 1
+      setMousePos({ x, y });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section
       id="overview"
       className="relative h-[100dvh] w-full flex items-center justify-start overflow-hidden bg-[#030308]"
     >
-      {/* Background Cinematic Space Image with Ken Burns Zoom */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          animate={{ scale: [1.02, 1.07, 1.02] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/hero_cinematic.png"
-            alt="Cinematic rocket launch silhouette"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center filter brightness-[0.35] saturate-[0.85] contrast-[0.95]"
-          />
-        </motion.div>
-        {/* Subtle grid pattern overlay */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.08] z-10"></div>
-        {/* Dark space gradient overlays for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308] opacity-100 z-10"></div>
-        <div className="absolute inset-0 radial-vignette z-10"></div>
-      </div>
+      {/* BACKGROUND LAYER: Space gradient, stars, and grid */}
+      <motion.div
+        style={{
+          x: mousePos.x * -15,
+          y: mousePos.y * -15,
+        }}
+        className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
+      >
+        <Image
+          src="/hero_cinematic.png"
+          alt="Cinematic rocket launch silhouette"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center filter brightness-[0.25] saturate-[0.8]"
+        />
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.06]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/40 to-[#030308]"></div>
+        <div className="absolute inset-0 radial-vignette"></div>
+      </motion.div>
 
+      {/* MID LAYER: 3D Orbital Trajectories & Floating Satellites */}
+      <motion.div
+        style={{
+          x: mousePos.x * 35,
+          y: mousePos.y * 35,
+          rotateX: mousePos.y * -5,
+          rotateY: mousePos.x * 5,
+          perspective: 1000,
+        }}
+        className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center transition-transform duration-500 ease-out"
+      >
+        {/* Orbital Trajectory Plane 1 */}
+        <div 
+          className="absolute w-[800px] h-[800px] border border-white/[0.03] rounded-full"
+          style={{ transform: "rotateX(75deg) rotateY(15deg)" }}
+        >
+          {/* Glowing trajectory dash track */}
+          <div className="absolute inset-0 border border-dashed border-[#00F0FF]/15 rounded-full animate-[spin_50s_linear_infinite]"></div>
+          
+          {/* Floating Satellite 1 */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-[#00F0FF] shadow-[0_0_10px_#00F0FF]"></div>
+            <span className="font-mono text-[7px] text-[#00F0FF]/60 tracking-widest">SAT_LEO_01</span>
+          </div>
+        </div>
+
+        {/* Orbital Trajectory Plane 2 */}
+        <div 
+          className="absolute w-[600px] h-[600px] border border-white/[0.02] rounded-full"
+          style={{ transform: "rotateX(70deg) rotateY(-25deg)" }}
+        >
+          <div className="absolute inset-0 border border-dashed border-[#FF6B00]/10 rounded-full animate-[spin_35s_linear_infinite_reverse]"></div>
+          
+          {/* Floating Satellite 2 */}
+          <div className="absolute bottom-0 right-1/4 translate-y-1/2 flex flex-col items-center gap-1">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#FF6B00] shadow-[0_0_8px_#FF6B00]"></div>
+            <span className="font-mono text-[7px] text-[#FF6B00]/60 tracking-widest">SAT_MEO_02</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* FOREGROUND LAYER: Content and Titles */}
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20">
-        <div className="max-w-3xl">
+        <motion.div
+          style={{
+            x: mousePos.x * 8,
+            y: mousePos.y * 8,
+          }}
+          className="max-w-3xl transition-transform duration-300 ease-out"
+        >
           {/* Eyebrow Tag using Neon Cyan */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -81,7 +141,7 @@ export function Hero() {
             <ChevronDown className="w-4 h-4 animate-bounce text-[#00F0FF]" />
             <span>SCROLL DOWN TO DECLASSIFY BRIEFING</span>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

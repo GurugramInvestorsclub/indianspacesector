@@ -9,7 +9,7 @@ export function Stats() {
       value: "$44B+",
       label: "Estimated Space Economy",
       context: "Projected national market capitalization by fiscal year 2033",
-      colorClass: "text-[#0052FF]"
+      colorClass: "text-[#00F0FF]"
     },
     {
       value: "250+",
@@ -21,7 +21,7 @@ export function Stats() {
       value: "50+",
       label: "Sovereign Launches",
       context: "Successful orbital payloads and satellite missions executed",
-      colorClass: "text-[#00E575]"
+      colorClass: "text-[#00F0FF]"
     }
   ];
 

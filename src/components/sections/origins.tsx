@@ -3,155 +3,283 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, Eye, EyeOff } from "lucide-react";
+import { Calendar, Eye, EyeOff, Orbit } from "lucide-react";
 
-interface TimelineEvent {
+interface Milestone {
   year: string;
   title: string;
   codename: string;
   details: string;
   redacted: string;
+  position: { x: number; y: number }; // Percentage coords along the orbital path
 }
 
 export function Origins() {
+  const [activeIndex, setActiveIndex] = useState(5); // Default to Chandrayaan-3 (index 5)
   const [revealed, setRevealed] = useState<Record<number, boolean>>({});
 
   const toggleReveal = (idx: number) => {
     setRevealed((prev) => ({ ...prev, [idx]: !prev[idx] }));
   };
 
-  const timeline: TimelineEvent[] = [
+  const milestones: Milestone[] = [
     {
-      year: "1975",
-      title: "Aryabhata Spacecraft",
-      codename: "MISSION_ARYA_01",
-      details: "India's first sovereign satellite launched into orbit, establishing core orbital engineering and telemetry capabilities.",
-      redacted: "COMMUNICATION ENCRYPTED. TELEMETRY CO-BROKERED VIA SOVIET LAUNCH VEHICLE COSMOS-3M."
+      year: "1962",
+      title: "INCOSPAR Setup",
+      codename: "INIT_COSPAR_62",
+      details: "Dr. Vikram Sarabhai establishes the Indian National Committee for Space Research, seeding the country's sovereign space intentions.",
+      redacted: "OPERATING OUT OF A THUMBA CHURCH. FIRST LAUNCH OF SODIUM VAPOR PAYLOAD VIA US NIKE-APACHE SYSTEM.",
+      position: { x: 10, y: 15 }
     },
     {
-      year: "1980s-90s",
-      title: "Launcher Autonomy",
-      codename: "PROPULSION_AUTO",
-      details: "Successful deployment of the SLV-3, ASLV, and the operational workhorse PSLV, ending reliance on foreign launch vehicles.",
-      redacted: "CRYOGENIC ENGINE KNOWLEDGE ACQUISITION RESISTED BY WESTERN EXPORT CONTROLS. LIQUID ENGINE DEVELOPMENT REDIRECTED TO VIKAS TECH."
+      year: "1969",
+      title: "ISRO Formation",
+      codename: "SOVEREIGN_ISRO",
+      details: "Sovereign institutionalization. ISRO replaces INCOSPAR to spearhead large-scale national space applications and launcher R&D.",
+      redacted: "EMPHASIS DIRECTED TO REGIONAL TELEVISION BROADCASTS AND MONSOON MAPPING VS DEEP SECURITY ORBITS.",
+      position: { x: 30, y: 22 }
+    },
+    {
+      year: "1993",
+      title: "PSLV First Flight",
+      codename: "PROPULSION_PSLV",
+      details: "Debut of the Polar Satellite Launch Vehicle, achieving sovereign orbital insertion autonomy and ending foreign transport reliance.",
+      redacted: "VIKAS LIQUID ENGINE DESIGNS TRANSFERRED VIA JOINT FRENCH AGREEMENT (VIKAS-PROVENCE CONTRACTS).",
+      position: { x: 50, y: 32 }
+    },
+    {
+      year: "2008",
+      title: "Chandrayaan-1",
+      codename: "LUNAR_ICE_FIND",
+      details: "India's first deep-space lunar probe. Discovers chemical signatures of water molecules (ice/OH) on the lunar surface using custom payloads.",
+      redacted: "NASA RADAR SCANNER (M3) CO-BROKERED ON THE LUNAR BUS IN COLLABORATION WITH GLOBAL NETWORKS.",
+      position: { x: 65, y: 45 }
+    },
+    {
+      year: "2013",
+      title: "Mangalyaan (MOM)",
+      codename: "MARS_FIRST_RUN",
+      details: "Mars Orbiter Mission enters Martian orbit on first attempt. Demonstrates extreme capital frugality, costing only $74M.",
+      redacted: "PROPULSION SLINGSHOT TRIGGERS MANEUVERED AROUND EARTH ORBITS DUE TO LOW PAYLOAD LAUNCH INJECTIONS.",
+      position: { x: 70, y: 60 }
     },
     {
       year: "2020",
-      title: "The Liberalization Decree",
-      codename: "OPEN_MARKET_2020",
+      title: "Space Sector Reforms",
+      codename: "DECREE_OPEN_MKT",
       details: "Sovereign deregulation. Establishment of IN-SPACe to authorize private rocket operators, commercial launches, and satellite assembly hubs.",
-      redacted: "100% FOREIGN DIRECT INVESTMENT (FDI) PERMITTED IN COMPONENT MANUFACTURING AND SATELLITE OPERATIONS."
+      redacted: "100% FOREIGN DIRECT INVESTMENT (FDI) PERMITTED IN COMPONENT MANUFACTURING AND SATELLITE OPERATIONS.",
+      position: { x: 60, y: 72 }
+    },
+    {
+      year: "2023",
+      title: "Chandrayaan-3",
+      codename: "SOUTH_POLE_LAND",
+      details: "Historic soft-landing at the Lunar South Pole. Establishes core cryogenic throttling systems and robotic rover qualifications.",
+      redacted: "COMMUNICATION STATIONS BACKUP SECURED VIA EUROPEAN SPACE AGENCY (ESA) DEEP SPACE NETWORKS.",
+      position: { x: 40, y: 82 }
+    },
+    {
+      year: "2024+",
+      title: "Private Space Era",
+      codename: "ENT_SPACE_RISE",
+      details: "Ecosystem scaling. Venture-backed launchers Vikram-S and Agnibaan execute commercial orbital qualifications and GSaaS telemetry downlinks.",
+      redacted: "RELIANCE TRANSITIONING FROM ISRO GOVERNMENT CONTRACTING TO A MASSIVE MULTI-PLAYER CAPITAL FLYWHEEL.",
+      position: { x: 15, y: 88 }
     }
   ];
+
+  const activeMilestone = milestones[activeIndex];
+  const isRevealed = !!revealed[activeIndex];
+
+  // Calculate orbital path path definition
+  // An elegant S-curve tracking the nodes
+  const pathD = "M 30,60 Q 320,180 180,300 T 30,530";
 
   return (
     <section
       id="origins"
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
-      {/* Full-bleed background space image with dark overlay */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      {/* Full-bleed space backdrop */}
+      <div className="absolute inset-0 z-0 opacity-30">
         <Image
           src="/space_bg.png"
           alt="Space background starry sky"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.4] saturate-[0.8]"
+          className="object-cover object-center filter brightness-[0.4]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/95 via-[#030308]/65 to-[#030308]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
-      {/* Ambient highlights */}
-      <div className="absolute top-1/2 left-[20%] w-[350px] h-[350px] rounded-full bg-[#FF6B00]/5 filter blur-[120px] pointer-events-none z-10"></div>
-
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-[80dvh]">
           
-          {/* Left Column: Title Block */}
-          <div className="lg:col-span-4">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FF6B00] uppercase block mb-3 font-semibold">
-              01. DECLASSIFIED BRIEFING
-            </span>
-            <h2 className="text-4xl md:text-5xl font-sans font-extrabold tracking-tighter leading-[1.05] text-white">
-              Origins of the <br />
-              Space Stack
-            </h2>
-            <p className="text-white/40 text-xs md:text-sm mt-4 font-sans leading-relaxed">
-              India's climb from academic baseline telemetry to a commercial launcher powerhouse.
-            </p>
-          </div>
+          {/* Left Column: Title Block & Selected Milestone Dossier */}
+          <div className="lg:col-span-6 flex flex-col justify-between h-full py-4">
+            <div>
+              <span className="font-mono text-[9px] tracking-[0.25em] text-[#FF6B00] uppercase block mb-2 font-semibold">
+                02. THE NARRATIVE ARC
+              </span>
+              <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-[1.05] text-white">
+                Origins of the <br />
+                Space Stack
+              </h2>
+              <p className="text-white/40 text-xs md:text-sm mt-3 font-sans max-w-md">
+                India's space program evolved from an academic, ISRO-led scientific model into a commercial, private-venture-backed orbital ecosystem.
+              </p>
+            </div>
 
-          {/* Right Column: Mission Timeline / Redacted Dossiers */}
-          <div className="lg:col-span-8 space-y-4">
-            {timeline.map((evt, idx) => {
-              const isRevealed = !!revealed[idx];
-              return (
+            {/* Declassified Dossier Detail Panel */}
+            <div className="bg-[#04040c]/85 border border-white/5 rounded-xl p-5 shadow-2xl backdrop-blur-md relative overflow-hidden mt-6 min-h-[300px] flex flex-col justify-between">
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00F0FF]/30 to-transparent"></div>
+              
+              <AnimatePresence mode="wait">
                 <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-1 rounded-[12px] bg-white/[0.01] border border-white/5 shadow-2xl"
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="bg-[#04040c]/85 border border-white/5 rounded-[8px] p-5 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center hover:border-[#00F0FF]/40 transition-all duration-300 backdrop-blur-sm">
-                    
-                    {/* Left: Year & Title */}
-                    <div className="flex gap-4 items-center">
-                      <div className="flex items-center justify-center p-2.5 bg-white/5 rounded-md text-[#FF6B00] shrink-0 border border-white/10">
+                  <div className="flex justify-between items-start border-b border-white/5 pb-3 mb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-2 bg-white/5 rounded-md text-[#FF6B00] border border-white/10">
                         <Calendar className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-sm font-bold text-white tracking-tight">{evt.year}</span>
-                          <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] uppercase px-1.5 py-0.5 rounded border border-[#FF6B00]/20 bg-[#FF6B00]/5 font-bold">
-                            {evt.codename}
-                          </span>
-                        </div>
-                        <h4 className="text-white text-sm font-bold mt-0.5 tracking-tight">{evt.title}</h4>
+                        <span className="font-mono text-[10px] text-white/50 block font-bold">YEAR: {activeMilestone.year}</span>
+                        <h4 className="text-white text-base font-bold tracking-tight mt-0.5">{activeMilestone.title}</h4>
                       </div>
                     </div>
-
-                    {/* Right: declassify details */}
-                    <div className="w-full md:w-auto flex flex-col items-stretch md:items-end gap-1.5 shrink-0">
-                      <button
-                        onClick={() => toggleReveal(idx)}
-                        className="flex items-center justify-center gap-1.5 px-3 py-1.5 border border-white/10 hover:border-[#FF6B00]/40 hover:bg-white/5 text-white font-mono text-[8px] tracking-wider rounded-xs transition-all duration-200 cursor-pointer"
-                      >
-                        {isRevealed ? (
-                          <>
-                            <EyeOff className="w-3 h-3" /> HIDE DETAILS
-                          </>
-                        ) : (
-                          <>
-                            <Eye className="w-3 h-3 text-[#FF6B00]" /> DECLASSIFY
-                          </>
-                        )}
-                      </button>
-                      
-                      <AnimatePresence>
-                        {isRevealed && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden w-full md:w-auto"
-                          >
-                            <div className="mt-1 font-mono text-[8px] tracking-wide leading-relaxed p-3 rounded border border-white/5 text-left md:text-right max-w-xs md:max-w-md bg-[#080814] text-white/50 space-y-1.5">
-                              <p className="text-white/70 font-sans text-[10px] leading-relaxed">{evt.details}</p>
-                              <div className="h-px bg-white/5 my-1.5"></div>
-                              <p className="text-[#FF6B00] font-semibold">{evt.redacted}</p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
+                    <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] uppercase px-2 py-0.5 rounded border border-[#FF6B00]/20 bg-[#FF6B00]/5 font-bold">
+                      {activeMilestone.codename}
+                    </span>
                   </div>
+
+                  <p className="text-white/70 text-xs leading-relaxed font-sans mt-3">
+                    {activeMilestone.details}
+                  </p>
                 </motion.div>
-              );
-            })}
+              </AnimatePresence>
+
+              {/* Reveal Dossier Section */}
+              <div className="mt-4 pt-4 border-t border-white/5 flex flex-col gap-2">
+                <button
+                  onClick={() => toggleReveal(activeIndex)}
+                  className="w-full md:w-auto self-start flex items-center justify-center gap-1.5 px-3 py-1.5 border border-white/10 hover:border-[#FF6B00]/40 hover:bg-white/5 text-white font-mono text-[8px] tracking-wider rounded-xs transition-all duration-200 cursor-pointer"
+                >
+                  {isRevealed ? (
+                    <>
+                      <EyeOff className="w-3 h-3 text-[#FF6B00]" /> HIDE CLASSIFIED DETAILS
+                    </>
+                  ) : (
+                    <>
+                      <Eye className="w-3 h-3 text-[#FF6B00]" /> DECLASSIFY DOSSIER
+                    </>
+                  )}
+                </button>
+
+                <AnimatePresence>
+                  {isRevealed && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-2 font-mono text-[8px] tracking-wide leading-relaxed p-3 rounded border border-[#FF6B00]/20 bg-[#FF6B00]/5 text-[#FF6B00] font-semibold">
+                        {activeMilestone.redacted}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Orbital Journey SVG Timeline */}
+          <div className="lg:col-span-6 flex items-center justify-center relative h-full min-h-[300px]">
+            {/* Center Planet Globe Decoration */}
+            <div className="absolute w-[200px] h-[200px] rounded-full border border-dashed border-white/[0.03] flex items-center justify-center">
+              <Orbit className="w-10 h-10 text-white/5 animate-pulse" />
+              <div className="absolute inset-0 bg-[#00F0FF]/1 filter blur-[80px] pointer-events-none rounded-full"></div>
+            </div>
+
+            {/* Core SVG Orbital Trail */}
+            <svg viewBox="0 0 350 600" className="w-full h-full relative z-10 max-h-[70dvh] pointer-events-none select-none">
+              {/* Path base shadow */}
+              <path
+                d={pathD}
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.03)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              {/* Glowing active path line */}
+              <motion.path
+                d={pathD}
+                fill="none"
+                stroke="#00F0FF"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                initial={{ pathLength: 0.1 }}
+                animate={{ pathLength: (activeIndex + 1) / milestones.length }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]"
+              />
+            </svg>
+
+            {/* Absolutely positioned nodes along the path (computed mathematically for responsive styling) */}
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              {milestones.map((mil, idx) => {
+                const isActive = activeIndex === idx;
+                const isPast = idx < activeIndex;
+
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setActiveIndex(idx);
+                      // Auto-hide classified when changing tabs
+                      setRevealed({});
+                    }}
+                    className="absolute pointer-events-auto cursor-pointer focus:outline-none -translate-x-1/2 -translate-y-1/2 group"
+                    style={{ left: `${mil.position.x}%`, top: `${mil.position.y}%` }}
+                  >
+                    {/* Node circle wrapper */}
+                    <div className="relative flex items-center justify-center">
+                      {/* Ambient hover/active circle */}
+                      <span className={`absolute w-8 h-8 rounded-full border transition-all duration-300 ${
+                        isActive 
+                          ? "bg-[#00F0FF]/10 border-[#00F0FF]/40 scale-100" 
+                          : "border-transparent scale-50 group-hover:scale-75 group-hover:bg-white/5"
+                      }`}></span>
+                      
+                      {/* Center dot */}
+                      <span className={`w-3.5 h-3.5 rounded-full border-2 border-[#030308] z-10 transition-all duration-300 ${
+                        isActive 
+                          ? "bg-[#00F0FF] shadow-[0_0_10px_#00F0FF]" 
+                          : isPast
+                          ? "bg-[#00F0FF]/40 border-[#00F0FF]/25"
+                          : "bg-white/10 border-white/20 hover:bg-white/20"
+                      }`}></span>
+
+                      {/* Tooltip Label */}
+                      <span className={`absolute left-10 font-mono text-[8px] font-bold tracking-widest uppercase transition-all duration-300 shrink-0 select-none ${
+                        isActive 
+                          ? "text-[#00F0FF] opacity-100 translate-x-0" 
+                          : "text-white/30 opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0"
+                      }`}>
+                        {mil.year} - {mil.title.split(" ")[0]}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
         </div>

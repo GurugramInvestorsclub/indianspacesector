@@ -17,6 +17,7 @@ interface Pillar {
   color: string;
   dotColor: string;
   bgGlow: string;
+  boosterColor: string;
 }
 
 export function FourPillars() {
@@ -27,14 +28,15 @@ export function FourPillars() {
       id: "applications",
       name: "Applications & Data",
       category: "Downstream Analytics & SaaS",
-      icon: <Database className="w-4 h-4 text-[#00E575]" />,
+      icon: <Database className="w-4 h-4 text-[#00F0FF]" />,
       desc: "Downstream spatial software, supply chain tracking, and agricultural NDVI indexing APIs. Captures over 90% of total space economy volume.",
       margin: "75% - 85%",
       multiple: "15x - 22x EV/Rev",
       players: ["SatSure", "MapmyIndia", "CropIn", "KaleidEO"],
-      color: "border-[#00E575]/40 text-[#00E575]",
-      dotColor: "bg-[#00E575]",
-      bgGlow: "from-[#00E575]/5"
+      color: "border-[#00F0FF]/40 text-[#00F0FF]",
+      dotColor: "bg-[#00F0FF]",
+      bgGlow: "from-[#00F0FF]/5",
+      boosterColor: "rgba(0, 240, 255, 0.4)"
     },
     {
       id: "ground",
@@ -47,7 +49,8 @@ export function FourPillars() {
       players: ["Dhruva Ground Network", "ISRO ISTRAC"],
       color: "border-[#FF6B00]/40 text-[#FF6B00]",
       dotColor: "bg-[#FF6B00]",
-      bgGlow: "from-[#FF6B00]/5"
+      bgGlow: "from-[#FF6B00]/5",
+      boosterColor: "rgba(255, 107, 0, 0.4)"
     },
     {
       id: "satellites",
@@ -60,29 +63,41 @@ export function FourPillars() {
       players: ["Dhruva Space", "Pixxel Assembly", "Bellatrix Propulsion"],
       color: "border-[#00F0FF]/40 text-[#00F0FF]",
       dotColor: "bg-[#00F0FF]",
-      bgGlow: "from-[#00F0FF]/5"
+      bgGlow: "from-[#00F0FF]/5",
+      boosterColor: "rgba(0, 240, 255, 0.4)"
     },
     {
       id: "launch",
       name: "Launch Systems",
       category: "Upstream Logistics & Rockets",
-      icon: <Rocket className="w-4 h-4 text-[#0052FF]" />,
+      icon: <Rocket className="w-4 h-4 text-[#00F0FF]" />,
       desc: "Orbital launchers, carbon-composite motors, and micro-launch configurations optimized for commercial payloads insertions.",
       margin: "30% - 35%",
       multiple: "4x - 6x EV/Rev",
       players: ["Skyroot Aerospace", "Agnikul Cosmos", "ISRO NSIL"],
-      color: "border-[#0052FF]/40 text-[#0052FF]",
-      dotColor: "bg-[#0052FF]",
-      bgGlow: "from-[#0052FF]/5"
+      color: "border-[#00F0FF]/40 text-[#00F0FF]",
+      dotColor: "bg-[#00F0FF]",
+      bgGlow: "from-[#00F0FF]/5",
+      boosterColor: "rgba(0, 240, 255, 0.4)"
     }
   ];
 
   const activePillar = pillars.find((p) => p.id === activePillarId) || pillars[3];
 
+  // Mouse move handler for Apple/Linear spotlight tracking effect
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
     <section
       id="pillars"
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
       {/* Full-bleed background flow graphic */}
       <div className="absolute inset-0 z-0 opacity-40">
@@ -112,8 +127,15 @@ export function FourPillars() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
           {/* Left Column: Interactive Terminal */}
-          <div className="lg:col-span-6 flex flex-col justify-between bg-[#04040c]/90 border border-white/5 rounded-2xl p-5 md:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+          <div 
+            onMouseMove={handleMouseMove}
+            className="lg:col-span-6 flex flex-col justify-between bg-[#04040c]/90 border border-white/5 rounded-2xl p-5 md:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md transition-all duration-300"
+            style={{
+              background: "radial-gradient(400px circle at var(--mouse-x, 250px) var(--mouse-y, 250px), rgba(0, 240, 255, 0.05), transparent 80%)"
+            } as any}
+          >
             <div>
               {/* Terminal Header */}
               <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
@@ -134,9 +156,9 @@ export function FourPillars() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePillar.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="flex items-center gap-3">
@@ -203,7 +225,7 @@ export function FourPillars() {
           {/* Right Column: Clickable CSS Stacked Rocket Diagram */}
           <div className="lg:col-span-6 flex items-center justify-center relative min-h-[250px]">
             {/* Stack Visual Container */}
-            <div className="w-full max-w-xs flex flex-col gap-2 relative z-10">
+            <div className="w-full max-w-xs flex flex-col gap-2.5 relative z-10">
               {pillars.map((plr, index) => {
                 const isActive = activePillarId === plr.id;
 
@@ -211,9 +233,9 @@ export function FourPillars() {
                   <button
                     key={plr.id}
                     onClick={() => setActivePillarId(plr.id)}
-                    className={`w-full relative overflow-hidden transition-all duration-300 rounded-[14px] p-4 border text-left cursor-pointer flex items-center justify-between ${
+                    className={`w-full relative overflow-hidden transition-all duration-300 rounded-[14px] p-4 border text-left cursor-pointer flex items-center justify-between group ${
                       isActive
-                        ? `bg-white/[0.03] border-white/20 shadow-lg`
+                        ? `bg-white/[0.03] border-white/25 shadow-2xl`
                         : "bg-[#06060f]/60 border-white/5 hover:border-white/15"
                     }`}
                   >
@@ -222,19 +244,27 @@ export function FourPillars() {
                       <div className={`absolute inset-0 bg-gradient-to-r ${plr.bgGlow} to-transparent z-0`}></div>
                     )}
 
+                    {/* Active Rocket Thrust Base Glow */}
+                    {isActive && (
+                      <div 
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[2px] rounded-full blur-[2px]"
+                        style={{ backgroundColor: plr.boosterColor, boxShadow: `0 0 12px 2px ${plr.boosterColor}` }}
+                      ></div>
+                    )}
+
                     <div className="flex items-center gap-3 relative z-10">
-                      {/* Stack Circle */}
+                      {/* Stack Circle Node */}
                       <span className={`w-7 h-7 rounded-full font-mono text-[10px] font-bold flex items-center justify-center border transition-all duration-300 ${
                         isActive
                           ? "bg-white text-[#030308] border-white"
-                          : "bg-white/5 border-white/10 text-white/40"
+                          : "bg-white/5 border-white/10 text-white/40 group-hover:text-white group-hover:border-white/20"
                       }`}>
                         0{pillars.length - index}
                       </span>
                       
                       <div>
                         <h4 className={`text-xs font-bold tracking-tight transition-colors ${
-                          isActive ? "text-white" : "text-white/60"
+                          isActive ? "text-white" : "text-white/60 group-hover:text-white"
                         }`}>
                           {plr.name}
                         </h4>
@@ -252,6 +282,7 @@ export function FourPillars() {
               })}
             </div>
           </div>
+
         </div>
       </div>
     </section>

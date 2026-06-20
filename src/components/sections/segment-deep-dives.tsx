@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { Activity, Server, Radio, BarChart3, Info } from "lucide-react";
@@ -9,14 +9,14 @@ interface DeepDiveProps {
   id: string;
 }
 
-// 1. LAUNCH SYSTEMS DEEP-DIVE
+// 1. LAUNCH SYSTEMS DEEP-DIVE (Vertical Ascent Visual)
 export function DeepDiveLaunch({ id }: DeepDiveProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
       {/* Full-bleed background with dark overlay */}
       <div className="absolute inset-0 z-0">
@@ -25,7 +25,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
           alt="Earth view representing launch path"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter brightness-[0.35] saturate-[0.8]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
         <div className="absolute inset-0 radial-vignette"></div>
@@ -36,7 +36,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
           
           {/* Left Column: Caption */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#0052FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase font-bold block mb-3">
               04A. PILLAR 01 // UPSTREAM LAUNCH
             </span>
             <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
@@ -50,7 +50,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#0052FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00F0FF] hover:text-white transition-colors cursor-pointer"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -68,16 +68,41 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
             </div>
           </div>
 
-          {/* Right Column: Telemetry HUD */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Telemetry HUD + Ascent animation */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            
+            {/* Visual: Vertical Ascent Animation */}
+            <div className="h-[80px] bg-white/[0.01] border border-white/5 rounded-xl relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+              {/* Vertically scrolling launch lines */}
+              <div className="flex gap-8 items-end h-full w-full justify-center pb-2">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <motion.div
+                    key={i}
+                    animate={{
+                      height: ["10%", "90%", "10%"],
+                      backgroundColor: ["rgba(0,240,255,0.2)", "rgba(0,240,255,0.7)", "rgba(0,240,255,0.2)"],
+                    }}
+                    transition={{
+                      duration: 1.5 + i * 0.3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="w-1.5 rounded-full"
+                  />
+                ))}
+              </div>
+              <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">STAGE_THRUST_FEED</span>
+            </div>
+
             <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
                   <div className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-[#0052FF] animate-pulse" />
+                    <Activity className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
                     <span className="font-mono text-[9px] text-white/80">LAUNCH_LOG // ACCELERATORS</span>
                   </div>
-                  <span className="font-mono text-[8px] text-[#0052FF] border border-[#0052FF]/20 px-2 py-0.5 rounded bg-[#0052FF]/5">
+                  <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/20 px-2 py-0.5 rounded bg-[#00F0FF]/5">
                     SECURED
                   </span>
                 </div>
@@ -86,7 +111,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
                   <div>
                     <span className="text-white/40 block font-semibold">LAUNCH COST</span>
                     <span className="text-base font-bold text-white block mt-0.5">~$3,000/kg</span>
-                    <span className="text-[8px] text-[#0052FF] font-semibold">LEO INSERTION</span>
+                    <span className="text-[8px] text-[#00F0FF] font-semibold">LEO INSERTION</span>
                   </div>
                   <div>
                     <span className="text-white/40 block font-semibold">OPERATING MARGIN</span>
@@ -95,7 +120,6 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
                   </div>
                 </div>
 
-                {/* Active builders */}
                 <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
                   <span className="text-white/40">BUILDERS:</span>
                   <span className="text-white/80">Skyroot, Agnikul, ISRO</span>
@@ -110,14 +134,14 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
   );
 }
 
-// 2. SATELLITES & PAYLOAD DEEP-DIVES
+// 2. SATELLITES & PAYLOAD DEEP-DIVES (Orbital Loops Visual)
 export function DeepDiveSatellites({ id }: DeepDiveProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
       <div className="absolute inset-0 z-0">
         <Image
@@ -125,7 +149,7 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
           alt="Satellite constellation rendering"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter brightness-[0.35] saturate-[0.8]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
         <div className="absolute inset-0 radial-vignette"></div>
@@ -167,8 +191,22 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
             </div>
           </div>
 
-          {/* Right Column: Telemetry HUD */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Telemetry HUD + Orbital Visual */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            
+            {/* Visual: Circular Orbital Loops */}
+            <div className="h-[80px] bg-white/[0.01] border border-white/5 rounded-xl relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+              {/* Concentric orbital loop paths */}
+              <div className="relative w-12 h-12 rounded-full border border-dashed border-[#00F0FF]/15 animate-[spin_8s_linear_infinite] flex items-center justify-center">
+                <span className="absolute -top-1 w-2.5 h-2.5 rounded-full bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]"></span>
+                <div className="w-6 h-6 rounded-full border border-dashed border-[#00F0FF]/10 animate-[spin_4s_linear_infinite_reverse]">
+                  <span className="absolute -bottom-0.5 left-1 w-1.5 h-1.5 rounded-full bg-[#00F0FF]/80"></span>
+                </div>
+              </div>
+              <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">CONSTELLATION_BUS</span>
+            </div>
+
             <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
@@ -208,14 +246,14 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
   );
 }
 
-// 3. GROUND SEGMENT DEEP-DIVES
+// 3. GROUND SEGMENT DEEP-DIVES (Radar Sweep Visual)
 export function DeepDiveGround({ id }: DeepDiveProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] border-t border-white/5 scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
       <div className="absolute inset-0 z-0">
         <Image
@@ -223,7 +261,7 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
           alt="Ground station gateway dishes"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter brightness-[0.35] saturate-[0.8]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
         <div className="absolute inset-0 radial-vignette"></div>
@@ -265,8 +303,20 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
             </div>
           </div>
 
-          {/* Right Column: Telemetry HUD */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Telemetry HUD + Radar Sweep Visual */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            
+            {/* Visual: Radar Sweep Beam */}
+            <div className="h-[80px] bg-white/[0.01] border border-white/5 rounded-xl relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+              {/* Sweep radar sweep element */}
+              <div className="w-14 h-14 rounded-full border border-white/5 relative overflow-hidden bg-radar-sweep flex items-center justify-center">
+                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,rgba(255,107,0,0.3)_0deg,transparent_90deg)] animate-[spin_3s_linear_infinite]"></div>
+                <div className="w-8 h-8 rounded-full border border-white/5"></div>
+              </div>
+              <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">RADAR_SWEEP_FEED</span>
+            </div>
+
             <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
@@ -306,14 +356,14 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
   );
 }
 
-// 4. DOWNSTREAM APPLICATIONS DEEP-DIVES
+// 4. DOWNSTREAM APPLICATIONS DEEP-DIVES (Scanning Ingest Visual)
 export function DeepDiveApplications({ id }: DeepDiveProps) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden border-b border-white/5"
     >
       <div className="absolute inset-0 z-0">
         <Image
@@ -321,7 +371,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
           alt="Satellite telemetry network layout"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter brightness-[0.35] saturate-[0.8]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
         <div className="absolute inset-0 radial-vignette"></div>
@@ -363,8 +413,34 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
             </div>
           </div>
 
-          {/* Right Column: Telemetry HUD */}
-          <div className="lg:col-span-5">
+          {/* Right Column: Telemetry HUD + Scanning Ingest Visual */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            
+            {/* Visual: Matrix Data Scan */}
+            <div className="h-[80px] bg-white/[0.01] border border-white/5 rounded-xl relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+              {/* Monospace scrolling code text backdrop */}
+              <div className="absolute inset-0 select-none flex flex-col font-mono text-[5px] text-[#00E575]/25 p-2 overflow-hidden leading-tight">
+                <div>01001011 00101110 01100101 INGEST_SYS_OK</div>
+                <div>01100100 01100001 01110100 SOVEREIGN_FDI</div>
+                <div>01100001 00101110 01110011 MapmyIndia_SYNC</div>
+                <div>01110101 01110010 01100101 SatSure_GEO_API</div>
+              </div>
+              {/* Sweeping scan bar */}
+              <motion.div
+                animate={{
+                  top: ["-5%", "105%", "-5%"]
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                className="absolute left-0 right-0 h-[1.5px] bg-[#00E575] shadow-[0_0_8px_#00E575] z-10"
+              />
+              <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">DATA_INGEST_SCAN</span>
+            </div>
+
             <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">

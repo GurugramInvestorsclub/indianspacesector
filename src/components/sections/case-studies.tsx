@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { BookOpen, X, ArrowRight } from "lucide-react";
+import { BookOpen, X, ArrowRight, Terminal, ShieldAlert } from "lucide-react";
 
 interface CaseStudy {
   slug: string;
@@ -18,6 +18,94 @@ interface CaseStudy {
   takeaways: string[];
   risks: string[];
   codename: string;
+}
+
+interface CaseStudyCardProps {
+  cs: CaseStudy;
+  onClick: () => void;
+}
+
+function CaseStudyCard({ cs, onClick }: CaseStudyCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setCoords({ x, y });
+
+    // Subtle premium 3D tilt (max 6 degrees tilt)
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * 6;
+    const tiltY = ((x - centerX) / centerX) * -6;
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className="p-[1px] rounded-[20px] bg-white/5 relative overflow-hidden transition-all duration-300 group cursor-pointer shadow-lg"
+      style={{
+        perspective: "1000px",
+      }}
+    >
+      {/* Apple-style Spotlight radial gradient glow */}
+      {isHovered && (
+        <div
+          className="absolute pointer-events-none inset-0 z-0 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(350px circle at ${coords.x}px ${coords.y}px, rgba(255, 107, 0, 0.12), transparent 80%)`,
+          }}
+        />
+      )}
+      
+      {/* Subtle high-tech grid in card background */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] z-0 pointer-events-none" />
+
+      {/* Content wrapper with dynamic tilt */}
+      <button
+        onClick={onClick}
+        style={{
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          transition: isHovered ? "none" : "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+        className="w-full text-left h-full flex flex-col justify-between p-5 rounded-[19px] bg-[#04040c]/90 border border-white/5 group-hover:border-[#FF6B00]/40 transition-all duration-300 shadow-md relative z-10 backdrop-blur-sm"
+      >
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
+              {cs.categoryLabel}
+            </span>
+          </div>
+          <h4 className="text-white text-base font-bold tracking-tight group-hover:text-[#FF6B00] transition-colors">
+            {cs.title}
+          </h4>
+          <p className="text-white/50 text-xs mt-1.5 font-sans leading-relaxed">
+            { cs.subtitle }
+          </p>
+        </div>
+
+        <div className="w-full mt-6 pt-3 border-t border-white/5 flex items-center justify-between font-mono text-[8px] text-white/40 group-hover:text-white transition-colors duration-200">
+          <span className="uppercase tracking-wider font-semibold">Inspect Dossier</span>
+          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:text-[#FF6B00]" />
+        </div>
+      </button>
+    </div>
+  );
 }
 
 export function CaseStudies() {
@@ -226,34 +314,11 @@ export function CaseStudies() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[50dvh] overflow-y-auto pr-2">
           {filteredStudies.map((cs) => {
             return (
-              <div
+              <CaseStudyCard
                 key={cs.slug}
-                className="p-1 rounded-[20px] bg-white/[0.01] border border-white/5 shadow-lg"
-              >
-                <button
-                  onClick={() => setActiveStudySlug(cs.slug)}
-                  className="w-full text-left h-full flex flex-col justify-between p-5 rounded-[16px] bg-[#04040c]/85 border border-white/5 hover:border-[#FF6B00]/40 transition-all duration-300 shadow-md group cursor-pointer backdrop-blur-sm"
-                >
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
-                        {cs.categoryLabel}
-                      </span>
-                    </div>
-                    <h4 className="text-white text-base font-bold tracking-tight group-hover:text-[#FF6B00] transition-colors">
-                      {cs.title}
-                    </h4>
-                    <p className="text-white/50 text-xs mt-1.5 font-sans leading-relaxed">
-                      {cs.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="w-full mt-6 pt-3 border-t border-white/5 flex items-center justify-between font-mono text-[8px] text-white/40 group-hover:text-white transition-colors duration-200">
-                    <span className="uppercase tracking-wider font-semibold">Inspect Dossier</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:text-[#FF6B00]" />
-                  </div>
-                </button>
-              </div>
+                cs={cs}
+                onClick={() => setActiveStudySlug(cs.slug)}
+              />
             );
           })}
         </div>
@@ -271,58 +336,80 @@ export function CaseStudies() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="relative w-full max-w-xl h-full bg-[#04040c] border-l border-white/10 p-6 md:p-8 overflow-y-auto flex flex-col justify-between shadow-2xl z-10"
+              className="relative w-full max-w-xl h-full bg-[#030308] border-l border-white/10 p-6 md:p-8 overflow-y-auto flex flex-col justify-between shadow-2xl z-10"
             >
+              {/* Scanline overlay */}
+              <div className="absolute inset-0 bg-scanline pointer-events-none opacity-[0.02] z-20"></div>
+
               <div>
                 {/* Modal Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-[8px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
                       {activeStudy.categoryLabel}
                     </span>
-                    <span className="font-mono text-[8px] text-white/40 tracking-wider font-semibold">
+                    <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/25 px-2 py-0.5 rounded bg-[#00F0FF]/5 font-semibold">
                       {activeStudy.codename}
                     </span>
                   </div>
                   <button
                     onClick={() => setActiveStudySlug(null)}
-                    className="p-1.5 text-white/50 hover:text-white bg-white/5 rounded-full border border-white/10 transition-colors cursor-pointer"
+                    className="p-1.5 text-white/50 hover:text-white bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-colors cursor-pointer"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                <h3 className="text-xl md:text-2xl font-sans font-extrabold text-white tracking-tight leading-tight">
-                  {activeStudy.title}
-                </h3>
-                <span className="text-white/40 font-mono text-[8px] uppercase tracking-wider block mt-0.5 font-semibold">
-                  DIVISION: {activeStudy.author.split(" ")[0]}
-                </span>
+                <div className="relative border border-white/5 bg-[#05050f]/80 p-5 rounded-lg mb-6 backdrop-blur-md">
+                  {/* Corner Crosshairs */}
+                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#FF6B00]"></div>
+                  <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[#FF6B00]"></div>
+                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[#FF6B00]"></div>
+                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#FF6B00]"></div>
 
-                <p className="text-white/70 text-xs mt-4 leading-relaxed font-sans border-l-2 border-[#FF6B00]/40 pl-3">
-                  {activeStudy.summary}
-                </p>
+                  <h3 className="text-xl md:text-2xl font-sans font-extrabold text-white tracking-tight leading-tight uppercase">
+                    {activeStudy.title}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="text-white/40 font-mono text-[8px] uppercase tracking-wider font-semibold">
+                      ORIGIN: DOMESTIC AEROSPACE SECTOR
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-[#00F0FF]"></span>
+                    <span className="text-[#00F0FF] font-mono text-[8px] uppercase tracking-wider font-bold">
+                      {activeStudy.author}
+                    </span>
+                  </div>
+
+                  <p className="text-white/70 text-xs mt-4 leading-relaxed font-sans border-l-2 border-[#FF6B00] pl-3">
+                    {activeStudy.summary}
+                  </p>
+                </div>
 
                 {/* Strategy */}
-                <div className="mt-6">
-                  <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2 font-bold">
-                    OPERATIONAL STRATEGY
+                <div className="mt-6 border border-white/5 rounded-lg p-4 bg-white/[0.01]">
+                  <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-3 font-bold flex items-center gap-1.5">
+                    <Terminal className="w-3 h-3 text-[#FF6B00]" />
+                    OPERATIONAL STRATEGY // KEY MILESTONES
                   </span>
-                  <ul className="space-y-1.5 font-sans text-xs text-white/60 list-inside list-disc">
+                  <ul className="space-y-2 font-mono text-[10px] text-white/60">
                     {activeStudy.keyPoints.map((pt, i) => (
-                      <li key={i} className="leading-relaxed">{pt}</li>
+                      <li key={i} className="flex gap-2 items-start leading-relaxed">
+                        <span className="text-[#FF6B00] font-bold">»</span>
+                        <span>{pt}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Metrics */}
-                <div className="mt-6 bg-[#080814] border border-white/5 p-3 rounded-lg">
-                  <div className="grid grid-cols-3 gap-3 font-mono text-[9px]">
+                <div className="mt-6 bg-[#080814]/90 border border-white/10 p-4 rounded-lg relative overflow-hidden">
+                  <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+                  <div className="grid grid-cols-3 gap-4 font-mono text-[9px] relative z-10">
                     {activeStudy.metrics.map((met, i) => (
                       <div key={i} className="border-r border-white/5 last:border-0 pr-2">
-                        <span className="text-white/30 block font-bold">{met.label}</span>
-                        <span className="text-sm font-extrabold text-white block mt-0.5">{met.value}</span>
-                        <span className="text-[7px] text-white/40 mt-0.5 block leading-tight">{met.context}</span>
+                        <span className="text-white/30 block font-bold uppercase">{met.label}</span>
+                        <span className="text-sm font-extrabold text-[#00F0FF] block mt-1 tracking-tight">{met.value}</span>
+                        <span className="text-[7px] text-white/40 mt-1 block leading-tight">{met.context}</span>
                       </div>
                     ))}
                   </div>
@@ -330,27 +417,27 @@ export function CaseStudies() {
 
                 {/* Takeaways & Risks */}
                 <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2 font-bold">
-                      KEY TAKEAWAYS
+                  <div className="border border-white/5 rounded-lg p-4 bg-[#00F0FF]/[0.01]">
+                    <span className="font-mono text-[8px] text-[#00F0FF] tracking-widest uppercase block mb-3 font-bold">
+                      KEY TAKEAWAYS // VENTURE VALUE
                     </span>
-                    <ul className="space-y-1.5 font-sans text-xs text-white/60">
+                    <ul className="space-y-2 font-mono text-[10px] text-white/60">
                       {activeStudy.takeaways.map((take, i) => (
-                        <li key={i} className="flex gap-1.5">
-                          <span className="text-[#00E575] font-bold">✓</span>
+                        <li key={i} className="flex gap-2 items-start">
+                          <span className="text-[#00F0FF] font-bold">✓</span>
                           <span className="leading-relaxed">{take}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div>
-                    <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2 font-bold">
-                      RISKS
+                  <div className="border border-white/5 rounded-lg p-4 bg-[#FF6B00]/[0.01]">
+                    <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-3 font-bold">
+                      RISKS // ECOSYSTEM CHALLENGES
                     </span>
-                    <ul className="space-y-1.5 font-sans text-xs text-white/60">
+                    <ul className="space-y-2 font-mono text-[10px] text-white/60">
                       {activeStudy.risks.map((risk, i) => (
-                        <li key={i} className="flex gap-1.5">
-                          <span className="text-[#FF6B00] font-bold">!</span>
+                        <li key={i} className="flex gap-2 items-start">
+                          <span className="text-[#FF6B00] font-bold">▲</span>
                           <span className="leading-relaxed">{risk}</span>
                         </li>
                       ))}
@@ -362,8 +449,11 @@ export function CaseStudies() {
 
               {/* Modal Footer */}
               <div className="mt-8 pt-4 border-t border-white/5 flex justify-between items-center text-[8px] font-mono text-white/30">
-                <span className="font-semibold">SECURITY AUDIT: CONCLUDED</span>
-                <span className="italic">Confidential</span>
+                <span className="font-semibold flex items-center gap-1">
+                  <ShieldAlert className="w-3 h-3 text-[#FF6B00]" />
+                  SECURITY AUDIT: CONCLUDED
+                </span>
+                <span className="italic uppercase tracking-widest text-[#FF6B00] font-bold">Classified Briefing</span>
               </div>
             </motion.div>
           </div>
