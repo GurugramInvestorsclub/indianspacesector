@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { Rocket, Satellite, Globe, Database, Activity } from "lucide-react";
+import { Activity, Rocket, Satellite, Globe, Database, Cpu } from "lucide-react";
 
-interface Pillar {
+interface PillarItem {
   id: string;
   name: string;
   category: string;
@@ -18,25 +18,42 @@ interface Pillar {
   dotColor: string;
   bgGlow: string;
   boosterColor: string;
+  cy: number; // SVG center coordinate Y for stack drawing
 }
 
 export function FourPillars() {
-  const [activePillarId, setActivePillarId] = useState<string>("launch");
+  const [activePillarId, setActivePillarId] = useState("launch");
 
-  const pillars: Pillar[] = [
+  const pillars: PillarItem[] = [
     {
-      id: "applications",
-      name: "Applications & Data",
-      category: "Downstream Analytics & SaaS",
-      icon: <Database className="w-4 h-4 text-[#00F0FF]" />,
-      desc: "Downstream spatial software, supply chain tracking, and agricultural NDVI indexing APIs. Captures over 90% of total space economy volume.",
+      id: "data-economy",
+      name: "Data Economy",
+      category: "Downstream Commercial Multiplier",
+      icon: <Cpu className="w-4 h-4 text-[#00F0FF]" />,
+      desc: "Downstream value monetization. Translating raw spectral coordinates, SAR radar returns, and Positioning Navigation Timing (PNT) signals into multi-billion dollar ESG indices, yield forecast models, and global logistics maps.",
       margin: "75% - 85%",
       multiple: "15x - 22x EV/Rev",
       players: ["SatSure", "MapmyIndia", "CropIn", "KaleidEO"],
       color: "border-[#00F0FF]/40 text-[#00F0FF]",
       dotColor: "bg-[#00F0FF]",
       bgGlow: "from-[#00F0FF]/5",
-      boosterColor: "rgba(0, 240, 255, 0.4)"
+      boosterColor: "rgba(0, 240, 255, 0.4)",
+      cy: 70
+    },
+    {
+      id: "applications",
+      name: "Applications & SaaS",
+      category: "Downstream Analytics & APIs",
+      icon: <Database className="w-4 h-4 text-[#00F0FF]" />,
+      desc: "Geospatial platforms, vessel tracking logs, carbon capture audits, and precision agriculture portals. Downstream software captures over 90% of total space economy volume.",
+      margin: "70% - 80%",
+      multiple: "12x - 18x EV/Rev",
+      players: ["SatSure Solutions", "MapmyIndia APIs", "CropIn Spatial"],
+      color: "border-[#00F0FF]/40 text-[#00F0FF]",
+      dotColor: "bg-[#00F0FF]",
+      bgGlow: "from-[#00F0FF]/5",
+      boosterColor: "rgba(0, 240, 255, 0.4)",
+      cy: 130
     },
     {
       id: "ground",
@@ -50,7 +67,8 @@ export function FourPillars() {
       color: "border-[#FF6B00]/40 text-[#FF6B00]",
       dotColor: "bg-[#FF6B00]",
       bgGlow: "from-[#FF6B00]/5",
-      boosterColor: "rgba(255, 107, 0, 0.4)"
+      boosterColor: "rgba(255, 107, 0, 0.4)",
+      cy: 190
     },
     {
       id: "satellites",
@@ -64,7 +82,8 @@ export function FourPillars() {
       color: "border-[#00F0FF]/40 text-[#00F0FF]",
       dotColor: "bg-[#00F0FF]",
       bgGlow: "from-[#00F0FF]/5",
-      boosterColor: "rgba(0, 240, 255, 0.4)"
+      boosterColor: "rgba(0, 240, 255, 0.4)",
+      cy: 250
     },
     {
       id: "launch",
@@ -78,11 +97,12 @@ export function FourPillars() {
       color: "border-[#00F0FF]/40 text-[#00F0FF]",
       dotColor: "bg-[#00F0FF]",
       bgGlow: "from-[#00F0FF]/5",
-      boosterColor: "rgba(0, 240, 255, 0.4)"
+      boosterColor: "rgba(0, 240, 255, 0.4)",
+      cy: 310
     }
   ];
 
-  const activePillar = pillars.find((p) => p.id === activePillarId) || pillars[3];
+  const activePillar = pillars.find((p) => p.id === activePillarId) || pillars[4];
 
   // Mouse move handler for Apple/Linear spotlight tracking effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -116,13 +136,13 @@ export function FourPillars() {
         {/* Section Header */}
         <div className="text-left mb-6 max-w-2xl">
           <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase block mb-2 font-semibold">
-            03. ECOSYSTEM VALUE SYSTEM
+            04. CHAPTER 4 // INDIA'S SPACE STACK
           </span>
           <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
-            The Four Pillars of the Stack
+            The Orbital Stack
           </h2>
           <p className="text-white/40 text-xs md:text-sm mt-2">
-            Select a layer of the rocket stack to inspect margins, multiples, and active players.
+            Inspect margins, multiples, and key players across the 5 layers. Click isometric planes to trace value and capital vectors.
           </p>
         </div>
 
@@ -145,10 +165,8 @@ export function FourPillars() {
                     STACK LAYER ANALYSIS
                   </span>
                 </div>
-                <div className="flex gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500/20 border border-red-500/40"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/20 border border-yellow-500/40"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500/20 border border-green-500/40"></span>
+                <div className="flex gap-1.5 font-mono text-[8px] text-white/30 uppercase">
+                  <span>LAYER: 0{5 - pillars.indexOf(activePillar)}</span>
                 </div>
               </div>
 
@@ -217,70 +235,128 @@ export function FourPillars() {
 
             {/* Bottom action */}
             <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-white/30">
-              <span className="font-semibold">STATUS: VERIFIED</span>
+              <span className="font-semibold uppercase text-[#00F0FF]">Status: Connected</span>
               <span className="italic">Webinar Slide 03</span>
             </div>
           </div>
 
-          {/* Right Column: Clickable CSS Stacked Rocket Diagram */}
-          <div className="lg:col-span-6 flex items-center justify-center relative min-h-[250px]">
-            {/* Stack Visual Container */}
-            <div className="w-full max-w-xs flex flex-col gap-2.5 relative z-10">
+          {/* Right Column: Isometric Interactive Stack SVG */}
+          <div className="lg:col-span-6 flex items-center justify-center relative min-h-[300px]">
+            {/* SVG Isometric Canvas */}
+            <svg 
+              viewBox="0 0 250 380" 
+              className="w-full h-full max-w-[280px] overflow-visible select-none z-10"
+            >
+              <defs>
+                <filter id="layer-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              {/* FLOW LINES IN BACKGROUND */}
+              <g>
+                {/* Value Flow: Cyan Line flowing Upward */}
+                <line 
+                  x1="125" 
+                  y1="310" 
+                  x2="125" 
+                  y2="70" 
+                  stroke="#00F0FF" 
+                  strokeWidth="1.5" 
+                  strokeDasharray="4 8"
+                  className="animate-[dash_2s_linear_infinite]"
+                  style={{ animationDirection: "reverse" }}
+                  opacity="0.4"
+                />
+
+                {/* Capital Flow: Amber Line flowing Downward */}
+                <line 
+                  x1="125" 
+                  y1="70" 
+                  x2="125" 
+                  y2="310" 
+                  stroke="#FF6B00" 
+                  strokeWidth="1.5" 
+                  strokeDasharray="4 8"
+                  className="animate-[dash_2.5s_linear_infinite]"
+                  opacity="0.3"
+                />
+              </g>
+
+              {/* ISOMETRIC LAYER DIAMONDS */}
               {pillars.map((plr, index) => {
                 const isActive = activePillarId === plr.id;
+                const layerIndex = 5 - index;
+                
+                // Diamond coordinates centered at cx = 125, cy = plr.cy
+                const cx = 125;
+                const cy = plr.cy;
+                const points = `${cx - 65},${cy} ${cx},${cy - 20} ${cx + 65},${cy} ${cx},${cy + 20}`;
 
                 return (
-                  <button
-                    key={plr.id}
+                  <g 
+                    key={plr.id} 
+                    className="cursor-pointer pointer-events-auto"
                     onClick={() => setActivePillarId(plr.id)}
-                    className={`w-full relative overflow-hidden transition-all duration-300 rounded-[14px] p-4 border text-left cursor-pointer flex items-center justify-between group ${
-                      isActive
-                        ? `bg-white/[0.03] border-white/25 shadow-2xl`
-                        : "bg-[#06060f]/60 border-white/5 hover:border-white/15"
-                    }`}
                   >
-                    {/* Layer Highlight background gradient */}
+                    {/* Shadow layer underneath diamond */}
+                    <polygon 
+                      points={points} 
+                      fill="none" 
+                      stroke="rgba(0,0,0,0.8)" 
+                      strokeWidth="3"
+                      transform="translate(0, 2)"
+                    />
+                    
+                    {/* Glowing active layer highlight */}
                     {isActive && (
-                      <div className={`absolute inset-0 bg-gradient-to-r ${plr.bgGlow} to-transparent z-0`}></div>
+                      <polygon 
+                        points={points} 
+                        fill="none" 
+                        stroke={plr.id === "ground" ? "#FF6B00" : "#00F0FF"} 
+                        strokeWidth="2.5"
+                        style={{ filter: "url(#layer-glow)" }}
+                      />
                     )}
 
-                    {/* Active Rocket Thrust Base Glow */}
+                    {/* Main isometric diamond plane */}
+                    <polygon 
+                      points={points} 
+                      fill={isActive ? "rgba(0,240,255,0.06)" : "rgba(6,6,15,0.8)"} 
+                      stroke={isActive ? (plr.id === "ground" ? "#FF6B00" : "#00F0FF") : "rgba(255,255,255,0.06)"} 
+                      strokeWidth="1"
+                      className="transition-all duration-300 hover:stroke-white/40"
+                    />
+
+                    {/* Plane Label Text */}
+                    <text 
+                      x={cx} 
+                      y={cy + 3} 
+                      fill={isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)"} 
+                      fontSize="5" 
+                      fontFamily="monospace" 
+                      fontWeight="bold"
+                      textAnchor="middle"
+                      letterSpacing="0.75"
+                    >
+                      0{layerIndex} // {plr.name.toUpperCase()}
+                    </text>
+
+                    {/* Flow indicator light blips */}
                     {isActive && (
-                      <div 
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[2px] rounded-full blur-[2px]"
-                        style={{ backgroundColor: plr.boosterColor, boxShadow: `0 0 12px 2px ${plr.boosterColor}` }}
-                      ></div>
+                      <circle 
+                        cx={cx} 
+                        cy={cy} 
+                        r="2.5" 
+                        fill={plr.id === "ground" ? "#FF6B00" : "#00F0FF"} 
+                        className="animate-ping"
+                      />
                     )}
-
-                    <div className="flex items-center gap-3 relative z-10">
-                      {/* Stack Circle Node */}
-                      <span className={`w-7 h-7 rounded-full font-mono text-[10px] font-bold flex items-center justify-center border transition-all duration-300 ${
-                        isActive
-                          ? "bg-white text-[#030308] border-white"
-                          : "bg-white/5 border-white/10 text-white/40 group-hover:text-white group-hover:border-white/20"
-                      }`}>
-                        0{pillars.length - index}
-                      </span>
-                      
-                      <div>
-                        <h4 className={`text-xs font-bold tracking-tight transition-colors ${
-                          isActive ? "text-white" : "text-white/60 group-hover:text-white"
-                        }`}>
-                          {plr.name}
-                        </h4>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 relative z-10">
-                      <span className={`h-1.5 w-1.5 rounded-full ${plr.dotColor} ${
-                        isActive ? "animate-pulse shadow-[0_0_6px_currentColor]" : "opacity-30"
-                      }`}></span>
-                    </div>
-
-                  </button>
+                  </g>
                 );
               })}
-            </div>
+            </svg>
           </div>
 
         </div>

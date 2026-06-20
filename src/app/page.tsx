@@ -42,7 +42,7 @@ export default function Home() {
     const observerOptions = {
       root: null,
       rootMargin: "-45% 0px -45% 0px", // Trigger when the section dominates the center area
-      threshold: 0.1
+      threshold: 0.05
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -109,22 +109,22 @@ export default function Home() {
         <MissionControl />
       </div>
 
-      {/* Origins Timeline Section */}
-      <div id="origins" className="snap-start h-[100dvh]">
+      {/* Origins Timeline Section (Scroll-driven Chapter 1) */}
+      <div id="origins" className="snap-start h-[200vh] relative">
         <Origins />
       </div>
 
-      {/* Inflection Point Stats Section */}
-      <div id="inflection" className="snap-start h-[100dvh]">
+      {/* Inflection Point Stats Section (Scroll-driven Chapter 2) */}
+      <div id="inflection" className="snap-start h-[200vh] relative">
         <InflectionPoint />
       </div>
 
-      {/* Interactive Ecosystem Map Section */}
+      {/* Interactive Ecosystem Map Section (Flagship Force Graph) */}
       <div id="ecosystem" className="snap-start h-[100dvh]">
         <EcosystemVisualization />
       </div>
 
-      {/* Four Pillars Stack Section */}
+      {/* Four Pillars Stack Section (Chapter 4: 5-Layer Stack) */}
       <div id="pillars" className="snap-start h-[100dvh]">
         <FourPillars />
       </div>
@@ -148,7 +148,7 @@ export default function Home() {
         <CaseStudies />
       </div>
 
-      {/* Closing Visual Summary Frame (replacing previous signup forms) */}
+      {/* Closing Visual Summary Frame (Future Radar Console) */}
       <div id="join" className="snap-start h-[100dvh]">
         <ClosingShot />
       </div>

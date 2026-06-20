@@ -85,10 +85,19 @@ function CaseStudyCard({ cs, onClick }: CaseStudyCardProps) {
         }}
         className="w-full text-left h-full flex flex-col justify-between p-5 rounded-[19px] bg-[#04040c]/90 border border-white/5 group-hover:border-[#FF6B00]/40 transition-all duration-300 shadow-md relative z-10 backdrop-blur-sm"
       >
-        <div>
+        <div className="w-full">
+          {/* Technical Corner Brackets */}
+          <div className="absolute top-2 left-2 w-1.5 h-1.5 border-t border-l border-white/10 group-hover:border-[#FF6B00]/40"></div>
+          <div className="absolute top-2 right-2 w-1.5 h-1.5 border-t border-r border-white/10 group-hover:border-[#FF6B00]/40"></div>
+          <div className="absolute bottom-2 left-2 w-1.5 h-1.5 border-b border-l border-white/10 group-hover:border-[#FF6B00]/40"></div>
+          <div className="absolute bottom-2 right-2 w-1.5 h-1.5 border-b border-r border-[#FF6B00]/40 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
           <div className="flex justify-between items-center mb-4">
             <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
               {cs.categoryLabel}
+            </span>
+            <span className="font-mono text-[6px] text-white/30 tracking-wider">
+              {cs.codename}
             </span>
           </div>
           <h4 className="text-white text-base font-bold tracking-tight group-hover:text-[#FF6B00] transition-colors">
@@ -97,6 +106,17 @@ function CaseStudyCard({ cs, onClick }: CaseStudyCardProps) {
           <p className="text-white/50 text-xs mt-1.5 font-sans leading-relaxed">
             { cs.subtitle }
           </p>
+
+          <div className="mt-4 pt-3 border-t border-white/5 grid grid-cols-2 gap-2 font-mono text-[8px] text-white/40">
+            <div>
+              <span>METRIC_VALUE:</span>
+              <strong className="text-white block mt-0.5">{cs.metrics[0].value}</strong>
+            </div>
+            <div>
+              <span>LEAD_OFFICE:</span>
+              <strong className="text-white block mt-0.5">{cs.author.split(" ")[0].toUpperCase()}</strong>
+            </div>
+          </div>
         </div>
 
         <div className="w-full mt-6 pt-3 border-t border-white/5 flex items-center justify-between font-mono text-[8px] text-white/40 group-hover:text-white transition-colors duration-200">
