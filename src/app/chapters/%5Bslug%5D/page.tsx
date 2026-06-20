@@ -307,10 +307,10 @@ export default function CaseStudyPage() {
 
   if (!caseStudy) {
     return (
-      <div className="min-h-screen bg-[#F7F6F3] text-[#111111] flex flex-col items-center justify-center font-mono">
-        <AlertTriangle className="w-8 h-8 text-[#956400] mb-4" />
-        <span className="font-semibold">RESEARCH PUBLICATION NOT FOUND</span>
-        <Link href="/" className="mt-4 text-xs text-[#1F6C9F] hover:underline font-bold">
+      <div className="min-h-screen bg-space-black text-white flex flex-col items-center justify-center font-mono">
+        <AlertTriangle className="w-8 h-8 text-accent-orange mb-4" />
+        <span>RESEARCH PUBLICATION NOT FOUND</span>
+        <Link href="/" className="mt-4 text-xs text-accent-cyan hover:underline">
           Return to presentation
         </Link>
       </div>
@@ -318,13 +318,13 @@ export default function CaseStudyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F6F3] text-[#111111] font-sans">
+    <div className="min-h-screen bg-[#030308] text-[#f4f4f7] font-sans">
       <Navbar />
 
       {/* Reading Progress Bar */}
-      <div className="fixed top-16 left-0 right-0 h-[2px] bg-black/5 z-40">
+      <div className="fixed top-16 left-0 right-0 h-[2px] bg-white/5 z-40">
         <div 
-          className="h-full bg-[#1F6C9F] transition-all duration-100" 
+          className="h-full bg-accent-cyan transition-all duration-100" 
           style={{ width: `${scrollProgress}%` }}
         ></div>
       </div>
@@ -335,36 +335,36 @@ export default function CaseStudyPage() {
         {/* Breadcrumb & Navigation */}
         <Link 
           href="/" 
-          className="inline-flex items-center gap-2 text-xs font-mono text-[#787774] hover:text-[#1F6C9F] transition-colors mb-8 group font-semibold"
+          className="inline-flex items-center gap-2 text-xs font-mono text-white/55 hover:text-accent-cyan transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           <span>RETURN TO PRESENTATION DECK</span>
         </Link>
 
         {/* Header Block */}
-        <div className="border-b border-[#EAEAEA] pb-8 mb-12">
-          <span className="font-mono text-xs text-[#1F6C9F] uppercase tracking-widest block mb-2 font-bold">
+        <div className="border-b border-space-border/50 pb-8 mb-12">
+          <span className="font-mono text-xs text-accent-cyan uppercase tracking-widest block mb-2">
             RESEARCH PUBLICATION &mdash; {caseStudy.category}
           </span>
-          <h1 className="text-4xl md:text-6xl font-sans font-extrabold tracking-tighter leading-tight text-[#111111] max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-sans font-extrabold tracking-tighter leading-tight text-white max-w-4xl">
             {caseStudy.title}
           </h1>
-          <p className="text-[#2F3437] text-lg md:text-xl font-light mt-4 max-w-3xl leading-relaxed">
+          <p className="text-white/60 text-lg md:text-xl font-light mt-4 max-w-3xl leading-relaxed">
             {caseStudy.subtitle}
           </p>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-6 mt-8 font-mono text-xs text-[#787774]">
+          <div className="flex flex-wrap items-center gap-6 mt-8 font-mono text-xs text-white/40">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-[#1F6C9F]" />
+              <Calendar className="w-4 h-4 text-accent-cyan" />
               <span>PUBLISHED: {caseStudy.date}</span>
             </div>
             <div className="flex items-center gap-2">
-              <User className="w-4 h-4 text-[#1F6C9F]" />
+              <User className="w-4 h-4 text-accent-cyan" />
               <span>BY: {caseStudy.author}</span>
             </div>
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-[#956400]" />
+              <FileText className="w-4 h-4 text-accent-orange" />
               <span>CLASSIFICATION: COMMERCIAL RESEARCH</span>
             </div>
           </div>
@@ -375,20 +375,20 @@ export default function CaseStudyPage() {
           
           {/* Sticky Table of Contents (Left 3 columns) */}
           <aside className="hidden lg:block lg:col-span-3 sticky top-32 space-y-6">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#787774] block border-b border-[#EAEAEA] pb-2 font-bold">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-white/30 block border-b border-white/5 pb-2">
               Document sections
             </span>
-            <nav className="flex flex-col gap-3 font-mono text-xs font-semibold">
-              <a href="#summary" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Executive Summary</a>
-              <a href="#structure" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Industry Structure</a>
-              <a href="#value-chain" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Ecosystem Value Chain</a>
-              <a href="#economics" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Financial Economics</a>
-              <a href="#risks-opps" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Risks & Opportunities</a>
-              <a href="#outlook" className="text-[#787774] hover:text-[#1F6C9F] hover:underline transition-colors">Future Outlook</a>
+            <nav className="flex flex-col gap-3 font-mono text-xs">
+              <a href="#summary" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Executive Summary</a>
+              <a href="#structure" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Industry Structure</a>
+              <a href="#value-chain" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Ecosystem Value Chain</a>
+              <a href="#economics" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Financial Economics</a>
+              <a href="#risks-opps" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Risks & Opportunities</a>
+              <a href="#outlook" className="text-white/60 hover:text-accent-cyan hover:underline transition-colors">Future Outlook</a>
             </nav>
 
-            <div className="pt-6 border-t border-[#EAEAEA]">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#787774] block mb-3 font-bold">
+            <div className="pt-6 border-t border-white/5">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-white/30 block mb-3">
                 Related briefs
               </span>
               <div className="flex flex-col gap-2">
@@ -396,7 +396,7 @@ export default function CaseStudyPage() {
                   <Link 
                     key={rel.slug} 
                     href={`/chapters/${rel.slug}`}
-                    className="text-xs text-[#1F6C9F] hover:underline font-mono font-bold"
+                    className="text-xs text-accent-cyan hover:underline font-mono"
                   >
                     // {rel.name}
                   </Link>
@@ -410,23 +410,23 @@ export default function CaseStudyPage() {
             
             {/* Executive Summary */}
             <section id="summary" className="space-y-4 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Executive Summary
               </h3>
-              <p className="text-[#2F3437] text-base leading-relaxed font-sans max-w-[70ch]">
+              <p className="text-[#c7c7d2] text-base leading-relaxed font-sans max-w-[70ch]">
                 {caseStudy.summary}
               </p>
             </section>
 
             {/* Industry Structure */}
             <section id="structure" className="space-y-4 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Industry Structure & Framework
               </h3>
               <ul className="space-y-4">
                 {caseStudy.structure.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-[#2F3437] text-sm leading-relaxed max-w-[70ch]">
-                    <span className="font-mono text-[#1F6C9F] font-bold mt-0.5">// 0{idx + 1}</span>
+                  <li key={idx} className="flex items-start gap-3 text-[#c7c7d2] text-sm leading-relaxed max-w-[70ch]">
+                    <span className="font-mono text-accent-cyan font-bold mt-0.5">// 0{idx + 1}</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -435,26 +435,26 @@ export default function CaseStudyPage() {
 
             {/* Value Chain */}
             <section id="value-chain" className="space-y-4 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Ecosystem Value Chain
               </h3>
-              <p className="text-[#787774] text-xs font-mono mb-4">
+              <p className="text-white/50 text-xs font-mono mb-4">
                 [ Walkthrough of supply chain and component flows ]
               </p>
               <div className="space-y-3">
                 {caseStudy.valueChain.map((chainItem, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-[#FFFFFF] border border-[#EAEAEA] p-4 rounded-xl flex items-start gap-4 shadow-sm"
+                    className="bg-[#050510] border border-white/5 p-4 rounded-xl flex items-start gap-4"
                   >
-                    <div className="w-8 h-8 rounded-full bg-[#1F6C9F]/10 border border-[#1F6C9F]/20 flex items-center justify-center font-mono text-xs text-[#1F6C9F] shrink-0 font-bold">
+                    <div className="w-8 h-8 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center font-mono text-xs text-accent-cyan shrink-0">
                       {idx + 1}
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-[#111111] font-mono uppercase tracking-wide">
+                      <h4 className="text-sm font-bold text-white font-mono uppercase tracking-wide">
                         {chainItem.split(":")[0]}
                       </h4>
-                      <p className="text-xs text-[#2F3437] mt-1 font-sans leading-relaxed">
+                      <p className="text-xs text-white/60 mt-1 font-sans leading-relaxed">
                         {chainItem.split(":")[1] || ""}
                       </p>
                     </div>
@@ -465,22 +465,22 @@ export default function CaseStudyPage() {
 
             {/* Financial Economics */}
             <section id="economics" className="space-y-4 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Financial Economics
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {caseStudy.economics.map((econ, idx) => (
                   <div 
                     key={idx} 
-                    className="bg-[#FFFFFF] border border-[#EAEAEA] p-5 rounded-2xl flex flex-col justify-between shadow-sm"
+                    className="bg-[#060612] border border-white/5 p-5 rounded-2xl flex flex-col justify-between"
                   >
-                    <span className="font-mono text-[9px] text-[#787774] uppercase tracking-widest block font-bold">
+                    <span className="font-mono text-[9px] text-white/40 uppercase tracking-widest block">
                       {econ.label}
                     </span>
-                    <span className="text-2xl lg:text-3xl font-mono font-extrabold text-[#1F6C9F] tracking-tight mt-3 block">
+                    <span className="text-2xl lg:text-3xl font-mono font-extrabold text-accent-cyan tracking-tight mt-3 block">
                       {econ.value}
                     </span>
-                    <span className="text-[10px] text-[#787774] mt-2 font-sans font-medium">
+                    <span className="text-[10px] text-white/50 mt-2 font-sans">
                       {econ.context}
                     </span>
                   </div>
@@ -490,42 +490,40 @@ export default function CaseStudyPage() {
 
             {/* Risks & Opportunities */}
             <section id="risks-opps" className="space-y-6 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Risks & Opportunities Matrix
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Risks list */}
-                <div className="bg-[#FCE8E6] border border-[#C5221F]/20 p-6 rounded-2xl">
-                  <div className="flex items-center gap-2 mb-4 border-b border-[#C5221F]/10 pb-2">
-                    <AlertTriangle className="w-4 h-4 text-[#C5221F]" />
-                    <span className="font-mono text-xs font-bold text-[#C5221F] uppercase tracking-wider">
+                <div className="bg-red-500/5 border border-red-500/10 p-6 rounded-2xl">
+                  <div className="flex items-center gap-2 mb-4 border-b border-red-500/10 pb-2">
+                    <AlertTriangle className="w-4 h-4 text-red-400" />
+                    <span className="font-mono text-xs font-bold text-red-400 uppercase tracking-wider">
                       Strategic Risks
                     </span>
                   </div>
                   <ul className="space-y-3">
                     {caseStudy.risks.map((risk, idx) => (
-                      <li key={idx} className="text-xs text-[#2F3437] leading-relaxed font-sans flex items-start gap-2">
-                        <span className="text-[#C5221F] font-bold">•</span>
-                        <span>{risk}</span>
+                      <li key={idx} className="text-xs text-white/80 leading-relaxed font-sans">
+                        • {risk}
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 {/* Opportunities list */}
-                <div className="bg-[#E1F3FE] border border-[#1F6C9F]/20 p-6 rounded-2xl">
-                  <div className="flex items-center gap-2 mb-4 border-b border-[#1F6C9F]/10 pb-2">
-                    <TrendingUp className="w-4 h-4 text-[#1F6C9F]" />
-                    <span className="font-mono text-xs font-bold text-[#1F6C9F] uppercase tracking-wider">
+                <div className="bg-accent-cyan/5 border border-accent-cyan/10 p-6 rounded-2xl">
+                  <div className="flex items-center gap-2 mb-4 border-b border-accent-cyan/10 pb-2">
+                    <TrendingUp className="w-4 h-4 text-accent-cyan" />
+                    <span className="font-mono text-xs font-bold text-accent-cyan uppercase tracking-wider">
                       Ecosystem Opportunities
                     </span>
                   </div>
                   <ul className="space-y-3">
                     {caseStudy.opportunities.map((opp, idx) => (
-                      <li key={idx} className="text-xs text-[#2F3437] leading-relaxed font-sans flex items-start gap-2">
-                        <span className="text-[#1F6C9F] font-bold">•</span>
-                        <span>{opp}</span>
+                      <li key={idx} className="text-xs text-white/80 leading-relaxed font-sans">
+                        • {opp}
                       </li>
                     ))}
                   </ul>
@@ -535,28 +533,28 @@ export default function CaseStudyPage() {
 
             {/* Future Outlook */}
             <section id="outlook" className="space-y-4 scroll-mt-24">
-              <h3 className="text-xl font-bold text-[#111111] tracking-tight border-b border-[#EAEAEA] pb-2">
+              <h3 className="text-xl font-bold text-white tracking-tight border-b border-white/5 pb-2">
                 Future Outlook
               </h3>
-              <p className="text-[#2F3437] text-sm leading-relaxed font-sans max-w-[70ch]">
+              <p className="text-[#c7c7d2] text-sm leading-relaxed font-sans max-w-[70ch]">
                 {caseStudy.outlook}
               </p>
             </section>
 
             {/* Takeaways Summary Card */}
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 rounded-2xl shadow-md relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#1F6C9F] to-[#956400]"></div>
+            <div className="bg-[#08081a] border border-white/10 p-6 rounded-2xl shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-accent-cyan to-accent-orange"></div>
               
               <div className="flex items-center gap-2 mb-4">
-                <FileText className="w-5 h-5 text-[#1F6C9F]" />
-                <h4 className="text-sm font-mono font-bold text-[#111111] uppercase tracking-wider">
+                <FileText className="w-5 h-5 text-accent-cyan" />
+                <h4 className="text-sm font-mono font-bold text-white uppercase tracking-wider">
                   Key Strategic Takeaways
                 </h4>
               </div>
               <ul className="space-y-3">
                 {caseStudy.takeaways.map((takeaway, idx) => (
-                  <li key={idx} className="text-xs text-[#2F3437] leading-relaxed font-sans flex items-start gap-2">
-                    <span className="text-[#1F6C9F] font-bold">•</span>
+                  <li key={idx} className="text-xs text-white/90 leading-relaxed font-sans flex items-start gap-2">
+                    <span className="text-accent-cyan">•</span>
                     <span>{takeaway}</span>
                   </li>
                 ))}
@@ -564,7 +562,7 @@ export default function CaseStudyPage() {
             </div>
 
             {/* Footer Navigation */}
-            <div className="pt-8 border-t border-[#EAEAEA] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-[#787774]/60 font-semibold">
+            <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-white/40">
               <span>REPORT NO: ISER-2026-04</span>
               <span>CLASSIFICATION: COMMERCIAL TRUSTED BRIEF</span>
             </div>

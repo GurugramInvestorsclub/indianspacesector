@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-space-black: #F7F6F3;
-  --color-space-dark: #FBFBFA;
-  --color-space-glass: rgba(247, 246, 243, 0.8);
-  --color-space-border: rgba(0, 0, 0, 0.06);
-  --color-accent-cyan: #1F6C9F;
-  --color-accent-orange: #956400;
+  --color-space-black: #030308;
+  --color-space-dark: #05050f;
+  --color-space-glass: rgba(5, 5, 15, 0.8);
+  --color-space-border: rgba(255, 255, 255, 0.06);
+  --color-accent-cyan: #00F0FF;
+  --color-accent-orange: #FF6B00;
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #F7F6F3;
-  --foreground: #111111;
+  --background: #030308;
+  --foreground: #ffffff;
 }
 
 body {
@@ -46,14 +46,14 @@ html.lenis, html.lenis body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F6F3;
+  background: #030308;
 }
 ::-webkit-scrollbar-thumb {
-  background: #EAEAEA;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1F6C9F;
+  background: #00F0FF;
 }
 
 /* Pulse animation for active nodes */
@@ -76,14 +76,14 @@ html.lenis, html.lenis body {
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
 .bg-radar-sweep {
-  background: conic-gradient(from 0deg, rgba(31, 108, 159, 0.04) 0deg, transparent 90deg, transparent 360deg);
+  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.04) 0deg, transparent 90deg, transparent 360deg);
 }
 
 .radial-vignette {
-  background: radial-gradient(circle at center, transparent 30%, rgba(247, 246, 243, 0.7) 100%);
+  background: radial-gradient(circle at center, transparent 30%, rgba(3, 3, 8, 0.8) 100%);
 }
