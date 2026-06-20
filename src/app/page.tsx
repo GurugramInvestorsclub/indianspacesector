@@ -62,7 +62,7 @@ export default function Home() {
   };
 
   return (
-    <div className="h-[100dvh] overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#030308] text-foreground antialiased selection:bg-[#00F0FF] selection:text-black">
+    <div className="h-[100dvh] overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#F7F6F3] text-[#111111] antialiased selection:bg-[#E1F3FE] selection:text-[#111111]">
       {/* Floating Header Navbar */}
       <Navbar />
 
@@ -111,9 +111,9 @@ export default function Home() {
       </div>
 
       {/* Persistent HUD Progress Counter Overlay */}
-      <div className="fixed bottom-6 right-8 md:bottom-8 md:right-12 z-40 font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] bg-[#05050f]/80 border border-white/10 px-4 py-2.5 rounded-sm backdrop-blur-md shadow-2xl flex items-center gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse"></span>
-        <span>SECTION {getSlideNumber()} / 10</span>
+      <div className="fixed bottom-6 right-8 md:bottom-8 md:right-12 z-40 font-mono text-[10px] tracking-[0.25em] text-[#1F6C9F] bg-[#F7F6F3]/90 border border-[#EAEAEA] px-4 py-2.5 rounded-sm backdrop-blur-md shadow-md flex items-center gap-3">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#1F6C9F] animate-pulse"></span>
+        <span className="font-semibold">SECTION {getSlideNumber()} / 10</span>
       </div>
     </div>
   );

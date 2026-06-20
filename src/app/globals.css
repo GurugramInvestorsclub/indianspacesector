@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-space-black: #030308;
-  --color-space-dark: #070714;
-  --color-space-glass: rgba(18, 18, 43, 0.4);
-  --color-space-border: rgba(255, 255, 255, 0.08);
-  --color-accent-cyan: #00F0FF;
-  --color-accent-orange: #FF6B00;
+  --color-space-black: #F7F6F3;
+  --color-space-dark: #FBFBFA;
+  --color-space-glass: rgba(247, 246, 243, 0.8);
+  --color-space-border: rgba(0, 0, 0, 0.06);
+  --color-accent-cyan: #1F6C9F;
+  --color-accent-orange: #956400;
   
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #030308;
-  --foreground: #f4f4f7;
+  --background: #F7F6F3;
+  --foreground: #111111;
 }
 
 body {
@@ -46,45 +46,44 @@ html.lenis, html.lenis body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030308;
+  background: #F7F6F3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1c1c3a;
+  background: #EAEAEA;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00F0FF;
+  background: #1F6C9F;
 }
 
 /* Pulse animation for active nodes */
 @keyframes pulse-cyan {
   0%, 100% {
-    opacity: 0.6;
+    opacity: 0.4;
     transform: scale(1);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.2);
+    opacity: 0.8;
+    transform: scale(1.15);
   }
 }
 
 .animate-pulse-cyan {
-  animation: pulse-cyan 2s infinite ease-in-out;
+  animation: pulse-cyan 2.2s infinite ease-in-out;
 }
 
 /* Scanline and grid overlays for tactical visuals */
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
 }
 
 .bg-radar-sweep {
-  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.15) 0deg, transparent 90deg, transparent 360deg);
+  background: conic-gradient(from 0deg, rgba(31, 108, 159, 0.04) 0deg, transparent 90deg, transparent 360deg);
 }
 
 .radial-vignette {
-  background: radial-gradient(circle at center, transparent 30%, rgba(3, 3, 8, 0.8) 100%);
+  background: radial-gradient(circle at center, transparent 30%, rgba(247, 246, 243, 0.7) 100%);
 }
-

@@ -47,37 +47,37 @@ export function Origins() {
   return (
     <section
       id="origins"
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#F7F6F3] scroll-snap-align-start overflow-hidden"
     >
-      {/* Full-bleed background space image */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      {/* Full-bleed background space image with high light overlay */}
+      <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="/space_bg.png"
           alt="Space background starry sky"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.7] saturate-[0.8]"
+          className="object-cover object-center filter grayscale-[60%] sepia-[15%] brightness-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/40 to-[#030308]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F3]/95 via-[#F7F6F3]/60 to-[#F7F6F3]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
       {/* Ambient highlights */}
-      <div className="absolute top-1/2 left-[20%] w-[350px] h-[350px] rounded-full bg-[#FF6B00]/5 filter blur-[100px] pointer-events-none z-10"></div>
+      <div className="absolute top-1/2 left-[20%] w-[350px] h-[350px] rounded-full bg-[#956400]/2 filter blur-[120px] pointer-events-none z-10"></div>
 
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Title Block */}
           <div className="lg:col-span-4">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FF6B00] uppercase block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#956400] uppercase block mb-3 font-semibold">
               01. DECLASSIFIED BRIEFING
             </span>
-            <h2 className="text-4xl md:text-5xl font-sans font-extrabold tracking-tighter leading-[1.05] text-white">
+            <h2 className="text-4xl md:text-5xl font-sans font-extrabold tracking-tighter leading-[1.05] text-[#111111]">
               Origins of the <br />
               Space Stack
             </h2>
-            <p className="text-white/50 text-xs md:text-sm mt-4 font-sans leading-relaxed">
+            <p className="text-[#787774] text-xs md:text-sm mt-4 font-sans leading-relaxed">
               India's climb from academic baseline telemetry to a commercial launcher powerhouse.
             </p>
           </div>
@@ -93,23 +93,23 @@ export function Origins() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-1 rounded-[16px] bg-white/[0.01] border border-white/5 shadow-md"
+                  className="p-1 rounded-[12px] bg-black/[0.01] border border-black/5 shadow-xs"
                 >
-                  <div className="bg-[#05050f]/80 border border-white/5 rounded-[12px] p-4 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center hover:border-[#FF6B00]/30 transition-all duration-300">
+                  <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-[8px] p-5 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center hover:border-[#1F6C9F]/30 transition-all duration-300">
                     
                     {/* Left: Year & Title */}
                     <div className="flex gap-4 items-center">
-                      <div className="flex items-center justify-center p-2 bg-white/5 rounded-lg text-[#FF6B00] shrink-0">
+                      <div className="flex items-center justify-center p-2.5 bg-[#F7F6F3] rounded-md text-[#956400] shrink-0 border border-[#EAEAEA]">
                         <Calendar className="w-3.5 h-3.5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-sm font-bold text-white tracking-tight">{evt.year}</span>
-                          <span className="font-mono text-[7px] tracking-widest text-[#FF6B00]/80 uppercase px-1.5 py-0.5 rounded border border-[#FF6B00]/20 bg-[#FF6B00]/5">
+                          <span className="font-mono text-sm font-bold text-[#111111] tracking-tight">{evt.year}</span>
+                          <span className="font-mono text-[7px] tracking-widest text-[#956400] uppercase px-1.5 py-0.5 rounded border border-[#956400]/20 bg-[#FBF3DB] font-bold">
                             {evt.codename}
                           </span>
                         </div>
-                        <h4 className="text-white text-sm font-bold mt-0.5 tracking-tight">{evt.title}</h4>
+                        <h4 className="text-[#111111] text-sm font-bold mt-0.5 tracking-tight">{evt.title}</h4>
                       </div>
                     </div>
 
@@ -117,7 +117,7 @@ export function Origins() {
                     <div className="w-full md:w-auto flex flex-col items-stretch md:items-end gap-1.5 shrink-0">
                       <button
                         onClick={() => toggleReveal(idx)}
-                        className="flex items-center justify-center gap-1.5 px-3 py-1.5 border border-white/10 hover:border-white/20 hover:bg-white/5 text-white/70 hover:text-white font-mono text-[8px] tracking-wider rounded-sm transition-all duration-200 cursor-pointer"
+                        className="flex items-center justify-center gap-1.5 px-3 py-1.5 border border-black/10 hover:border-black/20 hover:bg-black/5 text-[#111111] font-mono text-[8px] tracking-wider rounded-xs transition-all duration-200 cursor-pointer"
                       >
                         {isRevealed ? (
                           <>
@@ -125,7 +125,7 @@ export function Origins() {
                           </>
                         ) : (
                           <>
-                            <Eye className="w-3 h-3 text-[#FF6B00]" /> DECLASSIFY
+                            <Eye className="w-3 h-3 text-[#956400]" /> DECLASSIFY
                           </>
                         )}
                       </button>
@@ -136,12 +136,12 @@ export function Origins() {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
+                            className="overflow-hidden w-full md:w-auto"
                           >
-                            <div className="mt-1 font-mono text-[8px] tracking-wide leading-relaxed p-2.5 rounded border text-left md:text-right max-w-xs md:max-w-md bg-white/[0.02] border-white/5 text-white/80 space-y-1.5">
-                              <p className="text-white/60 font-sans text-[10px] leading-relaxed">{evt.details}</p>
-                              <div className="h-px bg-white/5 my-1.5"></div>
-                              <p className="text-[#FF6B00]/95">{evt.redacted}</p>
+                            <div className="mt-1 font-mono text-[8px] tracking-wide leading-relaxed p-3 rounded border text-left md:text-right max-w-xs md:max-w-md bg-[#F7F6F3] border-[#EAEAEA] text-[#2F3437] space-y-1.5">
+                              <p className="text-[#2F3437] font-sans text-[10px] leading-relaxed">{evt.details}</p>
+                              <div className="h-px bg-black/5 my-1.5"></div>
+                              <p className="text-[#956400] font-semibold">{evt.redacted}</p>
                             </div>
                           </motion.div>
                         )}

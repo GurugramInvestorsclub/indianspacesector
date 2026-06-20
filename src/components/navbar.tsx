@@ -93,7 +93,7 @@ export function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           scrolled
-            ? "py-4 bg-[#030308]/90 backdrop-blur-md border-b border-white/5"
+            ? "py-4 bg-[#F7F6F3]/85 backdrop-blur-md border-b border-black/5"
             : "py-6 bg-transparent"
         }`}
       >
@@ -101,9 +101,9 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-white font-sans font-bold text-sm md:text-base tracking-[0.2em] uppercase hover:opacity-85 transition-opacity flex items-center gap-2.5"
+            className="text-[#111111] font-sans font-bold text-sm md:text-base tracking-[0.2em] uppercase hover:opacity-80 transition-opacity flex items-center gap-2.5"
           >
-            <Shield className="w-4 h-4 text-[#00F0FF] animate-pulse shrink-0" />
+            <Shield className="w-4 h-4 text-[#1F6C9F] animate-pulse shrink-0" />
             <span>INDIA'S SPACE REVOLUTION</span>
           </Link>
 
@@ -117,23 +117,23 @@ export function Navbar() {
                   href={link.href}
                   onClick={(e) => handleScrollTo(e, link.href)}
                   className={`text-[11px] font-mono tracking-[0.18em] transition-colors duration-300 relative py-1 ${
-                    active ? "text-[#00F0FF]" : "text-white/55 hover:text-white"
+                    active ? "text-[#1F6C9F] font-bold" : "text-[#787774] hover:text-[#111111]"
                   }`}
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#00F0FF]"></span>
+                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#1F6C9F]"></span>
                   )}
                 </a>
               );
             })}
           </nav>
 
-          {/* Mobile Toggle (Hamburger only, CTA button removed) */}
+          {/* Mobile Toggle */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white/70 hover:text-white p-1 cursor-pointer"
+              className="text-[#787774] hover:text-[#111111] p-1 cursor-pointer"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -144,10 +144,10 @@ export function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-30 bg-[#030308]/98 backdrop-blur-2xl flex flex-col justify-center px-8 md:hidden">
+        <div className="fixed inset-0 z-30 bg-[#F7F6F3]/98 backdrop-blur-2xl flex flex-col justify-center px-8 md:hidden">
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white p-1"
+            className="absolute top-6 right-6 text-[#787774] hover:text-[#111111] p-1"
           >
             <X className="w-6 h-6" />
           </button>
@@ -158,7 +158,7 @@ export function Navbar() {
                 href={link.href}
                 onClick={(e) => handleScrollTo(e, link.href)}
                 className={`text-2xl font-sans font-bold tracking-wider transition-colors ${
-                  isLinkActive(link.activeKeys) ? "text-[#00F0FF]" : "text-white/70 hover:text-white"
+                  isLinkActive(link.activeKeys) ? "text-[#1F6C9F]" : "text-[#787774] hover:text-[#111111]"
                 }`}
                 style={{ animationDelay: `${idx * 75}ms` }}
               >

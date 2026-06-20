@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { Rocket, Satellite, Globe, Database, Cpu, Activity, Server, Radio, BarChart3, Info } from "lucide-react";
+import { Activity, Server, Radio, BarChart3, Info } from "lucide-react";
 
 interface DeepDiveProps {
   id: string;
@@ -16,18 +16,18 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#F7F6F3] scroll-snap-align-start overflow-hidden"
     >
       {/* Full-bleed background with dark overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="/hero_earth.png"
           alt="Earth view representing launch path"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter grayscale-[80%] sepia-[10%] brightness-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F3]/95 via-[#F7F6F3]/60 to-[#F7F6F3]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
@@ -36,13 +36,13 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
           
           {/* Left Column: Caption */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#0052FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#C5221F] uppercase font-bold block mb-3 font-semibold">
               04A. PILLAR 01 // UPSTREAM LAUNCH
             </span>
-            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
+            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-[#111111]">
               Access to Low Earth Orbit
             </h3>
-            <p className="text-white/70 text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
+            <p className="text-[#2F3437] text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
               Pivoting from state-led cargo runs to high-frequency private launchers utilizing custom inclinations and 3D-printed motors.
             </p>
             
@@ -50,7 +50,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#0052FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#C5221F] hover:text-[#111111] transition-colors cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -58,7 +58,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="mt-3 bg-white/[0.02] border border-white/5 p-4 rounded-xl max-w-md font-mono text-[9px] text-white/50 space-y-1.5"
+                  className="mt-3 bg-[#FFFFFF] border border-[#EAEAEA] p-4 rounded-xl max-w-md font-mono text-[9px] text-[#787774] space-y-1.5 shadow-sm"
                 >
                   <p>• 3D-printed cryogenic nozzle integrations</p>
                   <p>• High-turnaround solid booster structures</p>
@@ -70,38 +70,34 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
 
           {/* Right Column: Telemetry HUD */}
           <div className="lg:col-span-5">
-            <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
-              <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
-                
-                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-[#0052FF] animate-pulse" />
-                    <span className="font-mono text-[9px] text-white/80">LAUNCH_LOG // ACCELERATORS</span>
-                  </div>
-                  <span className="font-mono text-[8px] text-[#0052FF] border border-[#0052FF]/20 px-2 py-0.5 rounded bg-[#0052FF]/5">
-                    SECURED
-                  </span>
+            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-[16px] p-6 shadow-md">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EAEAEA] mb-4">
+                <div className="flex items-center gap-1.5 font-bold">
+                  <Activity className="w-3.5 h-3.5 text-[#C5221F]" />
+                  <span className="font-mono text-[9px] text-[#111111]">LAUNCH_LOG // ACCELERATORS</span>
                 </div>
+                <span className="font-mono text-[8px] text-[#C5221F] border border-[#C5221F]/20 px-2 py-0.5 rounded bg-[#C5221F]/5 font-bold">
+                  SECURED
+                </span>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-[#030308] border border-white/5 p-4 rounded-lg font-mono text-[10px]">
-                  <div>
-                    <span className="text-white/40 block">LAUNCH COST</span>
-                    <span className="text-base font-bold text-white block mt-0.5">~$3,000/kg</span>
-                    <span className="text-[8px] text-[#0052FF]">LEO INSERTION</span>
-                  </div>
-                  <div>
-                    <span className="text-white/40 block">OPERATING MARGIN</span>
-                    <span className="text-base font-bold text-white block mt-0.5">30% - 35%</span>
-                    <span className="text-[8px] text-white/30">LOGISTICS RATE</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-4 bg-[#F7F6F3] border border-[#EAEAEA] p-4 rounded-lg font-mono text-[10px]">
+                <div>
+                  <span className="text-[#787774] block font-bold">LAUNCH COST</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">~$3,000/kg</span>
+                  <span className="text-[8px] text-[#C5221F] font-semibold">LEO INSERTION</span>
                 </div>
-
-                {/* Hover reveal for active builders */}
-                <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
-                  <span className="text-white/40">BUILDERS:</span>
-                  <span className="text-white/80">Skyroot, Agnikul, ISRO</span>
+                <div>
+                  <span className="text-[#787774] block font-bold">OPERATING MARGIN</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">30% - 35%</span>
+                  <span className="text-[8px] text-[#787774]">LOGISTICS RATE</span>
                 </div>
+              </div>
 
+              {/* Active builders */}
+              <div className="mt-4 pt-3 border-t border-[#EAEAEA] flex justify-between items-center text-[9px] font-mono">
+                <span className="text-[#787774] font-bold">BUILDERS:</span>
+                <span className="text-[#111111] font-semibold">Skyroot, Agnikul, ISRO</span>
               </div>
             </div>
           </div>
@@ -119,17 +115,17 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#F7F6F3] border-t border-[#EAEAEA] scroll-snap-align-start overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="/sat_const.png"
           alt="Satellite constellation rendering"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter grayscale-[80%] sepia-[10%] brightness-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F3]/95 via-[#F7F6F3]/60 to-[#F7F6F3]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
@@ -138,20 +134,20 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
           
           {/* Left Column */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#1F6C9F] uppercase font-bold block mb-3 font-semibold">
               04B. PILLAR 02 // HARDWARE & ASSEMBLY
             </span>
-            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
+            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-[#111111]">
               Miniaturized Orbital Hardware
             </h3>
-            <p className="text-white/70 text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
+            <p className="text-[#2F3437] text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
               Capitalizing on local engineering talent margins to build CubeSats, propulsive thruster blocks, and RF payloads.
             </p>
 
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00F0FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#1F6C9F] hover:text-[#111111] transition-colors cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -159,7 +155,7 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="mt-3 bg-white/[0.02] border border-white/5 p-4 rounded-xl max-w-md font-mono text-[9px] text-white/50 space-y-1.5"
+                  className="mt-3 bg-[#FFFFFF] border border-[#EAEAEA] p-4 rounded-xl max-w-md font-mono text-[9px] text-[#787774] space-y-1.5 shadow-sm"
                 >
                   <p>• Modular bus configurations (1U to 12U CubeSats)</p>
                   <p>• Green propellant chemical and electric Hall-thrusters</p>
@@ -171,37 +167,33 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
 
           {/* Right Column: Telemetry HUD */}
           <div className="lg:col-span-5">
-            <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
-              <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
-                
-                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <Server className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
-                    <span className="font-mono text-[9px] text-white/80">SATELLITE_BUS // ACCELERATORS</span>
-                  </div>
-                  <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/20 px-2 py-0.5 rounded bg-[#00F0FF]/5">
-                    ADCS: LOCK
-                  </span>
+            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-[16px] p-6 shadow-md">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EAEAEA] mb-4">
+                <div className="flex items-center gap-1.5 font-bold">
+                  <Server className="w-3.5 h-3.5 text-[#1F6C9F]" />
+                  <span className="font-mono text-[9px] text-[#111111]">SATELLITE_BUS // ACCELERATORS</span>
                 </div>
+                <span className="font-mono text-[8px] text-[#1F6C9F] border border-[#1F6C9F]/20 px-2 py-0.5 rounded bg-[#1F6C9F]/5 font-bold">
+                  ADCS: LOCK
+                </span>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-[#030308] border border-white/5 p-4 rounded-lg font-mono text-[10px]">
-                  <div>
-                    <span className="text-white/40 block">MFG ARBITRAGE</span>
-                    <span className="text-base font-bold text-white block mt-0.5">35% Cheaper</span>
-                    <span className="text-[8px] text-[#00F0FF]">VS US/EUROPE</span>
-                  </div>
-                  <div>
-                    <span className="text-white/40 block">DESIGN MARGIN</span>
-                    <span className="text-base font-bold text-white block mt-0.5">45% - 55%</span>
-                    <span className="text-[8px] text-white/30">BUS INTEGRATION</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-4 bg-[#F7F6F3] border border-[#EAEAEA] p-4 rounded-lg font-mono text-[10px]">
+                <div>
+                  <span className="text-[#787774] block font-bold">MFG ARBITRAGE</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">35% Cheaper</span>
+                  <span className="text-[8px] text-[#1F6C9F] font-semibold">VS US/EUROPE</span>
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
-                  <span className="text-white/40">BUILDERS:</span>
-                  <span className="text-white/80">Dhruva Space, Pixxel, Bellatrix</span>
+                <div>
+                  <span className="text-[#787774] block font-bold">DESIGN MARGIN</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">45% - 55%</span>
+                  <span className="text-[8px] text-[#787774]">BUS INTEGRATION</span>
                 </div>
+              </div>
 
+              <div className="mt-4 pt-3 border-t border-[#EAEAEA] flex justify-between items-center text-[9px] font-mono">
+                <span className="text-[#787774] font-bold">BUILDERS:</span>
+                <span className="text-[#111111] font-semibold">Dhruva Space, Pixxel, Bellatrix</span>
               </div>
             </div>
           </div>
@@ -219,17 +211,17 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#F7F6F3] border-t border-[#EAEAEA] scroll-snap-align-start overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="/ground_station.png"
           alt="Ground station gateway dishes"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter grayscale-[80%] sepia-[10%] brightness-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F3]/95 via-[#F7F6F3]/60 to-[#F7F6F3]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
@@ -238,20 +230,20 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
           
           {/* Left Column */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FF6B00] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#956400] uppercase font-bold block mb-3 font-semibold">
               04C. PILLAR 03 // MIDSTREAM GATEWAYS
             </span>
-            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
+            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-[#111111]">
               The Toll-Roads of Orbit
             </h3>
-            <p className="text-white/70 text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
+            <p className="text-[#2F3437] text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
               Managing critical telemetry, commands, and data downlinks via globally distributed ground stations and gateways.
             </p>
 
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#FF6B00] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#956400] hover:text-[#111111] transition-colors cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -259,7 +251,7 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="mt-3 bg-white/[0.02] border border-white/5 p-4 rounded-xl max-w-md font-mono text-[9px] text-white/50 space-y-1.5"
+                  className="mt-3 bg-[#FFFFFF] border border-[#EAEAEA] p-4 rounded-xl max-w-md font-mono text-[9px] text-[#787774] space-y-1.5 shadow-sm"
                 >
                   <p>• Ground-Station-as-a-Service (GSaaS) API scheduling</p>
                   <p>• High-gain parabolic antenna arrays (L, S, Ku, Ka bands)</p>
@@ -271,37 +263,33 @@ export function DeepDiveGround({ id }: DeepDiveProps) {
 
           {/* Right Column: Telemetry HUD */}
           <div className="lg:col-span-5">
-            <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
-              <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
-                
-                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <Radio className="w-3.5 h-3.5 text-[#FF6B00] animate-pulse" />
-                    <span className="font-mono text-[9px] text-white/80">GROUND_GATEWAY // ACCELERATORS</span>
-                  </div>
-                  <span className="font-mono text-[8px] text-[#FF6B00] border border-[#FF6B00]/20 px-2 py-0.5 rounded bg-[#FF6B00]/5">
-                    LINK: ACTIVE
-                  </span>
+            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-[16px] p-6 shadow-md">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EAEAEA] mb-4">
+                <div className="flex items-center gap-1.5 font-bold">
+                  <Radio className="w-3.5 h-3.5 text-[#956400]" />
+                  <span className="font-mono text-[9px] text-[#111111]">GROUND_GATEWAY // ACCELERATORS</span>
                 </div>
+                <span className="font-mono text-[8px] text-[#956400] border border-[#956400]/20 px-2 py-0.5 rounded bg-[#956400]/5 font-bold">
+                  LINK: ACTIVE
+                </span>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-[#030308] border border-white/5 p-4 rounded-lg font-mono text-[10px]">
-                  <div>
-                    <span className="text-white/40 block">PEAK BANDWIDTH</span>
-                    <span className="text-base font-bold text-white block mt-0.5">30+ Gbps</span>
-                    <span className="text-[8px] text-[#FF6B00]">DATA DOWNLINK</span>
-                  </div>
-                  <div>
-                    <span className="text-white/40 block">UTILITY MARGINS</span>
-                    <span className="text-base font-bold text-white block mt-0.5">45% - 50%</span>
-                    <span className="text-[8px] text-white/30">RECURRING CASHFLOW</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-4 bg-[#F7F6F3] border border-[#EAEAEA] p-4 rounded-lg font-mono text-[10px]">
+                <div>
+                  <span className="text-[#787774] block font-bold">PEAK BANDWIDTH</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">30+ Gbps</span>
+                  <span className="text-[8px] text-[#956400] font-semibold">DATA DOWNLINK</span>
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
-                  <span className="text-white/40">OPERATORS:</span>
-                  <span className="text-white/80">Dhruva Network, ISRO ISTRAC</span>
+                <div>
+                  <span className="text-[#787774] block font-bold">UTILITY MARGINS</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">45% - 50%</span>
+                  <span className="text-[8px] text-[#787774]">RECURRING CASHFLOW</span>
                 </div>
+              </div>
 
+              <div className="mt-4 pt-3 border-t border-[#EAEAEA] flex justify-between items-center text-[9px] font-mono">
+                <span className="text-[#787774] font-bold">OPERATORS:</span>
+                <span className="text-[#111111] font-semibold">Dhruva Network, ISRO ISTRAC</span>
               </div>
             </div>
           </div>
@@ -319,17 +307,17 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
   return (
     <section
       id={id}
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#F7F6F3] border-t border-[#EAEAEA] scroll-snap-align-start overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 opacity-20">
         <Image
           src="/sat_network.png"
           alt="Satellite telemetry network layout"
           fill
           sizes="100vw"
-          className="object-cover object-center filter brightness-[0.3] saturate-[0.8]"
+          className="object-cover object-center filter grayscale-[80%] sepia-[10%] brightness-[1.05]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/50 to-[#030308]/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F6F3]/95 via-[#F7F6F3]/60 to-[#F7F6F3]/95"></div>
         <div className="absolute inset-0 radial-vignette"></div>
       </div>
 
@@ -338,20 +326,20 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
           
           {/* Left Column */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00E575] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#2E7D32] uppercase font-bold block mb-3 font-semibold">
               04D. PILLAR 04 // DOWNSTREAM SAAS
             </span>
-            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
+            <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-[#111111]">
               Downstream Value SaaS
             </h3>
-            <p className="text-white/70 text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
+            <p className="text-[#2F3437] text-sm md:text-base mt-4 leading-relaxed font-sans max-w-xl">
               Translating raw spectral imagery and telemetry points directly to crop yields, carbon indices, and logistics maps.
             </p>
 
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00E575] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#2E7D32] hover:text-[#111111] transition-colors cursor-pointer font-semibold"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -359,7 +347,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="mt-3 bg-white/[0.02] border border-white/5 p-4 rounded-xl max-w-md font-mono text-[9px] text-white/50 space-y-1.5"
+                  className="mt-3 bg-[#FFFFFF] border border-[#EAEAEA] p-4 rounded-xl max-w-md font-mono text-[9px] text-[#787774] space-y-1.5 shadow-sm"
                 >
                   <p>• Automated Supply Chain and Vessel tracking APIs</p>
                   <p>• Methane leaks and carbon capture auditing models</p>
@@ -371,37 +359,33 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
 
           {/* Right Column: Telemetry HUD */}
           <div className="lg:col-span-5">
-            <div className="p-1 rounded-[20px] bg-white/[0.01] border border-white/10 shadow-xl">
-              <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
-                
-                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <BarChart3 className="w-3.5 h-3.5 text-[#00E575] animate-pulse" />
-                    <span className="font-mono text-[9px] text-white/80">SAAS_PORTAL // ACCELERATORS</span>
-                  </div>
-                  <span className="font-mono text-[8px] text-[#00E575] border border-[#00E575]/20 px-2 py-0.5 rounded bg-[#00E575]/5">
-                    API_OK
-                  </span>
+            <div className="bg-[#FFFFFF] border border-[#EAEAEA] rounded-[16px] p-6 shadow-md">
+              <div className="flex items-center justify-between pb-3 border-b border-[#EAEAEA] mb-4">
+                <div className="flex items-center gap-1.5 font-bold">
+                  <BarChart3 className="w-3.5 h-3.5 text-[#2E7D32]" />
+                  <span className="font-mono text-[9px] text-[#111111]">SAAS_PORTAL // ACCELERATORS</span>
                 </div>
+                <span className="font-mono text-[8px] text-[#2E7D32] border border-[#2E7D32]/20 px-2 py-0.5 rounded bg-[#2E7D32]/5 font-bold">
+                  API_OK
+                </span>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-[#030308] border border-white/5 p-4 rounded-lg font-mono text-[10px]">
-                  <div>
-                    <span className="text-white/40 block">GLOBAL SCALE</span>
-                    <span className="text-base font-bold text-white block mt-0.5">~$380B Market</span>
-                    <span className="text-[8px] text-[#00E575]">95% OF VALUE</span>
-                  </div>
-                  <div>
-                    <span className="text-white/40 block">GROSS MARGINS</span>
-                    <span className="text-base font-bold text-white block mt-0.5">75% - 85%</span>
-                    <span className="text-[8px] text-white/30">RECURRING MULTIPLES</span>
-                  </div>
+              <div className="grid grid-cols-2 gap-4 bg-[#F7F6F3] border border-[#EAEAEA] p-4 rounded-lg font-mono text-[10px]">
+                <div>
+                  <span className="text-[#787774] block font-bold">GLOBAL SCALE</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">~$380B Market</span>
+                  <span className="text-[8px] text-[#2E7D32] font-semibold">95% OF VALUE</span>
                 </div>
-
-                <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
-                  <span className="text-white/40">PLATFORMS:</span>
-                  <span className="text-white/80">SatSure, CropIn, MapmyIndia</span>
+                <div>
+                  <span className="text-[#787774] block font-bold">GROSS MARGINS</span>
+                  <span className="text-base font-bold text-[#111111] block mt-0.5">75% - 85%</span>
+                  <span className="text-[8px] text-[#787774]">RECURRING MULTIPLES</span>
                 </div>
+              </div>
 
+              <div className="mt-4 pt-3 border-t border-[#EAEAEA] flex justify-between items-center text-[9px] font-mono">
+                <span className="text-[#787774] font-bold">PLATFORMS:</span>
+                <span className="text-[#111111] font-semibold">SatSure, CropIn, MapmyIndia</span>
               </div>
             </div>
           </div>
