@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { Rocket, Satellite, Globe, Database, ArrowRight, Activity, TrendingUp } from "lucide-react";
 
@@ -26,8 +27,8 @@ export function FourPillars() {
       id: "applications",
       name: "Applications & Data",
       category: "Downstream Analytics & SaaS",
-      icon: <Database className="w-5 h-5 text-[#00E575]" />,
-      desc: "Downstream spatial software, weather grids, ESG carbon monitoring, and agricultural yield indexing APIs. This segment captures over 90% of total economic volume in the global space economy.",
+      icon: <Database className="w-4 h-4 text-[#00E575]" />,
+      desc: "Downstream spatial software, supply chain tracking, and agricultural NDVI indexing APIs. Captures over 90% of total space economy volume.",
       margin: "75% - 85%",
       multiple: "15x - 22x EV/Rev",
       players: ["SatSure", "MapmyIndia", "CropIn", "KaleidEO"],
@@ -39,8 +40,8 @@ export function FourPillars() {
       id: "ground",
       name: "Ground Stations",
       category: "Midstream Telemetry & GSaaS",
-      icon: <Globe className="w-5 h-5 text-[#FF6B00]" />,
-      desc: "Gateway tracking dish nets, low-noise modems, and tracking antennas. Downlinks LEO/MEO raw radio signals directly to regional cloud servers on a per-pass subscription model.",
+      icon: <Globe className="w-4 h-4 text-[#FF6B00]" />,
+      desc: "Gateway tracking dish nets, software modems, and tracking antennas managing LEO data downlinks on a per-pass subscription model.",
       margin: "45% - 50%",
       multiple: "7x - 9x EV/Rev",
       players: ["Dhruva Ground Network", "ISRO ISTRAC"],
@@ -52,8 +53,8 @@ export function FourPillars() {
       id: "satellites",
       name: "Satellites & Payload",
       category: "Hardware Assembly & Bus Systems",
-      icon: <Satellite className="w-5 h-5 text-[#00F0FF]" />,
-      desc: "Design and integration of miniaturized LEO constellations, hyperspectral cameras, Green propulsion thrusters, and CubeSat structures utilizing cost-efficient domestic hub assembly nodes.",
+      icon: <Satellite className="w-4 h-4 text-[#00F0FF]" />,
+      desc: "Miniaturized LEO CubeSats, green propellant thruster nodes, and multispectral camera payloads designed in regional domestic clusters.",
       margin: "45% - 55%",
       multiple: "8x - 10x EV/Rev",
       players: ["Dhruva Space", "Pixxel Assembly", "Bellatrix Propulsion"],
@@ -65,8 +66,8 @@ export function FourPillars() {
       id: "launch",
       name: "Launch Systems",
       category: "Upstream Logistics & Rockets",
-      icon: <Rocket className="w-5 h-5 text-[#0052FF]" />,
-      desc: "Cryogenic motors, orbital launchers, reusable stage structures, and custom satellite orbits inserts. Startups are capturing micro-launch contracts for global small-sats.",
+      icon: <Rocket className="w-4 h-4 text-[#0052FF]" />,
+      desc: "Orbital launchers, carbon-composite motors, and micro-launch configurations optimized for commercial payloads insertions.",
       margin: "30% - 35%",
       multiple: "4x - 6x EV/Rev",
       players: ["Skyroot Aerospace", "Agnikul Cosmos", "ISRO NSIL"],
@@ -81,41 +82,53 @@ export function FourPillars() {
   return (
     <section
       id="pillars"
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#030308] scroll-snap-align-start overflow-hidden"
     >
-      <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10 flex flex-col justify-center h-full">
+      {/* Full-bleed background flow graphic */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <Image
+          src="/value_flow.png"
+          alt="Satellite value flow diagram"
+          fill
+          sizes="100vw"
+          className="object-cover object-center filter brightness-[0.4] saturate-[0.8]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/95 via-[#030308]/60 to-[#030308]/95"></div>
+        <div className="absolute inset-0 radial-vignette"></div>
+      </div>
+
+      <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
         {/* Section Header */}
-        <div className="text-left mb-10 max-w-2xl">
+        <div className="text-left mb-6 max-w-2xl">
           <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase block mb-2">
             03. ECOSYSTEM VALUE SYSTEM
           </span>
           <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
             The Four Pillars of the Stack
           </h2>
-          <p className="text-white/40 text-xs md:text-sm mt-3">
-            Select any structural layer of the rocket stack to inspect gross margins, commercial multiples, and active players.
+          <p className="text-white/40 text-xs md:text-sm mt-2">
+            Select a layer of the rocket stack to inspect margins, multiples, and active players.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Interactive Terminal */}
-          <div className="lg:col-span-6 flex flex-col justify-between bg-[#04040c] border border-white/5 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
-            {/* Ambient top border glow */}
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00F0FF]/30 to-transparent"></div>
+          <div className="lg:col-span-6 flex flex-col justify-between bg-[#04040c]/90 border border-white/5 rounded-2xl p-5 md:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00F0FF]/20 to-transparent"></div>
 
             <div>
               {/* Terminal Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-6">
+              <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
                 <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-[#00F0FF] animate-pulse" />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/80">
+                  <Activity className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+                  <span className="font-mono text-[9px] tracking-wider text-white/80">
                     STACK LAYER ANALYSIS
                   </span>
                 </div>
                 <div className="flex gap-1">
-                  <span className="w-2 h-2 rounded-full bg-red-500/20 border border-red-500/40"></span>
-                  <span className="w-2 h-2 rounded-full bg-yellow-500/20 border border-yellow-500/40"></span>
-                  <span className="w-2 h-2 rounded-full bg-green-500/20 border border-green-500/40"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500/20 border border-red-500/40"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/20 border border-yellow-500/40"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500/20 border border-green-500/40"></span>
                 </div>
               </div>
 
@@ -123,55 +136,55 @@ export function FourPillars() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activePillar.id}
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
+                  exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="p-3.5 bg-white/5 border border-white/10 rounded-2xl">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-white/5 border border-white/10 rounded-xl">
                       {activePillar.icon}
                     </div>
                     <div>
-                      <span className="font-mono text-[9px] tracking-wider text-white/40 uppercase block">
+                      <span className="font-mono text-[8px] tracking-wider text-white/40 uppercase block">
                         {activePillar.category}
                       </span>
-                      <h3 className="text-xl md:text-2xl font-sans font-extrabold text-white tracking-tight mt-0.5">
+                      <h3 className="text-lg font-bold text-white tracking-tight mt-0.5">
                         {activePillar.name}
                       </h3>
                     </div>
                   </div>
 
-                  <p className="text-white/60 text-xs md:text-sm mt-5 leading-relaxed font-sans">
+                  <p className="text-white/60 text-xs mt-4 leading-relaxed font-sans">
                     {activePillar.desc}
                   </p>
 
                   {/* Economics Metrics Panel */}
-                  <div className="mt-8 grid grid-cols-2 gap-4 bg-[#080814] border border-white/5 p-4 rounded-xl font-mono text-[10px]">
+                  <div className="mt-6 grid grid-cols-2 gap-4 bg-[#080814] border border-white/5 p-3 rounded-lg font-mono text-[9px]">
                     <div>
-                      <span className="text-white/40 uppercase tracking-wider block">TARGET MARGIN</span>
-                      <span className="text-base font-extrabold text-white tracking-tight mt-1 block">
+                      <span className="text-white/40 block">TARGET MARGIN</span>
+                      <span className="text-sm font-extrabold text-white tracking-tight mt-0.5 block">
                         {activePillar.margin}
                       </span>
                     </div>
                     <div>
-                      <span className="text-white/40 uppercase tracking-wider block">VALUATION MULTIPLE</span>
-                      <span className="text-base font-extrabold text-white tracking-tight mt-1 block">
+                      <span className="text-white/40 block">VALUATION MULTIPLE</span>
+                      <span className="text-sm font-extrabold text-white tracking-tight mt-0.5 block">
                         {activePillar.multiple}
                       </span>
                     </div>
                   </div>
 
                   {/* Active Indian Players */}
-                  <div className="mt-6">
-                    <span className="font-mono text-[9px] uppercase text-white/40 tracking-widest block mb-3">
+                  <div className="mt-5">
+                    <span className="font-mono text-[8px] uppercase text-white/40 tracking-widest block mb-2">
                       KEY INDIAN STACK BUILDERS
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {activePillar.players.map((plyr) => (
                         <span
                           key={plyr}
-                          className="bg-white/5 border border-white/10 text-white/80 font-mono text-[10px] px-3 py-1.5 rounded-sm hover:border-[#00F0FF]/30 hover:text-white transition-all duration-300"
+                          className="bg-white/5 border border-white/10 text-white/80 font-mono text-[9px] px-2.5 py-1 rounded"
                         >
                           {plyr}
                         </span>
@@ -182,26 +195,17 @@ export function FourPillars() {
               </AnimatePresence>
             </div>
 
-            {/* Downstream action */}
-            <div className="mt-8 pt-4 border-t border-white/5 flex justify-between items-center text-[10px] font-mono text-white/40">
-              <span>SECURITY CHECK: COMPLIANT</span>
-              <a
-                href="#deepdives"
-                className="text-[#00F0FF] hover:text-white flex items-center gap-1.5 transition-colors"
-              >
-                PROCEED TO SEGMENT DEEP-DIVES
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+            {/* Bottom action */}
+            <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-white/30">
+              <span>SECURITY CHECK: SECURE</span>
+              <span className="text-white/20 italic">Webinar Slide 04</span>
             </div>
           </div>
 
           {/* Right Column: Clickable CSS Stacked Rocket Diagram */}
-          <div className="lg:col-span-6 flex items-center justify-center relative min-h-[300px]">
-            {/* Glow backing */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,82,255,0.02)_0%,transparent_70%)]"></div>
-
+          <div className="lg:col-span-6 flex items-center justify-center relative min-h-[250px]">
             {/* Stack Visual Container */}
-            <div className="w-full max-w-sm flex flex-col gap-3 relative z-10">
+            <div className="w-full max-w-xs flex flex-col gap-2 relative z-10">
               {pillars.map((plr, index) => {
                 const isActive = activePillarId === plr.id;
 
@@ -209,10 +213,10 @@ export function FourPillars() {
                   <button
                     key={plr.id}
                     onClick={() => setActivePillarId(plr.id)}
-                    className={`w-full relative overflow-hidden transition-all duration-500 rounded-[20px] p-5 border text-left cursor-pointer flex items-center justify-between ${
+                    className={`w-full relative overflow-hidden transition-all duration-300 rounded-[14px] p-4 border text-left cursor-pointer flex items-center justify-between ${
                       isActive
-                        ? `bg-white/[0.03] border-white/30 shadow-2xl shadow-black/80`
-                        : "bg-[#06060f]/60 border-white/5 hover:border-white/20"
+                        ? `bg-white/[0.03] border-white/20 shadow-lg`
+                        : "bg-[#06060f]/60 border-white/5 hover:border-white/15"
                     }`}
                   >
                     {/* Layer Highlight background gradient */}
@@ -220,9 +224,9 @@ export function FourPillars() {
                       <div className={`absolute inset-0 bg-gradient-to-r ${plr.bgGlow} to-transparent z-0`}></div>
                     )}
 
-                    <div className="flex items-center gap-4 relative z-10">
+                    <div className="flex items-center gap-3 relative z-10">
                       {/* Stack Circle */}
-                      <span className={`w-8 h-8 rounded-full font-mono text-xs font-bold flex items-center justify-center border transition-all duration-300 ${
+                      <span className={`w-7 h-7 rounded-full font-mono text-[10px] font-bold flex items-center justify-center border transition-all duration-300 ${
                         isActive
                           ? "bg-white text-[#030308] border-white"
                           : "bg-white/5 border-white/10 text-white/40"
@@ -231,23 +235,17 @@ export function FourPillars() {
                       </span>
                       
                       <div>
-                        <h4 className={`text-sm font-bold tracking-tight transition-colors ${
-                          isActive ? "text-white animate-pulse" : "text-white/70"
+                        <h4 className={`text-xs font-bold tracking-tight transition-colors ${
+                          isActive ? "text-white" : "text-white/60"
                         }`}>
                           {plr.name}
                         </h4>
-                        <span className="font-mono text-[9px] text-white/40 tracking-wider">
-                          {plr.category.split(" & ")[0]}
-                        </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 relative z-10">
-                      <span className="font-mono text-[10px] text-white/30 hidden sm:inline">
-                        Multiple: {plr.multiple.split(" ")[0]}
-                      </span>
-                      <span className={`h-2 w-2 rounded-full ${plr.dotColor} ${
-                        isActive ? "animate-pulse shadow-[0_0_8px_currentColor]" : "opacity-40"
+                    <div className="flex items-center gap-2 relative z-10">
+                      <span className={`h-1.5 w-1.5 rounded-full ${plr.dotColor} ${
+                        isActive ? "animate-pulse shadow-[0_0_6px_currentColor]" : "opacity-30"
                       }`}></span>
                     </div>
 

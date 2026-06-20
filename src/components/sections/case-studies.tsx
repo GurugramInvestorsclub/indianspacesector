@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { BookOpen, X, ArrowRight, TrendingUp, ShieldAlert, Cpu, Sparkles } from "lucide-react";
+import { BookOpen, X, ArrowRight, TrendingUp, ShieldAlert, Cpu } from "lucide-react";
 
 interface CaseStudy {
   slug: string;
@@ -27,57 +28,57 @@ export function CaseStudies() {
     {
       slug: "skyroot",
       title: "Skyroot Aerospace",
-      subtitle: "Commercializing custom small-sat LEO insertion rockets",
+      subtitle: "Custom small-sat LEO insertion rockets",
       category: "launch",
       categoryLabel: "LAUNCH SYSTEMS",
       author: "Upstream Logistics Division",
       codename: "CASE_SKY_VIKRAM",
-      summary: "Skyroot became the first Indian private operator to design and launch an orbital-class test rocket (Vikram-S) in 2022. They specialize in multi-stage solid carbon-composite motors and liquid upper stages for small payload insertions.",
+      summary: "First Indian private operator to design and launch an orbital test rocket (Vikram-S). Specializes in carbon-composite motors and liquid upper stages.",
       keyPoints: [
-        "Development of solid carbon-fiber composite rocket stages (Vikram series).",
-        "Targeting customized small-sat deployments instead of heavy rideshare delays.",
-        "Utilized ISRO's launch systems under IN-SPACe authorization."
+        "Development of solid carbon-fiber composite stages.",
+        "Customized small-sat LEO insertions bypass rideshare delays.",
+        "Utilized ISRO launching pads under IN-SPACe authorization."
       ],
       metrics: [
-        { label: "LAUNCH COST", value: "$3,200/kg", context: "Projected commercial target" },
-        { label: "STAGE THRUST", value: "85 kN", context: "Vikram solid motor testing" },
-        { label: "MARKET CAP", value: "$300M Est.", context: "Recent valuation threshold" }
+        { label: "LAUNCH COST", value: "$3,200/kg", context: "Commercial LEO target" },
+        { label: "STAGE THRUST", value: "85 kM", context: "Vikram solid motor" },
+        { label: "VALUATION", value: "$300M Est.", context: "Institutional backing" }
       ],
       takeaways: [
-        "High flexibility: Startups win by offering custom orbital coordinates directly.",
-        "Fast-turnaround timelines: Reduced launch cycle prep by utilizing solid propellants."
+        "Sovereign flexibility: Providing direct orbit insertions.",
+        "Speed to orbit: Solid propellants cut prep cycles down."
       ],
       risks: [
-        "High initial test failure rates in orbital insertion flights.",
-        "Global price war driven by heavy SpaceX rideshares."
+        "Inherent aerospace validation failures.",
+        "Pricing pressure from global reusable launchers."
       ]
     },
     {
       slug: "agnikul",
       title: "Agnikul Cosmos",
-      subtitle: "3D-printed cryogenic rocket engines and mobile pads",
+      subtitle: "3D-printed semi-cryogenic engines and mobile pads",
       category: "launch",
       categoryLabel: "LAUNCH SYSTEMS",
       author: "Propulsion Engineering Group",
       codename: "CASE_AGNI_PRINT",
-      summary: "Agnikul is pioneering the commercialization of fully 3D-printed rocket engines. Their Agnibaan launcher features the 'Agnilet' engine—the world's first single-piece 3D-printed engine manufactured entirely in one run.",
+      summary: "Pioneering single-run 3D-printed rocket engines. Features the Agnilet engine: the world's first single-piece 3D-printed motor engine.",
       keyPoints: [
-        "Proprietary 3D-printed semi-cryogenic engine nozzles.",
-        "Designed and operated India's first private mobile launch pad.",
-        "Customizable payload structures (Agnibaan) adapting from 1 to 3 stages."
+        "Proprietary 3D-printed semi-cryo engine nozzles.",
+        "Operates mobile transporter-erector pads.",
+        "Customizable multi-stage configurations."
       ],
       metrics: [
-        { label: "ENGINE PRINT TIME", value: "72 Hours", context: "Agnilet single-piece run" },
+        { label: "ENGINE PRINT TIME", value: "72 Hours", context: "Agnilet single-run print" },
         { label: "LAUNCH CAPACITY", value: "100 kg", context: "To 700km polar orbits" },
-        { label: "OPERATING MARGIN", value: "32%", context: "3D manufacture cost saving" }
+        { label: "OPERATING MARGIN", value: "32%", context: "Manufacturing savings" }
       ],
       takeaways: [
-        "Simplified supply lines: Replacing 1,000+ assembly welds with a single 3D print.",
-        "Launch independence: Mobile launch vehicles allow operations from diverse coastlines."
+        "Frugal assembly: Replaced 1,000+ welded joints with one print.",
+        "Mobile pad setups: Launch from any qualified coastline."
       ],
       risks: [
-        "Severe wear on 3D-printed metal under high cryogenic thermal pressures.",
-        "Regulatory friction over mobile civilian rocket transport."
+        "Severe wear on printed alloy from cryo-pressures.",
+        "Civilian transport licenses on mobile launch trailers."
       ]
     },
     {
@@ -88,24 +89,24 @@ export function CaseStudies() {
       categoryLabel: "SATELLITES & PAYLOADS",
       author: "Downstream Software & Sensor Group",
       codename: "CASE_PIX_SPECTRA",
-      summary: "Pixxel is deploying a constellation of high-resolution hyperspectral satellites. Unlike normal cameras that capture standard RGB bands, Pixxel's sensors capture dozens of spectral channels, allowing chemical analysis of crops, water, and leaks from orbit.",
+      summary: "Deploying high-gain hyperspectral constellations. Capture dozens of spectral channels, allowing chemical analysis of crops and leaks from orbit.",
       keyPoints: [
-        "Captured crop-level chemical signals for precision agriculture.",
-        "Monitored methane emission leaks for global energy enterprises.",
-        "Secured early pilot contracts with the NRO and global agricultural funds."
+        "Chemical-level tracking of soils for precision agriculture.",
+        "Methane emission monitoring for global energy firms.",
+        "NRO research contracts secured."
       ],
       metrics: [
         { label: "SPECTRAL BANDS", value: "30+ Bands", context: "VS 3 standard RGB bands" },
         { label: "IMAGE RESOLUTION", value: "5 Meters", context: "High-frequency orbit sweeps" },
-        { label: "SAAS GROSS MARGIN", value: "75%", context: "Vectorized image processing APIs" }
+        { label: "SAAS GROSS MARGIN", value: "75%", context: "Vectorized processing APIs" }
       ],
       takeaways: [
-        "Information arbitrage: Hyperspectral imagery commoditizes standard visual imagery.",
-        "SaaS recurring model: Revenue is driven by recurring software API checks, not hardware sales."
+        "Data depth: Hyperspectral data renders visual data obsolete.",
+        "Recurring value: APIs drive subscription software revenues."
       ],
       risks: [
-        "Extended delay in full constellation deployment due to launcher bottlenecks.",
-        "Vast data ingestion costs to process petabytes of hyperspectral spectral grids."
+        "Constellation assembly blocks due to rideshare queues.",
+        "Heavy data hosting costs for spectral data bands."
       ]
     },
     {
@@ -116,24 +117,24 @@ export function CaseStudies() {
       categoryLabel: "SATELLITES & PAYLOADS",
       author: "Hardware Integration Group",
       codename: "CASE_DHRUVA_BUS",
-      summary: "Dhruva Space offers full-stack satellite design, bus assembly, space-qualification testing, and orbital deployers. They provide modular small-sat platforms that allow downstream operators to mount custom sensors instantly.",
+      summary: "Full-stack satellite design, modular bus frames, space qualification labs, and deployers allowing rapid sensors payload mounts.",
       keyPoints: [
-        "Proprietary CubeSat deployers qualified on ISRO launches.",
-        "Modular bus structures scaling from 1U CubeSats to 150kg platforms.",
-        "Integrated domestic testing labs reducing qualification costs."
+        "Space-qualified deployers mounted on ISRO launchers.",
+        "Modular bus structures scaling from 1U CubeSats to 150kg.",
+        "Internal test grids cutting qualifying costs."
       ],
       metrics: [
-        { label: "TEST ARBITRAGE", value: "40% Cheaper", context: "Domestic space qualification labs" },
-        { label: "ORBITAL LIFETIME", value: "5 Years", context: "LEO satellite buses" },
-        { label: "DEPLOYMENT RECORD", value: "100% Success", context: "ISRO PSLV rideshare runs" }
+        { label: "TEST ARBITRAGE", value: "40% Cheaper", context: "Domestic qualification labs" },
+        { label: "BUS LIFE", value: "5 Years", context: "Low Earth Orbit lifespan" },
+        { label: "DEPLOYMENT RECORD", value: "100% Success", context: "ISRO rideshare runs" }
       ],
       takeaways: [
-        "Integrated solutions: Downstream startups rent Dhruva's chassis to bypass hardware design.",
-        "Subsystem export: Selling qualified deployers directly to international launchers."
+        "Turnkey integrations: Bypassing legacy hardware build delays.",
+        "Subsystem export: Selling qualified deployers globally."
       ],
       risks: [
-        "Import reliance on custom radiation-hardened solar cell panels.",
-        "Intense hardware competition from high-frequency US/EU bus assembly lines."
+        "Reliance on imported radiation-hardened solar cells.",
+        "Intense global competition from European bus integrators."
       ]
     },
     {
@@ -144,24 +145,24 @@ export function CaseStudies() {
       categoryLabel: "SATELLITES & PAYLOADS",
       author: "Propulsion Engineering Group",
       codename: "CASE_BELL_THRUST",
-      summary: "Bellatrix specializes in high-efficiency electric thrusters, green monopropellant thrusters, and water-propellant Hall effect motors. Their propulsion modules allow satellites to maneuver and sustain orbits at ultra-low weight profiles.",
+      summary: "High-efficiency electric thrusters, green propellant thrusters, and microwave plasma Hall effect thrusters extending satellite lifespans.",
       keyPoints: [
-        "Proprietary environment-friendly green propellants replacing toxic hydrazine.",
-        "Water-fueled microwave plasma thruster systems.",
-        "Development of Orbital Transfer Vehicles (OTVs) acting as orbital tugboats."
+        "Hydrazine-free green propellant systems.",
+        "Water-fueled microwave plasma thruster designs.",
+        "Orbital Transfer Vehicles (OTVs) acting as orbit tugs."
       ],
       metrics: [
         { label: "FUEL EFFICIENCY", value: "3x Higher", context: "Electric VS chemical propulsion" },
-        { label: "THRUSTER WEIGHT", value: "under 5kg", context: "Modular payload arrays" },
-        { label: "PROJECTED MULTIPLE", value: "9.5x EV/Rev", context: "Propulsion module pricing" }
+        { label: "THRUSTER WEIGHT", value: "under 5kg", context: "Ultra-light arrays" },
+        { label: "VALUATION MULTIPLE", value: "9.5x EV/Rev", context: "High proprietary tech pricing" }
       ],
       takeaways: [
-        "Green mandates: Capturing clean propellant niches as hydrazine regulations tighten.",
-        "Orbit maneuvering: Satellites gain up to 2 years of extra life through orbital sustain controls."
+        "Hydrazine bans: Capitalizing on tightening global eco-mandates.",
+        "Orbit sustain: Adding up to 2 years of active satellite lifecycle."
       ],
       risks: [
-        "Extremely long validation cycles required by space insurance underwriters.",
-        "High battery power draws required by high-impulse electric thrusters."
+        "Long space-qualification validation timelines.",
+        "High electrical draws required by Hall thruster nodes."
       ]
     }
   ];
@@ -172,31 +173,44 @@ export function CaseStudies() {
   return (
     <section
       id="case-studies"
-      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] border-t border-white/5 scroll-snap-align-start overflow-hidden"
+      className="relative h-[100dvh] w-full flex items-center justify-center bg-[#020206] scroll-snap-align-start overflow-hidden"
     >
-      <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-10 flex flex-col justify-center h-full">
+      {/* Full-bleed background space image */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <Image
+          src="/space_bg.png"
+          alt="Space background starry sky"
+          fill
+          sizes="100vw"
+          className="object-cover object-center filter brightness-[0.6] saturate-[0.8]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/95 via-[#030308]/60 to-[#030308]/95"></div>
+        <div className="absolute inset-0 radial-vignette"></div>
+      </div>
+
+      <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
         
         {/* Header Block */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
           <div>
             <span className="font-mono text-[9px] tracking-[0.25em] text-[#FF6B00] uppercase block mb-2">
-              04. STRATEGIC INVESTMENTS
+              04. STRATEGIC DOSSIERS
             </span>
             <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
-              Case Study Dossiers
+              Case Studies
             </h2>
-            <p className="text-white/40 text-xs md:text-sm mt-3">
-              Deep dive into early-stage Indian space entities driving technological and commercial returns.
+            <p className="text-white/45 text-xs mt-2">
+              Declassified assessments of regional entities driving commercial and orbital tech returns.
             </p>
           </div>
 
           {/* Filter Categories */}
-          <div className="flex gap-2 bg-[#04040c] border border-white/5 p-1 rounded-sm font-mono text-[9px] tracking-wider shrink-0">
+          <div className="flex gap-2 bg-[#04040c]/90 border border-white/5 p-1 rounded-sm font-mono text-[8px] tracking-wider shrink-0 backdrop-blur-md">
             {["all", "launch", "satellites"].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat as any)}
-                className={`px-3 py-2 rounded-xs transition-colors duration-200 cursor-pointer uppercase font-bold ${
+                className={`px-3 py-1.5 rounded-xs transition-colors duration-200 cursor-pointer uppercase font-bold ${
                   filter === cat
                     ? "bg-[#FF6B00] text-[#030308]"
                     : "text-white/50 hover:text-white"
@@ -208,34 +222,32 @@ export function CaseStudies() {
           </div>
         </div>
 
-        {/* Bento Grid layout of cards (max 3 col desktop) */}
+        {/* Grid cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[50dvh] overflow-y-auto pr-2">
           {filteredStudies.map((cs) => (
             <motion.div
               key={cs.slug}
-              layoutId={`card-${cs.slug}`}
-              className="p-1 rounded-[24px] bg-white/[0.01] border border-white/5 shadow-xl"
+              className="p-1 rounded-[20px] bg-white/[0.01] border border-white/5 shadow-lg"
             >
               <button
                 onClick={() => setActiveStudySlug(cs.slug)}
-                className="w-full text-left h-full flex flex-col justify-between p-6 rounded-[18px] bg-[#04040c]/90 border border-white/5 hover:border-[#FF6B00]/40 transition-all duration-300 shadow-md group cursor-pointer"
+                className="w-full text-left h-full flex flex-col justify-between p-5 rounded-[16px] bg-[#04040c]/85 border border-white/5 hover:border-[#FF6B00]/40 transition-all duration-300 shadow-md group cursor-pointer backdrop-blur-sm"
               >
                 <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="font-mono text-[8px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/30 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="font-mono text-[7px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
                       {cs.categoryLabel}
                     </span>
-                    <BookOpen className="w-3.5 h-3.5 text-white/20 group-hover:text-[#FF6B00]/40 transition-colors" />
                   </div>
-                  <h4 className="text-white text-lg font-bold tracking-tight group-hover:text-[#FF6B00] transition-colors">
+                  <h4 className="text-white text-base font-bold tracking-tight group-hover:text-[#FF6B00] transition-colors">
                     {cs.title}
                   </h4>
-                  <p className="text-white/50 text-xs mt-2 font-sans leading-relaxed">
+                  <p className="text-white/50 text-xs mt-1.5 font-sans leading-relaxed">
                     {cs.subtitle}
                   </p>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[9px] text-white/40 group-hover:text-white transition-colors duration-200">
+                <div className="mt-6 pt-3 border-t border-white/5 flex items-center justify-between font-mono text-[8px] text-white/40 group-hover:text-white transition-colors duration-200">
                   <span className="uppercase tracking-wider">Inspect Dossier</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:text-[#FF6B00]" />
                 </div>
@@ -246,93 +258,83 @@ export function CaseStudies() {
 
       </div>
 
-      {/* Cinematic Detail View Modal Overlay */}
+      {/* Slide-in dossier modal */}
       <AnimatePresence>
         {activeStudy && (
           <div className="fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-md">
-            {/* Click backing to close */}
             <div className="absolute inset-0" onClick={() => setActiveStudySlug(null)}></div>
 
-            {/* Dossier sliding panel */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="relative w-full max-w-2xl h-full bg-[#04040c] border-l border-white/10 p-8 md:p-12 overflow-y-auto flex flex-col justify-between shadow-2xl z-10"
+              className="relative w-full max-w-xl h-full bg-[#04040c] border-l border-white/10 p-6 md:p-8 overflow-y-auto flex flex-col justify-between shadow-2xl z-10"
             >
               <div>
                 {/* Modal Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-6 mb-8">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[9px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/30 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
+                <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[8px] tracking-widest text-[#FF6B00] border border-[#FF6B00]/25 px-2 py-0.5 rounded bg-[#FF6B00]/5 font-semibold">
                       {activeStudy.categoryLabel}
                     </span>
-                    <span className="font-mono text-[9px] text-white/40 tracking-wider font-semibold">
+                    <span className="font-mono text-[8px] text-white/40 tracking-wider">
                       {activeStudy.codename}
                     </span>
                   </div>
                   <button
                     onClick={() => setActiveStudySlug(null)}
-                    className="p-2 text-white/50 hover:text-white bg-white/5 rounded-full border border-white/10 transition-colors cursor-pointer"
+                    className="p-1.5 text-white/50 hover:text-white bg-white/5 rounded-full border border-white/10 transition-colors cursor-pointer"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* Main Content */}
-                <h3 className="text-2xl md:text-3xl font-sans font-extrabold text-white tracking-tight leading-tight">
+                <h3 className="text-xl md:text-2xl font-sans font-extrabold text-white tracking-tight leading-tight">
                   {activeStudy.title}
                 </h3>
-                <span className="text-white/40 font-mono text-[9px] uppercase tracking-wider block mt-1">
-                  Author Division: {activeStudy.author}
+                <span className="text-white/40 font-mono text-[8px] uppercase tracking-wider block mt-0.5">
+                  DIVISION: {activeStudy.author.split(" ")[0]}
                 </span>
 
-                <p className="text-white/70 text-xs md:text-sm mt-6 leading-relaxed font-sans border-l-2 border-[#FF6B00]/40 pl-4 py-1">
+                <p className="text-white/70 text-xs mt-4 leading-relaxed font-sans border-l-2 border-[#FF6B00]/40 pl-3">
                   {activeStudy.summary}
                 </p>
 
-                {/* Key Points */}
-                <div className="mt-8">
-                  <span className="font-mono text-[9px] text-[#FF6B00] tracking-widest uppercase block mb-3">
+                {/* Strategy */}
+                <div className="mt-6">
+                  <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2">
                     OPERATIONAL STRATEGY
                   </span>
-                  <ul className="space-y-2.5 font-sans text-xs md:text-sm text-white/60 list-inside list-disc">
+                  <ul className="space-y-1.5 font-sans text-xs text-white/60 list-inside list-disc">
                     {activeStudy.keyPoints.map((pt, i) => (
                       <li key={i} className="leading-relaxed">{pt}</li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Metrics Table */}
-                <div className="mt-8 bg-[#080814] border border-white/5 p-4 rounded-xl">
-                  <span className="font-mono text-[9px] text-white/40 tracking-widest uppercase block mb-3">
-                    FINANCIAL & TECHNICAL ACCELERATORS
-                  </span>
-                  <div className="grid grid-cols-3 gap-4 font-mono text-[10px]">
+                {/* Metrics */}
+                <div className="mt-6 bg-[#080814] border border-white/5 p-3 rounded-lg">
+                  <div className="grid grid-cols-3 gap-3 font-mono text-[9px]">
                     {activeStudy.metrics.map((met, i) => (
                       <div key={i} className="border-r border-white/5 last:border-0 pr-2">
-                        <span className="text-white/30 block leading-tight">{met.label}</span>
-                        <span className="text-base font-extrabold text-white tracking-tight mt-1 block">
-                          {met.value}
-                        </span>
-                        <span className="text-[8px] text-white/40 mt-1 block leading-tight">
-                          {met.context}
-                        </span>
+                        <span className="text-white/30 block">{met.label}</span>
+                        <span className="text-sm font-extrabold text-white block mt-0.5">{met.value}</span>
+                        <span className="text-[7px] text-white/40 mt-0.5 block leading-tight">{met.context}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Risks and Takeaways Grid */}
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Takeaways & Risks */}
+                <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <span className="font-mono text-[9px] text-[#FF6B00] tracking-widest uppercase block mb-3">
+                    <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2">
                       KEY TAKEAWAYS
                     </span>
-                    <ul className="space-y-2 font-sans text-xs text-white/60">
+                    <ul className="space-y-1.5 font-sans text-xs text-white/60">
                       {activeStudy.takeaways.map((take, i) => (
-                        <li key={i} className="flex gap-2">
+                        <li key={i} className="flex gap-1.5">
                           <span className="text-[#00E575] font-bold">✓</span>
                           <span className="leading-relaxed">{take}</span>
                         </li>
@@ -340,12 +342,12 @@ export function CaseStudies() {
                     </ul>
                   </div>
                   <div>
-                    <span className="font-mono text-[9px] text-[#FF6B00] tracking-widest uppercase block mb-3">
-                      Ecosystem Risks
+                    <span className="font-mono text-[8px] text-[#FF6B00] tracking-widest uppercase block mb-2">
+                      RISKS
                     </span>
-                    <ul className="space-y-2 font-sans text-xs text-white/60">
+                    <ul className="space-y-1.5 font-sans text-xs text-white/60">
                       {activeStudy.risks.map((risk, i) => (
-                        <li key={i} className="flex gap-2">
+                        <li key={i} className="flex gap-1.5">
                           <span className="text-[#FF6B00] font-bold">!</span>
                           <span className="leading-relaxed">{risk}</span>
                         </li>
@@ -357,9 +359,9 @@ export function CaseStudies() {
               </div>
 
               {/* Modal Footer */}
-              <div className="mt-12 pt-6 border-t border-white/5 flex justify-between items-center text-[9px] font-mono text-white/30">
-                <span>SECURITY AUDIT // COMPLIANT</span>
-                <span className="text-white/20 font-sans italic">Confidential Document</span>
+              <div className="mt-8 pt-4 border-t border-white/5 flex justify-between items-center text-[8px] font-mono text-white/30">
+                <span>SECURITY AUDIT: CONCLUDED</span>
+                <span className="text-white/10">Confidential</span>
               </div>
             </motion.div>
           </div>

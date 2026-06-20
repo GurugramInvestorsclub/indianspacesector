@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight, Shield } from "lucide-react";
+import { Menu, X, Shield } from "lucide-react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +33,8 @@ export function Navbar() {
     ];
 
     const observerOptions = {
-      root: null, // Viewport
-      rootMargin: "-20% 0px -40% 0px", // Trigger when center of viewport is occupied
+      root: null,
+      rootMargin: "-20% 0px -40% 0px",
       threshold: 0.1
     };
 
@@ -64,7 +64,7 @@ export function Navbar() {
       activeKeys: ["deepdive-launch", "deepdive-satellites", "deepdive-ground", "deepdive-applications"]
     },
     { label: "CASE STUDIES", href: "#case-studies", activeKeys: ["case-studies"] },
-    { label: "JOIN NOW", href: "#join", activeKeys: ["join"] }
+    { label: "CLOSE", href: "#join", activeKeys: ["join"] }
   ];
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -73,7 +73,6 @@ export function Navbar() {
     const targetId = href.replace("#", "");
     const elem = document.getElementById(targetId);
     if (elem) {
-      // Offset for sticky header
       const headerOffset = 80;
       const elementPosition = elem.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -118,7 +117,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={(e) => handleScrollTo(e, link.href)}
                   className={`text-[11px] font-mono tracking-[0.18em] transition-colors duration-300 relative py-1 ${
-                    active ? "text-[#00F0FF]" : "text-white/50 hover:text-white"
+                    active ? "text-[#00F0FF]" : "text-white/55 hover:text-white"
                   }`}
                 >
                   {link.label}
@@ -130,20 +129,11 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* CTA Button (Desktop) & Mobile Toggle */}
-          <div className="flex items-center gap-4">
-            <a
-              href="#join"
-              onClick={(e) => handleScrollTo(e, "#join")}
-              className="hidden md:flex items-center gap-2 bg-[#0052FF] hover:bg-[#0040D0] text-white font-mono text-[10px] tracking-[0.18em] px-6 py-2.5 rounded-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] border border-[#0066FF]/20"
-            >
-              SECURE SPOT
-            </a>
-
-            {/* Hamburger Button */}
+          {/* Mobile Toggle (Hamburger only, CTA button removed) */}
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-white/70 hover:text-white p-1 cursor-pointer"
+              className="text-white/70 hover:text-white p-1 cursor-pointer"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -175,13 +165,6 @@ export function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#join"
-              onClick={(e) => handleScrollTo(e, "#join")}
-              className="mt-4 flex items-center justify-center gap-2 bg-[#0052FF] text-white font-mono text-[12px] tracking-[0.15em] py-3.5 rounded-sm"
-            >
-              SECURE SPOT <ArrowRight className="w-4 h-4" />
-            </a>
           </div>
         </div>
       )}

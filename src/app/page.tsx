@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Origins } from "@/components/sections/origins";
@@ -13,10 +13,54 @@ import {
   DeepDiveApplications 
 } from "@/components/sections/segment-deep-dives";
 import { CaseStudies } from "@/components/sections/case-studies";
-import { BriefingSignup } from "@/components/sections/briefing-signup";
-import { Footer } from "@/components/sections/footer";
+import { ClosingShot } from "@/components/sections/closing-shot";
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState("overview");
+
+  const sectionsList = [
+    "overview",
+    "origins",
+    "inflection",
+    "pillars",
+    "deepdive-launch",
+    "deepdive-satellites",
+    "deepdive-ground",
+    "deepdive-applications",
+    "case-studies",
+    "join"
+  ];
+
+  // IntersectionObserver to sync the persistent HUD progress counter
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-45% 0px -45% 0px", // Trigger when the section dominates the center area
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sectionsList.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const getSlideNumber = () => {
+    const index = sectionsList.indexOf(activeSection);
+    const num = index >= 0 ? index + 1 : 1;
+    return num.toString().padStart(2, "0");
+  };
+
   return (
     <div className="h-[100dvh] overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#030308] text-foreground antialiased selection:bg-[#00F0FF] selection:text-black">
       {/* Floating Header Navbar */}
@@ -61,12 +105,15 @@ export default function Home() {
         <CaseStudies />
       </div>
 
-      {/* Closing Briefing Signup Form & Footer (grouped to fit last slide perfectly) */}
-      <div id="join" className="snap-start h-[100dvh] flex flex-col justify-between bg-[#020206] pt-16">
-        <div className="flex-grow flex items-center justify-center">
-          <BriefingSignup />
-        </div>
-        <Footer />
+      {/* Closing Visual Summary Frame (replacing previous signup forms) */}
+      <div id="join" className="snap-start h-[100dvh]">
+        <ClosingShot />
+      </div>
+
+      {/* Persistent HUD Progress Counter Overlay */}
+      <div className="fixed bottom-6 right-8 md:bottom-8 md:right-12 z-40 font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] bg-[#05050f]/80 border border-white/10 px-4 py-2.5 rounded-sm backdrop-blur-md shadow-2xl flex items-center gap-3">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse"></span>
+        <span>SECTION {getSlideNumber()} / 10</span>
       </div>
     </div>
   );
