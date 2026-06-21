@@ -74,6 +74,16 @@ export function Beginning() {
     [15, 0, 0, -10]
   );
 
+  // Thumba background image transitions
+  const thumbaOpacity = useTransform(scrollYProgress, 
+    [0.76, 0.82, 0.94, 0.98], 
+    [0, 0.70, 0.70, 0]
+  );
+  const thumbaScale = useTransform(scrollYProgress, 
+    [0.76, 0.98], 
+    [1.05, 0.98]
+  );
+
   return (
     <div 
       ref={containerRef} 
@@ -138,6 +148,23 @@ export function Beginning() {
             className="object-cover object-center grayscale contrast-[1.25] brightness-[0.7] select-none pointer-events-none"
           />
           {/* Radial soft vignette - fades the portrait softly into absolute black */}
+          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_80%]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90" />
+        </motion.div>
+
+        {/* Thumba launch scene in background */}
+        <motion.div
+          style={{ opacity: thumbaOpacity, scale: thumbaScale }}
+          className="absolute inset-0 z-0 w-full h-full"
+        >
+          <Image
+            src="/thumba_launch.jpg"
+            alt="Thumba Equatorial Rocket Launching Station"
+            fill
+            sizes="100vw"
+            className="object-cover object-center grayscale contrast-[1.1] brightness-[0.6] select-none pointer-events-none"
+          />
+          {/* Fades the Thumba image softly into absolute black */}
           <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_80%]" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90" />
         </motion.div>
