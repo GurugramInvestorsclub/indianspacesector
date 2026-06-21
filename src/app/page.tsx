@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Beginning } from "@/components/sections/beginning";
+import { Aryabhata } from "@/components/sections/aryabhata";
 import { MissionControl } from "@/components/sections/mission-control";
 import { EcosystemVisualization } from "@/components/sections/ecosystem-visualization";
 import { FourPillars } from "@/components/sections/four-pillars";
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Beginning />
+      <Aryabhata />
       <MissionControl />
       <EcosystemVisualization />
       <FourPillars />
