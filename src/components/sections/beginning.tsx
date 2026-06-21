@@ -4,174 +4,191 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 
-function ScrollParagraph({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  
-  // Opacity transitions from 0.15 to 1.0 as the paragraph passes 90% to 60% of the viewport height
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 90%", "start 60%"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.15, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [12, 0]);
-
-  return (
-    <motion.p
-      ref={ref}
-      style={{ opacity, y }}
-      className="text-lg md:text-xl text-white/80 font-normal leading-relaxed mb-10 tracking-wide font-sans text-left max-w-2xl"
-    >
-      {children}
-    </motion.p>
-  );
-}
-
 export function Beginning() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Parallax translation for the portrait image
+  // Track scroll progress across the h-[500vh] scroll track
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start start", "end end"]
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [-45, 45]);
+  // Interpolation ranges for the different parts of the narrative
+
+  // Part 1: "In the 1960s..."
+  const part1Opacity = useTransform(scrollYProgress, 
+    [0.0, 0.05, 0.15, 0.20], 
+    [0, 1, 1, 0]
+  );
+  const part1Y = useTransform(scrollYProgress, 
+    [0.0, 0.05, 0.15, 0.20], 
+    [10, 0, 0, -10]
+  );
+
+  // Part 2: "Most nations viewed space..."
+  const part2AOpacity = useTransform(scrollYProgress, 
+    [0.20, 0.24, 0.36, 0.40], 
+    [0, 1, 1, 0]
+  );
+  const part2AY = useTransform(scrollYProgress, 
+    [0.20, 0.24, 0.36, 0.40], 
+    [10, 0, 0, -10]
+  );
+
+  const part2BOpacity = useTransform(scrollYProgress, 
+    [0.27, 0.31, 0.36, 0.40], 
+    [0, 1, 1, 0]
+  );
+  const part2BY = useTransform(scrollYProgress, 
+    [0.27, 0.31, 0.36, 0.40], 
+    [10, 0, 0, -10]
+  );
+
+  // Part 3 & 4: Sarabhai Portrait & Vision Statement
+  const portraitOpacity = useTransform(scrollYProgress, 
+    [0.40, 0.46, 0.70, 0.76], 
+    [0, 0.75, 0.75, 0]
+  );
+  const portraitScale = useTransform(scrollYProgress, 
+    [0.40, 0.76], 
+    [1.05, 0.98]
+  );
+
+  // Quote & Philosophy overlay
+  const quoteOpacity = useTransform(scrollYProgress, 
+    [0.48, 0.53, 0.70, 0.76], 
+    [0, 1, 1, 0]
+  );
+  const quoteY = useTransform(scrollYProgress, 
+    [0.48, 0.53, 0.70, 0.76], 
+    [15, 0, 0, -10]
+  );
+
+  // Part 5: The First Steps & Movement
+  const part5Opacity = useTransform(scrollYProgress, 
+    [0.76, 0.82, 0.94, 0.98], 
+    [0, 1, 1, 0]
+  );
+  const part5Y = useTransform(scrollYProgress, 
+    [0.76, 0.82, 0.94, 0.98], 
+    [15, 0, 0, -10]
+  );
 
   return (
-    <section
-      ref={containerRef}
-      id="beginning"
-      className="relative w-full bg-[#030308] border-b border-white/10 py-32 md:py-48 overflow-hidden"
+    <div 
+      ref={containerRef} 
+      className="relative w-full h-[500vh] bg-[#030308]"
     >
-      {/* Subtle Orbital Background Graphics - very low opacity */}
-      <svg
-        className="absolute top-0 right-0 w-full h-full pointer-events-none opacity-[0.02] select-none z-0"
-        viewBox="0 0 1000 1000"
-        fill="none"
-      >
-        <circle cx="700" cy="500" r="300" stroke="white" strokeWidth="1.5" strokeDasharray="6 12" />
-        <circle cx="700" cy="500" r="450" stroke="white" strokeWidth="1" />
-        <ellipse cx="700" cy="500" rx="600" ry="250" stroke="white" strokeWidth="1" strokeDasharray="3 6" transform="rotate(-20 700 500)" />
-      </svg>
+      {/* Sticky Viewport Container */}
+      <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center">
+        
+        {/* Subtle Background Space Ambient - extremely low opacity */}
+        <div className="absolute inset-0 z-0 bg-radial-[circle_at_center,rgba(0,240,255,0.01)_0%,transparent_75%] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-16 lg:gap-24 items-start">
-          
-          {/* Left Column: Portrait of Dr. Vikram Sarabhai - Sticky */}
-          <div className="lg:sticky lg:top-28 w-full z-10">
-            <div className="relative w-full aspect-[3/4] overflow-hidden border border-white/10 bg-[#05050f] rounded-sm group">
-              <motion.div 
-                style={{ y: imageY }}
-                className="absolute inset-[-15%] w-[130%] h-[130%]"
-              >
-                <Image
-                  src="/vikram_sarabhai.jpg"
-                  alt="Dr. Vikram Sarabhai portrait"
-                  fill
-                  priority
-                  sizes="(max-w-1024px) 100vw, 40vw"
-                  className="object-cover object-center grayscale contrast-[1.15] brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-[1200ms] ease-out"
-                />
-              </motion.div>
-              {/* Overlay styling for an editorial photography frame look */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030308]/40 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 font-mono text-[9px] tracking-widest text-white/40 uppercase">
-                Dr. Vikram Sarabhai
-              </div>
-            </div>
-          </div>
+        {/* ------------------------------------------------------------- */}
+        {/* PART 1: The Context */}
+        {/* ------------------------------------------------------------- */}
+        <motion.div
+          style={{ opacity: part1Opacity, y: part1Y }}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto"
+        >
+          <span className="font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] uppercase mb-6 opacity-60">
+            Chapter I
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-white/90 leading-tight">
+            In the 1960s, India was still finding its place in the world.
+          </h2>
+        </motion.div>
 
-          {/* Right Column: Editorial storytelling content */}
-          <div className="flex flex-col pt-2 lg:pt-8 z-10">
-            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#00F0FF] mb-4">
-              1962–1975
+        {/* ------------------------------------------------------------- */}
+        {/* PART 2: The Contrast */}
+        {/* ------------------------------------------------------------- */}
+        <motion.div
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto space-y-8"
+        >
+          <motion.h2
+            style={{ opacity: part2AOpacity, y: part2AY }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-white/90 leading-tight"
+          >
+            Most nations viewed space as a race.
+          </motion.h2>
+
+          <motion.h3
+            style={{ opacity: part2BOpacity, y: part2BY, fontFamily: 'Georgia, serif' }}
+            className="text-3xl md:text-4xl lg:text-5xl font-light italic tracking-tight text-[#00F0FF]/90"
+          >
+            One man saw something different.
+          </motion.h3>
+        </motion.div>
+
+        {/* ------------------------------------------------------------- */}
+        {/* PART 3 & 4: Dr. Vikram Sarabhai & The Vision */}
+        {/* ------------------------------------------------------------- */}
+        {/* Cinematic portrait in background */}
+        <motion.div
+          style={{ opacity: portraitOpacity, scale: portraitScale }}
+          className="absolute inset-0 z-0 w-full h-full"
+        >
+          <Image
+            src="/vikram_sarabhai.jpg"
+            alt="Dr. Vikram Sarabhai"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center grayscale contrast-[1.25] brightness-[0.7] select-none pointer-events-none"
+          />
+          {/* Radial soft vignette - fades the portrait softly into absolute black */}
+          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_80%]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90" />
+        </motion.div>
+
+        {/* Quote Overlay */}
+        <motion.div
+          style={{ opacity: quoteOpacity, y: quoteY }}
+          className="absolute z-10 w-full max-w-4xl px-8 md:px-12 flex flex-col justify-end h-[80%] pb-16 md:pb-24 pointer-events-none"
+        >
+          <div className="max-w-2xl text-left bg-gradient-to-t from-[#030308]/90 to-transparent p-6 rounded-md">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase mb-4 block">
+              Dr. Vikram Sarabhai
             </span>
-            <h2 className="font-mono text-sm uppercase tracking-[0.2em] text-white/50 mb-6">
-              THE BEGINNING
-            </h2>
-            <h3 
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1.05] mb-12 max-w-3xl"
+            <p 
+              className="text-2xl md:text-3xl lg:text-4xl font-extralight tracking-wide leading-relaxed text-white/95 italic mb-8"
               style={{ fontFamily: 'Georgia, serif' }}
             >
-              The Man Who Saw Space As A Tool For Development
-            </h3>
-
-            {/* Narrative text block */}
-            <div className="space-y-6">
-              <ScrollParagraph>
-                In 1962, as the Cold War superpower space race escalated into a geopolitical spectacle, a quiet decision in New Delhi set India on a fundamentally different trajectory. Dr. Vikram Sarabhai, a Harvard-educated physicist and industrialist, convinced Prime Minister Jawaharlal Nehru that space was not a luxury for a developing nation, but a necessity. Sarabhai argued that to play a meaningful role nationally and internationally, India must be second to none in the application of advanced technologies to the real problems of man and society.
-              </ScrollParagraph>
-
-              <ScrollParagraph>
-                This vision materialized in INCOSPAR—the Indian National Committee for Space Research. The early team set up operations in Thumba, a tiny fishing village near Trivandrum chosen for its proximity to Earth&apos;s magnetic equator. Lacking laboratories, they worked inside the St. Mary Magdalene Church. Equipment was transported by bicycles and bullock carts, and rocket payloads were integrated in bishop&apos;s offices. On November 21, 1963, a sounding rocket soared into the Thumba skies, signaling the modest but defiant birth of India&apos;s space era.
-              </ScrollParagraph>
-
-              <ScrollParagraph>
-                By 1969, the experimental committee transitioned into a national institution: the Indian Space Research Organisation (ISRO). Sarabhai’s focus remained unwavering—he did not seek military dominance or vanity missions, but satellite systems that could predict monsoons, guide fishermen, and broadcast educational television to thousands of remote villages. He laid the institutional and intellectual foundations that transformed India from a country launching foreign sounding rockets into a self-reliant space powerhouse.
-              </ScrollParagraph>
-            </div>
+              &ldquo;We do not have the financial or scientific power to compete with the advanced nations... But we are determined to use space technology for the benefit of our people.&rdquo;
+            </p>
+            <p className="text-xs md:text-sm font-mono tracking-widest text-[#FF6B00] uppercase">
+              The Visionary Insight That Sparked ISRO
+            </p>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Transition Bridge at the bottom of the section */}
-        <AryabhataBridge />
-      </div>
-    </section>
-  );
-}
-
-function AryabhataBridge() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "center center"]
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [0.96, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.4, 1]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ scale, opacity }}
-      className="relative w-full overflow-hidden border border-white/10 bg-[#05050f] p-8 md:p-16 mt-32 md:mt-48 rounded-sm z-10"
-    >
-      {/* Background Year Overlay */}
-      <div className="absolute right-0 bottom-[-20%] md:bottom-[-30%] font-mono text-[9rem] md:text-[18rem] font-black tracking-tighter text-[#00F0FF]/[0.02] select-none leading-none pointer-events-none">
-        1975
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10 relative">
-        <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/10 rounded-sm">
-          <Image
-            src="/aryabhata.png"
-            alt="Aryabhata Satellite"
-            fill
-            sizes="(max-w-768px) 100vw, 45vw"
-            className="object-cover grayscale contrast-[1.1] hover:grayscale-0 transition-all duration-700 ease-out"
-          />
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#FF6B00] mb-4">
-            First Milestone
+        {/* ------------------------------------------------------------- */}
+        {/* PART 5: The Movement */}
+        {/* ------------------------------------------------------------- */}
+        <motion.div
+          style={{ opacity: part5Opacity, y: part5Y }}
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center max-w-3xl mx-auto space-y-8"
+        >
+          <span className="font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] uppercase mb-2">
+            The Spark
           </span>
-          <h4 
-            className="text-4xl md:text-5xl font-black tracking-tight text-white mb-6 uppercase"
+          <h3 
+            className="text-3xl md:text-4xl lg:text-5xl font-normal leading-normal text-white"
             style={{ fontFamily: 'Georgia, serif' }}
           >
-            Aryabhata
-          </h4>
-          <p className="text-base text-white/70 leading-relaxed max-w-md mb-8">
-            Sovereign orbital entry. The launch of India&apos;s first indigenously designed satellite, establishing the technical foundations of space engineering.
+            A church in a fishing village. <br />
+            Bicycles carrying rocket parts.
+          </h3>
+          <p className="text-base md:text-lg text-white/60 font-mono tracking-[0.15em] uppercase leading-relaxed max-w-2xl">
+            Lacking launch pads and laboratories, they worked at Thumba. They did not wait for resources. They created them.
           </p>
-          <div className="font-mono text-xs tracking-widest text-[#00F0FF] uppercase flex items-center gap-2">
-            <span>Discover the history below</span>
-            <span className="animate-bounce">↓</span>
+          <div className="pt-4 font-mono text-[10px] tracking-[0.25em] text-[#FF6B00] uppercase">
+            A movement has begun
           </div>
-        </div>
+        </motion.div>
+
       </div>
-    </motion.div>
+    </div>
   );
 }
