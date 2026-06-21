@@ -3,6 +3,7 @@ import { Hero } from "@/components/sections/hero";
 import { Beginning } from "@/components/sections/beginning";
 import { Aryabhata } from "@/components/sections/aryabhata";
 import { LaunchEvolution } from "@/components/sections/launch-evolution";
+import { Exploration } from "@/components/sections/exploration";
 import { MissionControl } from "@/components/sections/mission-control";
 import { EcosystemVisualization } from "@/components/sections/ecosystem-visualization";
 import { FourPillars } from "@/components/sections/four-pillars";
@@ -16,6 +17,7 @@ export default function Home() {
       <Beginning />
       <Aryabhata />
       <LaunchEvolution />
+      <Exploration />
       <MissionControl />
       <EcosystemVisualization />
       <FourPillars />
