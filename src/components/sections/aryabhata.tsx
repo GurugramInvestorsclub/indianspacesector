@@ -73,18 +73,19 @@ export function Aryabhata() {
         {/* Scene 3: Aryabhata Satellite Visual */}
         <motion.div
           style={{ opacity: satelliteOpacity, scale: satelliteScale }}
-          className="absolute z-0 w-[80vw] h-[55vh] md:w-[60vw] md:h-[65vh] max-w-4xl"
+          className="absolute inset-0 z-0 w-full h-full"
         >
           <Image
-            src="/aryabhata.png"
-            alt="Aryabhata Satellite Artifact"
+            src="/aryabhata_satellite.jpg"
+            alt="Aryabhata Satellite in Space Orbit"
             fill
             priority
-            sizes="(max-w-768px) 80vw, 60vw"
-            className="object-contain grayscale contrast-[1.2] brightness-[0.75] select-none pointer-events-none"
+            sizes="100vw"
+            className="object-cover object-center grayscale contrast-[1.15] brightness-[0.65] select-none pointer-events-none"
           />
-          {/* Edge vignette for historical artifact look */}
-          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_40%,#030308_90%]" />
+          {/* Radial soft vignette and linear gradients to blend the outer boundaries of the photograph */}
+          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_85%] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90 pointer-events-none" />
         </motion.div>
 
         {/* Scene 4: The Story Text */}
