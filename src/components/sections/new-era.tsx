@@ -281,25 +281,23 @@ export function NewEra() {
         {/* Climax Statement */}
         <motion.div
           style={{ opacity: finalStatementOpacity, y: finalStatementY }}
-          className="absolute z-10 w-full max-w-4xl px-8 flex flex-col items-center text-center pointer-events-none"
+          className="absolute z-10 w-full max-w-5xl px-8 py-16 flex flex-col items-center justify-center text-center pointer-events-none"
         >
-          <span className="font-mono text-[9px] tracking-[0.4em] text-[#00F0FF] uppercase mb-6">
+          <span className="font-mono text-[10px] tracking-[0.4em] text-[#00F0FF] uppercase mb-6 opacity-80">
             The Frontier Opens
           </span>
           <h2 
-            className="text-3xl md:text-5xl lg:text-6xl font-light tracking-wide leading-snug text-white max-w-3xl mb-12"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-wide leading-relaxed text-white max-w-4xl mb-10"
             style={{ fontFamily: "Georgia, serif" }}
           >
-            India&apos;s space story is no longer written by a single pen. <br />
-            It is written by thousands of minds. <br />
-            And the greatest chapter is still ahead.
+            India&apos;s space story is no longer written by a single pen. It is written by thousands of minds. And the greatest chapter is still ahead.
           </h2>
 
           <h3 
-            className="text-4xl md:text-6xl font-bold tracking-tight text-white uppercase"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white uppercase"
             style={{ fontFamily: "Georgia, serif" }}
           >
-            The next chapter <br />
+            The next chapter <br className="sm:hidden" />
             <span className="text-[#FF6B00]">is just beginning.</span>
           </h3>
         </motion.div>
