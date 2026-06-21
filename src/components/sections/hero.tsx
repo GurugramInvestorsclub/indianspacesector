@@ -15,12 +15,12 @@ export function Hero() {
       className="relative min-h-[100dvh] overflow-hidden border-b border-white/10 bg-[#030308]"
     >
       <Image
-        src="/hero_cinematic.png"
+        src="/hero_background.png"
         alt="Earth horizon from orbit with India-centered mission-control framing"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center opacity-35"
+        className="object-cover object-center opacity-50"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#030308_0%,rgba(3,3,8,.92)_38%,rgba(3,3,8,.5)_100%)]" />
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
@@ -32,8 +32,8 @@ export function Hero() {
               <Network className="h-3.5 w-3.5" />
               Indian space ecosystem explorer
             </div>
-            <h1 className="max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.045em] text-white md:text-7xl">
-              Understand how India&apos;s space sector works.
+            <h1 className="max-w-4xl text-balance text-5xl font-black leading-[0.95] tracking-[-0.045em] text-white md:text-7xl uppercase">
+              India&apos;s space revolution
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-white/72 md:text-lg">
               Trace the roles of ISRO, IN-SPACe, NSIL, private startups, infrastructure, and downstream markets in one connected operating model.
