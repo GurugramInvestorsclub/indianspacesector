@@ -103,10 +103,35 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
 interface PresenterModeProps {
   activeChapter: number;
   onNavigateChapter: (chapterNum: number) => void;
+  isOpen?: boolean;
+  onToggleOpen?: (isOpen: boolean) => void;
 }
 
-export function PresenterMode({ activeChapter, onNavigateChapter }: PresenterModeProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function PresenterMode({ 
+  activeChapter, 
+  onNavigateChapter,
+  isOpen: controlledIsOpen,
+  onToggleOpen
+}: PresenterModeProps) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  
+  const toggleOpen = () => {
+    if (onToggleOpen) {
+      onToggleOpen(!isOpen);
+    } else {
+      setInternalIsOpen(!isOpen);
+    }
+  };
+
+  const closePresenter = () => {
+    if (onToggleOpen) {
+      onToggleOpen(false);
+    } else {
+      setInternalIsOpen(false);
+    }
+  };
+
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timerActive, setTimerActive] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -122,12 +147,12 @@ export function PresenterMode({ activeChapter, onNavigateChapter }: PresenterMod
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key.toLowerCase() === "p" && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
-        setIsOpen((prev) => !prev);
+        toggleOpen();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isOpen, onToggleOpen]);
 
   // Timer runner
   useEffect(() => {
@@ -226,7 +251,7 @@ export function PresenterMode({ activeChapter, onNavigateChapter }: PresenterMod
                 </button>
               </div>
               <button 
-                onClick={() => setIsOpen(false)}
+                onClick={closePresenter}
                 className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all text-white"
               >
                 <X className="w-4 h-4" />
