@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { MonitorPlay } from "lucide-react";
+import { gsap } from "gsap";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Beginning } from "@/components/sections/beginning";
@@ -69,17 +70,52 @@ export default function Home() {
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
   const [presentationActive, setPresentationActive] = useState(false);
   const [hudOpen, setHudOpen] = useState(false);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // Smooth scroll helper
+  // Cinematic smooth scroll helper using GSAP
   const scrollToFrame = (index: number) => {
     if (index < 0 || index >= FRAMES.length) return;
     const targetVh = FRAMES[index];
     const targetScrollY = (targetVh * window.innerHeight) / 100;
-    window.scrollTo({
-      top: targetScrollY,
-      behavior: "smooth"
+    
+    // Kill any running scroll animation tween
+    if (tweenRef.current) {
+      tweenRef.current.kill();
+    }
+    
+    const scrollObj = { y: window.scrollY };
+    
+    // Animate the window scroll position smoothly over 1.6s
+    tweenRef.current = gsap.to(scrollObj, {
+      y: targetScrollY,
+      duration: 1.6,
+      ease: "power3.out",
+      onUpdate: () => {
+        window.scrollTo(0, scrollObj.y);
+      },
+      onComplete: () => {
+        tweenRef.current = null;
+      }
     });
   };
+
+  // Cancel the transition animation if the user manually interrupts it via wheel/touch
+  useEffect(() => {
+    const handleInterrupt = () => {
+      if (tweenRef.current) {
+        tweenRef.current.kill();
+        tweenRef.current = null;
+      }
+    };
+
+    window.addEventListener("wheel", handleInterrupt, { passive: true });
+    window.addEventListener("touchmove", handleInterrupt, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleInterrupt);
+      window.removeEventListener("touchmove", handleInterrupt);
+    };
+  }, []);
 
   // Sync currentFrameIndex dynamically with manual window scroll position
   useEffect(() => {
