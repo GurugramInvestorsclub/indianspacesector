@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
 interface Callout {
   label: string;
@@ -28,93 +28,32 @@ interface RocketData {
 
 export function LaunchEvolution() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  const getSceneTransforms = (index: number) => {
-    const ranges = [
-      { inStart: 0.0, inEnd: 0.0, outStart: 0.08, outEnd: 0.14 },       // Intro
-      { inStart: 0.10, inEnd: 0.14, outStart: 0.22, outEnd: 0.28 },     // SLV-3
-      { inStart: 0.24, inEnd: 0.28, outStart: 0.36, outEnd: 0.42 },     // ASLV
-      { inStart: 0.38, inEnd: 0.42, outStart: 0.50, outEnd: 0.57 },     // PSLV
-      { inStart: 0.52, inEnd: 0.57, outStart: 0.65, outEnd: 0.71 },     // GSLV
-      { inStart: 0.67, inEnd: 0.71, outStart: 0.79, outEnd: 0.85 },     // LVM3
-      { inStart: 0.81, inEnd: 0.85, outStart: 0.95, outEnd: 1.00 },     // SSLV
-    ];
-    
-    const r = ranges[index];
-    
-    let opacityInput, opacityOutput;
-    let yInput, yOutput;
-    let pointerInput, pointerOutput;
-    
-    if (index === 0) {
-      opacityInput = [0.0, r.outStart, r.outEnd];
-      opacityOutput = [1, 1, 0];
-      yInput = [0.0, r.outEnd];
-      yOutput = [0, -40];
-      pointerInput = [0.0, r.outStart, r.outEnd];
-      pointerOutput = ["auto", "auto", "none"] as any;
+  // Track active slide index using standard motion value event listener
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // 7 scenes split across 0 to 1 scroll progress range:
+    if (latest < 0.12) {
+      setActiveIndex(0);
+    } else if (latest < 0.26) {
+      setActiveIndex(1);
+    } else if (latest < 0.40) {
+      setActiveIndex(2);
+    } else if (latest < 0.54) {
+      setActiveIndex(3);
+    } else if (latest < 0.68) {
+      setActiveIndex(4);
+    } else if (latest < 0.82) {
+      setActiveIndex(5);
     } else {
-      opacityInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
-      opacityOutput = [0, 1, 1, 0];
-      yInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
-      yOutput = [40, 0, 0, -40];
-      pointerInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
-      pointerOutput = ["none", "auto", "auto", "none"] as any;
+      setActiveIndex(6);
     }
-    
-    return { opacityInput, opacityOutput, yInput, yOutput, pointerInput, pointerOutput };
-  };
-
-  // Statically declare transforms to satisfy React Hook rules
-  const t0 = getSceneTransforms(0);
-  const opacity0 = useTransform(scrollYProgress, t0.opacityInput, t0.opacityOutput);
-  const y0 = useTransform(scrollYProgress, t0.yInput, t0.yOutput);
-  const pe0 = useTransform(scrollYProgress, t0.pointerInput, t0.pointerOutput);
-
-  const t1 = getSceneTransforms(1);
-  const opacity1 = useTransform(scrollYProgress, t1.opacityInput, t1.opacityOutput);
-  const y1 = useTransform(scrollYProgress, t1.yInput, t1.yOutput);
-  const pe1 = useTransform(scrollYProgress, t1.pointerInput, t1.pointerOutput);
-
-  const t2 = getSceneTransforms(2);
-  const opacity2 = useTransform(scrollYProgress, t2.opacityInput, t2.opacityOutput);
-  const y2 = useTransform(scrollYProgress, t2.yInput, t2.yOutput);
-  const pe2 = useTransform(scrollYProgress, t2.pointerInput, t2.pointerOutput);
-
-  const t3 = getSceneTransforms(3);
-  const opacity3 = useTransform(scrollYProgress, t3.opacityInput, t3.opacityOutput);
-  const y3 = useTransform(scrollYProgress, t3.yInput, t3.yOutput);
-  const pe3 = useTransform(scrollYProgress, t3.pointerInput, t3.pointerOutput);
-
-  const t4 = getSceneTransforms(4);
-  const opacity4 = useTransform(scrollYProgress, t4.opacityInput, t4.opacityOutput);
-  const y4 = useTransform(scrollYProgress, t4.yInput, t4.yOutput);
-  const pe4 = useTransform(scrollYProgress, t4.pointerInput, t4.pointerOutput);
-
-  const t5 = getSceneTransforms(5);
-  const opacity5 = useTransform(scrollYProgress, t5.opacityInput, t5.opacityOutput);
-  const y5 = useTransform(scrollYProgress, t5.yInput, t5.yOutput);
-  const pe5 = useTransform(scrollYProgress, t5.pointerInput, t5.pointerOutput);
-
-  const t6 = getSceneTransforms(6);
-  const opacity6 = useTransform(scrollYProgress, t6.opacityInput, t6.opacityOutput);
-  const y6 = useTransform(scrollYProgress, t6.yInput, t6.yOutput);
-  const pe6 = useTransform(scrollYProgress, t6.pointerInput, t6.pointerOutput);
-
-  const sceneStyles = [
-    { opacity: opacity0, y: y0, pointerEvents: pe0 },
-    { opacity: opacity1, y: y1, pointerEvents: pe1 },
-    { opacity: opacity2, y: y2, pointerEvents: pe2 },
-    { opacity: opacity3, y: y3, pointerEvents: pe3 },
-    { opacity: opacity4, y: y4, pointerEvents: pe4 },
-    { opacity: opacity5, y: y5, pointerEvents: pe5 },
-    { opacity: opacity6, y: y6, pointerEvents: pe6 },
-  ];
+  });
 
   const rockets: RocketData[] = [
     {
@@ -241,7 +180,12 @@ export function LaunchEvolution() {
 
         {/* ----------------- Scene 0: Introduction ----------------- */}
         <motion.div
-          style={sceneStyles[0] as any}
+          animate={{
+            opacity: activeIndex === 0 ? 1 : 0,
+            y: activeIndex === 0 ? 0 : -35,
+            pointerEvents: activeIndex === 0 ? "auto" : "none" as any
+          }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full"
         >
           <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 items-start">
@@ -271,12 +215,17 @@ export function LaunchEvolution() {
         {/* ----------------- Scenes 1 to 6: Launch Vehicles ----------------- */}
         {rockets.map((rocket, index) => {
           const isEven = index % 2 === 0;
-          const sceneStyle = sceneStyles[index + 1];
+          const isActive = activeIndex === index + 1;
           
           return (
             <motion.div
               key={rocket.id}
-              style={sceneStyle as any}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                y: isActive ? 0 : 35,
+                pointerEvents: isActive ? "auto" : "none" as any
+              }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 z-10 flex items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full"
             >
               <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full ${
@@ -305,12 +254,15 @@ export function LaunchEvolution() {
                       {/* HUD Grid Overlay */}
                       <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
                       
-                      {/* Telemetry Callout lines overlay */}
-                      {rocket.callouts.map((callout, cIdx) => {
+                      {/* Telemetry Callout lines overlay - Staggered fade in when active */}
+                      {isActive && rocket.callouts.map((callout, cIdx) => {
                         const isLeft = callout.align === "left";
                         return (
-                          <div
+                          <motion.div
                             key={cIdx}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 + cIdx * 0.12, duration: 0.4 }}
                             className="absolute z-20 pointer-events-none"
                             style={{ top: `${callout.y}%`, left: `${callout.x}%` }}
                           >
@@ -340,7 +292,7 @@ export function LaunchEvolution() {
                               <span className="w-1 h-1 rounded-full bg-[#00F0FF]" />
                               <span>{callout.label}</span>
                             </div>
-                          </div>
+                          </motion.div>
                         );
                       })}
                     </div>
