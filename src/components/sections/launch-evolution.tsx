@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 
 interface Callout {
   label: string;
@@ -35,7 +35,7 @@ export function LaunchEvolution() {
     offset: ["start start", "end end"]
   });
 
-  // Track active slide index using standard motion value event listener
+  // Track active slide index using standard motion value event listener to toggle pointer-events
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     // 7 scenes split across 0 to 1 scroll progress range:
     if (latest < 0.12) {
@@ -54,6 +54,76 @@ export function LaunchEvolution() {
       setActiveIndex(6);
     }
   });
+
+  const getSceneTransforms = (index: number) => {
+    const ranges = [
+      { inStart: 0.0, inEnd: 0.0, outStart: 0.08, outEnd: 0.14 },       // Intro
+      { inStart: 0.10, inEnd: 0.14, outStart: 0.22, outEnd: 0.28 },     // SLV-3
+      { inStart: 0.24, inEnd: 0.28, outStart: 0.36, outEnd: 0.42 },     // ASLV
+      { inStart: 0.38, inEnd: 0.42, outStart: 0.50, outEnd: 0.57 },     // PSLV
+      { inStart: 0.52, inEnd: 0.57, outStart: 0.65, outEnd: 0.71 },     // GSLV
+      { inStart: 0.67, inEnd: 0.71, outStart: 0.79, outEnd: 0.85 },     // LVM3
+      { inStart: 0.81, inEnd: 0.85, outStart: 0.95, outEnd: 1.00 },     // SSLV
+    ];
+    
+    const r = ranges[index];
+    
+    let opacityInput, opacityOutput;
+    let yInput, yOutput;
+    
+    if (index === 0) {
+      opacityInput = [0.0, r.outStart, r.outEnd];
+      opacityOutput = [1, 1, 0];
+      yInput = [0.0, r.outEnd];
+      yOutput = [0, -35];
+    } else {
+      opacityInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
+      opacityOutput = [0, 1, 1, 0];
+      yInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
+      yOutput = [35, 0, 0, -35];
+    }
+    
+    return { opacityInput, opacityOutput, yInput, yOutput };
+  };
+
+  // Statically declare transforms for scroll scrubbing (clamped to prevent extrapolation bugs)
+  const t0 = getSceneTransforms(0);
+  const opacity0 = useTransform(scrollYProgress, t0.opacityInput, t0.opacityOutput, { clamp: true });
+  const y0 = useTransform(scrollYProgress, t0.yInput, t0.yOutput, { clamp: true });
+
+  const t1 = getSceneTransforms(1);
+  const opacity1 = useTransform(scrollYProgress, t1.opacityInput, t1.opacityOutput, { clamp: true });
+  const y1 = useTransform(scrollYProgress, t1.yInput, t1.yOutput, { clamp: true });
+
+  const t2 = getSceneTransforms(2);
+  const opacity2 = useTransform(scrollYProgress, t2.opacityInput, t2.opacityOutput, { clamp: true });
+  const y2 = useTransform(scrollYProgress, t2.yInput, t2.yOutput, { clamp: true });
+
+  const t3 = getSceneTransforms(3);
+  const opacity3 = useTransform(scrollYProgress, t3.opacityInput, t3.opacityOutput, { clamp: true });
+  const y3 = useTransform(scrollYProgress, t3.yInput, t3.yOutput, { clamp: true });
+
+  const t4 = getSceneTransforms(4);
+  const opacity4 = useTransform(scrollYProgress, t4.opacityInput, t4.opacityOutput, { clamp: true });
+  const y4 = useTransform(scrollYProgress, t4.yInput, t4.yOutput, { clamp: true });
+
+  const t5 = getSceneTransforms(5);
+  const opacity5 = useTransform(scrollYProgress, t5.opacityInput, t5.opacityOutput, { clamp: true });
+  const y5 = useTransform(scrollYProgress, t5.yInput, t5.yOutput, { clamp: true });
+
+  const t6 = getSceneTransforms(6);
+  const opacity6 = useTransform(scrollYProgress, t6.opacityInput, t6.opacityOutput, { clamp: true });
+  const y6 = useTransform(scrollYProgress, t6.yInput, t6.yOutput, { clamp: true });
+
+  const sceneStyles = [
+    { opacity: opacity0, y: y0 },
+    { opacity: opacity1, y: y1 },
+    { opacity: opacity2, y: y2 },
+    { opacity: opacity3, y: y3 },
+    { opacity: opacity4, y: y4 },
+    { opacity: opacity5, y: y5 },
+    { opacity: opacity6, y: y6 },
+  ];
 
   const rockets: RocketData[] = [
     {
@@ -180,13 +250,10 @@ export function LaunchEvolution() {
 
         {/* ----------------- Scene 0: Introduction ----------------- */}
         <motion.div
-          animate={{
-            opacity: activeIndex === 0 ? 1 : 0,
-            y: activeIndex === 0 ? 0 : -35,
-            pointerEvents: activeIndex === 0 ? "auto" : "none" as any
-          }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full"
+          style={sceneStyles[0]}
+          className={`absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
+            activeIndex === 0 ? "pointer-events-auto" : "pointer-events-none"
+          }`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 items-start">
             <div>
@@ -220,13 +287,10 @@ export function LaunchEvolution() {
           return (
             <motion.div
               key={rocket.id}
-              animate={{
-                opacity: isActive ? 1 : 0,
-                y: isActive ? 0 : 35,
-                pointerEvents: isActive ? "auto" : "none" as any
-              }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-10 flex items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full"
+              style={sceneStyles[index + 1]}
+              className={`absolute inset-0 z-10 flex items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
+                isActive ? "pointer-events-auto" : "pointer-events-none"
+              }`}
             >
               <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full ${
                 isEven ? "md:flex-row" : "md:flex-row-reverse"
