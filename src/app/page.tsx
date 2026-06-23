@@ -12,7 +12,7 @@ import { Exploration } from "@/components/sections/exploration";
 import { NewEra } from "@/components/sections/new-era";
 import { PresenterMode } from "@/components/presenter-mode";
 
-// 23 presentation frames defined in scroll vh units:
+// 26 presentation frames defined in scroll vh units:
 const FRAMES = [
   0,    // Hero Overview
   150,  // Beginning Part 1 (In the 1960s...)
@@ -24,19 +24,22 @@ const FRAMES = [
   925,  // Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
   1050, // Aryabhata Scene 5 (Legacy Echoes)
   1120, // Launch Evolution Intro Text
-  1220, // Launch Evolution SLV-3 & ASLV details
-  1340, // Launch Evolution PSLV & GSLV details
-  1460, // Launch Evolution LVM3 details
-  1560, // Exploration Act 1 (Moon - Chandrayaan)
-  1688, // Exploration Act 2 (Mars - Mangalyaan)
-  1824, // Exploration Act 3 (Sun - Aditya L-1)
-  1948, // New Era Scene 1 (Transition: For decades...)
-  2060, // New Era Scene 2 (Opportunity Chart: $8B to $40B)
-  2164, // New Era Scene 3 (Why would companies...)
-  2284, // New Era Scene 4 & 5 (Constellation & Jio Proof)
-  2420, // New Era Scene 6 (Downstream Use Cases Network Map)
-  2524, // New Era Scene 7 (The Big Realization - Railways)
-  2660  // New Era Scene 8 (Conclusion / Briefing signup)
+  1220, // Launch Evolution SLV-3
+  1320, // Launch Evolution ASLV
+  1420, // Launch Evolution PSLV
+  1520, // Launch Evolution GSLV
+  1620, // Launch Evolution LVM3
+  1720, // Launch Evolution SSLV
+  1820, // Exploration Act 1 (Moon - Chandrayaan)
+  1948, // Exploration Act 2 (Mars - Mangalyaan)
+  2084, // Exploration Act 3 (Sun - Aditya L-1)
+  2208, // New Era Scene 1 (Transition: For decades...)
+  2320, // New Era Scene 2 (Opportunity Chart: $8B to $40B)
+  2424, // New Era Scene 3 (Why would companies...)
+  2544, // New Era Scene 4 & 5 (Constellation & Jio Proof)
+  2680, // New Era Scene 6 (Downstream Use Cases Network Map)
+  2784, // New Era Scene 7 (The Big Realization - Railways)
+  2920  // New Era Scene 8 (Conclusion / Briefing signup)
 ];
 
 // Map each frame index to a corresponding Chapter index (1 to 9) for PresenterMode speaker notes
@@ -50,20 +53,23 @@ const FRAME_TO_CHAPTER = [
   3, // Frame 6 (Aryabhata 2) -> Chapter 3: The Space Stack
   3, // Frame 7 (Aryabhata 3) -> Chapter 3: The Space Stack
   3, // Frame 8 (Aryabhata 4) -> Chapter 3: The Space Stack
-  4, // Frame 9 (LaunchEvolution 1) -> Chapter 4: The Misconception
-  4, // Frame 10 (LaunchEvolution 2) -> Chapter 4: The Misconception
-  4, // Frame 11 (LaunchEvolution 3) -> Chapter 4: The Misconception
-  4, // Frame 12 (LaunchEvolution 4) -> Chapter 4: The Misconception
-  5, // Frame 13 (Exploration 1) -> Chapter 5: Defense & Autonomy
-  5, // Frame 14 (Exploration 2) -> Chapter 5: Defense & Autonomy
-  5, // Frame 15 (Exploration 3) -> Chapter 5: Defense & Autonomy
-  6, // Frame 16 (NewEra 1) -> Chapter 6: Global Comparison
-  6, // Frame 17 (NewEra 2) -> Chapter 6: Global Comparison
-  7, // Frame 18 (NewEra 3) -> Chapter 7: Case Studies
-  8, // Frame 19 (NewEra 4) -> Chapter 8: What Most People Miss
-  8, // Frame 20 (NewEra 5) -> Chapter 8: What Most People Miss
-  8, // Frame 21 (NewEra 6) -> Chapter 8: What Most People Miss
-  9  // Frame 22 (NewEra 7) -> Chapter 9: The Opportunity
+  4, // Frame 9 (LaunchEvolution Intro) -> Chapter 4: The Misconception
+  4, // Frame 10 (LaunchEvolution SLV-3) -> Chapter 4: The Misconception
+  4, // Frame 11 (LaunchEvolution ASLV) -> Chapter 4: The Misconception
+  4, // Frame 12 (LaunchEvolution PSLV) -> Chapter 4: The Misconception
+  4, // Frame 13 (LaunchEvolution GSLV) -> Chapter 4: The Misconception
+  4, // Frame 14 (LaunchEvolution LVM3) -> Chapter 4: The Misconception
+  4, // Frame 15 (LaunchEvolution SSLV) -> Chapter 4: The Misconception
+  5, // Frame 16 (Exploration 1) -> Chapter 5: Defense & Autonomy
+  5, // Frame 17 (Exploration 2) -> Chapter 5: Defense & Autonomy
+  5, // Frame 18 (Exploration 3) -> Chapter 5: Defense & Autonomy
+  6, // Frame 19 (NewEra 1) -> Chapter 6: Global Comparison
+  6, // Frame 20 (NewEra 2) -> Chapter 6: Global Comparison
+  7, // Frame 21 (NewEra 3) -> Chapter 7: Case Studies
+  8, // Frame 22 (NewEra 4) -> Chapter 8: What Most People Miss
+  8, // Frame 23 (NewEra 5) -> Chapter 8: What Most People Miss
+  8, // Frame 24 (NewEra 6) -> Chapter 8: What Most People Miss
+  9  // Frame 25 (NewEra 7) -> Chapter 9: The Opportunity
 ];
 
 export default function Home() {
@@ -244,11 +250,11 @@ export default function Home() {
       2: 1,  // Chapter 2: Beginning
       3: 5,  // Chapter 3: Aryabhata
       4: 9,  // Chapter 4: LaunchEvolution
-      5: 13, // Chapter 5: Exploration
-      6: 16, // Chapter 6: NewEra intro
-      7: 18, // Chapter 7: Case Studies
-      8: 19, // Chapter 8: What Most People Miss
-      9: 22  // Chapter 9: The Opportunity
+      5: 16, // Chapter 5: Exploration
+      6: 19, // Chapter 6: NewEra intro
+      7: 21, // Chapter 7: Case Studies
+      8: 22, // Chapter 8: What Most People Miss
+      9: 25  // Chapter 9: The Opportunity
     };
 
     const targetFrameIndex = chapterToFrameIndex[chapterNum];
