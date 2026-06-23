@@ -62,7 +62,7 @@ export function Aryabhata() {
           style={{ opacity: yearOpacity, scale: yearScale }}
           className="absolute z-10 flex flex-col items-center justify-center pointer-events-none"
         >
-          <span className="font-mono text-[10px] tracking-[0.4em] text-[#00F0FF] uppercase mb-4">
+          <span className="font-mono text-[10px] tracking-[0.4em] text-[#FFB800] uppercase mb-4">
             The Milestone Year
           </span>
           <h1 className="text-[9rem] sm:text-[16rem] md:text-[20rem] font-black tracking-tighter text-white leading-none">
@@ -94,7 +94,7 @@ export function Aryabhata() {
           className="absolute z-10 w-full max-w-4xl px-8 flex flex-col items-start justify-end h-[85%] pb-16 md:pb-24 pointer-events-none"
         >
           <div className="max-w-xl bg-[#030308]/90 backdrop-blur-sm border border-white/5 p-8 rounded-sm">
-            <span className="font-mono text-[9px] tracking-[0.3em] text-[#00F0FF] uppercase mb-3 block">
+            <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-3 block">
               Sovereign Ascent
             </span>
             <h3 
@@ -132,7 +132,7 @@ export function Aryabhata() {
           <div className="font-mono text-[10px] tracking-[0.4em] text-white/20 uppercase absolute translate-y-[150px] translate-x-[200px]">
             GTO INSERTION
           </div>
-          <div className="font-mono text-[10px] tracking-[0.4em] text-[#00F0FF]/30 uppercase absolute translate-y-[-50px] translate-x-[250px]">
+          <div className="font-mono text-[10px] tracking-[0.4em] text-[#FFB800]/30 uppercase absolute translate-y-[-50px] translate-x-[250px]">
             FUTURE VECTOR
           </div>
 

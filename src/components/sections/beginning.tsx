@@ -93,7 +93,7 @@ export function Beginning() {
       <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center">
         
         {/* Subtle Background Space Ambient - extremely low opacity */}
-        <div className="absolute inset-0 z-0 bg-radial-[circle_at_center,rgba(0,240,255,0.01)_0%,transparent_75%] pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-radial-[circle_at_center,rgba(255, 184, 0,0.01)_0%,transparent_75%] pointer-events-none" />
 
         {/* ------------------------------------------------------------- */}
         {/* PART 1: The Context */}
@@ -102,7 +102,7 @@ export function Beginning() {
           style={{ opacity: part1Opacity, y: part1Y }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto"
         >
-          <span className="font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] uppercase mb-6 opacity-60">
+          <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase mb-6 opacity-60">
             Chapter I
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-extralight tracking-tight text-white/90 leading-tight">
@@ -125,7 +125,7 @@ export function Beginning() {
 
           <motion.h3
             style={{ opacity: part2BOpacity, y: part2BY, fontFamily: 'Georgia, serif' }}
-            className="text-3xl md:text-4xl lg:text-5xl font-light italic tracking-tight text-[#00F0FF]/90"
+            className="text-3xl md:text-4xl lg:text-5xl font-light italic tracking-tight text-[#FFB800]/90"
           >
             One man saw something different.
           </motion.h3>
@@ -175,7 +175,7 @@ export function Beginning() {
           className="absolute z-10 w-full max-w-4xl px-8 md:px-12 flex flex-col justify-end h-[80%] pb-16 md:pb-24 pointer-events-none"
         >
           <div className="max-w-2xl text-left bg-gradient-to-t from-[#030308]/90 to-transparent p-6 rounded-md">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase mb-4 block">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase mb-4 block">
               Dr. Vikram Sarabhai
             </span>
             <p 
@@ -197,7 +197,7 @@ export function Beginning() {
           style={{ opacity: part5Opacity, y: part5Y }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center max-w-3xl mx-auto space-y-8"
         >
-          <span className="font-mono text-[10px] tracking-[0.25em] text-[#00F0FF] uppercase mb-2">
+          <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase mb-2">
             The Spark
           </span>
           <h3 

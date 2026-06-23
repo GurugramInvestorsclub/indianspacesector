@@ -97,7 +97,7 @@ export function ClosingShot() {
           {/* Left Column: Interactive Radar Canvas */}
           <div className="lg:col-span-6 flex items-center justify-center relative bg-black/40 border border-white/5 rounded-2xl p-4 overflow-hidden min-h-[300px]">
             <div className="absolute top-3 left-3 font-mono text-[7px] text-white/30 uppercase tracking-widest flex items-center gap-1.5">
-              <Radar className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+              <Radar className="w-3.5 h-3.5 text-[#FFB800] animate-pulse" />
               Horizon SSA Radar Console
             </div>
 
@@ -107,14 +107,14 @@ export function ClosingShot() {
               className="w-full h-full max-w-[340px] relative z-10 overflow-visible select-none pointer-events-none"
             >
               {/* Concentric grid rings */}
-              <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(0, 240, 255, 0.05)" strokeWidth="0.75" />
-              <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(0, 240, 255, 0.03)" strokeWidth="0.5" strokeDasharray="4 4" />
-              <circle cx="150" cy="150" r="75" fill="none" stroke="rgba(0, 240, 255, 0.04)" strokeWidth="0.5" />
-              <circle cx="150" cy="150" r="40" fill="none" stroke="rgba(0, 240, 255, 0.03)" strokeWidth="0.5" strokeDasharray="2 2" />
+              <circle cx="150" cy="150" r="148" fill="none" stroke="rgba(255, 184, 0, 0.05)" strokeWidth="0.75" />
+              <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(255, 184, 0, 0.03)" strokeWidth="0.5" strokeDasharray="4 4" />
+              <circle cx="150" cy="150" r="75" fill="none" stroke="rgba(255, 184, 0, 0.04)" strokeWidth="0.5" />
+              <circle cx="150" cy="150" r="40" fill="none" stroke="rgba(255, 184, 0, 0.03)" strokeWidth="0.5" strokeDasharray="2 2" />
               
               {/* Crosshairs */}
-              <line x1="150" y1="0" x2="150" y2="300" stroke="rgba(0, 240, 255, 0.03)" strokeWidth="0.5" />
-              <line x1="0" y1="150" x2="300" y2="150" stroke="rgba(0, 240, 255, 0.03)" strokeWidth="0.5" />
+              <line x1="150" y1="0" x2="150" y2="300" stroke="rgba(255, 184, 0, 0.03)" strokeWidth="0.5" />
+              <line x1="0" y1="150" x2="300" y2="150" stroke="rgba(255, 184, 0, 0.03)" strokeWidth="0.5" />
 
               {/* Dynamic Sweep Line */}
               <line 
@@ -122,7 +122,7 @@ export function ClosingShot() {
                 y1="150" 
                 x2={sweepX} 
                 y2={sweepY} 
-                stroke="#00F0FF" 
+                stroke="#FFB800" 
                 strokeWidth="1.25"
                 opacity="0.6"
               />
@@ -136,8 +136,8 @@ export function ClosingShot() {
 
               <defs>
                 <linearGradient id="radar-sweep-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#00F0FF" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#00F0FF" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0" />
                 </linearGradient>
               </defs>
 
@@ -163,7 +163,7 @@ export function ClosingShot() {
                   >
                     {/* Blip glow */}
                     {(isHovered || isSwept) && (
-                      <circle cx="0" cy="0" r="8" fill="none" stroke={isHovered ? "#00F0FF" : "#FF6B00"} strokeWidth="0.5" className="animate-ping" />
+                      <circle cx="0" cy="0" r="8" fill="none" stroke={isHovered ? "#FFB800" : "#FF6B00"} strokeWidth="0.5" className="animate-ping" />
                     )}
 
                     {/* Central blip dot */}
@@ -171,13 +171,13 @@ export function ClosingShot() {
                       cx="0" 
                       cy="0" 
                       r={isHovered ? "3.5" : "2"} 
-                      fill={isHovered ? "#00F0FF" : isSwept ? "#FF6B00" : "rgba(255, 255, 255, 0.15)"} 
+                      fill={isHovered ? "#FFB800" : isSwept ? "#FF6B00" : "rgba(255, 255, 255, 0.15)"} 
                       className="transition-colors duration-300"
                     />
 
                     {/* Miniature identifier text */}
                     {isHovered && (
-                      <text x="6" y="2" fill="#00F0FF" fontSize="4.5" fontFamily="monospace" fontWeight="bold">
+                      <text x="6" y="2" fill="#FFB800" fontSize="4.5" fontFamily="monospace" fontWeight="bold">
                         {sig.name.toUpperCase()}
                       </text>
                     )}
@@ -196,7 +196,7 @@ export function ClosingShot() {
               <h3 className="text-2xl sm:text-3xl font-sans font-extrabold tracking-tighter leading-none text-white uppercase">
                 SOVEREIGNTY SECURED.
               </h3>
-              <p className="font-mono text-[10px] tracking-wider text-[#00F0FF] mt-1 font-bold">
+              <p className="font-mono text-[10px] tracking-wider text-[#FFB800] mt-1 font-bold">
                 Link Severed &mdash; Session Summary Log
               </p>
             </div>
@@ -222,7 +222,7 @@ export function ClosingShot() {
                       {activeSignal.description}
                     </p>
                     <div className="mt-2 text-white/40 text-[7.5px] flex items-center gap-1">
-                      <Activity className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+                      <Activity className="w-3.5 h-3.5 text-[#FFB800] animate-pulse" />
                       <span>TELEMETRY: <strong className="text-white">{activeSignal.status}</strong></span>
                     </div>
                   </motion.div>
@@ -234,7 +234,7 @@ export function ClosingShot() {
                     exit={{ opacity: 0 }}
                     className="flex flex-col justify-center h-full my-auto py-2"
                   >
-                    <div className="flex items-center gap-1.5 text-[#00F0FF] font-bold mb-2">
+                    <div className="flex items-center gap-1.5 text-[#FFB800] font-bold mb-2">
                       <Terminal className="w-3.5 h-3.5" />
                       <span>TERMINAL CONSOLE ACTIVE</span>
                     </div>
@@ -245,7 +245,7 @@ export function ClosingShot() {
                       </div>
                       <div className="flex justify-between">
                         <span>REGULATORY FDI INFLOWS:</span>
-                        <span className="text-[#00F0FF] font-bold">ACTIVE // 100% OPEN</span>
+                        <span className="text-[#FFB800] font-bold">ACTIVE // 100% OPEN</span>
                       </div>
                       <div className="flex justify-between">
                         <span>WEBINAR BRIEFING STREAM:</span>

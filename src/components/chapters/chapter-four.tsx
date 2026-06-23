@@ -135,7 +135,7 @@ export function ChapterFour({ onActiveState }: ChapterFourProps) {
             </div>
 
             {/* Downstream Applications Sector */}
-            <div className="bg-[#050510] border border-accent-cyan/10 p-6 rounded-2xl flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.02)]">
+            <div className="bg-[#050510] border border-accent-cyan/10 p-6 rounded-2xl flex flex-col justify-between shadow-[0_0_15px_rgba(255, 184, 0,0.02)]">
               <div>
                 <span className="font-mono text-[10px] text-accent-cyan uppercase tracking-widest block mb-2">
                   Downstream: Data & Applications

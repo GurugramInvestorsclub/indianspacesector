@@ -133,7 +133,7 @@ export function NewEra() {
       <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308]">
         
         {/* Subtle Ambient Glow */}
-        <div className="absolute inset-0 bg-radial-[circle_at_center,rgba(0,240,255,0.015)_0%,transparent_75%] pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-radial-[circle_at_center,rgba(255, 184, 0,0.015)_0%,transparent_75%] pointer-events-none z-0" />
 
         {/* ------------------------------------------------------------- */}
         {/* SCENE 1: Transition */}
@@ -159,7 +159,7 @@ export function NewEra() {
               y: reduceMotion ? 0 : scene1BY, 
               fontFamily: "Georgia, serif" 
             }}
-            className="text-3xl md:text-5xl lg:text-6xl font-light italic tracking-tight text-[#00F0FF]"
+            className="text-3xl md:text-5xl lg:text-6xl font-light italic tracking-tight text-[#FFB800]"
           >
             Today, it is becoming one of the world&apos;s largest industries.
           </motion.h3>
@@ -173,7 +173,7 @@ export function NewEra() {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-6xl mx-auto w-full"
         >
           <div className="text-center mb-16">
-            <span className="font-mono text-[9px] tracking-[0.3em] text-[#00F0FF] uppercase mb-4 block opacity-70">
+            <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-4 block opacity-70">
               Value Expansion
             </span>
             <h2 
@@ -213,15 +213,15 @@ export function NewEra() {
 
             {/* 2030 Bar */}
             <div className="flex flex-col items-center justify-end h-full z-10 w-24">
-              <span className="font-mono text-xs text-[#00F0FF] mb-3 font-semibold">$77 Billion</span>
+              <span className="font-mono text-xs text-[#FFB800] mb-3 font-semibold">$77 Billion</span>
               <motion.div 
-                className="w-full bg-gradient-to-t from-[#00F0FF]/10 to-[#00F0FF] border border-[#00F0FF]/40 rounded-t-sm shadow-[0_0_40px_rgba(0,240,255,0.25)]"
+                className="w-full bg-gradient-to-t from-[#FFB800]/10 to-[#FFB800] border border-[#FFB800]/40 rounded-t-sm shadow-[0_0_40px_rgba(255, 184, 0,0.25)]"
                 style={{ 
                   height: reduceMotion ? "90%" : useTransform(barHeight2030, (h) => `${h}%`),
                   transformOrigin: "bottom center"
                 }}
               />
-              <span className="font-mono text-xs font-bold text-[#00F0FF] mt-4 tracking-wider">2030 Projected</span>
+              <span className="font-mono text-xs font-bold text-[#FFB800] mt-4 tracking-wider">2030 Projected</span>
             </div>
           </div>
 
@@ -285,24 +285,24 @@ export function NewEra() {
               className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40"
             >
               <svg className="w-[450px] h-[270px] md:w-[650px] md:h-[380px] overflow-visible" viewBox="0 0 700 400" fill="none">
-                <ellipse cx="350" cy="200" rx="320" ry="130" stroke="#00F0FF" strokeWidth="0.5" strokeDasharray="4 8" opacity="0.25" />
+                <ellipse cx="350" cy="200" rx="320" ry="130" stroke="#FFB800" strokeWidth="0.5" strokeDasharray="4 8" opacity="0.25" />
                 <ellipse cx="350" cy="200" rx="350" ry="160" stroke="white" strokeWidth="0.5" opacity="0.15" />
                 
                 <motion.g style={{ opacity: reduceMotion ? 1 : satellitesOpacity }}>
-                  <circle cx="100" cy="230" r="1.5" fill="#00F0FF" />
-                  <circle cx="180" cy="150" r="2" fill="#00F0FF" className="animate-ping" />
-                  <circle cx="180" cy="150" r="1.5" fill="#00F0FF" />
-                  <circle cx="300" cy="110" r="2" fill="#00F0FF" />
+                  <circle cx="100" cy="230" r="1.5" fill="#FFB800" />
+                  <circle cx="180" cy="150" r="2" fill="#FFB800" className="animate-ping" />
+                  <circle cx="180" cy="150" r="1.5" fill="#FFB800" />
+                  <circle cx="300" cy="110" r="2" fill="#FFB800" />
                   <circle cx="450" cy="120" r="1.5" fill="#FF6B00" />
-                  <circle cx="580" cy="210" r="2" fill="#00F0FF" className="animate-ping" />
-                  <circle cx="580" cy="210" r="1.5" fill="#00F0FF" />
+                  <circle cx="580" cy="210" r="2" fill="#FFB800" className="animate-ping" />
+                  <circle cx="580" cy="210" r="1.5" fill="#FFB800" />
                 </motion.g>
               </svg>
             </motion.div>
 
             {/* Live Count Ticker overlay */}
             <div className="relative z-20 text-center flex flex-col items-center justify-center">
-              <span className="font-mono text-[9px] tracking-[0.3em] text-[#00F0FF] uppercase mb-4 opacity-70">
+              <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-4 opacity-70">
                 Constellation Scale
               </span>
               <div className="text-7xl md:text-9xl font-black text-white tracking-tight leading-none mb-4 select-none">
@@ -357,7 +357,7 @@ export function NewEra() {
 
           <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[75vh]">
             <div className="text-center mb-12 max-w-md pointer-events-none">
-              <span className="font-mono text-[9px] tracking-[0.3em] text-[#00F0FF] uppercase mb-3 block opacity-70">
+              <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-3 block opacity-70">
                 Downstream Horizon
               </span>
               <h3 
@@ -377,9 +377,9 @@ export function NewEra() {
                 {/* Callout 1: Connectivity */}
                 <motion.div 
                   style={{ opacity: reduceMotion ? 1 : useCase1Opacity }}
-                  className="flex flex-col text-left border-l border-[#00F0FF]/30 pl-4 py-1"
+                  className="flex flex-col text-left border-l border-[#FFB800]/30 pl-4 py-1"
                 >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#00F0FF] uppercase font-bold mb-1">
+                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#FFB800] uppercase font-bold mb-1">
                     01 / Connectivity
                   </span>
                   <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-2">
@@ -485,7 +485,7 @@ export function NewEra() {
               y: reduceMotion ? 0 : line7CY, 
               fontFamily: "Georgia, serif" 
             }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#00F0FF] uppercase pt-4"
+            className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight text-[#FFB800] uppercase pt-4"
           >
             Space may connect everything.
           </motion.p>
@@ -524,7 +524,7 @@ export function NewEra() {
           }}
           className="absolute z-10 w-full max-w-5xl px-8 py-16 flex flex-col items-center justify-center text-center pointer-events-none"
         >
-          <span className="font-mono text-[9px] tracking-[0.4em] text-[#00F0FF] uppercase mb-8 opacity-60">
+          <span className="font-mono text-[9px] tracking-[0.4em] text-[#FFB800] uppercase mb-8 opacity-60">
             The Frontier Opens
           </span>
           

@@ -301,7 +301,7 @@ export function ChapterThree({ onActiveState }: ChapterThreeProps) {
                   onClick={() => handleLayerSelect(layer.id)}
                   className={`w-full text-left relative overflow-hidden transition-all duration-300 rounded-xl p-3 border cursor-pointer flex items-center justify-between ${
                     isSelected 
-                      ? "bg-accent-cyan/10 border-accent-cyan shadow-[0_0_15px_rgba(0,240,255,0.15)]"
+                      ? "bg-accent-cyan/10 border-accent-cyan shadow-[0_0_15px_rgba(255, 184, 0,0.15)]"
                       : isDependency
                       ? "bg-accent-orange/5 border-accent-orange/40"
                       : "bg-[#06060f]/60 border-white/5 hover:border-white/20"

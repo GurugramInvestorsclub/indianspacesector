@@ -57,7 +57,7 @@ export function MissionControl() {
 
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {shifts.map(([label, detail]) => (
-            <article key={label} className="border-l-2 border-[#00d5e8] bg-white/[0.025] p-5">
+            <article key={label} className="border-l-2 border-[#FFB800] bg-white/[0.025] p-5">
               <h3 className="text-base font-bold text-white">{label}</h3>
               <p className="mt-2 text-sm leading-6 text-white/62">{detail}</p>
             </article>

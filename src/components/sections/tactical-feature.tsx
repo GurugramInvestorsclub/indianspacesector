@@ -53,7 +53,7 @@ export function TacticalFeature() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column: Context & Bullet items */}
           <div>
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase block mb-3">
               04. MILITARY SPACE DOMINANCE
             </span>
             <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">
@@ -76,7 +76,7 @@ export function TacticalFeature() {
               {features.map((feat, idx) => (
                 <div key={idx} className="flex items-start gap-4">
                   <div className="mt-1 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-[#00F0FF] shrink-0" />
+                    <CheckCircle2 className="w-5 h-5 text-[#FFB800] shrink-0" />
                   </div>
                   <div>
                     <h4 className="text-white text-base font-bold tracking-tight">
@@ -98,7 +98,7 @@ export function TacticalFeature() {
               {/* Radar Screen Header */}
               <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
                 <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-[#00F0FF] animate-pulse" />
+                  <Shield className="w-4 h-4 text-[#FFB800] animate-pulse" />
                   <span className="font-mono text-[9px] tracking-wider text-white/80">
                     ISRO-SSA RADAR CONSOLE
                   </span>
@@ -114,15 +114,15 @@ export function TacticalFeature() {
               </div>
 
               {/* Radar Screen Visual Area */}
-              <div className="relative aspect-square max-w-[340px] mx-auto rounded-full border border-[#00F0FF]/15 bg-[#030308] flex items-center justify-center overflow-hidden mb-6 shadow-[inset_0_0_20px_rgba(0,240,255,0.05)]">
+              <div className="relative aspect-square max-w-[340px] mx-auto rounded-full border border-[#FFB800]/15 bg-[#030308] flex items-center justify-center overflow-hidden mb-6 shadow-[inset_0_0_20px_rgba(255, 184, 0,0.05)]">
                 {/* Conic sweep element */}
                 <div className="absolute inset-0 bg-radar-sweep animate-spin origin-center duration-8000" style={{ animationDuration: "8s" }}></div>
 
                 {/* Radar Grid Rings */}
-                <div className="absolute w-[80%] aspect-square rounded-full border border-[#00F0FF]/10 border-dashed"></div>
-                <div className="absolute w-[60%] aspect-square rounded-full border border-[#00F0FF]/5"></div>
-                <div className="absolute w-[40%] aspect-square rounded-full border border-[#00F0FF]/10 border-dashed"></div>
-                <div className="absolute w-[20%] aspect-square rounded-full border border-[#00F0FF]/5"></div>
+                <div className="absolute w-[80%] aspect-square rounded-full border border-[#FFB800]/10 border-dashed"></div>
+                <div className="absolute w-[60%] aspect-square rounded-full border border-[#FFB800]/5"></div>
+                <div className="absolute w-[40%] aspect-square rounded-full border border-[#FFB800]/10 border-dashed"></div>
+                <div className="absolute w-[20%] aspect-square rounded-full border border-[#FFB800]/5"></div>
 
                 {/* Radar Crosshairs */}
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -133,7 +133,7 @@ export function TacticalFeature() {
                 </div>
 
                 {/* Glowing target blips */}
-                <span className="absolute top-[35%] left-[25%] h-2 w-2 rounded-full bg-[#00F0FF] shadow-[0_0_8px_#00F0FF] animate-pulse"></span>
+                <span className="absolute top-[35%] left-[25%] h-2 w-2 rounded-full bg-[#FFB800] shadow-[0_0_8px_#FFB800] animate-pulse"></span>
                 <span className="absolute top-[65%] left-[65%] h-2 w-2 rounded-full bg-[#FF6B00] shadow-[0_0_8px_#FF6B00] animate-pulse duration-1000"></span>
                 <span className="absolute top-[18%] left-[70%] h-1.5 w-1.5 rounded-full bg-[#00E575] shadow-[0_0_6px_#00E575] animate-pulse duration-700"></span>
 
@@ -142,7 +142,7 @@ export function TacticalFeature() {
               </div>
 
               {/* Live Telemetry Log Footer */}
-              <div className="bg-[#030308] border border-white/5 rounded-xl p-4 font-mono text-[9px] text-[#00F0FF]/90 space-y-1.5">
+              <div className="bg-[#030308] border border-white/5 rounded-xl p-4 font-mono text-[9px] text-[#FFB800]/90 space-y-1.5">
                 <div className="flex items-center gap-1.5 text-white/50 border-b border-white/5 pb-2 mb-2">
                   <Server className="w-3.5 h-3.5 shrink-0" />
                   <span className="tracking-wider">LIVE TELEMETRY STREAM</span>
@@ -150,7 +150,7 @@ export function TacticalFeature() {
                 {telemetry.map((log, idx) => (
                   <div key={idx} className="flex justify-between items-center whitespace-nowrap overflow-hidden">
                     <span className="opacity-95 text-ellipsis overflow-hidden">{log}</span>
-                    {idx === 0 && <span className="text-[8px] px-1 bg-[#00F0FF]/15 text-[#00F0FF] ml-2 shrink-0 animate-pulse">NEW</span>}
+                    {idx === 0 && <span className="text-[8px] px-1 bg-[#FFB800]/15 text-[#FFB800] ml-2 shrink-0 animate-pulse">NEW</span>}
                   </div>
                 ))}
               </div>

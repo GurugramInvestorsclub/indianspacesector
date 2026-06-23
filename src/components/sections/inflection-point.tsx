@@ -60,8 +60,8 @@ export function InflectionPoint() {
       prefix: "$",
       suffix: "B+",
       label: "Projected Size by 2033",
-      colorClass: "text-[#00F0FF]",
-      subBadge: "bg-[#00F0FF]/5 text-[#00F0FF] border-[#00F0FF]/15",
+      colorClass: "text-[#FFB800]",
+      subBadge: "bg-[#FFB800]/5 text-[#FFB800] border-[#FFB800]/15",
       desc: "Capital velocity scaling through sovereign & private launches"
     },
     {
@@ -78,8 +78,8 @@ export function InflectionPoint() {
       prefix: "",
       suffix: "+",
       label: "Sovereign Launches",
-      colorClass: "text-[#00F0FF]",
-      subBadge: "bg-[#00F0FF]/5 text-[#00F0FF] border-[#00F0FF]/15",
+      colorClass: "text-[#FFB800]",
+      subBadge: "bg-[#FFB800]/5 text-[#FFB800] border-[#FFB800]/15",
       desc: "Successful orbital payloads and satellite missions executed"
     }
   ];
@@ -113,19 +113,19 @@ export function InflectionPoint() {
         </div>
 
         {/* Ambient glow orb */}
-        <div className="absolute bottom-1/4 right-[10%] w-[380px] h-[380px] rounded-full bg-[#00F0FF]/2 filter blur-[120px] pointer-events-none z-10"></div>
+        <div className="absolute bottom-1/4 right-[10%] w-[380px] h-[380px] rounded-full bg-[#FFB800]/2 filter blur-[120px] pointer-events-none z-10"></div>
 
         <div className="max-w-7xl w-full mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left: Description & reformed stats console */}
             <div className="lg:col-span-5 flex flex-col justify-center text-left">
-              <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase block mb-3 font-semibold">
+              <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase block mb-3 font-semibold">
                 03. CHAPTER 2 // THE UNLOCKING
               </span>
               <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-[1.05] text-white">
                 The 2020 Reforms <br />
-                Ecosystem <span className="text-[#00F0FF]">Unlocking</span>
+                Ecosystem <span className="text-[#FFB800]">Unlocking</span>
               </h2>
               
               <p className="text-white/70 text-xs md:text-sm mt-4 font-sans leading-relaxed">
@@ -134,7 +134,7 @@ export function InflectionPoint() {
 
               {/* Status indicators */}
               <div className="mt-6 flex flex-wrap gap-2.5 font-mono text-[9px] tracking-wider font-semibold">
-                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00F0FF]/5 border border-[#00F0FF]/20 text-[#00F0FF] rounded-xs">
+                <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FFB800]/5 border border-[#FFB800]/20 text-[#FFB800] rounded-xs">
                   <Landmark className="w-3.5 h-3.5" /> 100% FDI OPEN
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FF6B00]/5 border border-[#FF6B00]/20 text-[#FF6B00] rounded-xs">
@@ -156,7 +156,7 @@ export function InflectionPoint() {
                       onMouseMove={handleMouseMove}
                       className="p-[1px] rounded-[14px] bg-white/[0.04] border border-white/5 relative overflow-hidden group transition-all duration-300 backdrop-blur-md"
                       style={{
-                        background: `radial-gradient(150px circle at var(--mouse-x, 150px) var(--mouse-y, 40px), rgba(0, 240, 255, 0.08), transparent 80%)`
+                        background: `radial-gradient(150px circle at var(--mouse-x, 150px) var(--mouse-y, 40px), rgba(255, 184, 0, 0.08), transparent 80%)`
                       }}
                     >
                       <div className="bg-[#04040c]/85 rounded-[13px] p-4 flex justify-between items-center relative z-10">
@@ -205,14 +205,14 @@ export function InflectionPoint() {
                     <path 
                       d="M135,115 A 75,75 0 0,0 135,235" 
                       fill="none" 
-                      stroke={isUnlocked ? "rgba(0,240,255,0.15)" : "#FF6B00"} 
+                      stroke={isUnlocked ? "rgba(255, 184, 0,0.15)" : "#FF6B00"} 
                       strokeWidth="3.5" 
                       className="transition-colors duration-500"
                     />
                     <path 
                       d="M125,100 A 90,90 0 0,0 125,250" 
                       fill="none" 
-                      stroke={isUnlocked ? "rgba(0,240,255,0.05)" : "rgba(255,107,0,0.4)"} 
+                      stroke={isUnlocked ? "rgba(255, 184, 0,0.05)" : "rgba(255,107,0,0.4)"} 
                       strokeWidth="1.5" 
                       strokeDasharray="4 6"
                       className="transition-colors duration-500"
@@ -224,14 +224,14 @@ export function InflectionPoint() {
                     <path 
                       d="M215,115 A 75,75 0 0,1 215,235" 
                       fill="none" 
-                      stroke={isUnlocked ? "rgba(0,240,255,0.15)" : "#FF6B00"} 
+                      stroke={isUnlocked ? "rgba(255, 184, 0,0.15)" : "#FF6B00"} 
                       strokeWidth="3.5"
                       className="transition-colors duration-500"
                     />
                     <path 
                       d="M225,100 A 90,90 0 0,1 225,250" 
                       fill="none" 
-                      stroke={isUnlocked ? "rgba(0,240,255,0.05)" : "rgba(255,107,0,0.4)"} 
+                      stroke={isUnlocked ? "rgba(255, 184, 0,0.05)" : "rgba(255,107,0,0.4)"} 
                       strokeWidth="1.5" 
                       strokeDasharray="4 6"
                       className="transition-colors duration-500"
@@ -250,39 +250,39 @@ export function InflectionPoint() {
                 {/* Private Outer Nodes (Fading in as reforms unlock) */}
                 <motion.g style={{ opacity: nodesOpacity, scale: nodesScale, originX: "175px", originY: "175px" }}>
                   {/* Outer Orbit line */}
-                  <circle cx="175" cy="175" r="110" fill="none" stroke="rgba(0, 240, 255, 0.08)" strokeWidth="0.5" strokeDasharray="4 4" />
+                  <circle cx="175" cy="175" r="110" fill="none" stroke="rgba(255, 184, 0, 0.08)" strokeWidth="0.5" strokeDasharray="4 4" />
 
                   {/* Private node 1: Private Launch */}
                   <g transform="translate(175, 65)">
-                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#00F0FF" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="14" fill="none" stroke="#00F0FF" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
-                    <text x="0" y="2" fill="#00F0FF" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">LAUNCH</text>
+                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#FFB800" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#FFB800" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
+                    <text x="0" y="2" fill="#FFB800" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">LAUNCH</text>
                   </g>
-                  <line x1="175" y1="160" x2="175" y2="75" stroke="rgba(0, 240, 255, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="175" y1="160" x2="175" y2="75" stroke="rgba(255, 184, 0, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
 
                   {/* Private node 2: Private Satellites */}
                   <g transform="translate(285, 175)">
-                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#00F0FF" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="14" fill="none" stroke="#00F0FF" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
-                    <text x="0" y="2" fill="#00F0FF" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SAT_DEV</text>
+                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#FFB800" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#FFB800" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
+                    <text x="0" y="2" fill="#FFB800" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">SAT_DEV</text>
                   </g>
-                  <line x1="190" y1="175" x2="275" y2="175" stroke="rgba(0, 240, 255, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="190" y1="175" x2="275" y2="175" stroke="rgba(255, 184, 0, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
 
                   {/* Private node 3: Startups Swarm */}
                   <g transform="translate(175, 285)">
-                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#00F0FF" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="14" fill="none" stroke="#00F0FF" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
-                    <text x="0" y="2" fill="#00F0FF" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">VENTURES</text>
+                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#FFB800" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#FFB800" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
+                    <text x="0" y="2" fill="#FFB800" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">VENTURES</text>
                   </g>
-                  <line x1="175" y1="190" x2="175" y2="275" stroke="rgba(0, 240, 255, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="175" y1="190" x2="175" y2="275" stroke="rgba(255, 184, 0, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
 
                   {/* Private node 4: Downstream Applications */}
                   <g transform="translate(65, 175)">
-                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#00F0FF" strokeWidth="1" />
-                    <circle cx="0" cy="0" r="14" fill="none" stroke="#00F0FF" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
-                    <text x="0" y="2" fill="#00F0FF" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">APPLICATIONS</text>
+                    <circle cx="0" cy="0" r="10" fill="#030308" stroke="#FFB800" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="14" fill="none" stroke="#FFB800" strokeWidth="0.5" strokeDasharray="2 2" className="animate-spin" />
+                    <text x="0" y="2" fill="#FFB800" fontSize="4.5" fontFamily="monospace" textAnchor="middle" fontWeight="bold">APPLICATIONS</text>
                   </g>
-                  <line x1="160" y1="175" x2="75" y2="175" stroke="rgba(0, 240, 255, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
+                  <line x1="160" y1="175" x2="75" y2="175" stroke="rgba(255, 184, 0, 0.15)" strokeWidth="1" strokeDasharray="3 3" />
                 </motion.g>
               </svg>
 
@@ -295,9 +295,9 @@ export function InflectionPoint() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="flex items-center gap-2 text-[#00F0FF]"
+                      className="flex items-center gap-2 text-[#FFB800]"
                     >
-                      <Unlock className="w-3.5 h-3.5 text-[#00F0FF]" />
+                      <Unlock className="w-3.5 h-3.5 text-[#FFB800]" />
                       <span className="font-bold tracking-widest">STATUS: SYSTEM UNLOCKED // IN-SPACe GATEWAY ON</span>
                     </motion.div>
                   ) : (

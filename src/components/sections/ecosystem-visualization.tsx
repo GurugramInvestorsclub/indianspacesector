@@ -213,7 +213,7 @@ export function EcosystemVisualization() {
                           onClick={() => setSelectedId(node.id)}
                           className={`interactive-control graph-node h-full w-full border px-3 py-2 text-left ${
                             active
-                              ? "border-[#00d5e8] bg-[#00d5e8] text-[#030308]"
+                              ? "border-[#FFB800] bg-[#FFB800] text-[#030308]"
                               : related
                                 ? "border-white/18 bg-[#030308] text-white"
                                 : "border-white/8 bg-[#030308] text-white/32"
@@ -278,7 +278,7 @@ export function EcosystemVisualization() {
                     className="interactive-control flex w-full items-center justify-between border border-white/10 bg-white/[0.025] px-3 py-2 text-left text-sm text-white/74"
                   >
                     {node.name}
-                    <ArrowRight className="h-3.5 w-3.5 text-[#00d5e8]" />
+                    <ArrowRight className="h-3.5 w-3.5 text-[#FFB800]" />
                   </button>
                 ))}
               </div>

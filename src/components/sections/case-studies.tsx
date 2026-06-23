@@ -84,7 +84,7 @@ export function CaseStudies() {
                   onClick={() => setFilter(category)}
                   className={`interactive-control border px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.12em] ${
                     filter === category
-                      ? "border-[#00d5e8] bg-[#00d5e8] text-[#030308]"
+                      ? "border-[#FFB800] bg-[#FFB800] text-[#030308]"
                       : "border-white/12 bg-white/[0.025] text-white/62"
                   }`}
                 >
@@ -102,7 +102,7 @@ export function CaseStudies() {
                     type="button"
                     onClick={() => setActiveSlug(study.slug)}
                     className={`interactive-control border p-4 text-left ${
-                      active ? "border-[#00d5e8] bg-[#00d5e8]/12" : "border-white/10 bg-[#05050f]"
+                      active ? "border-[#FFB800] bg-[#FFB800]/12" : "border-white/10 bg-[#05050f]"
                     }`}
                   >
                     <span className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#8cf7ff]">
@@ -124,7 +124,7 @@ export function CaseStudies() {
               {activeStudy.title}
             </h3>
             <p className="mt-2 text-sm font-semibold text-[#8cf7ff]">{activeStudy.role}</p>
-            <p className="mt-5 border-l-2 border-[#00d5e8] pl-4 text-sm leading-7 text-white/66">
+            <p className="mt-5 border-l-2 border-[#FFB800] pl-4 text-sm leading-7 text-white/66">
               {activeStudy.signal}
             </p>
             <div className="mt-6">

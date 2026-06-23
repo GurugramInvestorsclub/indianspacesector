@@ -114,7 +114,7 @@ export function ChapterNine({ onActiveState }: ChapterNineProps) {
             <path 
               d="M 120,120 Q 220,60 340,80 T 560,120 T 780,80 T 1000,120" 
               fill="none" 
-              stroke="#00F0FF" 
+              stroke="#FFB800" 
               strokeWidth="2" 
               strokeDasharray="8,6"
             />

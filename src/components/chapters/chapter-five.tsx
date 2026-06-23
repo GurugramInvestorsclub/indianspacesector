@@ -140,7 +140,7 @@ export function ChapterFive({ onActiveState }: ChapterFiveProps) {
 
             {/* Radar scanning nodes */}
             <div className="absolute top-[20%] left-[30%] w-2 h-2 bg-accent-orange rounded-full animate-pulse shadow-[0_0_8px_#FF6B00]"></div>
-            <div className="absolute bottom-[35%] right-[25%] w-2 h-2 bg-accent-cyan rounded-full animate-pulse shadow-[0_0_8px_#00F0FF]"></div>
+            <div className="absolute bottom-[35%] right-[25%] w-2 h-2 bg-accent-cyan rounded-full animate-pulse shadow-[0_0_8px_#FFB800]"></div>
             <div className="absolute top-[60%] left-[65%] w-1.5 h-1.5 bg-accent-orange rounded-full opacity-60"></div>
 
             <div className="absolute bottom-4 font-mono text-[9px] text-accent-orange tracking-widest bg-space-black/80 border border-accent-orange/20 px-2 py-0.5 rounded">

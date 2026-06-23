@@ -47,7 +47,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
           
           {/* Left Column: Caption */}
           <motion.div style={{ y: yLeftCol }} className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase font-bold block mb-3">
               04A. PILLAR 01 // UPSTREAM LAUNCH
             </span>
             <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white uppercase">
@@ -61,7 +61,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00F0FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#FFB800] hover:text-white transition-colors cursor-pointer"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -92,7 +92,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
                     key={i}
                     animate={{
                       height: ["10%", "90%", "10%"],
-                      backgroundColor: ["rgba(0,240,255,0.2)", "rgba(0,240,255,0.7)", "rgba(0,240,255,0.2)"],
+                      backgroundColor: ["rgba(255, 184, 0,0.2)", "rgba(255, 184, 0,0.7)", "rgba(255, 184, 0,0.2)"],
                     }}
                     transition={{
                       duration: 1.5 + i * 0.3,
@@ -110,10 +110,10 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
                   <div className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+                    <Activity className="w-3.5 h-3.5 text-[#FFB800] animate-pulse" />
                     <span className="font-mono text-[9px] text-white/80">LAUNCH_LOG // ACCELERATORS</span>
                   </div>
-                  <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/20 px-2 py-0.5 rounded bg-[#00F0FF]/5">
+                  <span className="font-mono text-[8px] text-[#FFB800] border border-[#FFB800]/20 px-2 py-0.5 rounded bg-[#FFB800]/5">
                     SECURED
                   </span>
                 </div>
@@ -122,7 +122,7 @@ export function DeepDiveLaunch({ id }: DeepDiveProps) {
                   <div>
                     <span className="text-white/40 block font-semibold">LAUNCH COST</span>
                     <span className="text-base font-bold text-white block mt-0.5">~$3,000/kg</span>
-                    <span className="text-[8px] text-[#00F0FF] font-semibold">LEO INSERTION</span>
+                    <span className="text-[8px] text-[#FFB800] font-semibold">LEO INSERTION</span>
                   </div>
                   <div>
                     <span className="text-white/40 block font-semibold">OPERATING MARGIN</span>
@@ -182,7 +182,7 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
           
           {/* Left Column */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase font-bold block mb-3">
               04B. PILLAR 02 // HARDWARE & ASSEMBLY
             </span>
             <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white uppercase">
@@ -195,7 +195,7 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00F0FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#FFB800] hover:text-white transition-colors cursor-pointer"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -222,11 +222,11 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
               {/* Concentric orbital loop paths reacting to scroll */}
               <motion.div 
                 style={{ rotate: satRotate, scale: satScale }}
-                className="relative w-12 h-12 rounded-full border border-dashed border-[#00F0FF]/20 flex items-center justify-center"
+                className="relative w-12 h-12 rounded-full border border-dashed border-[#FFB800]/20 flex items-center justify-center"
               >
-                <span className="absolute -top-1.5 w-2.5 h-2.5 rounded-full bg-[#00F0FF] shadow-[0_0_6px_#00F0FF]"></span>
-                <div className="w-6 h-6 rounded-full border border-dashed border-[#00F0FF]/15 animate-[spin_4s_linear_infinite_reverse]">
-                  <span className="absolute -bottom-1 left-0.5 w-1.5 h-1.5 rounded-full bg-[#00F0FF]/80"></span>
+                <span className="absolute -top-1.5 w-2.5 h-2.5 rounded-full bg-[#FFB800] shadow-[0_0_6px_#FFB800]"></span>
+                <div className="w-6 h-6 rounded-full border border-dashed border-[#FFB800]/15 animate-[spin_4s_linear_infinite_reverse]">
+                  <span className="absolute -bottom-1 left-0.5 w-1.5 h-1.5 rounded-full bg-[#FFB800]/80"></span>
                 </div>
               </motion.div>
               <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">CONSTELLATION_BUS</span>
@@ -236,10 +236,10 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
                   <div className="flex items-center gap-1.5">
-                    <Server className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+                    <Server className="w-3.5 h-3.5 text-[#FFB800] animate-pulse" />
                     <span className="font-mono text-[9px] text-white/80">SATELLITE_BUS // ACCELERATORS</span>
                   </div>
-                  <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/20 px-2 py-0.5 rounded bg-[#00F0FF]/5">
+                  <span className="font-mono text-[8px] text-[#FFB800] border border-[#FFB800]/20 px-2 py-0.5 rounded bg-[#FFB800]/5">
                     ADCS: LOCK
                   </span>
                 </div>
@@ -248,7 +248,7 @@ export function DeepDiveSatellites({ id }: DeepDiveProps) {
                   <div>
                     <span className="text-white/40 block font-semibold">MFG ARBITRAGE</span>
                     <span className="text-base font-bold text-white block mt-0.5">35% Cheaper</span>
-                    <span className="text-[8px] text-[#00F0FF] font-semibold">VS US/EUROPE</span>
+                    <span className="text-[8px] text-[#FFB800] font-semibold">VS US/EUROPE</span>
                   </div>
                   <div>
                     <span className="text-white/40 block font-semibold">DESIGN MARGIN</span>
@@ -436,7 +436,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
           
           {/* Left Column */}
           <div className="lg:col-span-7">
-            <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase font-bold block mb-3">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase font-bold block mb-3">
               04D. PILLAR 04 // DOWNSTREAM SAAS
             </span>
             <h3 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white uppercase">
@@ -449,7 +449,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
             <div className="mt-6">
               <button
                 onClick={() => setShowDetails(!showDetails)}
-                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#00F0FF] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-[#FFB800] hover:text-white transition-colors cursor-pointer"
               >
                 <Info className="w-3.5 h-3.5" /> {showDetails ? "HIDE TECHNICAL DETAILS" : "SHOW TECHNICAL DETAILS"}
               </button>
@@ -474,7 +474,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
             <div className="h-[80px] bg-white/[0.01] border border-white/5 rounded-xl relative overflow-hidden flex items-center justify-center">
               <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
               {/* Monospace scrolling code text backdrop */}
-              <div className="absolute inset-0 select-none flex flex-col font-mono text-[5px] text-[#00F0FF]/25 p-2 overflow-hidden leading-tight">
+              <div className="absolute inset-0 select-none flex flex-col font-mono text-[5px] text-[#FFB800]/25 p-2 overflow-hidden leading-tight">
                 <div>01001011 00101110 01100101 INGEST_SYS_OK</div>
                 <div>01100100 01100001 01110100 SOVEREIGN_FDI</div>
                 <div>01100001 00101110 01110011 MapmyIndia_SYNC</div>
@@ -483,7 +483,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
               {/* Sweeping scan bar (bound to scroll progress) */}
               <motion.div
                 style={{ top: scanLineTop }}
-                className="absolute left-0 right-0 h-[1.5px] bg-[#00F0FF] shadow-[0_0_8px_#00F0FF] z-10"
+                className="absolute left-0 right-0 h-[1.5px] bg-[#FFB800] shadow-[0_0_8px_#FFB800] z-10"
               />
               <span className="absolute bottom-2 right-3 font-mono text-[6px] text-white/30 tracking-widest uppercase">DATA_INGEST_SCAN</span>
             </div>
@@ -492,10 +492,10 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
               <div className="bg-[#05050f]/80 border border-white/5 rounded-[16px] p-6 backdrop-blur-md">
                 <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
                   <div className="flex items-center gap-1.5">
-                    <BarChart3 className="w-3.5 h-3.5 text-[#00F0FF] animate-pulse" />
+                    <BarChart3 className="w-3.5 h-3.5 text-[#FFB800] animate-pulse" />
                     <span className="font-mono text-[9px] text-white/80">SAAS_PORTAL // ACCELERATORS</span>
                   </div>
-                  <span className="font-mono text-[8px] text-[#00F0FF] border border-[#00F0FF]/20 px-2 py-0.5 rounded bg-[#00F0FF]/5">
+                  <span className="font-mono text-[8px] text-[#FFB800] border border-[#FFB800]/20 px-2 py-0.5 rounded bg-[#FFB800]/5">
                     API_OK
                   </span>
                 </div>
@@ -504,7 +504,7 @@ export function DeepDiveApplications({ id }: DeepDiveProps) {
                   <div>
                     <span className="text-white/40 block font-semibold">GLOBAL SCALE</span>
                     <span className="text-base font-bold text-white block mt-0.5">~$380B Market</span>
-                    <span className="text-[8px] text-[#00F0FF] font-semibold">95% OF VALUE</span>
+                    <span className="text-[8px] text-[#FFB800] font-semibold">95% OF VALUE</span>
                   </div>
                   <div>
                     <span className="text-white/40 block font-semibold">GROSS MARGINS</span>

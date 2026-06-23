@@ -18,11 +18,11 @@ export function Timeline() {
     {
       title: "Various New Launch Vehicles",
       desc: "After the successful demonstration of ISRO's SSLV and private startups' test launches, orbital access is becoming cheaper and more accessible than ever.",
-      icon: <Rocket className="w-4 h-4 text-[#00F0FF]" />,
-      color: "border-[#00F0FF]/30 shadow-[#00F0FF]/5",
-      dotBg: "bg-[#00F0FF]",
+      icon: <Rocket className="w-4 h-4 text-[#FFB800]" />,
+      color: "border-[#FFB800]/30 shadow-[#FFB800]/5",
+      dotBg: "bg-[#FFB800]",
       badge: "LAUNCH SYSTEMS",
-      badgeColor: "text-[#00F0FF] bg-[#00F0FF]/10 border-[#00F0FF]/20"
+      badgeColor: "text-[#FFB800] bg-[#FFB800]/10 border-[#FFB800]/20"
     }
   ];
 
@@ -34,7 +34,7 @@ export function Timeline() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Header Block */}
         <div className="max-w-3xl mb-20">
-          <span className="font-mono text-[9px] tracking-[0.25em] text-[#00F0FF] uppercase block mb-3">
+          <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase block mb-3">
             02. MARKET TRANSFORMATION
           </span>
           <h2 className="text-3xl md:text-5xl font-sans font-extrabold tracking-tighter leading-none text-white">

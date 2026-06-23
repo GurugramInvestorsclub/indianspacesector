@@ -5,7 +5,7 @@
   --color-space-dark: #05050f;
   --color-space-glass: rgba(5, 5, 15, 0.8);
   --color-space-border: rgba(255, 255, 255, 0.06);
-  --color-accent-cyan: #00F0FF;
+  --color-accent-cyan: #FFB800;
   --color-accent-orange: #FF6B00;
   
   --font-sans: "Aptos", "Segoe UI", Arial, sans-serif;
@@ -46,14 +46,14 @@ a {
 }
 
 .interactive-control:hover {
-  border-color: rgba(0, 213, 232, 0.68);
-  box-shadow: 0 0 0 1px rgba(0, 213, 232, 0.14);
+  border-color: rgba(255, 184, 0, 0.68);
+  box-shadow: 0 0 0 1px rgba(255, 184, 0, 0.14);
 }
 
 .interactive-control:focus-visible {
   box-shadow:
     0 0 0 2px #030308,
-    0 0 0 4px #00d5e8;
+    0 0 0 4px #FFB800;
 }
 
 .interactive-control:active {
@@ -93,7 +93,7 @@ html.lenis, html.lenis body {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00F0FF;
+  background: #FFB800;
 }
 
 /* Pulse animation for active nodes */
@@ -121,7 +121,7 @@ html.lenis, html.lenis body {
 }
 
 .bg-radar-sweep {
-  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.04) 0deg, transparent 90deg, transparent 360deg);
+  background: conic-gradient(from 0deg, rgba(255, 184, 0, 0.04) 0deg, transparent 90deg, transparent 360deg);
 }
 
 .radial-vignette {

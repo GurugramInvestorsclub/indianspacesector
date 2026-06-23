@@ -73,7 +73,7 @@ export function BackgroundEngine() {
       });
 
       // Draw constellation lines
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.03)";
+      ctx.strokeStyle = "rgba(255, 184, 0, 0.03)";
       ctx.lineWidth = 0.5;
 
       for (let i = 0; i < stars.length; i++) {
@@ -84,7 +84,7 @@ export function BackgroundEngine() {
 
           if (dist < connectionDistance) {
             const alphaFactor = (1 - dist / connectionDistance) * 0.15;
-            ctx.strokeStyle = `rgba(0, 240, 255, ${alphaFactor})`;
+            ctx.strokeStyle = `rgba(255, 184, 0, ${alphaFactor})`;
             ctx.beginPath();
             ctx.moveTo(s1.x, s1.y);
             ctx.lineTo(s2.x, s2.y);

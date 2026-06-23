@@ -167,7 +167,7 @@ export function Origins() {
 
               {/* Dossier Detail Panel */}
               <div className="bg-[#04040c]/85 border border-white/5 rounded-xl p-5 shadow-2xl backdrop-blur-md relative overflow-hidden mt-6 min-h-[300px] flex flex-col justify-between">
-                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00F0FF]/30 to-transparent"></div>
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#FFB800]/30 to-transparent"></div>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -238,7 +238,7 @@ export function Origins() {
               {/* Center Planet Globe Decoration */}
               <div className="absolute w-[200px] h-[200px] rounded-full border border-dashed border-white/[0.03] flex items-center justify-center">
                 <Orbit className="w-10 h-10 text-white/5 animate-pulse" />
-                <div className="absolute inset-0 bg-[#00F0FF]/1 filter blur-[80px] pointer-events-none rounded-full"></div>
+                <div className="absolute inset-0 bg-[#FFB800]/1 filter blur-[80px] pointer-events-none rounded-full"></div>
               </div>
 
               {/* Core SVG Orbital Trail */}
@@ -255,11 +255,11 @@ export function Origins() {
                 <motion.path
                   d={pathD}
                   fill="none"
-                  stroke="#00F0FF"
+                  stroke="#FFB800"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   style={{ pathLength: drawLength }}
-                  className="drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]"
+                  className="drop-shadow-[0_0_8px_rgba(255, 184, 0,0.4)]"
                 />
               </svg>
 
@@ -281,23 +281,23 @@ export function Origins() {
                         {/* Ambient hover/active circle */}
                         <span className={`absolute w-8 h-8 rounded-full border transition-all duration-300 ${
                           isActive 
-                            ? "bg-[#00F0FF]/10 border-[#00F0FF]/40 scale-100" 
+                            ? "bg-[#FFB800]/10 border-[#FFB800]/40 scale-100" 
                             : "border-transparent scale-50 group-hover:scale-75 group-hover:bg-white/5"
                         }`}></span>
                         
                         {/* Center dot */}
                         <span className={`w-3.5 h-3.5 rounded-full border-2 border-[#030308] z-10 transition-all duration-300 ${
                           isActive 
-                            ? "bg-[#00F0FF] shadow-[0_0_10px_#00F0FF]" 
+                            ? "bg-[#FFB800] shadow-[0_0_10px_#FFB800]" 
                             : isPast
-                            ? "bg-[#00F0FF]/40 border-[#00F0FF]/25"
+                            ? "bg-[#FFB800]/40 border-[#FFB800]/25"
                             : "bg-white/10 border-white/20 hover:bg-white/20"
                         }`}></span>
 
                         {/* Tooltip Label */}
                         <span className={`absolute left-10 font-mono text-[8px] font-bold tracking-widest uppercase transition-all duration-300 shrink-0 select-none ${
                           isActive 
-                            ? "text-[#00F0FF] opacity-100 translate-x-0" 
+                            ? "text-[#FFB800] opacity-100 translate-x-0" 
                             : "text-white/30 opacity-0 -translate-x-2 group-hover:opacity-60 group-hover:translate-x-0"
                         }`}>
                           {mil.year} - {mil.title.split(" ")[0]}

@@ -71,7 +71,7 @@ export function FourPillars() {
                     onClick={() => setActiveId(layer.id)}
                     className={`interactive-control grid w-full grid-cols-[52px_1fr] gap-4 border p-4 text-left ${
                       active
-                        ? "border-[#00d5e8] bg-[#00d5e8]/12"
+                        ? "border-[#FFB800] bg-[#FFB800]/12"
                         : "border-white/10 bg-[#030308]/72 hover:border-white/22"
                     }`}
                   >

@@ -266,7 +266,7 @@ export default function Home() {
   const activeChapter = FRAME_TO_CHAPTER[currentFrameIndex] || 1;
 
   return (
-    <main className="min-h-screen bg-[#030308] text-white selection:bg-[#00d5e8] selection:text-[#030308]">
+    <main className="min-h-screen bg-[#030308] text-white selection:bg-[#FFB800] selection:text-[#030308]">
       <Navbar />
       <Hero />
       <Beginning />
@@ -287,7 +287,7 @@ export default function Home() {
           }}
           className={`interactive-control px-4 py-2 rounded-full border text-[10px] font-bold tracking-wider transition-all duration-300 flex items-center gap-2 backdrop-blur-md shadow-lg cursor-pointer ${
             presentationActive
-              ? "bg-[#00d5e8]/15 border-[#00d5e8] text-[#00d5e8] shadow-[#00d5e8]/10"
+              ? "bg-[#FFB800]/15 border-[#FFB800] text-[#FFB800] shadow-[#FFB800]/10"
               : "bg-[#030308]/80 border-white/10 text-white/60 hover:text-white hover:border-white/20"
           }`}
         >
@@ -299,8 +299,8 @@ export default function Home() {
       {/* Bottom Center Presentation Help Hint overlay */}
       {presentationActive && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none animate-fade-in hidden md:block">
-          <div className="bg-[#050512]/90 backdrop-blur-md border border-[#00d5e8]/20 px-5 py-2.5 rounded-full flex items-center gap-4 text-[9px] font-mono tracking-widest text-white/50 uppercase shadow-lg shadow-black/40">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00d5e8] animate-pulse"></span>
+          <div className="bg-[#050512]/90 backdrop-blur-md border border-[#FFB800]/20 px-5 py-2.5 rounded-full flex items-center gap-4 text-[9px] font-mono tracking-widest text-white/50 uppercase shadow-lg shadow-black/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse"></span>
             <span>Left-Click: Next Frame</span>
             <span className="opacity-30">|</span>
             <span>Right-Click: Prev Frame</span>

@@ -32,7 +32,7 @@ export function BriefingSignup() {
         {/* Decorative Radar pulse icon */}
         <div className="flex justify-center mb-6">
           <div className="p-3 bg-white/5 rounded-full border border-white/10 relative">
-            <Radio className="w-6 h-6 text-[#00F0FF] animate-pulse" />
+            <Radio className="w-6 h-6 text-[#FFB800] animate-pulse" />
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export function BriefingSignup() {
                   value={email}
                   disabled={status === "loading"}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-4 py-3.5 bg-[#05050f] border border-white/10 rounded-sm text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#00F0FF] focus:ring-1 focus:ring-[#00F0FF] transition-all font-mono disabled:opacity-50"
+                  className="block w-full pl-10 pr-4 py-3.5 bg-[#05050f] border border-white/10 rounded-sm text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#FFB800] focus:ring-1 focus:ring-[#FFB800] transition-all font-mono disabled:opacity-50"
                 />
               </div>
               <button

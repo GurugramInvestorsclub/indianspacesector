@@ -219,7 +219,7 @@ export function ChapterSix({ onActiveState }: ChapterSixProps) {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className={`h-full rounded-full ${
                           cData.highlight 
-                            ? "bg-gradient-to-r from-accent-cyan to-[#00c0ff] shadow-[0_0_8px_rgba(0,240,255,0.4)]" 
+                            ? "bg-gradient-to-r from-accent-cyan to-[#00c0ff] shadow-[0_0_8px_rgba(255, 184, 0,0.4)]" 
                             : "bg-white/15"
                         }`}
                       />

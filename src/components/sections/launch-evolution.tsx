@@ -265,7 +265,7 @@ export function LaunchEvolution() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 items-start">
             <div>
-              <span className="font-mono text-[9px] tracking-[0.3em] text-[#00F0FF] uppercase mb-3 block">
+              <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-3 block">
                 Chapter III: Capability
               </span>
               <h2 
@@ -279,8 +279,8 @@ export function LaunchEvolution() {
               <p className="text-lg md:text-xl text-white/70 leading-relaxed font-sans mb-6">
                 Aryabhata proved India could build satellites. The next challenge was harder: India needed its own wings. From a tiny 22-meter solid motor to heavy cryogenic systems, each launch generation solved a new challenge of thrust, staging, and mass.
               </p>
-              <div className="h-[1px] w-24 bg-[#00F0FF]/30 mb-6" />
-              <span className="font-mono text-[10px] tracking-widest text-[#00F0FF]/60 uppercase">
+              <div className="h-[1px] w-24 bg-[#FFB800]/30 mb-6" />
+              <span className="font-mono text-[10px] tracking-widest text-[#FFB800]/60 uppercase">
                 [SCROLL DOWN TO INITIATE LINEUP ANALYSIS]
               </span>
             </div>
@@ -343,28 +343,28 @@ export function LaunchEvolution() {
                           >
                             {/* Pulse Dot */}
                             <span className="absolute flex h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00F0FF] opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00F0FF]"></span>
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFB800] opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FFB800]"></span>
                             </span>
                             
                             {/* Callout Line */}
                             <div 
-                              className={`absolute top-0 h-[1px] bg-gradient-to-r border-t border-dashed border-[#00F0FF]/30 ${
+                              className={`absolute top-0 h-[1px] bg-gradient-to-r border-t border-dashed border-[#FFB800]/30 ${
                                 isLeft 
-                                  ? "right-0 w-5 from-transparent to-[#00F0FF]/40" 
-                                  : "left-0 w-5 from-[#00F0FF]/40 to-transparent"
+                                  ? "right-0 w-5 from-transparent to-[#FFB800]/40" 
+                                  : "left-0 w-5 from-[#FFB800]/40 to-transparent"
                               }`}
                             />
                             
                             {/* Label */}
                             <div 
-                              className={`absolute top-0 flex items-center gap-1.5 pointer-events-none select-none font-mono text-[8px] tracking-wider text-[#00F0FF] whitespace-nowrap bg-[#030308]/90 backdrop-blur-xs px-2 py-0.5 border border-[#00F0FF]/25 rounded shadow-lg shadow-black/80 ${
+                              className={`absolute top-0 flex items-center gap-1.5 pointer-events-none select-none font-mono text-[8px] tracking-wider text-[#FFB800] whitespace-nowrap bg-[#030308]/90 backdrop-blur-xs px-2 py-0.5 border border-[#FFB800]/25 rounded shadow-lg shadow-black/80 ${
                                 isLeft 
                                   ? "right-5 -translate-y-1/2 flex-row-reverse" 
                                   : "left-5 -translate-y-1/2 flex-row"
                               }`}
                             >
-                              <span className="w-1 h-1 rounded-full bg-[#00F0FF]" />
+                              <span className="w-1 h-1 rounded-full bg-[#FFB800]" />
                               <span>{callout.label}</span>
                             </div>
                           </motion.div>
@@ -379,11 +379,11 @@ export function LaunchEvolution() {
                   
                   {/* Eyebrow details */}
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="font-mono text-[10px] tracking-[0.25em] text-[#00F0FF]/80 uppercase">
+                    <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800]/80 uppercase">
                       {rocket.year}
                     </span>
                     <span className="h-[1px] w-6 bg-white/10" />
-                    <span className="inline-block border border-[#00F0FF]/20 bg-[#00F0FF]/5 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-widest text-[#00F0FF]">
+                    <span className="inline-block border border-[#FFB800]/20 bg-[#FFB800]/5 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-widest text-[#FFB800]">
                       {rocket.breakthrough}
                     </span>
                   </div>
@@ -408,7 +408,7 @@ export function LaunchEvolution() {
                     </div>
                     <div className="border border-white/5 bg-white/[0.01] px-3 py-2 rounded">
                       <div className="text-white/40 uppercase tracking-widest mb-0.5 text-[8px]">Payload Capacity</div>
-                      <div className="text-white font-semibold text-[#00F0FF]">{rocket.capacity}</div>
+                      <div className="text-white font-semibold text-[#FFB800]">{rocket.capacity}</div>
                     </div>
                     <div className="border border-white/5 bg-white/[0.01] px-3 py-2 rounded">
                       <div className="text-white/40 uppercase tracking-widest mb-0.5 text-[8px]">Stages</div>

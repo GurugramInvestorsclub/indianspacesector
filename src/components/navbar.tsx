@@ -47,7 +47,7 @@ export function Navbar() {
           href="#overview"
           className="interactive-control flex items-center gap-2.5 py-2 text-sm font-black tracking-[-0.02em] text-white"
         >
-          <Shield className="h-4 w-4 text-[#00d5e8]" />
+          <Shield className="h-4 w-4 text-[#FFB800]" />
           India Space Sector
         </Link>
 
@@ -61,7 +61,7 @@ export function Navbar() {
                 href={link.href}
                 className={`interactive-control px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.12em] ${
                   active
-                    ? "bg-[#00d5e8]/14 text-[#8cf7ff]"
+                    ? "bg-[#FFB800]/14 text-[#8cf7ff]"
                     : "text-white/58 hover:text-white"
                 }`}
               >

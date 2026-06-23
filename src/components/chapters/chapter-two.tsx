@@ -96,15 +96,15 @@ export function ChapterTwo({ onActiveState }: ChapterTwoProps) {
             if (self.isActive) {
               // Highlight the corresponding year link on the left
               gsap.to(`.year-indicator-${idx}`, {
-                color: "#00F0FF",
+                color: "#FFB800",
                 scale: 1.15,
                 opacity: 1,
                 duration: 0.3
               });
               gsap.to(`.year-dot-${idx}`, {
-                backgroundColor: "#00F0FF",
+                backgroundColor: "#FFB800",
                 scale: 1.3,
-                boxShadow: "0 0 12px #00F0FF",
+                boxShadow: "0 0 12px #FFB800",
                 duration: 0.3
               });
             } else {
