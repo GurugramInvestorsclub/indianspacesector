@@ -72,15 +72,21 @@ export function LaunchEvolution() {
     let yInput, yOutput;
     
     if (index === 0) {
-      opacityInput = [0.0, r.outStart, r.outEnd];
-      opacityOutput = [1, 1, 0];
-      yInput = [0.0, r.outEnd];
-      yOutput = [0, -35];
+      // Map across full domain [0.0, 1.0] to prevent extrapolation bugs
+      opacityInput = [0.0, r.outStart, r.outEnd, 1.0];
+      opacityOutput = [1, 1, 0, 0];
+      yInput = [0.0, r.outEnd, 1.0];
+      yOutput = [0, -35, -35];
+    } else if (index === 6) {
+      opacityInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
+      opacityOutput = [0, 0, 1, 1, 0];
+      yInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
+      yOutput = [35, 35, 0, 0, -35];
     } else {
-      opacityInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
-      opacityOutput = [0, 1, 1, 0];
-      yInput = [r.inStart, r.inEnd, r.outStart, r.outEnd];
-      yOutput = [35, 0, 0, -35];
+      opacityInput = [0.0, r.inStart, r.inEnd, r.outStart, r.outEnd, 1.0];
+      opacityOutput = [0, 0, 1, 1, 0, 0];
+      yInput = [0.0, r.inStart, r.inEnd, r.outStart, r.outEnd, 1.0];
+      yOutput = [35, 35, 0, 0, -35, -35];
     }
     
     return { opacityInput, opacityOutput, yInput, yOutput };
@@ -251,8 +257,10 @@ export function LaunchEvolution() {
         {/* ----------------- Scene 0: Introduction ----------------- */}
         <motion.div
           style={sceneStyles[0]}
-          className={`absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
+          className={`absolute inset-0 z-10 flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
             activeIndex === 0 ? "pointer-events-auto" : "pointer-events-none"
+          } ${
+            Math.abs(activeIndex - 0) <= 1 ? "flex" : "hidden"
           }`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 items-start">
@@ -282,14 +290,17 @@ export function LaunchEvolution() {
         {/* ----------------- Scenes 1 to 6: Launch Vehicles ----------------- */}
         {rockets.map((rocket, index) => {
           const isEven = index % 2 === 0;
-          const isActive = activeIndex === index + 1;
+          const rocketIndex = index + 1;
+          const isActive = activeIndex === rocketIndex;
           
           return (
             <motion.div
               key={rocket.id}
-              style={sceneStyles[index + 1]}
-              className={`absolute inset-0 z-10 flex items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
+              style={sceneStyles[rocketIndex]}
+              className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
                 isActive ? "pointer-events-auto" : "pointer-events-none"
+              } ${
+                Math.abs(activeIndex - rocketIndex) <= 1 ? "flex" : "hidden"
               }`}
             >
               <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full ${
