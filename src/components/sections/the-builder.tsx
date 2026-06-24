@@ -261,7 +261,7 @@ export function TheBuilder() {
     <div
       ref={containerRef}
       id="the-builder"
-      className="relative w-full h-[300vh] bg-[#030308]"
+      className="relative w-full h-[500vh] bg-[#030308]"
     >
       {/* Sticky Viewport */}
       <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center">
