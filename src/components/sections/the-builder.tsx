@@ -21,14 +21,10 @@ interface Particle {
   noiseSpeed: number;
 }
 
-<<<<<<< HEAD
-=======
 interface SectionProps {
   presentationActive?: boolean;
   currentFrameIndex?: number;
 }
-
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
 export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -129,50 +125,8 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
   const satelliteScale = useTransform(progress, [0.68, 0.93], [0.9, 0.8]);
 
   // BUILD THE ROCKETS text scale and glow
-<<<<<<< HEAD
   const textScale = useTransform(progress, [0.85, 0.93], [0.85, 1.05]);
   const textOpacity = useTransform(progress, [0.85, 0.93], [0, 1]);
-=======
-  const textScale = useTransform(scrollYProgress, [0.85, 0.93], [0.85, 1.05]);
-  const textOpacity = useTransform(scrollYProgress, [0.85, 0.93], [0, 1]);
-
-  // Keep track of scroll position inside Ref to prevent react re-renders on canvas animation
-  const scrollValRef = useRef(0);
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      if (!presentationActive) {
-        scrollValRef.current = latest;
-      }
-    });
-  }, [scrollYProgress, presentationActive]);
-
-  useEffect(() => {
-    if (!presentationActive) return;
-    let mockScroll = 0;
-    if (currentFrameIndex === 13) {
-      setActiveIndex(1);
-      setAlignmentStatus("ALIGNING...");
-      mockScroll = 0.15;
-    } else if (currentFrameIndex === 14) {
-      setActiveIndex(2);
-      setAlignmentStatus("ALIGNING...");
-      mockScroll = 0.49;
-    } else if (currentFrameIndex === 15) {
-      setActiveIndex(3);
-      setAlignmentStatus("ALIGNING...");
-      mockScroll = 0.78;
-    } else if (currentFrameIndex === 16) {
-      setActiveIndex(3);
-      setAlignmentStatus("CALIBRATED");
-      mockScroll = 0.94;
-    } else if (currentFrameIndex < 13) {
-      mockScroll = 0.0;
-    } else {
-      mockScroll = 1.0;
-    }
-    scrollValRef.current = mockScroll;
-  }, [presentationActive, currentFrameIndex]);
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
 
   // Load Vikram Sarabhai image & create stardust particles
   useEffect(() => {

@@ -75,12 +75,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
   }, [presentationActive, currentFrameIndex, scrollYProgress, progress]);
 
   // Track active slide index using standard motion value event listener to toggle pointer-events
-<<<<<<< HEAD
   useMotionValueEvent(progress, "change", (latest) => {
-=======
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (presentationActive) return;
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
     // 8 scenes split across 0 to 1 scroll progress range:
     if (latest < 0.125) {
       setActiveIndex(0);

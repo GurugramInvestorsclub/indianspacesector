@@ -25,7 +25,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
-<<<<<<< HEAD
+
     if (presentationActive) {
       let p = 0;
       let satCount = 0;
@@ -97,26 +97,12 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   const satelliteCount = useTransform(progress, [0.50, 0.58], [0, 1600]);
 
   useEffect(() => {
-=======
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
+
     if (presentationActive) return;
     return satelliteCount.onChange((latest) => {
       setDisplayCount(Math.min(1600, Math.floor(latest)));
     });
-<<<<<<< HEAD
   }, [presentationActive, satelliteCount]);
-=======
-  }, [satelliteCount, presentationActive]);
-
-  useEffect(() => {
-    if (!presentationActive) return;
-    if (currentFrameIndex >= 33) {
-      setDisplayCount(1600);
-    } else {
-      setDisplayCount(0);
-    }
-  }, [presentationActive, currentFrameIndex]);
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
 
   // Jio Statement Opacity
   const jioTextOpacity = useTransform(progress, [0.58, 0.60, 0.68, 0.70], [0, 1, 1, 0]);

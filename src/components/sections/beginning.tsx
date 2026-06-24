@@ -196,20 +196,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
 
     // Main animation loop
     const render = () => {
-<<<<<<< HEAD
       const pVal = progress.get();
-=======
-      let progress = scrollYProgress.get();
-      if (presentationActive) {
-        if (currentFrameIndex === 4) progress = 0.08;
-        else if (currentFrameIndex === 5) progress = 0.30;
-        else if (currentFrameIndex === 6) progress = 0.50;
-        else if (currentFrameIndex === 7) progress = 0.71;
-        else if (currentFrameIndex === 8) progress = 0.90;
-        else if (currentFrameIndex < 4) progress = 0.0;
-        else progress = 1.0;
-      }
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
       
       // Clear canvas with subtle radial depth overlay
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -572,11 +559,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
       window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-<<<<<<< HEAD
   }, [isMobile, reduce, progress]);
-=======
-  }, [isMobile, reduce, presentationActive, currentFrameIndex]);
->>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
 
   return (
     <div 
