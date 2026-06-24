@@ -13,7 +13,6 @@ import {
 } from "motion/react";
 import {
   ArrowLeft,
-  Clock,
   ChevronRight,
   ChevronLeft,
   Compass,
@@ -31,73 +30,6 @@ import {
 // ---------------------------------------------------------------------------
 // DATA
 // ---------------------------------------------------------------------------
-
-const SPEAKER_NOTES = [
-  {
-    title: "1. The Space Economy",
-    points: [
-      "Space is no longer a science project — it's a critical commercial layer.",
-      "Key numbers: $77B projected TAM by 2030, 250+ active startups.",
-      "India's strategic position: cost arbitrage + policy unlock = structural edge.",
-    ],
-  },
-  {
-    title: "2. Why Now?",
-    points: [
-      "Three concurrent catalysts: IN-SPACe regulatory reforms, FDI policy, capital availability.",
-      "Cost arbitrage: Indian engineering talent is 30-40% cheaper than Western counterparts.",
-      "These forces are interconnected — regulatory unlock opens capital, which accelerates engineering.",
-    ],
-  },
-  {
-    title: "3. Indian Space Ecosystem",
-    points: [
-      "Center Node: ISRO and IN-SPACe form the policy and technology backstop.",
-      "Orbiting sectors: launcher systems, satellite platforms, TTC ground infrastructure, downstream analytics.",
-      "The ecosystem is fully integrated — mention key private leaders in each orbit.",
-    ],
-  },
-  {
-    title: "4. Jio Constellation Opportunity",
-    points: [
-      "Corporate validation: Reliance Jio's proposal for 1,600+ LEO satellites.",
-      "Not theoretical — giants are securing orbital slots for direct-to-device connectivity.",
-      "LEO satellite swarms are the next cellular tower infrastructure.",
-    ],
-  },
-  {
-    title: "5. Space Value Chain",
-    points: [
-      "Launchers are 5% of TAM; Downstream Apps & Data are 95%.",
-      "Component hardware gross margins: 70%+ — India's export opportunity.",
-      "India's play: export hardware and build global downstream SaaS.",
-    ],
-  },
-  {
-    title: "6. Capital Flow Architecture",
-    points: [
-      "Trace the money: Government funding → ISRO R&D + IN-SPACe facilitation.",
-      "IN-SPACe transfers tech and infrastructure access to commercial startups.",
-      "This creates a self-sustaining commercial space flywheel.",
-    ],
-  },
-  {
-    title: "7. Opportunity Matrix",
-    points: [
-      "Where should investors deploy capital?",
-      "High TAM / Low Risk: Downstream SaaS & Analytics (Pixxel, GalaxEye) — the sweet spot.",
-      "High TAM / High Risk: Private launcher platforms (Skyroot, Agnikul) — higher conviction needed.",
-    ],
-  },
-  {
-    title: "8. Thesis Summary",
-    points: [
-      "The next global infrastructure is orbital — India has the engineering lead.",
-      "Call to action: review case study briefs for individual sector deep-dives.",
-      "Q&A session opens now.",
-    ],
-  },
-];
 
 const ECO_SECTORS = [
   {
@@ -1368,88 +1300,49 @@ export default function SpaceEconomyPage() {
       <AnimatePresence>
         {presentationActive && hudOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-2xl bg-[#0a0a14]/95 border border-[#FFB800]/25 rounded-2xl p-4 shadow-2xl backdrop-blur-xl hud-overlay"
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 bg-[#0a0a14]/80 border border-white/10 rounded-full pl-4 pr-2 py-1.5 shadow-2xl backdrop-blur-xl hud-overlay opacity-40 hover:opacity-100 transition-opacity duration-300"
           >
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-2.5 mb-3">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse" />
-                <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] font-bold uppercase">
-                  Presenter Deck Control
-                </span>
-              </div>
-              <div className="flex items-center gap-4 text-[10px] font-mono text-white/45">
-                <div className="flex items-center gap-1.5">
-                  <Clock className="w-3 h-3 text-[#FFB800]" />
-                  <span>{formatTime(elapsedTime)}</span>
-                </div>
-                <button
-                  onClick={() => {
-                    setPresentationActive(false);
-                    setHudOpen(false);
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer text-[#FFB800] interactive-control"
-                >
-                  [EXIT]
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={prevSlide}
+              disabled={currentFrameIndex === 0 || isTransitioning}
+              className="p-1.5 rounded-full hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer interactive-control"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-start">
-              <div className="text-left font-mono">
-                <h4 className="text-[9px] text-white/45 uppercase tracking-widest">
-                  Slide {currentFrameIndex + 1} of {TOTAL_FRAMES}
-                </h4>
-                <p className="text-sm font-semibold text-white mt-1 border-l-2 border-[#FFB800] pl-3">
-                  {SPEAKER_NOTES[currentFrameIndex].title}
-                </p>
-                <ul className="text-[10px] text-white/65 leading-relaxed mt-2 space-y-1">
-                  {SPEAKER_NOTES[currentFrameIndex].points.map((note, i) => (
-                    <li key={i} className="flex gap-1.5">
-                      <span className="text-[#FFB800] shrink-0">›</span>
-                      <span>{note}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <span className="font-mono text-[10px] text-white/70 tabular-nums w-9 text-center">
+              {currentFrameIndex + 1} / {TOTAL_FRAMES}
+            </span>
 
-              <div className="flex items-center gap-2 md:flex-col md:pt-1">
-                <button
-                  onClick={prevSlide}
-                  disabled={currentFrameIndex === 0 || isTransitioning}
-                  className="p-2 border border-white/10 hover:border-[#FFB800]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <div className="font-mono text-[9px] text-white/40 w-8 text-center">
-                  {currentFrameIndex + 1}/{TOTAL_FRAMES}
-                </div>
-                <button
-                  onClick={nextSlide}
-                  disabled={currentFrameIndex === TOTAL_FRAMES - 1 || isTransitioning}
-                  className="p-2 border border-white/10 hover:border-[#FFB800]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={nextSlide}
+              disabled={currentFrameIndex === TOTAL_FRAMES - 1 || isTransitioning}
+              className="p-1.5 rounded-full hover:bg-white/10 disabled:opacity-25 transition-all cursor-pointer interactive-control"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
 
-            {/* Progress bar */}
-            <div className="mt-3 w-full h-[2px] bg-white/[0.05] rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#FFB800] transition-all duration-500"
-                style={{
-                  width: `${((currentFrameIndex + 1) / TOTAL_FRAMES) * 100}%`,
-                }}
-              />
-            </div>
+            <span className="w-px h-4 bg-white/10" />
 
-            <p className="text-[8px] text-white/25 font-mono mt-2 text-center">
-              ← → navigate &nbsp;|&nbsp; P toggle HUD &nbsp;|&nbsp; ESC exit
-            </p>
+            <span className="font-mono text-[9px] text-white/40 tabular-nums hidden sm:inline">
+              {formatTime(elapsedTime)}
+            </span>
+
+            <button
+              onClick={() => {
+                setPresentationActive(false);
+                setHudOpen(false);
+              }}
+              className="px-3 py-1 rounded-full text-[9px] font-mono font-bold tracking-widest text-[#FFB800] hover:bg-[#FFB800]/10 transition-all cursor-pointer interactive-control"
+            >
+              EXIT
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
