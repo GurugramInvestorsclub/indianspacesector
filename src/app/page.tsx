@@ -12,13 +12,14 @@ import { Exploration } from "@/components/sections/exploration";
 import { NewEra } from "@/components/sections/new-era";
 import { PresenterMode } from "@/components/presenter-mode";
 
-// 26 presentation frames defined in scroll vh units:
+// 27 presentation frames defined in scroll vh units:
 const FRAMES = [
   0,    // Hero Overview
-  150,  // Beginning Part 1 (In the 1960s...)
-  250,  // Beginning Part 2 (Most nations viewed space as a race...)
-  390,  // Beginning Part 3 & 4 (Vikram Sarabhai Quote & Portrait)
-  540,  // Beginning Part 5 (Thumba launch & fishing village)
+  150,  // Beginning Part 1 (Sputnik 1957)
+  250,  // Beginning Part 2 (Vikram Sarabhai Portrait)
+  360,  // Beginning Part 3 (The Vision Quote)
+  470,  // Beginning Part 4 (INCOSPAR Node Network)
+  570,  // Beginning Part 5 (Thumba Rocket)
   650,  // Aryabhata Scene 1 (Thirteen years later...)
   750,  // Aryabhata Scene 2 (1975 Milestone Year)
   925,  // Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
@@ -45,31 +46,32 @@ const FRAMES = [
 // Map each frame index to a corresponding Chapter index (1 to 9) for PresenterMode speaker notes
 const FRAME_TO_CHAPTER = [
   1, // Frame 0 (Hero) -> Chapter 1: The Question
-  2, // Frame 1 (Beginning 1) -> Chapter 2: The Transformation
-  2, // Frame 2 (Beginning 2) -> Chapter 2: The Transformation
-  2, // Frame 3 (Beginning 3) -> Chapter 2: The Transformation
-  2, // Frame 4 (Beginning 4) -> Chapter 2: The Transformation
-  3, // Frame 5 (Aryabhata 1) -> Chapter 3: The Space Stack
-  3, // Frame 6 (Aryabhata 2) -> Chapter 3: The Space Stack
-  3, // Frame 7 (Aryabhata 3) -> Chapter 3: The Space Stack
-  3, // Frame 8 (Aryabhata 4) -> Chapter 3: The Space Stack
-  4, // Frame 9 (LaunchEvolution Intro) -> Chapter 4: The Misconception
-  4, // Frame 10 (LaunchEvolution SLV-3) -> Chapter 4: The Misconception
-  4, // Frame 11 (LaunchEvolution ASLV) -> Chapter 4: The Misconception
-  4, // Frame 12 (LaunchEvolution PSLV) -> Chapter 4: The Misconception
-  4, // Frame 13 (LaunchEvolution GSLV) -> Chapter 4: The Misconception
-  4, // Frame 14 (LaunchEvolution LVM3) -> Chapter 4: The Misconception
-  4, // Frame 15 (LaunchEvolution SSLV) -> Chapter 4: The Misconception
-  5, // Frame 16 (Exploration 1) -> Chapter 5: Defense & Autonomy
-  5, // Frame 17 (Exploration 2) -> Chapter 5: Defense & Autonomy
-  5, // Frame 18 (Exploration 3) -> Chapter 5: Defense & Autonomy
-  6, // Frame 19 (NewEra 1) -> Chapter 6: Global Comparison
-  6, // Frame 20 (NewEra 2) -> Chapter 6: Global Comparison
-  7, // Frame 21 (NewEra 3) -> Chapter 7: Case Studies
-  8, // Frame 22 (NewEra 4) -> Chapter 8: What Most People Miss
-  8, // Frame 23 (NewEra 5) -> Chapter 8: What Most People Miss
-  8, // Frame 24 (NewEra 6) -> Chapter 8: What Most People Miss
-  9  // Frame 25 (NewEra 7) -> Chapter 9: The Opportunity
+  2, // Frame 1 (Scene 1) -> Chapter 2: Where It All Began
+  2, // Frame 2 (Scene 2) -> Chapter 2: Where It All Began
+  2, // Frame 3 (Scene 3) -> Chapter 2: Where It All Began
+  2, // Frame 4 (Scene 4) -> Chapter 2: Where It All Began
+  2, // Frame 5 (Scene 5) -> Chapter 2: Where It All Began
+  3, // Frame 6 (Aryabhata 1) -> Chapter 3: The Space Stack
+  3, // Frame 7 (Aryabhata 2) -> Chapter 3: The Space Stack
+  3, // Frame 8 (Aryabhata 3) -> Chapter 3: The Space Stack
+  3, // Frame 9 (Aryabhata 4) -> Chapter 3: The Space Stack
+  4, // Frame 10 (LaunchEvolution Intro) -> Chapter 4: The Misconception
+  4, // Frame 11 (LaunchEvolution SLV-3) -> Chapter 4: The Misconception
+  4, // Frame 12 (LaunchEvolution ASLV) -> Chapter 4: The Misconception
+  4, // Frame 13 (LaunchEvolution PSLV) -> Chapter 4: The Misconception
+  4, // Frame 14 (LaunchEvolution GSLV) -> Chapter 4: The Misconception
+  4, // Frame 15 (LaunchEvolution LVM3) -> Chapter 4: The Misconception
+  4, // Frame 16 (LaunchEvolution SSLV) -> Chapter 4: The Misconception
+  5, // Frame 17 (Exploration 1) -> Chapter 5: Defense & Autonomy
+  5, // Frame 18 (Exploration 2) -> Chapter 5: Defense & Autonomy
+  5, // Frame 19 (Exploration 3) -> Chapter 5: Defense & Autonomy
+  6, // Frame 20 (NewEra 1) -> Chapter 6: Global Comparison
+  6, // Frame 21 (NewEra 2) -> Chapter 6: Global Comparison
+  7, // Frame 22 (NewEra 3) -> Chapter 7: Case Studies
+  8, // Frame 23 (NewEra 4) -> Chapter 8: What Most People Miss
+  8, // Frame 24 (NewEra 5) -> Chapter 8: What Most People Miss
+  8, // Frame 25 (NewEra 6) -> Chapter 8: What Most People Miss
+  9  // Frame 26 (NewEra 7) -> Chapter 9: The Opportunity
 ];
 
 export default function Home() {
@@ -248,13 +250,13 @@ export default function Home() {
     const chapterToFrameIndex: Record<number, number> = {
       1: 0,  // Chapter 1: Hero Overview
       2: 1,  // Chapter 2: Beginning
-      3: 5,  // Chapter 3: Aryabhata
-      4: 9,  // Chapter 4: LaunchEvolution
-      5: 16, // Chapter 5: Exploration
-      6: 19, // Chapter 6: NewEra intro
-      7: 21, // Chapter 7: Case Studies
-      8: 22, // Chapter 8: What Most People Miss
-      9: 25  // Chapter 9: The Opportunity
+      3: 6,  // Chapter 3: Aryabhata
+      4: 10, // Chapter 4: LaunchEvolution
+      5: 17, // Chapter 5: Exploration
+      6: 20, // Chapter 6: NewEra intro
+      7: 22, // Chapter 7: Case Studies
+      8: 23, // Chapter 8: What Most People Miss
+      9: 26  // Chapter 9: The Opportunity
     };
 
     const targetFrameIndex = chapterToFrameIndex[chapterNum];
