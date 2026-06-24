@@ -16,7 +16,12 @@ interface Particle {
   noiseSpeed: number;
 }
 
-export function TheBuilder() {
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
+
+export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -90,9 +95,38 @@ export function TheBuilder() {
   const scrollValRef = useRef(0);
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      scrollValRef.current = latest;
+      if (!presentationActive) {
+        scrollValRef.current = latest;
+      }
     });
-  }, [scrollYProgress]);
+  }, [scrollYProgress, presentationActive]);
+
+  useEffect(() => {
+    if (!presentationActive) return;
+    let mockScroll = 0;
+    if (currentFrameIndex === 13) {
+      setActiveIndex(1);
+      setAlignmentStatus("ALIGNING...");
+      mockScroll = 0.15;
+    } else if (currentFrameIndex === 14) {
+      setActiveIndex(2);
+      setAlignmentStatus("ALIGNING...");
+      mockScroll = 0.49;
+    } else if (currentFrameIndex === 15) {
+      setActiveIndex(3);
+      setAlignmentStatus("ALIGNING...");
+      mockScroll = 0.78;
+    } else if (currentFrameIndex === 16) {
+      setActiveIndex(3);
+      setAlignmentStatus("CALIBRATED");
+      mockScroll = 0.94;
+    } else if (currentFrameIndex < 13) {
+      mockScroll = 0.0;
+    } else {
+      mockScroll = 1.0;
+    }
+    scrollValRef.current = mockScroll;
+  }, [presentationActive, currentFrameIndex]);
 
   // Load Vikram Sarabhai image & create stardust particles
   useEffect(() => {
@@ -277,9 +311,10 @@ export function TheBuilder() {
         {/* SCENE 1: The Unexpected Loss (0.0 - 0.33) */}
         {/* ============================================================= */}
         <motion.div
-          style={{ opacity: scene1Opacity, y: scene1Y }}
+          style={presentationActive ? undefined : { opacity: scene1Opacity, y: scene1Y }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 13 ? 1 : 0, y: currentFrameIndex === 13 ? 0 : -25 } : undefined}
           className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-5xl mx-auto ${
-            activeIndex === 1 ? "pointer-events-auto" : "pointer-events-none"
+            (presentationActive ? (currentFrameIndex === 13) : (activeIndex === 1)) ? "pointer-events-auto" : "pointer-events-none"
           }`}
         >
           {/* Header context */}
@@ -351,14 +386,16 @@ export function TheBuilder() {
         {/* SCENE 2: Enter Satish Dhawan (0.33 - 0.66) */}
         {/* ============================================================= */}
         <motion.div
-          style={{ opacity: scene2Opacity, y: scene2Y }}
+          style={presentationActive ? undefined : { opacity: scene2Opacity, y: scene2Y }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 14 ? 1 : 0, y: currentFrameIndex === 14 ? 0 : -25 } : undefined}
           className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-6xl mx-auto ${
-            activeIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
+            (presentationActive ? (currentFrameIndex === 14) : (activeIndex === 2)) ? "pointer-events-auto" : "pointer-events-none"
           }`}
         >
           {/* Parallax Blueprint elements in the background */}
           <motion.div
-            style={{ y: bgBlueprintY }}
+            style={presentationActive ? undefined : { y: bgBlueprintY }}
+            animate={presentationActive ? { y: 0 } : undefined}
             className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-[0.04]"
           >
             {/* Wind tunnel / trajectory outlines */}
@@ -384,27 +421,31 @@ export function TheBuilder() {
                   stroke="#FFB800" 
                   strokeWidth="1.5" 
                   strokeDasharray="4 8"
-                  style={{ strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -100]) }}
-                />
-                <motion.path 
-                  d="M 50,200 C 150,170 250,230 350,200 T 450,210" 
-                  stroke="#FFB800" 
-                  strokeWidth="1" 
-                  strokeDasharray="8 8"
-                  style={{ strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [100, 0]) }}
-                />
-                <motion.path 
-                  d="M 50,250 C 150,220 250,280 350,250 T 450,260" 
-                  stroke="#FFB800" 
-                  strokeWidth="1.5" 
-                  strokeDasharray="2 4"
-                  style={{ strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -50]) }}
-                />
+                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -100]) }}
+                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+              />
+              <motion.path 
+                d="M 50,200 C 150,170 250,230 350,200 T 450,210" 
+                stroke="#FFB800" 
+                strokeWidth="1" 
+                strokeDasharray="8 8"
+                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [100, 0]) }}
+                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+              />
+              <motion.path 
+                d="M 50,250 C 150,220 250,280 350,250 T 450,260" 
+                stroke="#FFB800" 
+                strokeWidth="1.5" 
+                strokeDasharray="2 4"
+                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -50]) }}
+                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+              />
               </svg>
 
               {/* Layered Parallax Portrait representing Satish Dhawan */}
               <motion.div
-                style={{ y: silhouetteY }}
+                style={presentationActive ? undefined : { y: silhouetteY }}
+                animate={presentationActive ? { y: 0 } : undefined}
                 className="relative w-[280px] h-[350px] flex justify-center items-center"
               >
                 {/* Outer blueprint card frame */}
@@ -490,9 +531,10 @@ export function TheBuilder() {
         {/* SCENE 3: A New Priority ("BUILD THE ROCKETS") (0.66 - 1.0) */}
         {/* ============================================================= */}
         <motion.div
-          style={{ opacity: scene3Opacity, y: scene3Y }}
+          style={presentationActive ? undefined : { opacity: scene3Opacity, y: scene3Y }}
+          animate={presentationActive ? { opacity: (currentFrameIndex === 15 || currentFrameIndex === 16) ? 1 : 0, y: (currentFrameIndex === 15 || currentFrameIndex === 16) ? 0 : 25 } : undefined}
           className={`absolute inset-0 z-10 flex flex-col items-center justify-between py-16 px-6 max-w-7xl mx-auto ${
-            activeIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
+            (presentationActive ? (currentFrameIndex === 15 || currentFrameIndex === 16) : (activeIndex === 3)) ? "pointer-events-auto" : "pointer-events-none"
           }`}
         >
           {/* Header context */}
@@ -524,7 +566,8 @@ export function TheBuilder() {
 
               {/* Satellites waiting on the ground (represented as technical graphics) */}
               <motion.div 
-                style={{ opacity: satelliteOpacity, scale: satelliteScale }}
+                style={presentationActive ? undefined : { opacity: satelliteOpacity, scale: satelliteScale }}
+                animate={presentationActive ? { opacity: currentFrameIndex === 15 ? 0.4 : 0, scale: currentFrameIndex === 15 ? 0.9 : 0.8 } : undefined}
                 className="absolute bottom-6 left-12 flex flex-col items-center gap-2 border border-white/10 p-3 bg-black/60 rounded"
               >
                 {/* Aryabhata satellite vector graphic */}
@@ -549,7 +592,8 @@ export function TheBuilder() {
                 
                 {/* Nose Cone Section */}
                 <motion.div 
-                  style={{ y: part1Y, rotate: part1Rotate }} 
+                  style={presentationActive ? undefined : { y: part1Y, rotate: part1Rotate }} 
+                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : -90, rotate: currentFrameIndex === 16 ? 0 : -6 } : undefined}
                   className="relative z-30 flex flex-col items-center"
                 >
                   <svg className="w-8 h-12 text-white" viewBox="0 0 32 48" fill="none">
@@ -561,7 +605,8 @@ export function TheBuilder() {
 
                 {/* Upper Stage Section */}
                 <motion.div 
-                  style={{ y: part2Y }} 
+                  style={presentationActive ? undefined : { y: part2Y }} 
+                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : -30 } : undefined}
                   className="relative z-20 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-8 h-10 text-white" viewBox="0 0 32 40" fill="none">
@@ -574,7 +619,8 @@ export function TheBuilder() {
 
                 {/* Main Booster Stage Section */}
                 <motion.div 
-                  style={{ y: part3Y }} 
+                  style={presentationActive ? undefined : { y: part3Y }} 
+                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : 30 } : undefined}
                   className="relative z-15 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-10 h-16 text-white" viewBox="0 0 40 64" fill="none">
@@ -588,7 +634,8 @@ export function TheBuilder() {
 
                 {/* Nozzle & Fins Section */}
                 <motion.div 
-                  style={{ y: part4Y, rotate: part4Rotate }} 
+                  style={presentationActive ? undefined : { y: part4Y, rotate: part4Rotate }} 
+                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : 90, rotate: currentFrameIndex === 16 ? 0 : 4 } : undefined}
                   className="relative z-10 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-12 h-10 text-white" viewBox="0 0 48 40" fill="none">
@@ -601,14 +648,14 @@ export function TheBuilder() {
 
                 {/* Connection Glow lines */}
                 <motion.div
-                  style={{ 
+                  style={presentationActive ? undefined : { 
                     opacity: useTransform(scrollYProgress, [0.85, 0.88, 0.93], [0, 1, 0]),
                     scaleX: useTransform(scrollYProgress, [0.85, 0.88], [1.3, 1.0])
                   }}
                   className="absolute w-[60px] h-[1px] bg-[#FFB800] shadow-[0_0_10px_#FFB800] z-40 pointer-events-none top-[47%]"
                 />
                 <motion.div
-                  style={{ 
+                  style={presentationActive ? undefined : { 
                     opacity: useTransform(scrollYProgress, [0.85, 0.88, 0.93], [0, 1, 0]),
                     scaleX: useTransform(scrollYProgress, [0.85, 0.88], [1.3, 1.0])
                   }}
@@ -633,7 +680,8 @@ export function TheBuilder() {
 
             {/* Dynamic "BUILD THE ROCKETS" typography overlay */}
             <motion.div 
-              style={{ opacity: textOpacity, scale: textScale }}
+              style={presentationActive ? undefined : { opacity: textOpacity, scale: textScale }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 16 ? 1 : 0, scale: currentFrameIndex === 16 ? 1 : 0.85 } : undefined}
               className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none text-center"
             >
               <h1 

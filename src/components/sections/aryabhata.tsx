@@ -4,7 +4,12 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 
-export function Aryabhata() {
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
+
+export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -43,7 +48,8 @@ export function Aryabhata() {
         
         {/* Scene 1: "Thirteen years later..." */}
         <motion.div
-          style={{ opacity: scene1Opacity, y: scene1Y }}
+          style={presentationActive ? undefined : { opacity: scene1Opacity, y: scene1Y }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 9 ? 1 : 0, y: currentFrameIndex === 9 ? 0 : 15 } : undefined}
           className="absolute z-10 text-center px-6 max-w-2xl"
         >
           <p className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-4">
@@ -59,7 +65,8 @@ export function Aryabhata() {
 
         {/* Scene 2: "1975" */}
         <motion.div
-          style={{ opacity: yearOpacity, scale: yearScale }}
+          style={presentationActive ? undefined : { opacity: yearOpacity, scale: yearScale }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 10 ? 1 : 0, scale: currentFrameIndex === 10 ? 1 : 1.1 } : undefined}
           className="absolute z-10 flex flex-col items-center justify-center pointer-events-none"
         >
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#FFB800] uppercase mb-4">
@@ -72,7 +79,8 @@ export function Aryabhata() {
 
         {/* Scene 3: Aryabhata Satellite Visual */}
         <motion.div
-          style={{ opacity: satelliteOpacity, scale: satelliteScale }}
+          style={presentationActive ? undefined : { opacity: satelliteOpacity, scale: satelliteScale }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 11 ? 0.85 : 0, scale: currentFrameIndex === 11 ? 1.02 : 0.95 } : undefined}
           className="absolute inset-0 z-0 w-full h-full"
         >
           <Image
@@ -90,7 +98,8 @@ export function Aryabhata() {
 
         {/* Scene 4: The Story Text */}
         <motion.div
-          style={{ opacity: storyOpacity, y: storyY }}
+          style={presentationActive ? undefined : { opacity: storyOpacity, y: storyY }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 11 ? 1 : 0, y: currentFrameIndex === 11 ? 0 : 15 } : undefined}
           className="absolute z-10 w-full max-w-4xl px-8 flex flex-col items-start justify-end h-[85%] pb-16 md:pb-24 pointer-events-none"
         >
           <div className="max-w-xl bg-[#030308]/90 backdrop-blur-sm border border-white/5 p-8 rounded-sm">
@@ -114,7 +123,8 @@ export function Aryabhata() {
 
         {/* Scene 5: Legacy Echoes */}
         <motion.div
-          style={{ opacity: legacyOpacity, scale: legacyScale }}
+          style={presentationActive ? undefined : { opacity: legacyOpacity, scale: legacyScale }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 12 ? 1 : 0, scale: currentFrameIndex === 12 ? 1 : 0.9 } : undefined}
           className="absolute z-20 w-full h-full flex flex-col items-center justify-center pointer-events-none"
         >
           {/* Subtle concentric expanding orbital rings */}

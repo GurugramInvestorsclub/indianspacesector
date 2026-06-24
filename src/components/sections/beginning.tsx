@@ -20,7 +20,12 @@ const CITIES: CityPoint3D[] = [
   { name: "Sydney", lat: -33.8688, lon: 151.2093 }
 ];
 
-export function Beginning() {
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
+
+export function Beginning({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -170,7 +175,16 @@ export function Beginning() {
 
     // Main animation loop
     const render = () => {
-      const progress = scrollYProgress.get();
+      let progress = scrollYProgress.get();
+      if (presentationActive) {
+        if (currentFrameIndex === 4) progress = 0.08;
+        else if (currentFrameIndex === 5) progress = 0.30;
+        else if (currentFrameIndex === 6) progress = 0.50;
+        else if (currentFrameIndex === 7) progress = 0.71;
+        else if (currentFrameIndex === 8) progress = 0.90;
+        else if (currentFrameIndex < 4) progress = 0.0;
+        else progress = 1.0;
+      }
       
       // Clear canvas with subtle radial depth overlay
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -533,7 +547,7 @@ export function Beginning() {
       window.removeEventListener("resize", resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isMobile, reduce]);
+  }, [isMobile, reduce, presentationActive, currentFrameIndex]);
 
   return (
     <div 
@@ -557,7 +571,8 @@ export function Beginning() {
         {/* SCENE 1: Sputnik 1957 (0.00 - 0.22) */}
         {/* ------------------------------------------------------------- */}
         <motion.div
-          style={{ opacity: scene1Opacity, y: scene1Y }}
+          style={presentationActive ? undefined : { opacity: scene1Opacity, y: scene1Y }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 4 ? 1 : 0, y: currentFrameIndex === 4 ? 0 : 20 } : undefined}
           className="absolute inset-0 z-20 flex flex-col items-center justify-between py-20 px-6 max-w-7xl mx-auto pointer-events-none"
         >
           {/* Section Chapter indicator */}
@@ -582,7 +597,8 @@ export function Beginning() {
 
           {/* Archival Box showing Sputnik 1 B&W visual */}
           <motion.div
-            style={{ opacity: archivalOpacity, scale: archivalScale }}
+            style={presentationActive ? undefined : { opacity: archivalOpacity, scale: archivalScale }}
+            animate={presentationActive ? { opacity: currentFrameIndex === 4 ? 1 : 0, scale: currentFrameIndex === 4 ? 1 : 0.95 } : undefined}
             className="w-full max-w-[280px] bg-[#090912]/80 border border-white/10 rounded-xl p-3 flex flex-col gap-3 backdrop-blur-md shadow-2xl relative"
           >
             {/* Film Grain effect overlay */}
@@ -609,12 +625,14 @@ export function Beginning() {
         {/* SCENE 2: Vikram Sarabhai (0.22 - 0.44) */}
         {/* ------------------------------------------------------------- */}
         <motion.div
-          style={{ opacity: scene2Opacity }}
+          style={presentationActive ? undefined : { opacity: scene2Opacity }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 5 ? 1 : 0 } : undefined}
           className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between px-6 md:px-20 max-w-7xl mx-auto pointer-events-none"
         >
           {/* Scientific sketches layered behind Vikram Sarabhai portrait */}
           <motion.div
-            style={{ y: sketchesY }}
+            style={presentationActive ? undefined : { y: sketchesY }}
+            animate={presentationActive ? { y: currentFrameIndex === 5 ? 0 : 20 } : undefined}
             className="absolute inset-0 z-0 opacity-15 pointer-events-none flex items-center justify-center"
           >
             <svg 
@@ -654,7 +672,8 @@ export function Beginning() {
 
           {/* Left Block: Vikram Sarabhai Portrait (Separated Layer) */}
           <motion.div
-            style={{ y: portraitY }}
+            style={presentationActive ? undefined : { y: portraitY }}
+            animate={presentationActive ? { y: currentFrameIndex === 5 ? 0 : 40 } : undefined}
             className="relative w-full max-w-[280px] md:max-w-[340px] aspect-[3/4] md:ml-[35%] lg:ml-[25%] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.8)] z-10"
           >
             <Image
@@ -697,24 +716,28 @@ export function Beginning() {
         {/* SCENE 3: The Vision (0.44 - 0.64) */}
         {/* ------------------------------------------------------------- */}
         <motion.div
-          style={{ opacity: scene3Opacity }}
+          style={presentationActive ? undefined : { opacity: scene3Opacity }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined}
           className="absolute inset-0 z-20 flex flex-col items-center justify-center px-6 max-w-4xl mx-auto pointer-events-none"
         >
           <div className="text-left md:text-center space-y-6 md:space-y-8 select-none">
             <motion.p
-              style={{ opacity: quoteLine1Opacity }}
+              style={presentationActive ? undefined : { opacity: quoteLine1Opacity }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined}
               className="text-xl md:text-2xl font-mono text-[#FFB800]/60 tracking-wider"
             >
               For Vikram Sarabhai,
             </motion.p>
             <motion.p
-              style={{ opacity: quoteLine2Opacity }}
+              style={presentationActive ? undefined : { opacity: quoteLine2Opacity }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined}
               className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-white/90"
             >
               space was never about prestige.
             </motion.p>
             <motion.p
-              style={{ opacity: quoteLine3Opacity, fontFamily: "Georgia, serif" }}
+              style={presentationActive ? undefined : { opacity: quoteLine3Opacity, fontFamily: "Georgia, serif" }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined}
               className="text-2xl md:text-3xl font-mono italic text-[#FFB800]/80 text-left md:text-center block"
             >
               It was about development.
@@ -722,16 +745,16 @@ export function Beginning() {
             
             {/* Progressive staggered terms */}
             <div className="flex flex-wrap items-center justify-start md:justify-center gap-x-6 gap-y-2 pt-4 font-mono text-sm md:text-base tracking-[0.2em] text-white/50 uppercase">
-              <motion.span style={{ opacity: quoteLine4Opacity }} className="text-white">
+              <motion.span style={presentationActive ? undefined : { opacity: quoteLine4Opacity }} animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined} className="text-white">
                 Communication.
               </motion.span>
-              <motion.span style={{ opacity: quoteLine5Opacity }} className="text-white/80">
+              <motion.span style={presentationActive ? undefined : { opacity: quoteLine5Opacity }} animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 0.8 : 0 } : undefined} className="text-white/80">
                 Education.
               </motion.span>
-              <motion.span style={{ opacity: quoteLine6Opacity }} className="text-white/60">
+              <motion.span style={presentationActive ? undefined : { opacity: quoteLine6Opacity }} animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 0.6 : 0 } : undefined} className="text-white/60">
                 Weather forecasting.
               </motion.span>
-              <motion.span style={{ opacity: quoteLine7Opacity }} className="text-[#FFB800] font-bold">
+              <motion.span style={presentationActive ? undefined : { opacity: quoteLine7Opacity }} animate={presentationActive ? { opacity: currentFrameIndex === 6 ? 1 : 0 } : undefined} className="text-[#FFB800] font-bold">
                 National progress.
               </motion.span>
             </div>
@@ -743,18 +766,21 @@ export function Beginning() {
         {/* SCENE 4: Birth of Space Program / INCOSPAR (0.64 - 0.84) */}
         {/* ------------------------------------------------------------- */}
         <motion.div
-          style={{ opacity: scene4Opacity }}
+          style={presentationActive ? undefined : { opacity: scene4Opacity }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 7 ? 1 : 0 } : undefined}
           className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 max-w-7xl mx-auto pointer-events-none"
         >
           {/* Left Column: Large Archival Photo Collage of Early Struggles */}
           <div className="w-full md:w-1/2 flex items-center justify-center mt-6 md:mt-0">
             <motion.div 
-              style={{ scale: mapScale }}
+              style={presentationActive ? undefined : { scale: mapScale }}
+              animate={presentationActive ? { scale: currentFrameIndex === 7 ? 1 : 0.92 } : undefined}
               className="relative w-[350px] h-[400px] md:w-[570px] md:h-[470px]"
             >
               {/* Left Polaroid - Rocket on Bicycle */}
               <motion.div
-                style={{ opacity: bicycleOpacity, x: bicycleX }}
+                style={presentationActive ? undefined : { opacity: bicycleOpacity, x: bicycleX }}
+                animate={presentationActive ? { opacity: currentFrameIndex === 7 ? 1 : 0, x: currentFrameIndex === 7 ? 0 : -30 } : undefined}
                 className="absolute left-0 top-0 w-[200px] md:w-[310px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 rotate-[-4deg]"
               >
                 {/* Film Grain overlay */}
@@ -779,7 +805,8 @@ export function Beginning() {
 
               {/* Right Polaroid - Satellite on Bullock Cart */}
               <motion.div
-                style={{ opacity: cartOpacity, x: cartX }}
+                style={presentationActive ? undefined : { opacity: cartOpacity, x: cartX }}
+                animate={presentationActive ? { opacity: currentFrameIndex === 7 ? 1 : 0, x: currentFrameIndex === 7 ? 0 : 30 } : undefined}
                 className="absolute right-0 bottom-0 w-[200px] md:w-[310px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-20 rotate-[4deg]"
               >
                 {/* Film Grain overlay */}
@@ -835,7 +862,8 @@ export function Beginning() {
         {/* SCENE 5: Thumba equatorial rocket launch (0.84 - 1.0) */}
         {/* ------------------------------------------------------------- */}
         <motion.div
-          style={{ opacity: scene5Opacity }}
+          style={presentationActive ? undefined : { opacity: scene5Opacity }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 8 ? 1 : 0 } : undefined}
           className="absolute inset-0 z-20 flex flex-col justify-between py-20 px-6 max-w-7xl mx-auto pointer-events-none"
         >
           {/* Header context */}
@@ -854,7 +882,8 @@ export function Beginning() {
           <div className="absolute inset-0 z-0 flex flex-col justify-end pointer-events-none">
             {/* Twinkling stars */}
             <motion.div 
-              style={{ opacity: starsDensity }}
+              style={presentationActive ? undefined : { opacity: starsDensity }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 8 ? 1 : 0 } : undefined}
               className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.08)_0%,transparent_60%)] pointer-events-none"
             >
               {/* Twinkling Stars generated via CSS shadows */}
@@ -867,7 +896,8 @@ export function Beginning() {
 
             {/* Earth's Magnetic Equator Line */}
             <motion.div
-              style={{ opacity: magneticEquatorOpacity }}
+              style={presentationActive ? undefined : { opacity: magneticEquatorOpacity }}
+              animate={presentationActive ? { opacity: currentFrameIndex === 8 ? 0.8 : 0 } : undefined}
               className="absolute top-[35%] w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFB800]/40 to-transparent flex items-center justify-center font-mono text-[8px] tracking-[0.3em] text-[#FFB800]/70"
             >
               <span className="bg-[#030308] px-4 py-1 border border-[#FFB800]/20 rounded-full shadow-[0_0_15px_rgba(255,184,0,0.1)]">
@@ -882,7 +912,8 @@ export function Beginning() {
 
               {/* Minimalist Sounding Rocket */}
               <motion.div 
-                style={{ y: rocketY }}
+                style={presentationActive ? undefined : { y: rocketY }}
+                animate={presentationActive ? { y: currentFrameIndex === 8 ? 0 : 250 } : undefined}
                 className="relative z-10 flex flex-col items-center"
               >
                 {/* Nike-Apache sounding rocket mockup shape */}
@@ -906,7 +937,8 @@ export function Beginning() {
             >
               {/* First Ocean Wave layer */}
               <motion.path 
-                style={{ x: oceanWaveOffset }}
+                style={presentationActive ? undefined : { x: oceanWaveOffset }}
+                animate={presentationActive ? { x: 0 } : undefined}
                 d="M0,130 C320,110 440,150 720,130 C1000,110 1120,150 1440,130 L1440,200 L0,200 Z" 
                 fill="rgba(5, 5, 20, 0.7)"
               />
