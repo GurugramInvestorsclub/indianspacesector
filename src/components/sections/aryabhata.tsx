@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValue } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue, animate } from "motion/react";
 
 interface SectionProps {
   presentationActive?: boolean;
@@ -28,7 +28,9 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
       else if (currentFrameIndex === 12) p = 0.90;
       else if (currentFrameIndex < 9) p = 0.0;
       else p = 1.0;
-      progress.set(p);
+      
+      const controls = animate(progress, p, { duration: 0.6, ease: [0.25, 1, 0.5, 1] });
+      return () => controls.stop();
     } else {
       progress.set(scrollYProgress.get());
       return scrollYProgress.onChange((latest) => {
@@ -68,8 +70,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
         
         {/* Scene 1: "Thirteen years later..." */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: scene1Opacity, y: scene1Y }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 9 ? 1 : 0, y: currentFrameIndex === 9 ? 0 : 15 } : undefined}
+          style={{ opacity: scene1Opacity, y: scene1Y }}
           className="absolute z-10 text-center px-6 max-w-2xl"
         >
           <p className="font-mono text-xs tracking-[0.3em] text-[#FF6B00] uppercase mb-4">
@@ -85,8 +86,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
 
         {/* Scene 2: "1975" */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: yearOpacity, scale: yearScale }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 10 ? 1 : 0, scale: currentFrameIndex === 10 ? 1 : 1.1 } : undefined}
+          style={{ opacity: yearOpacity, scale: yearScale }}
           className="absolute z-10 flex flex-col items-center justify-center pointer-events-none"
         >
           <span className="font-mono text-[10px] tracking-[0.4em] text-[#FFB800] uppercase mb-4">
@@ -99,8 +99,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
 
         {/* Scene 3: Aryabhata Satellite Visual */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: satelliteOpacity, scale: satelliteScale }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 11 ? 0.85 : 0, scale: currentFrameIndex === 11 ? 1.02 : 0.95 } : undefined}
+          style={{ opacity: satelliteOpacity, scale: satelliteScale }}
           className="absolute inset-0 z-0 w-full h-full"
         >
           <Image
@@ -118,8 +117,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
 
         {/* Scene 4: The Story Text */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: storyOpacity, y: storyY }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 11 ? 1 : 0, y: currentFrameIndex === 11 ? 0 : 15 } : undefined}
+          style={{ opacity: storyOpacity, y: storyY }}
           className="absolute z-10 w-full max-w-4xl px-8 flex flex-col items-start justify-end h-[85%] pb-16 md:pb-24 pointer-events-none"
         >
           <div className="max-w-xl bg-[#030308]/90 backdrop-blur-sm border border-white/5 p-8 rounded-sm">
@@ -143,8 +141,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
 
         {/* Scene 5: Legacy Echoes */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: legacyOpacity, scale: legacyScale }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 12 ? 1 : 0, scale: currentFrameIndex === 12 ? 1 : 0.9 } : undefined}
+          style={{ opacity: legacyOpacity, scale: legacyScale }}
           className="absolute z-20 w-full h-full flex flex-col items-center justify-center pointer-events-none"
         >
           {/* Subtle concentric expanding orbital rings */}

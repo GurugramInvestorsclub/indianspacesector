@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValue } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue, animate } from "motion/react";
 
 interface SectionProps {
   presentationActive?: boolean;
@@ -67,8 +67,15 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
       } else {
         p = 1.0;
       }
-      progress.set(p);
-      scrollValRef.current = p;
+      
+      const controls = animate(progress, p, {
+        duration: 0.6,
+        ease: [0.25, 1, 0.5, 1],
+        onUpdate: (latest) => {
+          scrollValRef.current = latest;
+        }
+      });
+      return () => controls.stop();
     } else {
       progress.set(scrollYProgress.get());
       scrollValRef.current = scrollYProgress.get();
@@ -123,6 +130,13 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
   // Satellite waiting elements in Scene 3
   const satelliteOpacity = useTransform(progress, [0.68, 0.78, 0.88, 0.93], [0, 0.4, 0.4, 0]);
   const satelliteScale = useTransform(progress, [0.68, 0.93], [0.9, 0.8]);
+
+  const dashOffset1 = useTransform(progress, [0.33, 0.66], [0, -100]);
+  const dashOffset2 = useTransform(progress, [0.33, 0.66], [100, 0]);
+  const dashOffset3 = useTransform(progress, [0.33, 0.66], [0, -50]);
+  
+  const connectionGlowOpacity = useTransform(progress, [0.85, 0.88, 0.93], [0, 1, 0]);
+  const connectionGlowScaleX = useTransform(progress, [0.85, 0.88], [1.3, 1.0]);
 
   // BUILD THE ROCKETS text scale and glow
   const textScale = useTransform(progress, [0.85, 0.93], [0.85, 1.05]);
@@ -310,13 +324,13 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
         {/* ============================================================= */}
         {/* SCENE 1: The Unexpected Loss (0.0 - 0.33) */}
         {/* ============================================================= */}
-        <motion.div
-          style={presentationActive ? undefined : { opacity: scene1Opacity, y: scene1Y }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 13 ? 1 : 0, y: currentFrameIndex === 13 ? 0 : -25 } : undefined}
-          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-5xl mx-auto ${
-            (presentationActive ? (currentFrameIndex === 13) : (activeIndex === 1)) ? "pointer-events-auto" : "pointer-events-none"
-          }`}
+        <motion.div 
+          style={{ opacity: scene1Opacity, y: scene1Y }} 
+          className="absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full pointer-events-none"
         >
+          <div className={`flex flex-col items-center justify-center px-6 max-w-5xl mx-auto ${
+            (presentationActive ? (currentFrameIndex === 13) : (activeIndex === 1)) ? "pointer-events-auto" : "pointer-events-none"
+          }`}>
           {/* Header context */}
           <div className="text-center mb-8">
             <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-2 block">
@@ -379,6 +393,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
               </p>
             </div>
           </div>
+          </div>
         </motion.div>
 
 
@@ -386,17 +401,14 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
         {/* SCENE 2: Enter Satish Dhawan (0.33 - 0.66) */}
         {/* ============================================================= */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: scene2Opacity, y: scene2Y }}
-          animate={presentationActive ? { opacity: currentFrameIndex === 14 ? 1 : 0, y: currentFrameIndex === 14 ? 0 : -25 } : undefined}
-          className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-6xl mx-auto ${
-            (presentationActive ? (currentFrameIndex === 14) : (activeIndex === 2)) ? "pointer-events-auto" : "pointer-events-none"
-          }`}
+          style={{ opacity: scene2Opacity, y: scene2Y }}
+          className="absolute inset-0 z-10 flex flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full pointer-events-none"
         >
-          {/* Parallax Blueprint elements in the background */}
-          <motion.div
-            style={presentationActive ? undefined : { y: bgBlueprintY }}
-            animate={presentationActive ? { y: 0 } : undefined}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 opacity-[0.04]"
+          
+          {/* Detailed schematics background vector graphic overlay */}
+          <motion.div 
+            style={{ y: bgBlueprintY }}
+            className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.035] pointer-events-none"
           >
             {/* Wind tunnel / trajectory outlines */}
             <svg className="w-[85%] h-[85%]" viewBox="0 0 1000 800" fill="none">
@@ -410,7 +422,9 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
             </svg>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center w-full z-10">
+          <div className={`grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center w-full z-10 ${
+            (presentationActive ? (currentFrameIndex === 14) : (activeIndex === 2)) ? "pointer-events-auto" : "pointer-events-none"
+          }`}>
             {/* Left: Silhouette/Blueprint drawing & wind tunnel flow */}
             <div className="relative flex justify-center items-center">
               {/* Wind tunnel aerodynamic flow animation overlay */}
@@ -420,32 +434,28 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
                   d="M 50,150 C 150,120 250,180 350,150 T 450,160" 
                   stroke="#FFB800" 
                   strokeWidth="1.5" 
-                  strokeDasharray="4 8"
-                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -100]) }}
-                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+                  strokeDasharray="4 4"
+                  style={{ strokeDashoffset: dashOffset1 }}
               />
               <motion.path 
                 d="M 50,200 C 150,170 250,230 350,200 T 450,210" 
                 stroke="#FFB800" 
                 strokeWidth="1" 
                 strokeDasharray="8 8"
-                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [100, 0]) }}
-                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+                style={{ strokeDashoffset: dashOffset2 }}
               />
               <motion.path 
                 d="M 50,250 C 150,220 250,280 350,250 T 450,260" 
                 stroke="#FFB800" 
                 strokeWidth="1.5" 
                 strokeDasharray="2 4"
-                style={presentationActive ? undefined : { strokeDashoffset: useTransform(scrollYProgress, [0.33, 0.66], [0, -50]) }}
-                animate={presentationActive ? { strokeDashoffset: 0 } : undefined}
+                style={{ strokeDashoffset: dashOffset3 }}
               />
               </svg>
 
               {/* Layered Parallax Portrait representing Satish Dhawan */}
               <motion.div
-                style={presentationActive ? undefined : { y: silhouetteY }}
-                animate={presentationActive ? { y: 0 } : undefined}
+                style={{ y: silhouetteY }}
                 className="relative w-[280px] h-[350px] flex justify-center items-center"
               >
                 {/* Outer blueprint card frame */}
@@ -453,12 +463,10 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
                   
                   {/* Detailed Blueprint actual photo of Dhawan */}
                   <div className="relative w-full h-[88%] rounded-sm overflow-hidden border border-white/10">
-                    <Image
+                    <img
                       src="/satish_dhawan.png"
                       alt="Dr. Satish Dhawan Portrait"
-                      fill
-                      priority
-                      className="object-cover object-top grayscale contrast-[1.25] brightness-[0.75] select-none pointer-events-none"
+                      className="absolute inset-0 w-full h-full object-cover object-top grayscale contrast-[1.25] brightness-[0.75] select-none pointer-events-none"
                     />
                     
                     {/* Grid overlay over photo */}
@@ -531,8 +539,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
         {/* SCENE 3: A New Priority ("BUILD THE ROCKETS") (0.66 - 1.0) */}
         {/* ============================================================= */}
         <motion.div
-          style={presentationActive ? undefined : { opacity: scene3Opacity, y: scene3Y }}
-          animate={presentationActive ? { opacity: (currentFrameIndex === 15 || currentFrameIndex === 16) ? 1 : 0, y: (currentFrameIndex === 15 || currentFrameIndex === 16) ? 0 : 25 } : undefined}
+          style={{ opacity: scene3Opacity, y: scene3Y }}
           className={`absolute inset-0 z-10 flex flex-col items-center justify-between py-16 px-6 max-w-7xl mx-auto ${
             (presentationActive ? (currentFrameIndex === 15 || currentFrameIndex === 16) : (activeIndex === 3)) ? "pointer-events-auto" : "pointer-events-none"
           }`}
@@ -566,8 +573,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
               {/* Satellites waiting on the ground (represented as technical graphics) */}
               <motion.div 
-                style={presentationActive ? undefined : { opacity: satelliteOpacity, scale: satelliteScale }}
-                animate={presentationActive ? { opacity: currentFrameIndex === 15 ? 0.4 : 0, scale: currentFrameIndex === 15 ? 0.9 : 0.8 } : undefined}
+                style={{ opacity: satelliteOpacity, scale: satelliteScale }}
                 className="absolute bottom-6 left-12 flex flex-col items-center gap-2 border border-white/10 p-3 bg-black/60 rounded"
               >
                 {/* Aryabhata satellite vector graphic */}
@@ -591,9 +597,8 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
               <div className="relative flex flex-col items-center justify-center h-[90%] w-[120px]">
                 
                 {/* Nose Cone Section */}
-                <motion.div 
-                  style={presentationActive ? undefined : { y: part1Y, rotate: part1Rotate }} 
-                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : -90, rotate: currentFrameIndex === 16 ? 0 : -6 } : undefined}
+                 <motion.div 
+                  style={{ y: part1Y, rotate: part1Rotate }} 
                   className="relative z-30 flex flex-col items-center"
                 >
                   <svg className="w-8 h-12 text-white" viewBox="0 0 32 48" fill="none">
@@ -605,8 +610,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
                 {/* Upper Stage Section */}
                 <motion.div 
-                  style={presentationActive ? undefined : { y: part2Y }} 
-                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : -30 } : undefined}
+                  style={{ y: part2Y }} 
                   className="relative z-20 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-8 h-10 text-white" viewBox="0 0 32 40" fill="none">
@@ -619,8 +623,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
                 {/* Main Booster Stage Section */}
                 <motion.div 
-                  style={presentationActive ? undefined : { y: part3Y }} 
-                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : 30 } : undefined}
+                  style={{ y: part3Y }} 
                   className="relative z-15 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-10 h-16 text-white" viewBox="0 0 40 64" fill="none">
@@ -634,8 +637,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
                 {/* Nozzle & Fins Section */}
                 <motion.div 
-                  style={presentationActive ? undefined : { y: part4Y, rotate: part4Rotate }} 
-                  animate={presentationActive ? { y: currentFrameIndex === 16 ? 0 : 90, rotate: currentFrameIndex === 16 ? 0 : 4 } : undefined}
+                  style={{ y: part4Y, rotate: part4Rotate }} 
                   className="relative z-10 flex flex-col items-center mt-[-1px]"
                 >
                   <svg className="w-12 h-10 text-white" viewBox="0 0 48 40" fill="none">
@@ -648,17 +650,11 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
                 {/* Connection Glow lines */}
                 <motion.div
-                  style={presentationActive ? undefined : { 
-                    opacity: useTransform(scrollYProgress, [0.85, 0.88, 0.93], [0, 1, 0]),
-                    scaleX: useTransform(scrollYProgress, [0.85, 0.88], [1.3, 1.0])
-                  }}
+                  style={{ opacity: connectionGlowOpacity, scaleX: connectionGlowScaleX }}
                   className="absolute w-[60px] h-[1px] bg-[#FFB800] shadow-[0_0_10px_#FFB800] z-40 pointer-events-none top-[47%]"
                 />
                 <motion.div
-                  style={presentationActive ? undefined : { 
-                    opacity: useTransform(scrollYProgress, [0.85, 0.88, 0.93], [0, 1, 0]),
-                    scaleX: useTransform(scrollYProgress, [0.85, 0.88], [1.3, 1.0])
-                  }}
+                  style={{ opacity: connectionGlowOpacity, scaleX: connectionGlowScaleX }}
                   className="absolute w-[60px] h-[1px] bg-[#FFB800] shadow-[0_0_10px_#FFB800] z-40 pointer-events-none top-[71%]"
                 />
               </div>
@@ -680,8 +676,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
 
             {/* Dynamic "BUILD THE ROCKETS" typography overlay */}
             <motion.div 
-              style={presentationActive ? undefined : { opacity: textOpacity, scale: textScale }}
-              animate={presentationActive ? { opacity: currentFrameIndex === 16 ? 1 : 0, scale: currentFrameIndex === 16 ? 1 : 0.85 } : undefined}
+              style={{ opacity: textOpacity, scale: textScale }}
               className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none text-center"
             >
               <h1 

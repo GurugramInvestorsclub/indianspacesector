@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue, animate } from "motion/react";
 
 interface Callout {
   label: string;
@@ -59,13 +59,8 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
       else if (currentFrameIndex < 17) p = 0.0;
       else p = 1.0;
 
-      progress.set(p);
-
-      // Force instant active index updates for presentation clicks
-      const targetActiveIndex = currentFrameIndex - 17;
-      if (targetActiveIndex >= 0 && targetActiveIndex <= 7) {
-        setActiveIndex(targetActiveIndex);
-      }
+      const controls = animate(progress, p, { duration: 0.6, ease: [0.25, 1, 0.5, 1] });
+      return () => controls.stop();
     } else {
       progress.set(scrollYProgress.get());
       return scrollYProgress.onChange((latest) => {
@@ -317,8 +312,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
 
         {/* ----------------- Scene 0: Introduction ----------------- */}
         <motion.div
-          style={presentationActive ? undefined : sceneStyles[0]}
-          animate={presentationActive ? { opacity: activeIndexToUse === 0 ? 1 : 0, y: activeIndexToUse === 0 ? 0 : -35 } : undefined}
+          style={sceneStyles[0]}
           className={`absolute inset-0 z-10 flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
             activeIndexToUse === 0 ? "pointer-events-auto" : "pointer-events-none"
           } ${
@@ -359,8 +353,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
             return (
               <motion.div
                 key={rocket.id}
-                style={presentationActive ? undefined : sceneStyles[rocketIndex]}
-                animate={presentationActive ? { opacity: activeIndexToUse === rocketIndex ? 1 : 0, y: activeIndexToUse === rocketIndex ? 0 : (activeIndexToUse < rocketIndex ? 35 : -35) } : undefined}
+                style={sceneStyles[rocketIndex]}
                 className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
                   isActiveToUse ? "pointer-events-auto" : "pointer-events-none"
                 } ${
@@ -449,8 +442,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
           return (
             <motion.div
               key={rocket.id}
-              style={presentationActive ? undefined : sceneStyles[rocketIndex]}
-              animate={presentationActive ? { opacity: activeIndexToUse === rocketIndex ? 1 : 0, y: activeIndexToUse === rocketIndex ? 0 : (activeIndexToUse < rocketIndex ? 35 : -35) } : undefined}
+              style={sceneStyles[rocketIndex]}
               className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
                 isActiveToUse ? "pointer-events-auto" : "pointer-events-none"
               } ${
