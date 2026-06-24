@@ -84,11 +84,11 @@ export function Beginning() {
   const rocketY = useTransform(scrollYProgress, [0.88, 0.98], [250, -450]);
   const starsDensity = useTransform(scrollYProgress, [0.90, 0.98], [0, 1]);
 
-  // Archival photos (bicycle & bullock cart) transitions in Scene 5
-  const bicycleOpacity = useTransform(scrollYProgress, [0.85, 0.89, 0.98, 1.0], [0, 1, 1, 0]);
-  const bicycleX = useTransform(scrollYProgress, [0.85, 0.89], [-40, 0]);
-  const cartOpacity = useTransform(scrollYProgress, [0.87, 0.91, 0.98, 1.0], [0, 1, 1, 0]);
-  const cartX = useTransform(scrollYProgress, [0.87, 0.91], [40, 0]);
+  // Archival photos (bicycle & bullock cart) transitions in Scene 4 (INCOSPAR)
+  const bicycleOpacity = useTransform(scrollYProgress, [0.64, 0.68, 0.80, 0.84], [0, 1, 1, 0]);
+  const bicycleX = useTransform(scrollYProgress, [0.64, 0.68], [-30, 0]);
+  const cartOpacity = useTransform(scrollYProgress, [0.66, 0.70, 0.80, 0.84], [0, 1, 1, 0]);
+  const cartX = useTransform(scrollYProgress, [0.66, 0.70], [30, 0]);
 
   // -------------------------------------------------------------
   // CANVAS ANIMATION LOOP (3D ROTATING GLOBE & SPUTNIK)
@@ -819,6 +819,54 @@ export function Beginning() {
                   <text x="254" y="466" className="font-mono text-[7px] fill-[#FFB800]">LAUNCH SITE</text>
                 </g>
               </svg>
+
+              {/* Left Polaroid - Rocket on Bicycle */}
+              <motion.div
+                style={{ opacity: bicycleOpacity, x: bicycleX, rotate: -4 }}
+                className="absolute left-[-6%] top-[15%] md:left-[-25%] md:top-[12%] w-[110px] md:w-[180px] bg-[#090912]/90 border border-white/10 rounded-xl p-1.5 md:p-3 flex flex-col gap-1.5 backdrop-blur-md shadow-2xl z-20 pointer-events-none"
+              >
+                {/* Film Grain overlay */}
+                <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-black border border-white/5">
+                  <Image
+                    src="/rocket_bicycle.png"
+                    alt="Nike-Apache rocket parts on a bicycle, Thumba 1963"
+                    fill
+                    sizes="(max-w-768px) 110px, 180px"
+                    className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
+                  />
+                </div>
+                <div className="font-mono text-[6px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
+                  <span className="text-[#FFB800] font-bold">1963 — BICYCLE TRANSIT</span>
+                </div>
+                <p className="text-[6px] md:text-[8px] font-mono text-white/40 leading-normal">
+                  Nike-Apache rocket nose cone carried by bicycle.
+                </p>
+              </motion.div>
+
+              {/* Right Polaroid - Satellite on Bullock Cart */}
+              <motion.div
+                style={{ opacity: cartOpacity, x: cartX, rotate: 4 }}
+                className="absolute right-[-6%] bottom-[12%] md:right-[-25%] md:bottom-[10%] w-[110px] md:w-[180px] bg-[#090912]/90 border border-white/10 rounded-xl p-1.5 md:p-3 flex flex-col gap-1.5 backdrop-blur-md shadow-2xl z-20 pointer-events-none"
+              >
+                {/* Film Grain overlay */}
+                <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-black border border-white/5">
+                  <Image
+                    src="/satellite_cart.png"
+                    alt="APPLE satellite on a bullock cart for testing, 1981"
+                    fill
+                    sizes="(max-w-768px) 110px, 180px"
+                    className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
+                  />
+                </div>
+                <div className="font-mono text-[6px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
+                  <span className="text-[#FFB800] font-bold">1981 — BULLOCK CART</span>
+                </div>
+                <p className="text-[6px] md:text-[8px] font-mono text-white/40 leading-normal">
+                  APPLE satellite carried on a cart for antenna tests.
+                </p>
+              </motion.div>
             </motion.div>
           </div>
 
@@ -866,58 +914,7 @@ export function Beginning() {
             </h4>
           </div>
 
-          {/* Floating Archival Photos of Early Struggles */}
-          <div className="absolute inset-0 z-10 flex flex-row justify-between items-start px-6 md:px-16 pointer-events-none top-[15vh] md:top-[12vh]">
-            {/* Left Polaroid - Rocket on Bicycle */}
-            <motion.div
-              style={{ opacity: bicycleOpacity, x: bicycleX, rotate: -3 }}
-              className="w-[120px] md:w-[220px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3 flex flex-col gap-2 backdrop-blur-md shadow-2xl relative mt-[14vh] md:mt-[8vh]"
-            >
-              {/* Film Grain overlay */}
-              <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-black border border-white/5">
-                <Image
-                  src="/rocket_bicycle.png"
-                  alt="Nike-Apache rocket parts on a bicycle, Thumba 1963"
-                  fill
-                  sizes="(max-w-768px) 120px, 220px"
-                  className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
-                />
-              </div>
-              <div className="font-mono text-[7px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
-                <span className="text-[#FFB800] font-bold">1963 — BICYCLE TRANSIT</span>
-                <span className="hidden md:inline">THUMBA</span>
-              </div>
-              <p className="text-[7px] md:text-[8.5px] font-mono text-white/40 leading-normal">
-                Nike-Apache rocket nose cone transported by bicycle to Thumba beach.
-              </p>
-            </motion.div>
 
-            {/* Right Polaroid - Satellite on Bullock Cart */}
-            <motion.div
-              style={{ opacity: cartOpacity, x: cartX, rotate: 3 }}
-              className="w-[120px] md:w-[220px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3 flex flex-col gap-2 backdrop-blur-md shadow-2xl relative mt-[14vh] md:mt-[18vh]"
-            >
-              {/* Film Grain overlay */}
-              <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-black border border-white/5">
-                <Image
-                  src="/satellite_cart.png"
-                  alt="APPLE satellite on a bullock cart for testing, 1981"
-                  fill
-                  sizes="(max-w-768px) 120px, 220px"
-                  className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
-                />
-              </div>
-              <div className="font-mono text-[7px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
-                <span className="text-[#FFB800] font-bold">1981 — BULLOCK CART</span>
-                <span className="hidden md:inline">APPLE SATELLITE</span>
-              </div>
-              <p className="text-[7px] md:text-[8.5px] font-mono text-white/40 leading-normal">
-                APPLE communications satellite carried on a cart for non-magnetic testing.
-              </p>
-            </motion.div>
-          </div>
 
           {/* Interactive Coastline visual background */}
           <div className="absolute inset-0 z-0 flex flex-col justify-end pointer-events-none">
