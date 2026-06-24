@@ -123,31 +123,39 @@ export default function Home() {
   const [hudOpen, setHudOpen] = useState(false);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  // Cinematic smooth scroll helper using GSAP
+  // Cinematic smooth scroll helper using Lenis or GSAP
   const scrollToFrame = (index: number) => {
     if (index < 0 || index >= FRAMES.length) return;
     const targetVh = FRAMES[index];
     const targetScrollY = (targetVh * window.innerHeight) / 100;
     
-    // Kill any running scroll animation tween
-    if (tweenRef.current) {
-      tweenRef.current.kill();
-    }
-    
-    const scrollObj = { y: window.scrollY };
-    
-    // Animate the window scroll position smoothly over 1.2s with power3.inOut ease
-    tweenRef.current = gsap.to(scrollObj, {
-      y: targetScrollY,
-      duration: 1.2,
-      ease: "power3.inOut",
-      onUpdate: () => {
-        window.scrollTo(0, scrollObj.y);
-      },
-      onComplete: () => {
-        tweenRef.current = null;
+    // Check if lenis is available globally
+    if (typeof window !== "undefined" && (window as any).lenis) {
+      (window as any).lenis.scrollTo(targetScrollY, {
+        duration: 1.2,
+        force: true // ensures it scrolls even if some other system thinks it shouldn't
+      });
+    } else {
+      // Kill any running scroll animation tween (fallback to GSAP)
+      if (tweenRef.current) {
+        tweenRef.current.kill();
       }
-    });
+      
+      const scrollObj = { y: window.scrollY };
+      
+      // Animate the window scroll position smoothly over 1.2s with power3.inOut ease
+      tweenRef.current = gsap.to(scrollObj, {
+        y: targetScrollY,
+        duration: 1.2,
+        ease: "power3.inOut",
+        onUpdate: () => {
+          window.scrollTo(0, scrollObj.y);
+        },
+        onComplete: () => {
+          tweenRef.current = null;
+        }
+      });
+    }
   };
 
   // Section State Machine Helpers
@@ -195,35 +203,26 @@ export default function Home() {
     }
   }, []);
 
-  // Lock manual scroll events and stop Lenis when presentation mode is active
+  // Lock manual scroll events when presentation mode is active
   useEffect(() => {
     if (!presentationActive) return;
 
     const preventDefault = (e: Event) => {
       e.preventDefault();
+      e.stopPropagation();
     };
 
-    // Pause Lenis smooth scroll
-    if (typeof window !== "undefined" && (window as any).lenis) {
-      (window as any).lenis.stop();
-    }
-
-    // Add scroll lock event listeners
-    window.addEventListener("wheel", preventDefault, { passive: false });
-    window.addEventListener("touchmove", preventDefault, { passive: false });
+    // Add scroll lock event listeners in capture phase to intercept before Lenis or standard scroll can process them
+    window.addEventListener("wheel", preventDefault, { passive: false, capture: true });
+    window.addEventListener("touchmove", preventDefault, { passive: false, capture: true });
 
     // Inject presentation scrollbar hiding classes
     document.documentElement.classList.add("presentation-active");
     document.body.classList.add("presentation-active");
 
     return () => {
-      // Resume Lenis smooth scroll
-      if (typeof window !== "undefined" && (window as any).lenis) {
-        (window as any).lenis.start();
-      }
-
-      window.removeEventListener("wheel", preventDefault);
-      window.removeEventListener("touchmove", preventDefault);
+      window.removeEventListener("wheel", preventDefault, { capture: true });
+      window.removeEventListener("touchmove", preventDefault, { capture: true });
       document.documentElement.classList.remove("presentation-active");
       document.body.classList.remove("presentation-active");
     };
