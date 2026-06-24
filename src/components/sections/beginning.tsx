@@ -744,12 +744,12 @@ export function Beginning() {
           <div className="w-full md:w-1/2 flex items-center justify-center mt-6 md:mt-0">
             <motion.div 
               style={{ scale: mapScale }}
-              className="relative w-[280px] h-[320px] md:w-[460px] md:h-[380px]"
+              className="relative w-[350px] h-[400px] md:w-[570px] md:h-[470px]"
             >
               {/* Left Polaroid - Rocket on Bicycle */}
               <motion.div
                 style={{ opacity: bicycleOpacity, x: bicycleX }}
-                className="absolute left-0 top-0 w-[160px] md:w-[250px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 rotate-[-4deg]"
+                className="absolute left-0 top-0 w-[200px] md:w-[310px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 rotate-[-4deg]"
               >
                 {/* Film Grain overlay */}
                 <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
@@ -758,7 +758,7 @@ export function Beginning() {
                     src="/rocket_bicycle.png"
                     alt="Nike-Apache rocket parts on a bicycle, Thumba 1963"
                     fill
-                    sizes="(max-w-768px) 160px, 250px"
+                    sizes="(max-w-768px) 200px, 310px"
                     className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
                   />
                 </div>
@@ -774,7 +774,7 @@ export function Beginning() {
               {/* Right Polaroid - Satellite on Bullock Cart */}
               <motion.div
                 style={{ opacity: cartOpacity, x: cartX }}
-                className="absolute right-0 bottom-0 w-[160px] md:w-[250px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-20 rotate-[4deg]"
+                className="absolute right-0 bottom-0 w-[200px] md:w-[310px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-20 rotate-[4deg]"
               >
                 {/* Film Grain overlay */}
                 <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
@@ -783,7 +783,7 @@ export function Beginning() {
                     src="/satellite_cart.png"
                     alt="APPLE satellite on a bullock cart for testing, 1981"
                     fill
-                    sizes="(max-w-768px) 160px, 250px"
+                    sizes="(max-w-768px) 200px, 310px"
                     className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
                   />
                 </div>

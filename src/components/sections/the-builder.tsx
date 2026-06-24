@@ -426,10 +426,9 @@ export function TheBuilder() {
 
                     {/* Target crosshairs */}
                     <svg className="absolute inset-0 w-full h-full opacity-30 text-[#FFB800]" viewBox="0 0 100 100" fill="none">
-                      <circle cx="50" cy="45" r="8" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                      <circle cx="50" cy="45" r="8" stroke="currentColor" strokeWidth="0.5" />
                       <line x1="50" y1="32" x2="50" y2="58" stroke="currentColor" strokeWidth="0.5" />
                       <line x1="37" y1="45" x2="63" y2="45" stroke="currentColor" strokeWidth="0.5" />
-                      <rect x="5" y="5" width="90" height="90" stroke="currentColor" strokeWidth="0.3" strokeDasharray="3 6" />
                     </svg>
                   </div>
                   

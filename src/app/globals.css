@@ -154,3 +154,40 @@ body.presentation-active::-webkit-scrollbar {
   display: none !important; /* Safari/Chrome */
 }
 
+/* Typography and Font families constraint: Only 3 fonts */
+h1, h2, h3, h4, h5, h6, .font-headline {
+  font-family: Georgia, serif !important;
+}
+
+body, p, span, li, a, .font-sans {
+  font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+}
+
+.font-subheadline, .font-mono, kbd, code {
+  font-family: "Cascadia Mono", "Roboto Mono", "SFMono-Regular", Consolas, monospace !important;
+}
+
+/* Prevent greyed out text and increase contrast for legibility */
+[class*="text-white/20"],
+[class*="text-white/25"] {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+[class*="text-white/30"],
+[class*="text-white/35"],
+[class*="text-white/40"] {
+  color: rgba(255, 255, 255, 0.76) !important;
+}
+[class*="text-white/45"],
+[class*="text-white/50"],
+[class*="text-white/55"],
+[class*="text-white/58"],
+[class*="text-white/60"] {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+[class*="text-white/70"],
+[class*="text-white/76"],
+[class*="text-white/80"] {
+  color: rgba(255, 255, 255, 0.98) !important;
+}
+
+
