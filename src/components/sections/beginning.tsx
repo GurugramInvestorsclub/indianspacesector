@@ -702,9 +702,8 @@ export function Beginning() {
               space was never about prestige.
             </motion.p>
             <motion.p
-              style={{ opacity: quoteLine3Opacity }}
+              style={{ opacity: quoteLine3Opacity, fontFamily: "Georgia, serif" }}
               className="text-2xl md:text-3xl font-mono italic text-[#FFB800]/80 text-left md:text-center block"
-              style={{ fontFamily: "Georgia, serif" }}
             >
               It was about development.
             </motion.p>
