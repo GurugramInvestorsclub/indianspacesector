@@ -247,7 +247,7 @@ const SLIDE_BASE =
 /** Monospace label used as chapter/section identifier */
 function SceneLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[9px] tracking-[0.32em] text-[#0d9488] uppercase font-bold block mb-3">
+    <span className="font-mono text-[9px] tracking-[0.32em] text-[#FFB800] uppercase font-bold block mb-3">
       {children}
     </span>
   );
@@ -323,13 +323,13 @@ function Scene0Hero({
           className="object-cover object-center opacity-35"
         />
         {/* Top fade into dark space */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080c12]/70 via-[#080c12]/20 to-[#080c12]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/70 via-[#030308]/20 to-[#030308]/95" />
         {/* Radial vignette to frame the content */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 70% at center, transparent 25%, #080c12 90%)",
+              "radial-gradient(ellipse 80% 70% at center, transparent 25%, #030308 90%)",
           }}
         />
       </div>
@@ -343,7 +343,7 @@ function Scene0Hero({
         >
           The Space
           <br />
-          <span className="text-[#0d9488]">Economy</span>
+          <span className="text-[#FFB800]">Economy</span>
         </h1>
 
         <p className="text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed mb-10 font-light">
@@ -363,7 +363,7 @@ function Scene0Hero({
               key={s.label}
               className={`text-center py-5 px-4 ${i !== 2 ? "border-r border-white/10" : ""}`}
             >
-              <span className="text-2xl font-extrabold text-[#0d9488] block">
+              <span className="text-2xl font-extrabold text-[#FFB800] block">
                 {s.val}
               </span>
               <span className="text-[9px] uppercase text-white/55 tracking-wider">
@@ -374,10 +374,10 @@ function Scene0Hero({
         </div>
 
         {!presentationActive && (
-          <div className="flex flex-col items-center gap-2 font-mono text-[9px] text-[#0d9488]/70 tracking-[0.25em] uppercase">
+          <div className="flex flex-col items-center gap-2 font-mono text-[9px] text-[#FFB800]/70 tracking-[0.25em] uppercase">
             <span>Scroll to decrypt</span>
-            <span className="w-px h-8 bg-[#0d9488]/30 relative overflow-hidden rounded-full block">
-              <span className="absolute top-0 inset-x-0 h-3 bg-[#0d9488] rounded-full animate-bounce" />
+            <span className="w-px h-8 bg-[#FFB800]/30 relative overflow-hidden rounded-full block">
+              <span className="absolute top-0 inset-x-0 h-3 bg-[#FFB800] rounded-full animate-bounce" />
             </span>
           </div>
         )}
@@ -416,13 +416,13 @@ function Scene1WhyNow() {
           return (
             <div
               key={card.n}
-              className="bg-[#0b131e]/90 border border-white/5 hover:border-[#0d9488]/40 p-6 rounded-2xl text-left backdrop-blur-md shadow-xl transition-all duration-300 group"
+              className="bg-[#0a0a14]/90 border border-white/5 hover:border-[#FFB800]/40 p-6 rounded-2xl text-left backdrop-blur-md shadow-xl transition-all duration-300 group"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-[#0d9488]/10 border border-[#0d9488]/20 flex items-center justify-center text-[#0d9488] font-mono text-xs font-bold shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/20 flex items-center justify-center text-[#FFB800] font-mono text-xs font-bold shrink-0">
                   {card.n}
                 </div>
-                <Icon className="w-4 h-4 text-[#0d9488]/60 group-hover:text-[#0d9488] transition-colors" />
+                <Icon className="w-4 h-4 text-[#FFB800]/60 group-hover:text-[#FFB800] transition-colors" />
               </div>
               <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">
                 {card.title}
@@ -435,7 +435,7 @@ function Scene1WhyNow() {
         {/* Decorative connecting line — desktop only */}
         <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-center z-0">
           <svg
-            className="w-full h-full text-[#0d9488]/10 absolute"
+            className="w-full h-full text-[#FFB800]/10 absolute"
             viewBox="0 0 800 160"
             fill="none"
           >
@@ -484,7 +484,7 @@ function Scene2Ecosystem({
             <div className="absolute w-[100px] h-[100px] rounded-full border border-white/[0.02]" />
 
             {/* Central node */}
-            <div className="absolute w-14 h-14 rounded-full bg-[#0d9488]/10 border border-[#0d9488]/50 shadow-[0_0_20px_rgba(13,148,136,0.2)] flex flex-col items-center justify-center font-mono text-[7px] font-bold text-[#0d9488] z-10">
+            <div className="absolute w-14 h-14 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/50 shadow-[0_0_20px_rgba(255,184,0,0.2)] flex flex-col items-center justify-center font-mono text-[7px] font-bold text-[#FFB800] z-10">
               <span>ISRO</span>
               <span className="text-white/50">HUB</span>
             </div>
@@ -504,8 +504,8 @@ function Scene2Ecosystem({
                   onClick={() => setActiveEcoSector(sIdx === activeEcoSector ? null : sIdx)}
                   className={`absolute w-9 h-9 rounded-full border flex items-center justify-center cursor-pointer transition-all duration-300 interactive-control ${
                     isActive
-                      ? "bg-[#0d9488] border-[#0d9488] shadow-[0_0_15px_rgba(13,148,136,0.6)] scale-110"
-                      : "bg-[#0b131e] border-white/15 hover:border-[#0d9488]/60"
+                      ? "bg-[#FFB800] border-[#FFB800] shadow-[0_0_15px_rgba(255,184,0,0.6)] scale-110"
+                      : "bg-[#0a0a14] border-white/15 hover:border-[#FFB800]/60"
                   }`}
                   style={{
                     transform: `translate(${x}px, ${y}px) rotate(${-orbitDeg}deg)`,
@@ -531,20 +531,20 @@ function Scene2Ecosystem({
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -16 }}
                 transition={{ duration: 0.25 }}
-                className="bg-[#0b131e]/90 border border-[#0d9488]/30 p-6 rounded-2xl backdrop-blur-md shadow-2xl space-y-4"
+                className="bg-[#0a0a14]/90 border border-[#FFB800]/30 p-6 rounded-2xl backdrop-blur-md shadow-2xl space-y-4"
               >
-                <div className="flex items-center justify-between border-b border-[#0d9488]/20 pb-3">
+                <div className="flex items-center justify-between border-b border-[#FFB800]/20 pb-3">
                   <h3 className="text-lg font-bold uppercase tracking-wide text-white">
                     {ECO_SECTORS[activeEcoSector].name}
                   </h3>
-                  <span className="font-mono text-xs text-[#0d9488] font-bold">
+                  <span className="font-mono text-xs text-[#FFB800] font-bold">
                     {ECO_SECTORS[activeEcoSector].tam}
                   </span>
                 </div>
                 <div className="space-y-3 text-xs">
                   <div className="flex justify-between items-center font-mono text-[10px] text-white/55 uppercase border-b border-white/5 pb-1">
                     <span>Growth Rate</span>
-                    <span className="text-[#0d9488] font-bold">
+                    <span className="text-[#FFB800] font-bold">
                       {ECO_SECTORS[activeEcoSector].growth}
                     </span>
                   </div>
@@ -552,7 +552,7 @@ function Scene2Ecosystem({
                     {ECO_SECTORS[activeEcoSector].desc}
                   </p>
                   <div className="pt-1">
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#0d9488] font-bold block mb-1">
+                    <span className="font-mono text-[9px] uppercase tracking-wider text-[#FFB800] font-bold block mb-1">
                       Key Operators:
                     </span>
                     <p className="text-white/70 font-mono text-[10px]">
@@ -599,7 +599,7 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
               fill
               className="object-cover object-center opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#080c12]/60 via-transparent to-[#080c12]/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#030308]/60 via-transparent to-[#030308]/30" />
           </div>
 
           <div className="w-[260px] h-[260px] md:w-[340px] md:h-[340px] flex items-center justify-center relative">
@@ -637,7 +637,7 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
                   cy="60"
                   rx={ring.rx}
                   ry={ring.ry}
-                  stroke="#0d9488"
+                  stroke="#FFB800"
                   strokeWidth="0.4"
                   opacity={0.35 - i * 0.06}
                   transform={`rotate(${ring.rot} 60 60)`}
@@ -658,14 +658,14 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
                     cx={sat.cx}
                     cy={sat.cy}
                     r="2"
-                    fill="#0d9488"
+                    fill="#FFB800"
                     className={sat.pulse ? "animate-pulse" : ""}
                   />
                   <circle
                     cx={sat.cx}
                     cy={sat.cy}
                     r="4"
-                    stroke="#0d9488"
+                    stroke="#FFB800"
                     strokeWidth="0.5"
                     opacity="0.3"
                   />
@@ -682,8 +682,8 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
               />
               <defs>
                 <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#0d9488" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="#0d9488" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#FFB800" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#FFB800" stopOpacity="0" />
                 </radialGradient>
               </defs>
             </svg>
@@ -692,14 +692,14 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
 
         {/* Ticker + narrative */}
         <div className="lg:col-span-5 text-left flex flex-col gap-5">
-          <div className="font-mono bg-[#0b131e]/60 border border-white/5 p-6 rounded-2xl backdrop-blur-md">
+          <div className="font-mono bg-[#0a0a14]/60 border border-white/5 p-6 rounded-2xl backdrop-blur-md">
             <span className="text-[9px] text-white/55 tracking-widest uppercase block mb-2">
               Constellation Enrollment
             </span>
             <div className="text-6xl md:text-7xl font-black text-white tracking-tight leading-none tabular-nums">
               {tickerVal >= 1640 ? "1,650+" : tickerVal.toLocaleString()}
             </div>
-            <span className="text-[9px] text-[#0d9488] font-bold uppercase tracking-wider mt-2 block">
+            <span className="text-[9px] text-[#FFB800] font-bold uppercase tracking-wider mt-2 block">
               LEO Satellites Planned
             </span>
           </div>
@@ -712,7 +712,7 @@ function Scene3JioConstellation({ tickerVal }: { tickerVal: number }) {
             maritime corridors.
           </p>
 
-          <div className="flex items-center gap-3 bg-[#0d9488]/5 border border-[#0d9488]/15 px-4 py-3 rounded-xl text-xs font-mono text-[#0d9488]">
+          <div className="flex items-center gap-3 bg-[#FFB800]/5 border border-[#FFB800]/15 px-4 py-3 rounded-xl text-xs font-mono text-[#FFB800]">
             <Shield className="w-4 h-4 shrink-0" />
             <span>
               CORPORATE GIANTS RECOGNIZE SPACE AS ESSENTIAL INFRASTRUCTURE.
@@ -749,8 +749,8 @@ function Scene4ValueChain({
               onClick={() => setActiveChainStep(sIdx)}
               className={`p-4 border rounded-xl text-left cursor-pointer transition-all duration-300 interactive-control ${
                 activeChainStep === sIdx
-                  ? "bg-[#0d9488]/10 border-[#0d9488] shadow-[0_0_15px_rgba(13,148,136,0.15)] scale-[1.02]"
-                  : "bg-[#0b131e]/90 border-white/5 hover:border-white/20"
+                  ? "bg-[#FFB800]/10 border-[#FFB800] shadow-[0_0_15px_rgba(255,184,0,0.15)] scale-[1.02]"
+                  : "bg-[#0a0a14]/90 border-white/5 hover:border-white/20"
               }`}
             >
               <span className="font-mono text-[8px] text-white/50 block mb-1 uppercase">
@@ -758,7 +758,7 @@ function Scene4ValueChain({
               </span>
               <h3
                 className={`text-[11px] font-bold uppercase tracking-wide truncate ${
-                  activeChainStep === sIdx ? "text-[#0d9488]" : "text-white"
+                  activeChainStep === sIdx ? "text-[#FFB800]" : "text-white"
                 }`}
               >
                 {step.label.split(". ")[1]}
@@ -774,7 +774,7 @@ function Scene4ValueChain({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="bg-[#0b131e]/90 border border-white/5 rounded-2xl p-6 md:p-7 text-left backdrop-blur-md shadow-2xl relative"
+            className="bg-[#0a0a14]/90 border border-white/5 rounded-2xl p-6 md:p-7 text-left backdrop-blur-md shadow-2xl relative"
           >
             <div className="absolute top-3 right-4 font-mono text-[9px] text-white/40 uppercase">
               [SEGMENT PROFILE]
@@ -783,7 +783,7 @@ function Scene4ValueChain({
             <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start">
               <div className="space-y-3">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="font-mono text-[9px] tracking-widest text-[#0d9488] uppercase border border-[#0d9488]/30 px-2 py-0.5 rounded font-bold">
+                  <span className="font-mono text-[9px] tracking-widest text-[#FFB800] uppercase border border-[#FFB800]/30 px-2 py-0.5 rounded font-bold">
                     {CHAIN_STEPS[activeChainStep].focus}
                   </span>
                   <span className="font-mono text-[9px] text-white/40 uppercase">
@@ -804,7 +804,7 @@ function Scene4ValueChain({
               <div className="bg-white/[0.02] border border-white/5 p-4 rounded-xl space-y-3 font-mono text-xs">
                 <div className="flex justify-between items-center text-[10px] text-white/55 uppercase border-b border-white/[0.03] pb-1.5">
                   <span>Global Segment TAM</span>
-                  <span className="text-[#0d9488] font-bold">
+                  <span className="text-[#FFB800] font-bold">
                     {CHAIN_STEPS[activeChainStep].tam}
                   </span>
                 </div>
@@ -825,9 +825,9 @@ function Scene4ValueChain({
 
 function Scene5CapitalFlow({ dashOffset }: { dashOffset: number }) {
   const flows = [
-    { d: "M 170,115 C 230,115 250,70 310,70", thick: 6, thin: 1.5, color: "#0d9488", animated: true },
+    { d: "M 170,115 C 230,115 250,70 310,70", thick: 6, thin: 1.5, color: "#FFB800", animated: true },
     { d: "M 170,115 C 230,115 250,195 310,195", thick: 9, thin: 1, color: "#ffffff", animated: true },
-    { d: "M 490,70 C 550,70 570,70 630,70", thick: 5, thin: 1.5, color: "#0d9488", animated: true },
+    { d: "M 490,70 C 550,70 570,70 630,70", thick: 5, thin: 1.5, color: "#FFB800", animated: true },
     { d: "M 490,195 C 550,195 570,195 630,195", thick: 7, thin: 1, color: "#ffffff", animated: false },
   ];
 
@@ -849,15 +849,15 @@ function Scene5CapitalFlow({ dashOffset }: { dashOffset: number }) {
         Unified Sankey capital distribution pathways
       </p>
 
-      <div className="relative w-full max-w-4xl aspect-[16/8] md:aspect-[16/6] bg-[#0b131e]/50 border border-white/5 rounded-2xl p-5 backdrop-blur-md shadow-2xl z-10 overflow-hidden">
+      <div className="relative w-full max-w-4xl aspect-[16/8] md:aspect-[16/6] bg-[#0a0a14]/50 border border-white/5 rounded-2xl p-5 backdrop-blur-md shadow-2xl z-10 overflow-hidden">
         {/* Node labels */}
         {nodes.map((node) => (
           <div
             key={node.title}
-            className={`absolute bg-[#0b131e] border ${node.accent ? "border-[#0d9488]/40 shadow-[0_0_12px_rgba(13,148,136,0.1)]" : "border-white/10"} rounded-xl p-2.5 font-mono z-20`}
+            className={`absolute bg-[#0a0a14] border ${node.accent ? "border-[#FFB800]/40 shadow-[0_0_12px_rgba(255,184,0,0.1)]" : "border-white/10"} rounded-xl p-2.5 font-mono z-20`}
             style={node.style}
           >
-            <span className={`text-[7px] ${node.accent ? "text-[#0d9488]" : "text-white/50"} uppercase block mb-0.5 font-bold tracking-wider`}>
+            <span className={`text-[7px] ${node.accent ? "text-[#FFB800]" : "text-white/50"} uppercase block mb-0.5 font-bold tracking-wider`}>
               {node.tag}
             </span>
             <span className="text-[10px] font-bold text-white block">{node.title}</span>
@@ -919,19 +919,19 @@ function Scene6Matrix({
               className={`p-5 rounded-2xl border text-left cursor-pointer transition-all duration-300 relative interactive-control ${
                 hoveredQuad === quad.id
                   ? quad.highlight
-                    ? "bg-[#0d9488]/15 border-[#0d9488] shadow-[0_0_20px_rgba(13,148,136,0.25)] scale-[1.02]"
-                    : "bg-[#0d9488]/5 border-[#0d9488]/60 scale-[1.02]"
-                  : "bg-[#0b131e]/90 border-white/5 hover:border-[#0d9488]/30"
+                    ? "bg-[#FFB800]/15 border-[#FFB800] shadow-[0_0_20px_rgba(255,184,0,0.25)] scale-[1.02]"
+                    : "bg-[#FFB800]/5 border-[#FFB800]/60 scale-[1.02]"
+                  : "bg-[#0a0a14]/90 border-white/5 hover:border-[#FFB800]/30"
               }`}
             >
               {quad.highlight && (
-                <span className="absolute top-2 right-2 text-[7px] font-mono text-[#0d9488] font-bold bg-[#0d9488]/10 px-1.5 py-0.5 rounded">
+                <span className="absolute top-2 right-2 text-[7px] font-mono text-[#FFB800] font-bold bg-[#FFB800]/10 px-1.5 py-0.5 rounded">
                   PRIMARY TARGET
                 </span>
               )}
               <span
                 className={`font-mono text-[8px] font-bold block mb-1.5 ${
-                  quad.highlight ? "text-[#0d9488]" : "text-white/50"
+                  quad.highlight ? "text-[#FFB800]" : "text-white/50"
                 }`}
               >
                 {quad.tag}
@@ -956,9 +956,9 @@ function Scene6Matrix({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.25 }}
-                className="bg-[#0b131e]/90 border border-[#0d9488]/30 p-6 rounded-2xl backdrop-blur-md shadow-2xl space-y-4"
+                className="bg-[#0a0a14]/90 border border-[#FFB800]/30 p-6 rounded-2xl backdrop-blur-md shadow-2xl space-y-4"
               >
-                <div className="border-b border-[#0d9488]/20 pb-3">
+                <div className="border-b border-[#FFB800]/20 pb-3">
                   <h4 className="text-sm font-bold text-white uppercase tracking-wider">
                     {MATRIX_QUADS[hoveredQuad].title}
                   </h4>
@@ -976,7 +976,7 @@ function Scene6Matrix({
                     >
                       <span className="text-white/50 uppercase">{row.label}</span>
                       <span
-                        className={`font-bold ${row.accent ? "text-[#0d9488]" : "text-white"}`}
+                        className={`font-bold ${row.accent ? "text-[#FFB800]" : "text-white"}`}
                       >
                         {row.val}
                       </span>
@@ -1014,7 +1014,7 @@ function Scene7FinalThesis() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at center, rgba(13,148,136,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at center, rgba(255,184,0,0.06) 0%, transparent 70%)",
         }}
       />
 
@@ -1031,7 +1031,7 @@ function Scene7FinalThesis() {
         <span className="block mb-2 text-white font-semibold">
           isn&apos;t on the ground.
         </span>
-        <span className="block text-[#0d9488] font-bold">
+        <span className="block text-[#FFB800] font-bold">
           It is the orbital layer.
         </span>
       </h2>
@@ -1045,7 +1045,7 @@ function Scene7FinalThesis() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
         <Link
           href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0d9488] hover:bg-[#0f766e] text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
+          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
         >
           <ArrowLeft className="w-4 h-4" />
           Return to Main Deck
@@ -1321,8 +1321,46 @@ export default function SpaceEconomyPage() {
   // RENDER
   // ---------------------------------------------------------------------------
   return (
-    <div className="min-h-screen bg-[#080c12] text-white font-sans selection:bg-[#0d9488] selection:text-white relative">
+    <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
       <Navbar />
+
+      {/* Top-Right Presentation Mode Toggle (matches landing page) */}
+      <div className="fixed top-20 right-6 z-40 font-mono text-xs">
+        <div className="flex items-center gap-3 bg-[#030308]/75 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+          <span className="text-white/60 tracking-wider uppercase text-[9px] font-bold">
+            Presentation Mode
+          </span>
+          <div className="flex items-center bg-black/40 border border-white/5 rounded-full p-0.5">
+            <button
+              onClick={() => {
+                setPresentationActive(true);
+                setHudOpen(true);
+                setCurrentFrameIndex(0);
+              }}
+              className={`px-3 py-0.5 rounded-full text-[9px] font-bold tracking-widest transition-all interactive-control ${
+                presentationActive
+                  ? "bg-[#FFB800] text-[#030308]"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              ON
+            </button>
+            <button
+              onClick={() => {
+                setPresentationActive(false);
+                setHudOpen(false);
+              }}
+              className={`px-3 py-0.5 rounded-full text-[9px] font-bold tracking-widest transition-all interactive-control ${
+                !presentationActive
+                  ? "bg-white/15 text-white"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              OFF
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* ------------------------------------------------------------------- */}
       {/* PRESENTER HUD */}
@@ -1334,18 +1372,18 @@ export default function SpaceEconomyPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-2xl bg-[#0a1220]/95 border border-[#0d9488]/25 rounded-2xl p-4 shadow-2xl backdrop-blur-xl hud-overlay"
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] w-[92%] max-w-2xl bg-[#0a0a14]/95 border border-[#FFB800]/25 rounded-2xl p-4 shadow-2xl backdrop-blur-xl hud-overlay"
           >
             <div className="flex items-center justify-between border-b border-white/[0.06] pb-2.5 mb-3">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0d9488] animate-pulse" />
-                <span className="font-mono text-[9px] tracking-[0.3em] text-[#0d9488] font-bold uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse" />
+                <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] font-bold uppercase">
                   Presenter Deck Control
                 </span>
               </div>
               <div className="flex items-center gap-4 text-[10px] font-mono text-white/45">
                 <div className="flex items-center gap-1.5">
-                  <Clock className="w-3 h-3 text-[#0d9488]" />
+                  <Clock className="w-3 h-3 text-[#FFB800]" />
                   <span>{formatTime(elapsedTime)}</span>
                 </div>
                 <button
@@ -1353,7 +1391,7 @@ export default function SpaceEconomyPage() {
                     setPresentationActive(false);
                     setHudOpen(false);
                   }}
-                  className="hover:text-white transition-colors cursor-pointer text-[#0d9488] interactive-control"
+                  className="hover:text-white transition-colors cursor-pointer text-[#FFB800] interactive-control"
                 >
                   [EXIT]
                 </button>
@@ -1365,13 +1403,13 @@ export default function SpaceEconomyPage() {
                 <h4 className="text-[9px] text-white/45 uppercase tracking-widest">
                   Slide {currentFrameIndex + 1} of {TOTAL_FRAMES}
                 </h4>
-                <p className="text-sm font-semibold text-white mt-1 border-l-2 border-[#0d9488] pl-3">
+                <p className="text-sm font-semibold text-white mt-1 border-l-2 border-[#FFB800] pl-3">
                   {SPEAKER_NOTES[currentFrameIndex].title}
                 </p>
                 <ul className="text-[10px] text-white/65 leading-relaxed mt-2 space-y-1">
                   {SPEAKER_NOTES[currentFrameIndex].points.map((note, i) => (
                     <li key={i} className="flex gap-1.5">
-                      <span className="text-[#0d9488] shrink-0">›</span>
+                      <span className="text-[#FFB800] shrink-0">›</span>
                       <span>{note}</span>
                     </li>
                   ))}
@@ -1382,7 +1420,7 @@ export default function SpaceEconomyPage() {
                 <button
                   onClick={prevSlide}
                   disabled={currentFrameIndex === 0 || isTransitioning}
-                  className="p-2 border border-white/10 hover:border-[#0d9488]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
+                  className="p-2 border border-white/10 hover:border-[#FFB800]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
@@ -1392,7 +1430,7 @@ export default function SpaceEconomyPage() {
                 <button
                   onClick={nextSlide}
                   disabled={currentFrameIndex === TOTAL_FRAMES - 1 || isTransitioning}
-                  className="p-2 border border-white/10 hover:border-[#0d9488]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
+                  className="p-2 border border-white/10 hover:border-[#FFB800]/50 disabled:opacity-25 rounded-xl hover:bg-white/5 transition-all cursor-pointer interactive-control"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -1402,7 +1440,7 @@ export default function SpaceEconomyPage() {
             {/* Progress bar */}
             <div className="mt-3 w-full h-[2px] bg-white/[0.05] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#0d9488] transition-all duration-500"
+                className="h-full bg-[#FFB800] transition-all duration-500"
                 style={{
                   width: `${((currentFrameIndex + 1) / TOTAL_FRAMES) * 100}%`,
                 }}
@@ -1424,9 +1462,9 @@ export default function SpaceEconomyPage() {
             setHudOpen(true);
             setCurrentFrameIndex(0);
           }}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-[#0a1220]/90 border border-[#0d9488]/30 hover:border-[#0d9488]/70 text-[#0d9488] font-mono text-[10px] uppercase tracking-widest rounded-full shadow-xl backdrop-blur-md transition-all duration-300 interactive-control"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 bg-[#0a0a14]/90 border border-[#FFB800]/30 hover:border-[#FFB800]/70 text-[#FFB800] font-mono text-[10px] uppercase tracking-widest rounded-full shadow-xl backdrop-blur-md transition-all duration-300 interactive-control"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#0d9488]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800]" />
           Present [P]
         </button>
       )}
@@ -1436,9 +1474,9 @@ export default function SpaceEconomyPage() {
       {/* ------------------------------------------------------------------- */}
       <div
         ref={containerRef}
-        className="relative w-full h-[800vh] bg-[#080c12]"
+        className="relative w-full h-[800vh] bg-[#030308]"
       >
-        <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#080c12] z-10">
+        <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
 
           {/* Global grid overlay */}
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
@@ -1588,7 +1626,7 @@ export default function SpaceEconomyPage() {
                   key={i}
                   className={`w-1 h-1 rounded-full transition-all duration-300 ${
                     currentFrameIndex === i
-                      ? "bg-[#0d9488] scale-125"
+                      ? "bg-[#FFB800] scale-125"
                       : "bg-white/20"
                   }`}
                 />
@@ -1601,3 +1639,4 @@ export default function SpaceEconomyPage() {
     </div>
   );
 }
+
