@@ -29,19 +29,40 @@ export function Disclaimer() {
         style={{ opacity, y }}
         className="relative z-10 w-full max-w-7xl px-8 md:px-16 mx-auto my-auto flex flex-col justify-center"
       >
-        {/* Title: Styled as a div to bypass the Georgia serif !important override on h1-h6 in globals.css */}
-        <div className="text-3xl md:text-4xl lg:text-5xl font-sans font-black tracking-wider text-[#FFB800] mb-8 uppercase select-none">
-          DISCLAIMER
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          {/* Left Column: Title & Key Warning Card */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
+            <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase block mb-3 opacity-60">
+              00 / LEGAL COMPLIANCE
+            </span>
+            <div className="text-3xl md:text-4xl lg:text-5xl font-sans font-black tracking-wider text-[#FFB800] mb-6 uppercase select-none">
+              DISCLAIMER
+            </div>
+            
+            <div className="border border-[#FFB800]/15 bg-[#FFB800]/[0.02] p-5 rounded-lg relative overflow-hidden backdrop-blur-sm shadow-lg shadow-black/20">
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#FFB800]" />
+              <div className="text-[9px] font-mono tracking-widest text-[#FFB800] uppercase mb-2 font-bold opacity-80">
+                POSITION DISCLOSURE
+              </div>
+              <p className="font-sans text-xs sm:text-sm text-[#FFB800] leading-relaxed font-medium">
+                The speaker and / or associated persons may hold positions in one or more of the securities mentioned, and those positions may change at any time without notice.
+              </p>
+            </div>
+          </div>
 
-        {/* Disclaimer text content as a single contiguous paragraph */}
-        <p className="font-sans text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed md:leading-loose text-white/80 text-justify tracking-wide max-w-[95%]">
-          This presentation is for educational and informational purposes only and does not constitute investment advice, a research report, or a recommendation to buy, sell, or hold any security. It is not a solicitation or offer to deal in any security. The companies, sectors, and securities discussed are referenced solely to illustrate the analytical framework and themes presented; their inclusion is not a recommendation.{" "}
-          <span className="bg-[#FFB800] text-[#030308] px-2 py-0.5 rounded-[2px] font-bold inline-block md:inline">
-            The speaker and / or associated persons may hold positions in one or more of the securities mentioned, and those positions may change at any time without notice.
-          </span>{" "}
-          All information drawn from sources believed to be reliable and from publicly available primary documents, but no representation or warranty, express or implied, is made as to its accuracy, completeness, or timeliness. Forward-looking statements and management guidance referenced herein are subject to change and inherent uncertainty. Past performance is not indicative of future results. Investing in securities carries risk, including possible loss of principal. Recipients should conduct their own independent due diligence and consult a SEBI-registered investment adviser before making any investment decision. The speaker accepts no liability for any loss arising from reliance on this material.
-        </p>
+          {/* Right Column: Detailed Disclaimers */}
+          <div className="lg:col-span-7 space-y-4 text-xs sm:text-sm leading-relaxed text-white/50 transition-colors duration-300 hover:text-white/70">
+            <p className="font-sans">
+              This presentation is for educational and informational purposes only and does not constitute investment advice, a research report, or a recommendation to buy, sell, or hold any security. It is not a solicitation or offer to deal in any security. The companies, sectors, and securities discussed are referenced solely to illustrate the analytical framework and themes presented; their inclusion is not a recommendation.
+            </p>
+            <p className="font-sans">
+              All information drawn from sources believed to be reliable and from publicly available primary documents, but no representation or warranty, express or implied, is made as to its accuracy, completeness, or timeliness. Forward-looking statements and management guidance referenced herein are subject to change and inherent uncertainty. Past performance is not indicative of future results.
+            </p>
+            <p className="font-sans">
+              Investing in securities carries risk, including possible loss of principal. Recipients should conduct their own independent due diligence and consult a SEBI-registered investment adviser before making any investment decision. The speaker accepts no liability for any loss arising from reliance on this material.
+            </p>
+          </div>
+        </div>
       </motion.div>
 
       {/* Bottom border hazard stripe tape spanning full width, matching the user's screenshot exactly */}

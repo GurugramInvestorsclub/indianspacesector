@@ -149,7 +149,7 @@ export function DeepTechWebinars() {
             DEEPTECH WEBINARS
           </h2>
           <p className="font-sans text-base md:text-lg text-white/65 leading-relaxed tracking-wide">
-            Explore India&apos;s most important technology revolutions through first-principles research and storytelling.
+            Explore India&apos;s most important technology revolutions through first-principles research.
           </p>
         </div>
 
