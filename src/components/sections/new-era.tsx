@@ -16,112 +16,112 @@ export function NewEra() {
 
   // -------------------------------------------------------------
   // Scene 1: Transition ("For decades, space was...")
-  // Range: 0.0 -> 0.14 (Transition)
+  // Range: 0.0 -> 0.25 (Transition)
   // -------------------------------------------------------------
-  const scene1ContainerOpacity = useTransform(scrollYProgress, [0.0, 0.12, 0.14], [1, 1, 0]);
+  const scene1ContainerOpacity = useTransform(scrollYProgress, [0.0, 0.23, 0.25], [1, 1, 0]);
 
   // Part A: "For decades..."
-  const scene1AOpacity = useTransform(scrollYProgress, [0.0, 0.02, 0.05, 0.07], [0, 1, 1, 0]);
-  const scene1AY = useTransform(scrollYProgress, [0.0, 0.02, 0.05, 0.07], [15, 0, 0, -15]);
+  const scene1AOpacity = useTransform(scrollYProgress, [0.0, 0.01, 0.06, 0.07], [0, 1, 1, 0]);
+  const scene1AY = useTransform(scrollYProgress, [0.0, 0.01, 0.06, 0.07], [15, 0, 0, -15]);
 
   // Part B: "Today, it is becoming..."
-  const scene1BOpacity = useTransform(scrollYProgress, [0.06, 0.08, 0.11, 0.13], [0, 1, 1, 0]);
-  const scene1BY = useTransform(scrollYProgress, [0.06, 0.08, 0.11, 0.13], [15, 0, 0, -15]);
+  const scene1BOpacity = useTransform(scrollYProgress, [0.06, 0.07, 0.23, 0.25], [0, 1, 1, 0]);
+  const scene1BY = useTransform(scrollYProgress, [0.06, 0.07, 0.23, 0.25], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
   // Scene 2: The Opportunity Chart (2023 -> 2030)
-  // Range: 0.14 -> 0.28
+  // Range: 0.25 -> 0.38
   // -------------------------------------------------------------
-  const scene2Opacity = useTransform(scrollYProgress, [0.14, 0.16, 0.25, 0.28], [0, 1, 1, 0]);
-  const barHeight2023 = useTransform(scrollYProgress, [0.16, 0.22], [0, 10]); // 10% height
-  const barHeight2030 = useTransform(scrollYProgress, [0.16, 0.22], [0, 90]); // 90% height
+  const scene2Opacity = useTransform(scrollYProgress, [0.23, 0.25, 0.35, 0.38], [0, 1, 1, 0]);
+  const barHeight2023 = useTransform(scrollYProgress, [0.25, 0.31], [0, 10]); // 10% height
+  const barHeight2030 = useTransform(scrollYProgress, [0.25, 0.31], [0, 90]); // 90% height
 
   // -------------------------------------------------------------
   // Scene 3: The Question ("Why would companies...")
-  // Range: 0.28 -> 0.38
+  // Range: 0.38 -> 0.50
   // -------------------------------------------------------------
-  const scene3Opacity = useTransform(scrollYProgress, [0.28, 0.30, 0.35, 0.38], [0, 1, 1, 0]);
-  const scene3Y = useTransform(scrollYProgress, [0.28, 0.30, 0.35, 0.38], [20, 0, 0, -20]);
+  const scene3Opacity = useTransform(scrollYProgress, [0.35, 0.38, 0.48, 0.50], [0, 1, 1, 0]);
+  const scene3Y = useTransform(scrollYProgress, [0.35, 0.38, 0.48, 0.50], [20, 0, 0, -20]);
 
   // -------------------------------------------------------------
   // Scene 4 & 5: The Constellation & Jio Proof
-  // Range: 0.38 -> 0.58
+  // Range: 0.50 -> 0.70
   // -------------------------------------------------------------
-  const scene4Opacity = useTransform(scrollYProgress, [0.38, 0.40, 0.55, 0.58], [0, 1, 1, 0]);
-  const constellationScale = useTransform(scrollYProgress, [0.38, 0.58], [1.02, 0.97]);
-  const constellationImgOpacity = useTransform(scrollYProgress, [0.38, 0.41, 0.55, 0.58], [0, 0.4, 0.4, 0]);
+  const scene4Opacity = useTransform(scrollYProgress, [0.48, 0.50, 0.68, 0.70], [0, 1, 1, 0]);
+  const constellationScale = useTransform(scrollYProgress, [0.48, 0.70], [1.02, 0.97]);
+  const constellationImgOpacity = useTransform(scrollYProgress, [0.48, 0.50, 0.68, 0.70], [0, 0.4, 0.4, 0]);
   
   // Controls the emergence of the constellation nodes and paths
-  const orbitRingScale = useTransform(scrollYProgress, [0.38, 0.50], [0.85, 1.05]);
-  const satellitesOpacity = useTransform(scrollYProgress, [0.39, 0.48], [0, 1]);
+  const orbitRingScale = useTransform(scrollYProgress, [0.48, 0.60], [0.85, 1.05]);
+  const satellitesOpacity = useTransform(scrollYProgress, [0.49, 0.58], [0, 1]);
 
   // Map scroll progress to a raw satellite count that goes from 0 to 1600
-  const satelliteCount = useTransform(scrollYProgress, [0.40, 0.48], [0, 1600]);
+  const satelliteCount = useTransform(scrollYProgress, [0.50, 0.58], [0, 1600]);
 
   // Interpolated state for displaying in React
   const [displayCount, setDisplayCount] = useState(0);
 
   useEffect(() => {
-    return satelliteCount.on("change", (latest) => {
+    return satelliteCount.onChange((latest) => {
       setDisplayCount(Math.min(1600, Math.floor(latest)));
     });
   }, [satelliteCount]);
 
   // Jio Statement Opacity
-  const jioTextOpacity = useTransform(scrollYProgress, [0.48, 0.51, 0.55, 0.58], [0, 1, 1, 0]);
-  const jioTextY = useTransform(scrollYProgress, [0.48, 0.51, 0.55, 0.58], [15, 0, 0, -15]);
+  const jioTextOpacity = useTransform(scrollYProgress, [0.58, 0.60, 0.68, 0.70], [0, 1, 1, 0]);
+  const jioTextY = useTransform(scrollYProgress, [0.58, 0.60, 0.68, 0.70], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
   // Scene 6: Why It Matters (Use Cases Network Map)
-  // Range: 0.58 -> 0.73
+  // Range: 0.70 -> 0.83
   // -------------------------------------------------------------
-  const scene6Opacity = useTransform(scrollYProgress, [0.58, 0.60, 0.70, 0.73], [0, 1, 1, 0]);
-  const networkImgOpacity = useTransform(scrollYProgress, [0.58, 0.61, 0.70, 0.73], [0, 0.35, 0.35, 0]);
-  const networkImgScale = useTransform(scrollYProgress, [0.58, 0.73], [1.03, 0.98]);
+  const scene6Opacity = useTransform(scrollYProgress, [0.68, 0.70, 0.81, 0.83], [0, 1, 1, 0]);
+  const networkImgOpacity = useTransform(scrollYProgress, [0.68, 0.70, 0.81, 0.83], [0, 0.35, 0.35, 0]);
+  const networkImgScale = useTransform(scrollYProgress, [0.68, 0.83], [1.03, 0.98]);
 
   // Staggered reveal of the use cases callouts
-  const useCase1Opacity = useTransform(scrollYProgress, [0.60, 0.62], [0, 1]);
-  const useCase2Opacity = useTransform(scrollYProgress, [0.62, 0.64], [0, 1]);
-  const useCase3Opacity = useTransform(scrollYProgress, [0.64, 0.66], [0, 1]);
-  const useCase4Opacity = useTransform(scrollYProgress, [0.66, 0.68], [0, 1]);
+  const useCase1Opacity = useTransform(scrollYProgress, [0.70, 0.72], [0, 1]);
+  const useCase2Opacity = useTransform(scrollYProgress, [0.72, 0.74], [0, 1]);
+  const useCase3Opacity = useTransform(scrollYProgress, [0.74, 0.76], [0, 1]);
+  const useCase4Opacity = useTransform(scrollYProgress, [0.76, 0.78], [0, 1]);
 
   // -------------------------------------------------------------
   // Scene 7: The Big Realization ("Railways connected...")
-  // Range: 0.73 -> 0.85
+  // Range: 0.83 -> 0.94
   // -------------------------------------------------------------
-  const scene7Opacity = useTransform(scrollYProgress, [0.73, 0.75, 0.82, 0.85], [0, 1, 1, 0]);
+  const scene7Opacity = useTransform(scrollYProgress, [0.81, 0.83, 0.92, 0.94], [0, 1, 1, 0]);
   
   // Staggered lines
-  const line7AOpacity = useTransform(scrollYProgress, [0.74, 0.76, 0.82, 0.85], [0, 1, 1, 0]);
-  const line7AY = useTransform(scrollYProgress, [0.74, 0.76, 0.82, 0.85], [15, 0, 0, -15]);
+  const line7AOpacity = useTransform(scrollYProgress, [0.82, 0.84, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7AY = useTransform(scrollYProgress, [0.82, 0.84, 0.92, 0.94], [15, 0, 0, -15]);
 
-  const line7BOpacity = useTransform(scrollYProgress, [0.76, 0.78, 0.82, 0.85], [0, 1, 1, 0]);
-  const line7BY = useTransform(scrollYProgress, [0.76, 0.78, 0.82, 0.85], [15, 0, 0, -15]);
+  const line7BOpacity = useTransform(scrollYProgress, [0.84, 0.86, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7BY = useTransform(scrollYProgress, [0.84, 0.86, 0.92, 0.94], [15, 0, 0, -15]);
 
-  const line7COpacity = useTransform(scrollYProgress, [0.78, 0.80, 0.82, 0.85], [0, 1, 1, 0]);
-  const line7CY = useTransform(scrollYProgress, [0.78, 0.80, 0.82, 0.85], [15, 0, 0, -15]);
+  const line7COpacity = useTransform(scrollYProgress, [0.86, 0.88, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7CY = useTransform(scrollYProgress, [0.86, 0.88, 0.92, 0.94], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
   // Scene 8: The Finale (Vision -> Moon -> $77B -> Climax)
-  // Range: 0.85 -> 1.0 (Ends in complete fade-to-black at 1.0)
+  // Range: 0.94 -> 1.0 (Ends in complete fade-to-black at 1.0)
   // -------------------------------------------------------------
-  const scene8Opacity = useTransform(scrollYProgress, [0.85, 0.88, 0.97, 1.0], [0, 1, 1, 0]);
-  const finalBackdropOpacity = useTransform(scrollYProgress, [0.85, 0.88, 0.97, 1.0], [0, 0.75, 0.75, 0]);
-  const finalBackdropScale = useTransform(scrollYProgress, [0.85, 1.0], [1.04, 0.97]);
+  const scene8Opacity = useTransform(scrollYProgress, [0.92, 0.94, 0.99, 1.0], [0, 1, 1, 0]);
+  const finalBackdropOpacity = useTransform(scrollYProgress, [0.92, 0.94, 0.99, 1.0], [0, 0.75, 0.75, 0]);
+  const finalBackdropScale = useTransform(scrollYProgress, [0.92, 1.0], [1.04, 0.97]);
 
   // Finale lines stagger
-  const finalAOpacity = useTransform(scrollYProgress, [0.87, 0.89], [0, 1]);
-  const finalAY = useTransform(scrollYProgress, [0.87, 0.89], [15, 0]);
+  const finalAOpacity = useTransform(scrollYProgress, [0.94, 0.95], [0, 1]);
+  const finalAY = useTransform(scrollYProgress, [0.94, 0.95], [15, 0]);
 
-  const finalBOpacity = useTransform(scrollYProgress, [0.89, 0.91], [0, 1]);
-  const finalBY = useTransform(scrollYProgress, [0.89, 0.91], [15, 0]);
+  const finalBOpacity = useTransform(scrollYProgress, [0.95, 0.96], [0, 1]);
+  const finalBY = useTransform(scrollYProgress, [0.95, 0.96], [15, 0]);
 
-  const finalCOpacity = useTransform(scrollYProgress, [0.91, 0.93], [0, 1]);
-  const finalCY = useTransform(scrollYProgress, [0.91, 0.93], [15, 0]);
+  const finalCOpacity = useTransform(scrollYProgress, [0.96, 0.97], [0, 1]);
+  const finalCY = useTransform(scrollYProgress, [0.96, 0.97], [15, 0]);
 
-  const finalClimaxOpacity = useTransform(scrollYProgress, [0.93, 0.95], [0, 1]);
-  const finalClimaxY = useTransform(scrollYProgress, [0.93, 0.95], [15, 0]);
-  const finalStatementY = useTransform(scrollYProgress, [0.85, 0.88, 0.97, 1.0], [20, 0, 0, -20]);
+  const finalClimaxOpacity = useTransform(scrollYProgress, [0.97, 0.98], [0, 1]);
+  const finalClimaxY = useTransform(scrollYProgress, [0.97, 0.98], [15, 0]);
+  const finalStatementY = useTransform(scrollYProgress, [0.92, 0.94, 0.99, 1.0], [20, 0, 0, -20]);
 
   return (
     <div 

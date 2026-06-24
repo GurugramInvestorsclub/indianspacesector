@@ -13,24 +13,24 @@ export function Aryabhata() {
   });
 
   // Scene 1: "Thirteen years later..."
-  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.05, 0.15, 0.20], [0, 1, 1, 0]);
-  const scene1Y = useTransform(scrollYProgress, [0.0, 0.05, 0.15, 0.20], [15, 0, 0, -10]);
+  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.05, 0.10, 0.20], [0, 1, 1, 0]);
+  const scene1Y = useTransform(scrollYProgress, [0.0, 0.05, 0.10, 0.20], [15, 0, 0, -10]);
 
   // Scene 2: "1975"
-  const yearOpacity = useTransform(scrollYProgress, [0.20, 0.25, 0.35, 0.40], [0, 1, 1, 0]);
+  const yearOpacity = useTransform(scrollYProgress, [0.20, 0.25, 0.30, 0.40], [0, 1, 1, 0]);
   const yearScale = useTransform(scrollYProgress, [0.20, 0.40], [1.1, 0.95]);
 
   // Scene 3: Aryabhata image reveal
-  const satelliteOpacity = useTransform(scrollYProgress, [0.40, 0.48, 0.75, 0.82], [0, 0.85, 0.85, 0]);
-  const satelliteScale = useTransform(scrollYProgress, [0.40, 0.82], [0.95, 1.02]);
+  const satelliteOpacity = useTransform(scrollYProgress, [0.40, 0.45, 0.70, 0.80], [0, 0.85, 0.85, 0]);
+  const satelliteScale = useTransform(scrollYProgress, [0.40, 0.80], [0.95, 1.02]);
   
   // Scene 4: The Story
-  const storyOpacity = useTransform(scrollYProgress, [0.52, 0.58, 0.75, 0.82], [0, 1, 1, 0]);
-  const storyY = useTransform(scrollYProgress, [0.52, 0.58, 0.75, 0.82], [15, 0, 0, -10]);
+  const storyOpacity = useTransform(scrollYProgress, [0.44, 0.50, 0.70, 0.80], [0, 1, 1, 0]);
+  const storyY = useTransform(scrollYProgress, [0.44, 0.50, 0.70, 0.80], [15, 0, 0, -10]);
 
   // Scene 5: Legacy echoes (concentric rings and faint text)
-  const legacyOpacity = useTransform(scrollYProgress, [0.82, 0.88, 0.96, 0.99], [0, 1, 1, 0]);
-  const legacyScale = useTransform(scrollYProgress, [0.82, 0.99], [0.9, 1.1]);
+  const legacyOpacity = useTransform(scrollYProgress, [0.80, 0.85, 0.90, 1.0], [0, 1, 1, 0]);
+  const legacyScale = useTransform(scrollYProgress, [0.80, 1.0], [0.9, 1.1]);
 
   return (
     <div 

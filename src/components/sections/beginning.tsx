@@ -47,48 +47,48 @@ export function Beginning() {
   // -------------------------------------------------------------
 
   // Scene 1: Sputnik & entering the space age
-  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.05, 0.18, 0.22], [0, 1, 1, 0]);
-  const scene1Y = useTransform(scrollYProgress, [0.0, 0.05, 0.18, 0.22], [20, 0, 0, -20]);
+  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.05, 0.10, 0.20], [0, 1, 1, 0]);
+  const scene1Y = useTransform(scrollYProgress, [0.0, 0.05, 0.10, 0.20], [20, 0, 0, -20]);
   
   // Archival visual image block in Scene 1
-  const archivalOpacity = useTransform(scrollYProgress, [0.08, 0.12, 0.18, 0.22], [0, 1, 1, 0]);
-  const archivalScale = useTransform(scrollYProgress, [0.08, 0.22], [0.95, 1.03]);
+  const archivalOpacity = useTransform(scrollYProgress, [0.02, 0.08, 0.10, 0.20], [0, 1, 1, 0]);
+  const archivalScale = useTransform(scrollYProgress, [0.02, 0.20], [0.95, 1.03]);
 
   // Scene 2: Vikram Sarabhai Portrait & Scientific Sketches
-  const scene2Opacity = useTransform(scrollYProgress, [0.22, 0.26, 0.40, 0.44], [0, 1, 1, 0]);
-  const portraitY = useTransform(scrollYProgress, [0.22, 0.26, 0.40, 0.44], [40, 0, 0, -30]);
-  const sketchesY = useTransform(scrollYProgress, [0.22, 0.44], [20, -40]); // slower scroll for depth
+  const scene2Opacity = useTransform(scrollYProgress, [0.20, 0.25, 0.30, 0.40], [0, 1, 1, 0]);
+  const portraitY = useTransform(scrollYProgress, [0.20, 0.25, 0.30, 0.40], [40, 0, 0, -30]);
+  const sketchesY = useTransform(scrollYProgress, [0.20, 0.40], [20, -40]); // slower scroll for depth
 
   // Scene 3: The Vision Quote
-  const scene3Opacity = useTransform(scrollYProgress, [0.44, 0.47, 0.60, 0.64], [0, 1, 1, 0]);
+  const scene3Opacity = useTransform(scrollYProgress, [0.40, 0.45, 0.50, 0.60], [0, 1, 1, 0]);
   
   // Scene 3 progressive line transforms
-  const quoteLine1Opacity = useTransform(scrollYProgress, [0.45, 0.47, 0.58, 0.62], [0, 1, 1, 0]);
-  const quoteLine2Opacity = useTransform(scrollYProgress, [0.47, 0.49, 0.58, 0.62], [0, 1, 1, 0]);
-  const quoteLine3Opacity = useTransform(scrollYProgress, [0.49, 0.51, 0.58, 0.62], [0, 1, 1, 0]);
-  const quoteLine4Opacity = useTransform(scrollYProgress, [0.51, 0.53, 0.59, 0.63], [0, 1, 1, 0]);
-  const quoteLine5Opacity = useTransform(scrollYProgress, [0.53, 0.55, 0.59, 0.63], [0, 1, 1, 0]);
-  const quoteLine6Opacity = useTransform(scrollYProgress, [0.55, 0.57, 0.59, 0.63], [0, 1, 1, 0]);
-  const quoteLine7Opacity = useTransform(scrollYProgress, [0.57, 0.59, 0.60, 0.64], [0, 1, 1, 0]);
+  const quoteLine1Opacity = useTransform(scrollYProgress, [0.41, 0.44, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine2Opacity = useTransform(scrollYProgress, [0.42, 0.45, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine3Opacity = useTransform(scrollYProgress, [0.43, 0.46, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine4Opacity = useTransform(scrollYProgress, [0.44, 0.47, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine5Opacity = useTransform(scrollYProgress, [0.45, 0.48, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine6Opacity = useTransform(scrollYProgress, [0.46, 0.49, 0.50, 0.60], [0, 1, 1, 0]);
+  const quoteLine7Opacity = useTransform(scrollYProgress, [0.47, 0.50, 0.50, 0.60], [0, 1, 1, 0]);
 
   // Scene 4: Birth of Indian Space Program (INCOSPAR Node Network)
-  const scene4Opacity = useTransform(scrollYProgress, [0.64, 0.67, 0.80, 0.84], [0, 1, 1, 0]);
-  const mapScale = useTransform(scrollYProgress, [0.64, 0.84], [0.92, 1.05]);
-  const pathLength = useTransform(scrollYProgress, [0.68, 0.76], [0, 1]);
-  const nodeConnectionsOpacity = useTransform(scrollYProgress, [0.72, 0.78], [0, 1]);
+  const scene4Opacity = useTransform(scrollYProgress, [0.60, 0.65, 0.70, 0.80], [0, 1, 1, 0]);
+  const mapScale = useTransform(scrollYProgress, [0.60, 0.80], [0.92, 1.05]);
+  const pathLength = useTransform(scrollYProgress, [0.63, 0.75], [0, 1]);
+  const nodeConnectionsOpacity = useTransform(scrollYProgress, [0.68, 0.76], [0, 1]);
 
   // Scene 5: Thumba Launching Site
-  const scene5Opacity = useTransform(scrollYProgress, [0.84, 0.87, 0.98, 1.0], [0, 1, 1, 0]);
-  const magneticEquatorOpacity = useTransform(scrollYProgress, [0.86, 0.89], [0, 0.8]);
-  const oceanWaveOffset = useTransform(scrollYProgress, [0.84, 1.0], [0, 80]);
-  const rocketY = useTransform(scrollYProgress, [0.88, 0.98], [250, -450]);
-  const starsDensity = useTransform(scrollYProgress, [0.90, 0.98], [0, 1]);
+  const scene5Opacity = useTransform(scrollYProgress, [0.80, 0.85, 0.90, 1.0], [0, 1, 1, 0]);
+  const magneticEquatorOpacity = useTransform(scrollYProgress, [0.82, 0.86], [0, 0.8]);
+  const oceanWaveOffset = useTransform(scrollYProgress, [0.80, 1.0], [0, 80]);
+  const rocketY = useTransform(scrollYProgress, [0.84, 0.98], [250, -450]);
+  const starsDensity = useTransform(scrollYProgress, [0.86, 0.98], [0, 1]);
 
   // Archival photos (bicycle & bullock cart) transitions in Scene 4 (INCOSPAR)
-  const bicycleOpacity = useTransform(scrollYProgress, [0.64, 0.68, 0.80, 0.84], [0, 1, 1, 0]);
-  const bicycleX = useTransform(scrollYProgress, [0.64, 0.68], [-30, 0]);
-  const cartOpacity = useTransform(scrollYProgress, [0.66, 0.70, 0.80, 0.84], [0, 1, 1, 0]);
-  const cartX = useTransform(scrollYProgress, [0.66, 0.70], [30, 0]);
+  const bicycleOpacity = useTransform(scrollYProgress, [0.60, 0.65, 0.70, 0.80], [0, 1, 1, 0]);
+  const bicycleX = useTransform(scrollYProgress, [0.60, 0.65], [-30, 0]);
+  const cartOpacity = useTransform(scrollYProgress, [0.62, 0.67, 0.70, 0.80], [0, 1, 1, 0]);
+  const cartX = useTransform(scrollYProgress, [0.62, 0.67], [30, 0]);
 
   // -------------------------------------------------------------
   // CANVAS ANIMATION LOOP (3D ROTATING GLOBE & SPUTNIK)
@@ -176,7 +176,7 @@ export function Beginning() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Only draw the globe if we are in Scene 1 or Scene 2
-      if (progress > 0.44) {
+      if (progress > 0.40) {
         animationFrameId = requestAnimationFrame(render);
         return;
       }
@@ -198,15 +198,15 @@ export function Beginning() {
       let rotY = timeAngle + scrollAngle;
       let rotX = (15 * Math.PI) / 180; // Default slight tilt
 
-      if (progress < 0.22) {
+      if (progress < 0.20) {
         // Scene 1: Centered globe, regular spin
         cx = width / 2;
         cy = height / 2;
         zoom = 1.0;
-        globeOpacity = progress < 0.05 ? progress / 0.05 : 1.0;
-      } else if (progress < 0.32) {
+        globeOpacity = progress < 0.02 ? progress / 0.02 : 1.0;
+      } else if (progress < 0.30) {
         // Transition Scene 1 -> Scene 2: Pan left, zoom in, lock on India/Ahmedabad
-        const t = (progress - 0.22) / 0.10;
+        const t = (progress - 0.20) / 0.10;
         const easeT = t * t * (3 - 2 * t); // smoothstep
 
         const targetRotY = (-72.57 * Math.PI) / 180;
@@ -240,8 +240,8 @@ export function Beginning() {
         }
 
         // Fade out as we transition into Scene 3
-        if (progress > 0.40) {
-          globeOpacity = Math.max(0, 1.0 - (progress - 0.40) / 0.04);
+        if (progress > 0.38) {
+          globeOpacity = Math.max(0, 1.0 - (progress - 0.38) / 0.02);
         }
       }
 
@@ -368,9 +368,15 @@ export function Beginning() {
       });
 
       // Draw Sputnik 1 Orbit & Satellite (Only in Scene 1)
-      if (progress < 0.24) {
+      if (progress < 0.20) {
         const sputnikTime = Date.now() * 0.001;
         const sputnikAngle = (sputnikTime) % (Math.PI * 2);
+
+        // Smoothly fade out Sputnik elements as we approach Scene 2 (progress 0.18 to 0.20)
+        let sputnikFade = 1.0;
+        if (progress > 0.18) {
+          sputnikFade = Math.max(0, 1.0 - (progress - 0.18) / 0.02);
+        }
 
         // 1. Draw Orbit Line
         ctx.beginPath();
@@ -394,7 +400,7 @@ export function Beginning() {
           const py = cy - oy2 * zoom;
 
           if (oz2 > 0) {
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * sputnikFade})`;
             if (firstSputnikPt) {
               ctx.moveTo(px, py);
               firstSputnikPt = false;
@@ -426,7 +432,7 @@ export function Beginning() {
         const isSputnikFront = sz2 > 0;
 
         // Maintain Sputnik History for trail
-        sputnikHistory.push({ x: spx, y: spy, opacity: isSputnikFront ? 1.0 : 0.2 });
+        sputnikHistory.push({ x: spx, y: spy, opacity: (isSputnikFront ? 1.0 : 0.2) * sputnikFade });
         if (sputnikHistory.length > 35) {
           sputnikHistory.shift();
         }
@@ -443,7 +449,7 @@ export function Beginning() {
             sputnikHistory[sputnikHistory.length - 1].x, sputnikHistory[sputnikHistory.length - 1].y
           );
           trailGrad.addColorStop(0, "rgba(255, 184, 0, 0)");
-          trailGrad.addColorStop(1, "rgba(255, 184, 0, 0.4)");
+          trailGrad.addColorStop(1, `rgba(255, 184, 0, ${0.4 * sputnikFade})`);
           ctx.strokeStyle = trailGrad;
           ctx.lineWidth = 1.5;
           ctx.stroke();
@@ -451,7 +457,7 @@ export function Beginning() {
 
         // Draw Sputnik satellite body & antennae
         ctx.save();
-        ctx.globalAlpha = isSputnikFront ? 1.0 : 0.25;
+        ctx.globalAlpha = (isSputnikFront ? 1.0 : 0.25) * sputnikFade;
         
         // Draw 4 antennae lines pointing backwards (opposite to orbit tangent)
         const tangentAngle = sputnikAngle + Math.PI / 2;
@@ -502,7 +508,7 @@ export function Beginning() {
         // 3. Draw radio-wave transmission pulses (expanding rings)
         if (isSputnikFront) {
           const pulseOffset = (Date.now() * 0.001) % 1.5;
-          ctx.strokeStyle = `rgba(255, 184, 0, ${Math.max(0, 0.7 - pulseOffset / 1.5)})`;
+          ctx.strokeStyle = `rgba(255, 184, 0, ${Math.max(0, (0.7 - pulseOffset / 1.5) * sputnikFade)})`;
           ctx.lineWidth = 1;
           
           ctx.beginPath();

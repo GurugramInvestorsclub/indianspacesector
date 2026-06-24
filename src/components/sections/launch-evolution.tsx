@@ -38,19 +38,19 @@ export function LaunchEvolution() {
   // Track active slide index using standard motion value event listener to toggle pointer-events
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     // 8 scenes split across 0 to 1 scroll progress range:
-    if (latest < 0.11) {
+    if (latest < 0.125) {
       setActiveIndex(0);
-    } else if (latest < 0.24) {
+    } else if (latest < 0.25) {
       setActiveIndex(1);
-    } else if (latest < 0.37) {
+    } else if (latest < 0.375) {
       setActiveIndex(2);
     } else if (latest < 0.50) {
       setActiveIndex(3);
-    } else if (latest < 0.63) {
+    } else if (latest < 0.625) {
       setActiveIndex(4);
-    } else if (latest < 0.76) {
+    } else if (latest < 0.75) {
       setActiveIndex(5);
-    } else if (latest < 0.89) {
+    } else if (latest < 0.875) {
       setActiveIndex(6);
     } else {
       setActiveIndex(7);
@@ -59,14 +59,14 @@ export function LaunchEvolution() {
 
   const getSceneTransforms = (index: number) => {
     const ranges = [
-      { inStart: 0.0, inEnd: 0.0, outStart: 0.08, outEnd: 0.12 },       // 0: Intro
-      { inStart: 0.09, inEnd: 0.12, outStart: 0.21, outEnd: 0.25 },     // 1: SLV-3
-      { inStart: 0.22, inEnd: 0.25, outStart: 0.34, outEnd: 0.38 },     // 2: Leadership Failure
-      { inStart: 0.35, inEnd: 0.38, outStart: 0.47, outEnd: 0.51 },     // 3: ASLV
-      { inStart: 0.48, inEnd: 0.51, outStart: 0.60, outEnd: 0.64 },     // 4: PSLV
-      { inStart: 0.61, inEnd: 0.64, outStart: 0.73, outEnd: 0.77 },     // 5: GSLV
-      { inStart: 0.74, inEnd: 0.77, outStart: 0.86, outEnd: 0.90 },     // 6: LVM3
-      { inStart: 0.87, inEnd: 0.90, outStart: 0.96, outEnd: 1.00 },     // 7: SSLV
+      { inStart: 0.0, inEnd: 0.0, outStart: 0.11, outEnd: 0.125 },       // 0: Intro
+      { inStart: 0.125, inEnd: 0.14, outStart: 0.235, outEnd: 0.25 },   // 1: SLV-3
+      { inStart: 0.25, inEnd: 0.265, outStart: 0.36, outEnd: 0.375 },   // 2: Leadership Failure
+      { inStart: 0.375, inEnd: 0.39, outStart: 0.485, outEnd: 0.50 },   // 3: ASLV
+      { inStart: 0.50, inEnd: 0.515, outStart: 0.61, outEnd: 0.625 },   // 4: PSLV
+      { inStart: 0.625, inEnd: 0.64, outStart: 0.735, outEnd: 0.75 },   // 5: GSLV
+      { inStart: 0.75, inEnd: 0.765, outStart: 0.86, outEnd: 0.875 },   // 6: LVM3
+      { inStart: 0.875, inEnd: 0.89, outStart: 0.98, outEnd: 1.00 },   // 7: SSLV
     ];
     
     const r = ranges[index];

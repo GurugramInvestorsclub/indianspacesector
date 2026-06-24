@@ -53,17 +53,17 @@ export function TheBuilder() {
   });
 
   // Scene Opacities & Positions
-  // Scene 1: Fades in early, fades out at 0.3
-  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.05, 0.28, 0.33], [0, 1, 1, 0]);
-  const scene1Y = useTransform(scrollYProgress, [0.0, 0.28, 0.33], [0, 0, -25]);
+  // Scene 1: Fades in early, fades out at 0.31
+  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.02, 0.31, 0.33], [0, 1, 1, 0]);
+  const scene1Y = useTransform(scrollYProgress, [0.0, 0.31, 0.33], [0, 0, -25]);
 
-  // Scene 2: Fades in at 0.33, fades out at 0.63
-  const scene2Opacity = useTransform(scrollYProgress, [0.33, 0.38, 0.62, 0.66], [0, 1, 1, 0]);
-  const scene2Y = useTransform(scrollYProgress, [0.33, 0.38, 0.62, 0.66], [25, 0, 0, -25]);
+  // Scene 2: Fades in at 0.33, fades out at 0.64
+  const scene2Opacity = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [0, 1, 1, 0]);
+  const scene2Y = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [25, 0, 0, -25]);
 
   // Scene 3: Fades in at 0.66
-  const scene3Opacity = useTransform(scrollYProgress, [0.66, 0.72, 0.96, 1.0], [0, 1, 1, 0]);
-  const scene3Y = useTransform(scrollYProgress, [0.66, 0.72], [25, 0]);
+  const scene3Opacity = useTransform(scrollYProgress, [0.66, 0.68, 0.98, 1.0], [0, 1, 1, 0]);
+  const scene3Y = useTransform(scrollYProgress, [0.66, 0.68], [25, 0]);
 
   // Parallax values for Scene 2 (Satish Dhawan blueprints)
   const bgBlueprintY = useTransform(scrollYProgress, [0.33, 0.66], [-40, 40]);
