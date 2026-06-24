@@ -606,10 +606,10 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
           className="absolute z-20 bottom-[14vh] left-1/2 -translate-x-1/2 pointer-events-auto"
         >
           <Link
-            href="/chapters/space-economy"
+            href="/chapters/paradigm-shift"
             className="interactive-control group inline-flex items-center gap-3 px-8 py-4 bg-[#FFB800] hover:bg-[#ffc62e] text-[#030308] font-mono text-xs uppercase tracking-[0.18em] rounded-full font-bold shadow-[0_0_30px_rgba(255,184,0,0.25)] transition-all duration-300"
           >
-            <span>Enter the Space Economy</span>
+            <span>Enter the Paradigm Shift</span>
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>

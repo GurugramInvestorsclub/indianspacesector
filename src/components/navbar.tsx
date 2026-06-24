@@ -17,7 +17,7 @@ const navLinks = [
 
 // Dedicated chapter pages (full routes, not anchors).
 const pageLinks = [
-  { label: "Space Economy", href: "/chapters/space-economy" },
+  { label: "Paradigm Shift", href: "/chapters/paradigm-shift" },
 ];
 
 export function Navbar() {
