@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 
 interface Particle {
@@ -95,7 +96,7 @@ export function TheBuilder() {
 
   // Load Vikram Sarabhai image & create stardust particles
   useEffect(() => {
-    const img = new Image();
+    const img = new window.Image();
     img.src = "/vikram_sarabhai.jpg";
     img.crossOrigin = "anonymous";
     img.onload = () => {
@@ -401,66 +402,51 @@ export function TheBuilder() {
                 />
               </svg>
 
-              {/* Layered Parallax Silhouette representing Satish Dhawan */}
+              {/* Layered Parallax Portrait representing Satish Dhawan */}
               <motion.div
                 style={{ y: silhouetteY }}
-                className="relative w-[280px] h-[340px] flex justify-center items-center"
+                className="relative w-[280px] h-[350px] flex justify-center items-center"
               >
-                {/* Outer beaker frame */}
-                <div className="absolute inset-0 border border-white/5 rounded-sm p-4 bg-gradient-to-tr from-[#050510]/80 to-transparent backdrop-blur-md">
+                {/* Outer blueprint card frame */}
+                <div className="absolute inset-0 border border-white/5 rounded-sm p-3 bg-gradient-to-tr from-[#050510]/90 to-[#030308]/90 backdrop-blur-md flex flex-col justify-between shadow-2xl">
                   
-                  {/* Detailed Blueprint line art profile of Dhawan */}
-                  <svg className="w-full h-full text-white/70" viewBox="0 0 200 240" fill="none">
-                    {/* Grid background on card */}
-                    <g opacity="0.15">
-                      <line x1="20" y1="0" x2="20" y2="240" stroke="white" strokeWidth="0.5" />
-                      <line x1="60" y1="0" x2="60" y2="240" stroke="white" strokeWidth="0.5" />
-                      <line x1="100" y1="0" x2="100" y2="240" stroke="white" strokeWidth="0.5" />
-                      <line x1="140" y1="0" x2="140" y2="240" stroke="white" strokeWidth="0.5" />
-                      <line x1="180" y1="0" x2="180" y2="240" stroke="white" strokeWidth="0.5" />
-                      <line x1="0" y1="40" x2="200" y2="40" stroke="white" strokeWidth="0.5" />
-                      <line x1="0" y1="80" x2="200" y2="80" stroke="white" strokeWidth="0.5" />
-                      <line x1="0" y1="120" x2="200" y2="120" stroke="white" strokeWidth="0.5" />
-                      <line x1="0" y1="160" x2="200" y2="160" stroke="white" strokeWidth="0.5" />
-                      <line x1="0" y1="200" x2="200" y2="200" stroke="white" strokeWidth="0.5" />
-                    </g>
-                    
-                    {/* Profile outline of Satish Dhawan wearing glasses (styled technical vectors) */}
-                    <path 
-                      d="M 120,40 C 135,40 145,55 145,75 C 145,95 135,115 125,120 L 122,122 L 125,125 C 130,130 135,145 130,175 C 128,185 120,200 110,210 L 90,215 L 75,200 L 70,185 L 70,165 C 68,160 62,158 55,160 L 50,140 C 50,130 55,125 60,122 L 65,110 C 65,100 62,95 62,85 C 62,70 70,55 85,45 C 95,40 110,40 120,40 Z" 
-                      fill="#030308"
-                      stroke="#FFB800" 
-                      strokeWidth="1.5" 
-                      opacity="0.85"
+                  {/* Detailed Blueprint actual photo of Dhawan */}
+                  <div className="relative w-full h-[88%] rounded-sm overflow-hidden border border-white/10">
+                    <Image
+                      src="/satish_dhawan.png"
+                      alt="Dr. Satish Dhawan Portrait"
+                      fill
+                      priority
+                      className="object-cover object-top grayscale contrast-[1.25] brightness-[0.75] select-none pointer-events-none"
                     />
+                    
+                    {/* Grid overlay over photo */}
+                    <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
+                    <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_35%,#030308_95%] opacity-90 pointer-events-none" />
 
-                    {/* Intellectual glasses profile lines */}
-                    <path d="M 60,110 L 75,100 M 55,112 C 55,105 60,98 68,98 M 62,118 L 82,108" stroke="#FFB800" strokeWidth="1.2" />
-                    
-                    {/* Aerodynamic flow points / blueprint nodes */}
-                    <circle cx="85" cy="45" r="3" fill="#FFB800" />
-                    <circle cx="120" cy="40" r="3" fill="#FFB800" />
-                    <circle cx="145" cy="75" r="3" fill="#FFB800" />
-                    <circle cx="130" cy="175" r="3" fill="#FFB800" />
-                    <circle cx="65" cy="110" r="3" fill="#FFB800" />
-                    
-                    {/* Blueprint annotations */}
-                    <text x="15" y="25" fill="#FFB800" fontSize="8" fontFamily="monospace" opacity="0.6">MODEL: SD-1972</text>
-                    <text x="15" y="35" fill="white" fontSize="8" fontFamily="monospace" opacity="0.4">ROLE: CHAIRMAN</text>
-                    <text x="15" y="225" fill="white" fontSize="8" fontFamily="monospace" opacity="0.3">SCALE: 1:15</text>
-                    
-                    {/* Dimension arrows */}
-                    <line x1="60" y1="210" x2="140" y2="210" stroke="white" strokeWidth="0.5" opacity="0.4" />
-                    <line x1="60" y1="207" x2="60" y2="213" stroke="white" strokeWidth="0.5" opacity="0.4" />
-                    <line x1="140" y1="207" x2="140" y2="213" stroke="white" strokeWidth="0.5" opacity="0.4" />
-                    <text x="80" y="220" fill="white" fontSize="7" fontFamily="monospace" opacity="0.4">DHAWAN CORE PROFILE</text>
-                  </svg>
+                    {/* Target crosshairs */}
+                    <svg className="absolute inset-0 w-full h-full opacity-30 text-[#FFB800]" viewBox="0 0 100 100" fill="none">
+                      <circle cx="50" cy="45" r="8" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
+                      <line x1="50" y1="32" x2="50" y2="58" stroke="currentColor" strokeWidth="0.5" />
+                      <line x1="37" y1="45" x2="63" y2="45" stroke="currentColor" strokeWidth="0.5" />
+                      <rect x="5" y="5" width="90" height="90" stroke="currentColor" strokeWidth="0.3" strokeDasharray="3 6" />
+                    </svg>
+                  </div>
+                  
+                  {/* Blueprint annotations */}
+                  <div className="flex justify-between items-end z-10 font-mono text-[8px] text-white/50 px-1 mt-1.5">
+                    <div className="flex flex-col">
+                      <span className="text-[#FFB800] font-bold">MODEL: SD-1972</span>
+                      <span>ROLE: ISRO CHAIRMAN</span>
+                    </div>
+                    <span className="opacity-40">Sriharikota 13.7° N</span>
+                  </div>
                   
                   {/* Subtle technical scanner effect line */}
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFB800]/40 to-transparent animate-scan" style={{ animationDuration: "6s" }} />
                 </div>
 
-                <span className="absolute top-2 right-4 font-mono text-[9px] text-[#FFB800] tracking-widest bg-[#030308] px-2 py-0.5 rounded border border-[#FFB800]/20 uppercase">
+                <span className="absolute top-2 right-4 font-mono text-[9px] text-[#FFB800] tracking-widest bg-[#030308] px-2 py-0.5 rounded border border-[#FFB800]/20 uppercase z-10">
                   ACTIVE SCHEMATIC
                 </span>
               </motion.div>
