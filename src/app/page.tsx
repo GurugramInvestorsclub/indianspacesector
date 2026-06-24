@@ -478,12 +478,12 @@ export default function Home() {
       <Speaker />
       <Disclaimer />
       <DeepTechWebinars presentationActive={presentationActive} />
-      <Beginning />
-      <Aryabhata />
-      <TheBuilder />
-      <LaunchEvolution />
-      <Exploration />
-      <NewEra />
+      <Beginning presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
+      <Aryabhata presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
+      <TheBuilder presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
+      <LaunchEvolution presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
+      <Exploration presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
+      <NewEra presentationActive={presentationActive} currentFrameIndex={currentFrameIndex} />
 
       {/* Top-Right Presentation Mode Toggle Button */}
       <div className="fixed top-20 right-6 z-40 font-mono text-xs">

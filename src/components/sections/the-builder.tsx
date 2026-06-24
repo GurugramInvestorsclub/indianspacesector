@@ -2,7 +2,12 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue } from "motion/react";
+
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
 
 interface Particle {
   ox: number; // original X relative to center
@@ -16,7 +21,7 @@ interface Particle {
   noiseSpeed: number;
 }
 
-export function TheBuilder() {
+export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -31,68 +36,93 @@ export function TheBuilder() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [alignmentStatus, setAlignmentStatus] = useState("ALIGNING...");
+  const scrollValRef = useRef(0);
+  const progress = useMotionValue(0);
 
-  // Active scene calculation:
-  // Scene 1: 0.0 to 0.33
-  // Scene 2: 0.33 to 0.66
-  // Scene 3: 0.66 to 1.0
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.33) {
-      setActiveIndex(1);
-    } else if (latest < 0.66) {
-      setActiveIndex(2);
+  useEffect(() => {
+    if (presentationActive) {
+      let p = 0;
+      if (currentFrameIndex === 13) {
+        p = 0.15;
+        setActiveIndex(1);
+        setAlignmentStatus("ALIGNING...");
+      } else if (currentFrameIndex === 14) {
+        p = 0.49;
+        setActiveIndex(2);
+        setAlignmentStatus("ALIGNING...");
+      } else if (currentFrameIndex === 15) {
+        p = 0.78;
+        setActiveIndex(3);
+        setAlignmentStatus("ALIGNING...");
+      } else if (currentFrameIndex === 16) {
+        p = 0.94;
+        setActiveIndex(3);
+        setAlignmentStatus("CALIBRATED");
+      } else if (currentFrameIndex < 13) {
+        p = 0.0;
+      } else {
+        p = 1.0;
+      }
+      progress.set(p);
+      scrollValRef.current = p;
     } else {
-      setActiveIndex(3);
-    }
+      progress.set(scrollYProgress.get());
+      scrollValRef.current = scrollYProgress.get();
+      return scrollYProgress.onChange((latest) => {
+        progress.set(latest);
+        scrollValRef.current = latest;
+        
+        // Active index calculation:
+        if (latest < 0.33) {
+          setActiveIndex(1);
+        } else if (latest < 0.66) {
+          setActiveIndex(2);
+        } else {
+          setActiveIndex(3);
+        }
 
-    if (latest >= 0.85) {
-      setAlignmentStatus("CALIBRATED");
-    } else {
-      setAlignmentStatus("ALIGNING...");
+        if (latest >= 0.85) {
+          setAlignmentStatus("CALIBRATED");
+        } else {
+          setAlignmentStatus("ALIGNING...");
+        }
+      });
     }
-  });
+  }, [presentationActive, currentFrameIndex, scrollYProgress, progress]);
 
   // Scene Opacities & Positions
   // Scene 1: Fades in early, fades out at 0.31
-  const scene1Opacity = useTransform(scrollYProgress, [0.0, 0.02, 0.31, 0.33], [0, 1, 1, 0]);
-  const scene1Y = useTransform(scrollYProgress, [0.0, 0.31, 0.33], [0, 0, -25]);
+  const scene1Opacity = useTransform(progress, [0.0, 0.02, 0.31, 0.33], [0, 1, 1, 0]);
+  const scene1Y = useTransform(progress, [0.0, 0.31, 0.33], [0, 0, -25]);
 
   // Scene 2: Fades in at 0.33, fades out at 0.64
-  const scene2Opacity = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [0, 1, 1, 0]);
-  const scene2Y = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [25, 0, 0, -25]);
+  const scene2Opacity = useTransform(progress, [0.33, 0.35, 0.64, 0.66], [0, 1, 1, 0]);
+  const scene2Y = useTransform(progress, [0.33, 0.35, 0.64, 0.66], [25, 0, 0, -25]);
 
   // Scene 3: Fades in at 0.66
-  const scene3Opacity = useTransform(scrollYProgress, [0.66, 0.68, 0.98, 1.0], [0, 1, 1, 0]);
-  const scene3Y = useTransform(scrollYProgress, [0.66, 0.68], [25, 0]);
+  const scene3Opacity = useTransform(progress, [0.66, 0.68, 0.98, 1.0], [0, 1, 1, 0]);
+  const scene3Y = useTransform(progress, [0.66, 0.68], [25, 0]);
 
   // Parallax values for Scene 2 (Satish Dhawan blueprints)
-  const bgBlueprintY = useTransform(scrollYProgress, [0.33, 0.66], [-40, 40]);
-  const silhouetteY = useTransform(scrollYProgress, [0.33, 0.66], [10, -10]);
+  const bgBlueprintY = useTransform(progress, [0.33, 0.66], [-40, 40]);
+  const silhouetteY = useTransform(progress, [0.33, 0.66], [10, -10]);
 
   // Rocket parts assembly in Scene 3 (0.66 to 0.90)
-  const assemblyProgress = useTransform(scrollYProgress, [0.68, 0.88], [0, 1]);
-  const part1Y = useTransform(scrollYProgress, [0.68, 0.88], [-180, 0]); // Nose Cone
-  const part1Rotate = useTransform(scrollYProgress, [0.68, 0.88], [-12, 0]);
-  const part2Y = useTransform(scrollYProgress, [0.68, 0.88], [-60, 0]);  // Upper stage
-  const part3Y = useTransform(scrollYProgress, [0.68, 0.88], [60, 0]);   // Lower stage
-  const part4Y = useTransform(scrollYProgress, [0.68, 0.88], [180, 0]);  // Nozzle / Fins
-  const part4Rotate = useTransform(scrollYProgress, [0.68, 0.88], [8, 0]);
+  const assemblyProgress = useTransform(progress, [0.68, 0.88], [0, 1]);
+  const part1Y = useTransform(progress, [0.68, 0.88], [-180, 0]); // Nose Cone
+  const part1Rotate = useTransform(progress, [0.68, 0.88], [-12, 0]);
+  const part2Y = useTransform(progress, [0.68, 0.88], [-60, 0]);  // Upper stage
+  const part3Y = useTransform(progress, [0.68, 0.88], [60, 0]);   // Lower stage
+  const part4Y = useTransform(progress, [0.68, 0.88], [180, 0]);  // Nozzle / Fins
+  const part4Rotate = useTransform(progress, [0.68, 0.88], [8, 0]);
 
   // Satellite waiting elements in Scene 3
-  const satelliteOpacity = useTransform(scrollYProgress, [0.68, 0.78, 0.88, 0.93], [0, 0.4, 0.4, 0]);
-  const satelliteScale = useTransform(scrollYProgress, [0.68, 0.93], [0.9, 0.8]);
+  const satelliteOpacity = useTransform(progress, [0.68, 0.78, 0.88, 0.93], [0, 0.4, 0.4, 0]);
+  const satelliteScale = useTransform(progress, [0.68, 0.93], [0.9, 0.8]);
 
   // BUILD THE ROCKETS text scale and glow
-  const textScale = useTransform(scrollYProgress, [0.85, 0.93], [0.85, 1.05]);
-  const textOpacity = useTransform(scrollYProgress, [0.85, 0.93], [0, 1]);
-
-  // Keep track of scroll position inside Ref to prevent react re-renders on canvas animation
-  const scrollValRef = useRef(0);
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      scrollValRef.current = latest;
-    });
-  }, [scrollYProgress]);
+  const textScale = useTransform(progress, [0.85, 0.93], [0.85, 1.05]);
+  const textOpacity = useTransform(progress, [0.85, 0.93], [0, 1]);
 
   // Load Vikram Sarabhai image & create stardust particles
   useEffect(() => {

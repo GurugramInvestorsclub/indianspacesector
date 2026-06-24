@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue } from "motion/react";
 import { Target, Calendar, Globe, Cpu, Activity, Info } from "lucide-react";
 
 interface MissionEvent {
@@ -18,7 +18,12 @@ interface TelemetryRow {
   highlight?: boolean;
 }
 
-export function Exploration() {
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
+
+export function Exploration({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -26,32 +31,52 @@ export function Exploration() {
     offset: ["start start", "end end"]
   });
 
+  const progress = useMotionValue(0);
+
+  useEffect(() => {
+    if (presentationActive) {
+      let p = 0;
+      if (currentFrameIndex === 25 || currentFrameIndex === 26) p = 0.15;
+      else if (currentFrameIndex === 27) p = 0.49;
+      else if (currentFrameIndex === 28) p = 0.83;
+      else if (currentFrameIndex < 25) p = 0.0;
+      else p = 1.0;
+
+      progress.set(p);
+    } else {
+      progress.set(scrollYProgress.get());
+      return scrollYProgress.onChange((latest) => {
+        progress.set(latest);
+      });
+    }
+  }, [presentationActive, currentFrameIndex, scrollYProgress, progress]);
+
   // -------------------------------------------------------------
   // Act 1: The Moon (Scroll 0.00 to 0.33)
   // -------------------------------------------------------------
-  const moonBgOpacity = useTransform(scrollYProgress, [0.0, 0.31, 0.33], [0.85, 0.85, 0]);
-  const moonScale = useTransform(scrollYProgress, [0.0, 0.33], [1.02, 0.98]);
-  const moonTextOpacity = useTransform(scrollYProgress, [0.0, 0.02, 0.31, 0.33], [0, 1, 1, 0]);
-  const moonTextY = useTransform(scrollYProgress, [0.0, 0.02, 0.31, 0.33], [20, 0, 0, -20]);
-  const moonOrbitRotate = useTransform(scrollYProgress, [0.0, 0.33], [0, 45]);
+  const moonBgOpacity = useTransform(progress, [0.0, 0.31, 0.33], [0.85, 0.85, 0]);
+  const moonScale = useTransform(progress, [0.0, 0.33], [1.02, 0.98]);
+  const moonTextOpacity = useTransform(progress, [0.0, 0.02, 0.31, 0.33], [0, 1, 1, 0]);
+  const moonTextY = useTransform(progress, [0.0, 0.02, 0.31, 0.33], [20, 0, 0, -20]);
+  const moonOrbitRotate = useTransform(progress, [0.0, 0.33], [0, 45]);
 
   // -------------------------------------------------------------
   // Act 2: Mars (Scroll 0.33 to 0.66)
   // -------------------------------------------------------------
-  const marsBgOpacity = useTransform(scrollYProgress, [0.31, 0.33, 0.64, 0.66], [0, 0.85, 0.85, 0]);
-  const marsScale = useTransform(scrollYProgress, [0.31, 0.66], [1.04, 0.98]);
-  const marsTextOpacity = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [0, 1, 1, 0]);
-  const marsTextY = useTransform(scrollYProgress, [0.33, 0.35, 0.64, 0.66], [20, 0, 0, -20]);
-  const marsOrbitRotate = useTransform(scrollYProgress, [0.31, 0.66], [-15, 30]);
+  const marsBgOpacity = useTransform(progress, [0.31, 0.33, 0.64, 0.66], [0, 0.85, 0.85, 0]);
+  const marsScale = useTransform(progress, [0.31, 0.66], [1.04, 0.98]);
+  const marsTextOpacity = useTransform(progress, [0.33, 0.35, 0.64, 0.66], [0, 1, 1, 0]);
+  const marsTextY = useTransform(progress, [0.33, 0.35, 0.64, 0.66], [20, 0, 0, -20]);
+  const marsOrbitRotate = useTransform(progress, [0.31, 0.66], [-15, 30]);
 
   // -------------------------------------------------------------
   // Act 3: The Sun (Scroll 0.66 to 1.00)
   // -------------------------------------------------------------
-  const sunBgOpacity = useTransform(scrollYProgress, [0.64, 0.66, 0.98, 1.0], [0, 0.85, 0.85, 0]);
-  const sunScale = useTransform(scrollYProgress, [0.64, 1.0], [1.04, 0.98]);
-  const sunTextOpacity = useTransform(scrollYProgress, [0.66, 0.68, 0.98, 1.0], [0, 1, 1, 0]);
-  const sunTextY = useTransform(scrollYProgress, [0.66, 0.68, 0.98, 1.0], [20, 0, 0, -20]);
-  const sunOrbitRotate = useTransform(scrollYProgress, [0.64, 1.0], [0, 60]);
+  const sunBgOpacity = useTransform(progress, [0.64, 0.66, 0.98, 1.0], [0, 0.85, 0.85, 0]);
+  const sunScale = useTransform(progress, [0.64, 1.0], [1.04, 0.98]);
+  const sunTextOpacity = useTransform(progress, [0.66, 0.68, 0.98, 1.0], [0, 1, 1, 0]);
+  const sunTextY = useTransform(progress, [0.66, 0.68, 0.98, 1.0], [20, 0, 0, -20]);
+  const sunOrbitRotate = useTransform(progress, [0.64, 1.0], [0, 60]);
 
   // Mission Datasets
   const moonMissions: MissionEvent[] = [

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue } from "motion/react";
 
 interface Callout {
   label: string;
@@ -26,7 +26,12 @@ interface RocketData {
   callouts: Callout[];
 }
 
-export function LaunchEvolution() {
+interface SectionProps {
+  presentationActive?: boolean;
+  currentFrameIndex?: number;
+}
+
+export function LaunchEvolution({ presentationActive = false, currentFrameIndex = 0 }: SectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   
@@ -35,8 +40,39 @@ export function LaunchEvolution() {
     offset: ["start start", "end end"]
   });
 
+  const progress = useMotionValue(0);
+
+  useEffect(() => {
+    if (presentationActive) {
+      let p = 0;
+      if (currentFrameIndex === 17) p = 0.05;
+      else if (currentFrameIndex === 18) p = 0.18;
+      else if (currentFrameIndex === 19) p = 0.31;
+      else if (currentFrameIndex === 20) p = 0.44;
+      else if (currentFrameIndex === 21) p = 0.56;
+      else if (currentFrameIndex === 22) p = 0.69;
+      else if (currentFrameIndex === 23) p = 0.81;
+      else if (currentFrameIndex === 24) p = 0.94;
+      else if (currentFrameIndex < 17) p = 0.0;
+      else p = 1.0;
+
+      progress.set(p);
+
+      // Force instant active index updates for presentation clicks
+      const targetActiveIndex = currentFrameIndex - 17;
+      if (targetActiveIndex >= 0 && targetActiveIndex <= 7) {
+        setActiveIndex(targetActiveIndex);
+      }
+    } else {
+      progress.set(scrollYProgress.get());
+      return scrollYProgress.onChange((latest) => {
+        progress.set(latest);
+      });
+    }
+  }, [presentationActive, currentFrameIndex, scrollYProgress, progress]);
+
   // Track active slide index using standard motion value event listener to toggle pointer-events
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  useMotionValueEvent(progress, "change", (latest) => {
     // 8 scenes split across 0 to 1 scroll progress range:
     if (latest < 0.125) {
       setActiveIndex(0);
@@ -97,36 +133,36 @@ export function LaunchEvolution() {
 
   // Statically declare transforms for scroll scrubbing (clamped to prevent extrapolation bugs)
   const t0 = getSceneTransforms(0);
-  const opacity0 = useTransform(scrollYProgress, t0.opacityInput, t0.opacityOutput, { clamp: true });
-  const y0 = useTransform(scrollYProgress, t0.yInput, t0.yOutput, { clamp: true });
+  const opacity0 = useTransform(progress, t0.opacityInput, t0.opacityOutput, { clamp: true });
+  const y0 = useTransform(progress, t0.yInput, t0.yOutput, { clamp: true });
 
   const t1 = getSceneTransforms(1);
-  const opacity1 = useTransform(scrollYProgress, t1.opacityInput, t1.opacityOutput, { clamp: true });
-  const y1 = useTransform(scrollYProgress, t1.yInput, t1.yOutput, { clamp: true });
+  const opacity1 = useTransform(progress, t1.opacityInput, t1.opacityOutput, { clamp: true });
+  const y1 = useTransform(progress, t1.yInput, t1.yOutput, { clamp: true });
 
   const t2 = getSceneTransforms(2);
-  const opacity2 = useTransform(scrollYProgress, t2.opacityInput, t2.opacityOutput, { clamp: true });
-  const y2 = useTransform(scrollYProgress, t2.yInput, t2.yOutput, { clamp: true });
+  const opacity2 = useTransform(progress, t2.opacityInput, t2.opacityOutput, { clamp: true });
+  const y2 = useTransform(progress, t2.yInput, t2.yOutput, { clamp: true });
 
   const t3 = getSceneTransforms(3);
-  const opacity3 = useTransform(scrollYProgress, t3.opacityInput, t3.opacityOutput, { clamp: true });
-  const y3 = useTransform(scrollYProgress, t3.yInput, t3.yOutput, { clamp: true });
+  const opacity3 = useTransform(progress, t3.opacityInput, t3.opacityOutput, { clamp: true });
+  const y3 = useTransform(progress, t3.yInput, t3.yOutput, { clamp: true });
 
   const t4 = getSceneTransforms(4);
-  const opacity4 = useTransform(scrollYProgress, t4.opacityInput, t4.opacityOutput, { clamp: true });
-  const y4 = useTransform(scrollYProgress, t4.yInput, t4.yOutput, { clamp: true });
+  const opacity4 = useTransform(progress, t4.opacityInput, t4.opacityOutput, { clamp: true });
+  const y4 = useTransform(progress, t4.yInput, t4.yOutput, { clamp: true });
 
   const t5 = getSceneTransforms(5);
-  const opacity5 = useTransform(scrollYProgress, t5.opacityInput, t5.opacityOutput, { clamp: true });
-  const y5 = useTransform(scrollYProgress, t5.yInput, t5.yOutput, { clamp: true });
+  const opacity5 = useTransform(progress, t5.opacityInput, t5.opacityOutput, { clamp: true });
+  const y5 = useTransform(progress, t5.yInput, t5.yOutput, { clamp: true });
 
   const t6 = getSceneTransforms(6);
-  const opacity6 = useTransform(scrollYProgress, t6.opacityInput, t6.opacityOutput, { clamp: true });
-  const y6 = useTransform(scrollYProgress, t6.yInput, t6.yOutput, { clamp: true });
+  const opacity6 = useTransform(progress, t6.opacityInput, t6.opacityOutput, { clamp: true });
+  const y6 = useTransform(progress, t6.yInput, t6.yOutput, { clamp: true });
 
   const t7 = getSceneTransforms(7);
-  const opacity7 = useTransform(scrollYProgress, t7.opacityInput, t7.opacityOutput, { clamp: true });
-  const y7 = useTransform(scrollYProgress, t7.yInput, t7.yOutput, { clamp: true });
+  const opacity7 = useTransform(progress, t7.opacityInput, t7.opacityOutput, { clamp: true });
+  const y7 = useTransform(progress, t7.yInput, t7.yOutput, { clamp: true });
 
   const sceneStyles = [
     { opacity: opacity0, y: y0 },
