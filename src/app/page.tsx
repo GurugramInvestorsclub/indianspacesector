@@ -6,6 +6,8 @@ import { gsap } from "gsap";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Speaker } from "@/components/sections/speaker";
+import { Disclaimer } from "@/components/sections/disclaimer";
+import { DeepTechWebinars } from "@/components/sections/webinars";
 import { Beginning } from "@/components/sections/beginning";
 import { Aryabhata } from "@/components/sections/aryabhata";
 import { TheBuilder } from "@/components/sections/the-builder";
@@ -14,99 +16,90 @@ import { Exploration } from "@/components/sections/exploration";
 import { NewEra } from "@/components/sections/new-era";
 import { PresenterMode } from "@/components/presenter-mode";
 
-// 33 presentation frames defined in scroll vh units, aligned to the center of each scene's active visibility range:
+// 39 presentation frames defined in scroll vh units, aligned to the center of each scene's active visibility range:
 const FRAMES = [
   0,    // 0: Hero Overview
-  150,  // 1: Beginning Part 1 (Sputnik 1957)
-  230,  // 2: Beginning Part 2 (Vikram Sarabhai Portrait)
-  315,  // 3: Beginning Part 3 (The Vision Quote)
-  395,  // 4: Beginning Part 4 (INCOSPAR Node Network)
-  470,  // 5: Beginning Part 5 (Thumba Rocket)
-  640,  // 6: Aryabhata Scene 1 (Thirteen years later...)
-  720,  // 7: Aryabhata Scene 2 (1975 Milestone Year)
-  870,  // 8: Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
-  970,  // 9: Aryabhata Scene 5 (Legacy Echoes)
-  1165, // 10: The Builder Scene 1 (December 1971)
-  1300, // 11: The Builder Scene 2 (Satish Dhawan 1972)
-  1440, // 12: The Builder Scene 3 (A New Priority)
-  1480, // 13: The Builder Scene 3 Sub (Build The Rockets Directive)
-  1630, // 14: Launch Evolution Intro Text
-  1715, // 15: Launch Evolution SLV-3
-  1805, // 16: Leadership Lesson (Failure of 1979)
-  1900, // 17: Launch Evolution ASLV
-  1990, // 18: Launch Evolution PSLV
-  2080, // 19: Launch Evolution GSLV
-  2170, // 20: Launch Evolution LVM3
-  2250, // 21: Launch Evolution SSLV
-  2400, // 22: Exploration Act 1 (Moon - Background Only)
-  2445, // 23: Exploration Act 1 (Moon - Chandrayaan Text)
-  2540, // 24: Exploration Act 2 (Mars - Mangalyaan)
-  2640, // 25: Exploration Act 3 (Sun - Aditya L-1)
-  2825, // 26: New Era Scene 1 (Transition: For decades...)
-  2865, // 27: New Era Scene 1 Sub 1B (Sector Privatization)
-  2945, // 28: New Era Scene 2 (Opportunity Chart: $8B to $40B)
-  3030, // 29: New Era Scene 3 (Why would companies...)
-  3115, // 30: New Era Scene 4 & 5 (Constellation)
-  3170, // 31: New Era Scene 5 Sub (Jio Proof)
-  3255, // 32: New Era Scene 6 (Downstream Use Cases Network Map)
-  3350, // 33: New Era Scene 7 (The Big Realization - Railways)
-  3450, // 34: New Era Scene 8 (Conclusion / The Frontier Opens)
-  3470  // 35: New Era Scene 8 Sub (Conclusion / The Next Chapter Climax)
+  100,  // 1: Your Speaker Profile
+  200,  // 2: Disclaimer
+  300,  // 3: DeepTech Webinars
+  450,  // 4: Beginning Part 1 (Sputnik 1957)
+  530,  // 5: Beginning Part 2 (Vikram Sarabhai Portrait)
+  615,  // 6: Beginning Part 3 (The Vision Quote)
+  695,  // 7: Beginning Part 4 (INCOSPAR Node Network)
+  770,  // 8: Beginning Part 5 (Thumba Rocket)
+  940,  // 9: Aryabhata Scene 1 (Thirteen years later...)
+  1020, // 10: Aryabhata Scene 2 (1975 Milestone Year)
+  1170, // 11: Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
+  1270, // 12: Aryabhata Scene 5 (Legacy Echoes)
+  1465, // 13: The Builder Scene 1 (December 1971)
+  1600, // 14: The Builder Scene 2 (Satish Dhawan 1972)
+  1740, // 15: The Builder Scene 3 (A New Priority)
+  1780, // 16: The Builder Scene 3 Sub (Build The Rockets Directive)
+  1930, // 17: Launch Evolution Intro Text
+  2015, // 18: Launch Evolution SLV-3
+  2105, // 19: Leadership Lesson (Failure of 1979)
+  2200, // 20: Launch Evolution ASLV
+  2290, // 21: Launch Evolution PSLV
+  2380, // 22: Launch Evolution GSLV
+  2470, // 23: Launch Evolution LVM3
+  2550, // 24: Launch Evolution SSLV
+  2700, // 25: Exploration Act 1 (Moon - Background Only)
+  2745, // 26: Exploration Act 1 (Moon - Chandrayaan Text)
+  2840, // 27: Exploration Act 2 (Mars - Mangalyaan)
+  2940, // 28: Exploration Act 3 (Sun - Aditya L-1)
+  3125, // 29: New Era Scene 1 (Transition: For decades...)
+  3165, // 30: New Era Scene 1 Sub 1B (Sector Privatization)
+  3245, // 31: New Era Scene 2 (Opportunity Chart: $8B to $40B)
+  3330, // 32: New Era Scene 3 (Why would companies...)
+  3415, // 33: New Era Scene 4 & 5 (Constellation)
+  3470, // 34: New Era Scene 5 Sub (Jio Proof)
+  3555, // 35: New Era Scene 6 (Downstream Use Cases Network Map)
+  3650, // 36: New Era Scene 7 (The Big Realization - Railways)
+  3750, // 37: New Era Scene 8 (Conclusion / The Frontier Opens)
+  3770  // 38: New Era Scene 8 Sub (Conclusion / The Next Chapter Climax)
 ];
 
 // Map each frame index to a corresponding Chapter index (1 to 10) for PresenterMode speaker notes
 const FRAME_TO_CHAPTER = [
   1,  // Frame 0 (Hero) -> Chapter 1: The Question
-  2,  // Frame 1 (Scene 1) -> Chapter 2: Where It All Began
-  2,  // Frame 2 (Scene 2) -> Chapter 2: Where It All Began
-  2,  // Frame 3 (Scene 3) -> Chapter 2: Where It All Began
-  2,  // Frame 4 (Scene 4) -> Chapter 2: Where It All Began
-  2,  // Frame 5 (Scene 5) -> Chapter 2: Where It All Began
-  3,  // Frame 6 (Aryabhata 1) -> Chapter 3: The Space Stack
-  3,  // Frame 7 (Aryabhata 2) -> Chapter 3: The Space Stack
-  3,  // Frame 8 (Aryabhata 3) -> Chapter 3: The Space Stack
-  3,  // Frame 9 (Aryabhata 4) -> Chapter 3: The Space Stack
-  4,  // Frame 10 (The Builder 1) -> Chapter 4: The Builder
-  4,  // Frame 11 (The Builder 2) -> Chapter 4: The Builder
-  4,  // Frame 12 (The Builder 3) -> Chapter 4: The Builder
-  4,  // Frame 13 (The Builder 3 Sub) -> Chapter 4: The Builder
-  5,  // Frame 14 (LaunchEvolution Intro) -> Chapter 5: The Misconception
   1,  // Frame 1 (Speaker) -> Chapter 1: The Question
-  2,  // Frame 2 (Scene 1) -> Chapter 2: Where It All Began
-  2,  // Frame 3 (Scene 2) -> Chapter 2: Where It All Began
-  2,  // Frame 4 (Scene 3) -> Chapter 2: Where It All Began
-  2,  // Frame 5 (Scene 4) -> Chapter 2: Where It All Began
-  2,  // Frame 6 (Scene 5) -> Chapter 2: Where It All Began
-  3,  // Frame 7 (Aryabhata 1) -> Chapter 3: The Space Stack
-  3,  // Frame 8 (Aryabhata 2) -> Chapter 3: The Space Stack
-  3,  // Frame 9 (Aryabhata 3) -> Chapter 3: The Space Stack
-  3,  // Frame 10 (Aryabhata 4) -> Chapter 3: The Space Stack
-  4,  // Frame 11 (The Builder 1) -> Chapter 4: The Builder
-  4,  // Frame 12 (The Builder 2) -> Chapter 4: The Builder
-  4,  // Frame 13 (The Builder 3) -> Chapter 4: The Builder
-  4,  // Frame 14 (The Builder 3 Sub) -> Chapter 4: The Builder
-  5,  // Frame 15 (LaunchEvolution Intro) -> Chapter 5: The Misconception
-  5,  // Frame 16 (LaunchEvolution SLV-3) -> Chapter 5: The Misconception
-  5,  // Frame 17 (Leadership Lesson) -> Chapter 5: The Misconception
-  5,  // Frame 18 (LaunchEvolution ASLV) -> Chapter 5: The Misconception
-  5,  // Frame 19 (LaunchEvolution PSLV) -> Chapter 5: The Misconception
-  5,  // Frame 20 (LaunchEvolution GSLV) -> Chapter 5: The Misconception
-  5,  // Frame 21 (LaunchEvolution LVM3) -> Chapter 5: The Misconception
-  5,  // Frame 22 (LaunchEvolution SSLV) -> Chapter 5: The Misconception
-  6,  // Frame 23 (Exploration 1 - Background Only) -> Chapter 6: Defense & Autonomy
-  6,  // Frame 24 (Exploration 1 - Text) -> Chapter 6: Defense & Autonomy
-  6,  // Frame 25 (Exploration 2) -> Chapter 6: Defense & Autonomy
-  6,  // Frame 26 (Exploration 3) -> Chapter 6: Defense & Autonomy
-  7,  // Frame 27 (NewEra 1) -> Chapter 7: Global Comparison
-  7,  // Frame 28 (NewEra 2) -> Chapter 7: Global Comparison
-  7,  // Frame 29 (NewEra Opportunity Chart) -> Chapter 7: Global Comparison
-  8,  // Frame 30 (NewEra 3) -> Chapter 8: Case Studies
-  9,  // Frame 31 (NewEra 4 & 5) -> Chapter 9: What Most People Miss
-  9,  // Frame 32 (NewEra Jio Proof) -> Chapter 9: What Most People Miss
-  9,  // Frame 33 (NewEra 6) -> Chapter 9: What Most People Miss
-  9,  // Frame 34 (NewEra 7) -> Chapter 9: What Most People Miss
-  10, // Frame 35 (NewEra 8) -> Chapter 10: The Opportunity
-  10  // Frame 36 (NewEra 8 Climax) -> Chapter 10: The Opportunity
+  1,  // Frame 2 (Disclaimer) -> Chapter 1: The Question
+  1,  // Frame 3 (Webinars) -> Chapter 1: The Question
+  2,  // Frame 4 (Scene 1) -> Chapter 2: Where It All Began
+  2,  // Frame 5 (Scene 2) -> Chapter 2: Where It All Began
+  2,  // Frame 6 (Scene 3) -> Chapter 2: Where It All Began
+  2,  // Frame 7 (Scene 4) -> Chapter 2: Where It All Began
+  2,  // Frame 8 (Scene 5) -> Chapter 2: Where It All Began
+  3,  // Frame 9 (Aryabhata 1) -> Chapter 3: The Space Stack
+  3,  // Frame 10 (Aryabhata 2) -> Chapter 3: The Space Stack
+  3,  // Frame 11 (Aryabhata 3) -> Chapter 3: The Space Stack
+  3,  // Frame 12 (Aryabhata 4) -> Chapter 3: The Space Stack
+  4,  // Frame 13 (The Builder 1) -> Chapter 4: The Builder
+  4,  // Frame 14 (The Builder 2) -> Chapter 4: The Builder
+  4,  // Frame 15 (The Builder 3) -> Chapter 4: The Builder
+  4,  // Frame 16 (The Builder 3 Sub) -> Chapter 4: The Builder
+  5,  // Frame 17 (LaunchEvolution Intro) -> Chapter 5: The Misconception
+  5,  // Frame 18 (LaunchEvolution SLV-3) -> Chapter 5: The Misconception
+  5,  // Frame 19 (Leadership Lesson) -> Chapter 5: The Misconception
+  5,  // Frame 20 (LaunchEvolution ASLV) -> Chapter 5: The Misconception
+  5,  // Frame 21 (LaunchEvolution PSLV) -> Chapter 5: The Misconception
+  5,  // Frame 22 (LaunchEvolution GSLV) -> Chapter 5: The Misconception
+  5,  // Frame 23 (LaunchEvolution LVM3) -> Chapter 5: The Misconception
+  5,  // Frame 24 (LaunchEvolution SSLV) -> Chapter 5: The Misconception
+  6,  // Frame 25 (Exploration 1 - Background Only) -> Chapter 6: Defense & Autonomy
+  6,  // Frame 26 (Exploration 1 - Text) -> Chapter 6: Defense & Autonomy
+  6,  // Frame 27 (Exploration 2) -> Chapter 6: Defense & Autonomy
+  6,  // Frame 28 (Exploration 3) -> Chapter 6: Defense & Autonomy
+  7,  // Frame 29 (NewEra 1) -> Chapter 7: Global Comparison
+  7,  // Frame 30 (NewEra 2) -> Chapter 7: Global Comparison
+  7,  // Frame 31 (NewEra Opportunity Chart) -> Chapter 7: Global Comparison
+  8,  // Frame 32 (NewEra 3) -> Chapter 8: Case Studies
+  9,  // Frame 33 (NewEra 4 & 5) -> Chapter 9: What Most People Miss
+  9,  // Frame 34 (NewEra Jio Proof) -> Chapter 9: What Most People Miss
+  9,  // Frame 35 (NewEra 6) -> Chapter 9: What Most People Miss
+  9,  // Frame 36 (NewEra 7) -> Chapter 9: What Most People Miss
+  10, // Frame 37 (NewEra 8) -> Chapter 10: The Opportunity
+  10  // Frame 38 (NewEra 8 Climax) -> Chapter 10: The Opportunity
 ];
 
 interface PresentationScene {
@@ -118,54 +111,58 @@ interface PresentationScene {
 }
 
 const PRESENTATION_SCENES: PresentationScene[] = [
-  { id: "hero", name: "The Challenge", label: "01 / 37", startFrame: 0, endFrame: 0 },
-  { id: "speaker", name: "Your Speaker", label: "02 / 37", startFrame: 1, endFrame: 1 },
-  { id: "sputnik", name: "Where It All Began", label: "03 / 37", startFrame: 2, endFrame: 2 },
-  { id: "sarabhai", name: "The Visionary", label: "04 / 37", startFrame: 3, endFrame: 3 },
-  { id: "vision", name: "The Core Philosophy", label: "05 / 37", startFrame: 4, endFrame: 4 },
-  { id: "incospar", name: "INCOSPAR Node Network", label: "06 / 37", startFrame: 5, endFrame: 5 },
-  { id: "thumba", name: "Thumba Sounding Rocket", label: "07 / 37", startFrame: 6, endFrame: 6 },
-  { id: "aryabhata-intro", name: "The Aryabhata Era", label: "08 / 37", startFrame: 7, endFrame: 7 },
-  { id: "milestone-1975", name: "1975 Satellite Milestone", label: "09 / 37", startFrame: 8, endFrame: 8 },
-  { id: "sovereign-ascent", name: "Aryabhata Orbital Success", label: "10 / 37", startFrame: 9, endFrame: 9 },
-  { id: "legacy-echoes", name: "Early Space Footprints", label: "11 / 37", startFrame: 10, endFrame: 10 },
-  { id: "loss-sarabhai", name: "Loss of the Architect", label: "12 / 37", startFrame: 11, endFrame: 11 },
-  { id: "dhawan-charge", name: "Satish Dhawan Takes Charge", label: "13 / 37", startFrame: 12, endFrame: 12 },
-  { id: "new-priority", name: "Rocket Blueprint & Assembly", label: "14 / 37", startFrame: 13, endFrame: 13 },
-  { id: "build-the-rockets", name: "Build The Rockets Directive", label: "15 / 37", startFrame: 14, endFrame: 14 },
-  { id: "launch-intro", name: "The Launcher Bottleneck", label: "16 / 37", startFrame: 15, endFrame: 15 },
-  { id: "slv3", name: "First Launcher: SLV-3", label: "17 / 37", startFrame: 16, endFrame: 16 },
-  { id: "failure-1979", name: "Leadership: 1979 Failure", label: "18 / 37", startFrame: 17, endFrame: 17 },
-  { id: "aslv", name: "Booster Tech: ASLV", label: "19 / 37", startFrame: 18, endFrame: 18 },
-  { id: "pslv", name: "Trusted Workhorse: PSLV", label: "20 / 37", startFrame: 19, endFrame: 19 },
-  { id: "gslv", name: "Cryo Breakthrough: GSLV", label: "21 / 37", startFrame: 20, endFrame: 20 },
-  { id: "lvm3", name: "Heavy Lift: LVM3", label: "22 / 37", startFrame: 21, endFrame: 21 },
-  { id: "sslv", name: "On-Demand Launch: SSLV", label: "23 / 37", startFrame: 22, endFrame: 22 },
-  { id: "moon-bg", name: "Moon Mission: Chandrayaan (Visual)", label: "24 / 37", startFrame: 23, endFrame: 23 },
-  { id: "moon", name: "Moon Mission: Chandrayaan", label: "25 / 37", startFrame: 24, endFrame: 24 },
-  { id: "mars", name: "Interplanetary: Mangalyaan", label: "26 / 37", startFrame: 25, endFrame: 25 },
-  { id: "sun", name: "Solar Observation: Aditya L-1", label: "27 / 37", startFrame: 26, endFrame: 26 },
-  { id: "commercial-ascent", name: "Decades of Growth", label: "28 / 37", startFrame: 27, endFrame: 27 },
-  { id: "privatization", name: "Sector Privatization Influx", label: "29 / 37", startFrame: 28, endFrame: 28 },
-  { id: "market-growth", name: "Opportunity Scaling to $40B", label: "30 / 37", startFrame: 29, endFrame: 29 },
-  { id: "why-launch", name: "Why Do Companies Launch?", label: "31 / 37", startFrame: 30, endFrame: 30 },
-  { id: "constellations", name: "Global Constellation Demand", label: "32 / 37", startFrame: 31, endFrame: 31 },
-  { id: "jio-proof", name: "Broadband Proof: Jio", label: "33 / 37", startFrame: 32, endFrame: 32 },
-  { id: "downstream-soft", name: "Downstream Network Map", label: "34 / 37", startFrame: 33, endFrame: 33 },
-  { id: "railways-realization", name: "Downstream Infrastructure", label: "35 / 37", startFrame: 34, endFrame: 34 },
-  { id: "opportunity-sign", name: "Conclusion: The Frontier", label: "36 / 37", startFrame: 35, endFrame: 35 },
-  { id: "climax-statement", name: "Conclusion: The Next Chapter", label: "37 / 37", startFrame: 36, endFrame: 36 }
+  { id: "hero", name: "The Challenge", label: "01 / 39", startFrame: 0, endFrame: 0 },
+  { id: "speaker", name: "Your Speaker", label: "02 / 39", startFrame: 1, endFrame: 1 },
+  { id: "disclaimer", name: "Disclaimer", label: "03 / 39", startFrame: 2, endFrame: 2 },
+  { id: "webinars", name: "DeepTech Webinars", label: "04 / 39", startFrame: 3, endFrame: 3 },
+  { id: "sputnik", name: "Where It All Began", label: "05 / 39", startFrame: 4, endFrame: 4 },
+  { id: "sarabhai", name: "The Visionary", label: "06 / 39", startFrame: 5, endFrame: 5 },
+  { id: "vision", name: "The Core Philosophy", label: "07 / 39", startFrame: 6, endFrame: 6 },
+  { id: "incospar", name: "INCOSPAR Node Network", label: "08 / 39", startFrame: 7, endFrame: 7 },
+  { id: "thumba", name: "Thumba Sounding Rocket", label: "09 / 39", startFrame: 8, endFrame: 8 },
+  { id: "aryabhata-intro", name: "The Aryabhata Era", label: "10 / 39", startFrame: 9, endFrame: 9 },
+  { id: "milestone-1975", name: "1975 Satellite Milestone", label: "11 / 39", startFrame: 10, endFrame: 10 },
+  { id: "sovereign-ascent", name: "Aryabhata Orbital Success", label: "12 / 39", startFrame: 11, endFrame: 11 },
+  { id: "legacy-echoes", name: "Early Space Footprints", label: "13 / 39", startFrame: 12, endFrame: 12 },
+  { id: "loss-sarabhai", name: "Loss of the Architect", label: "14 / 39", startFrame: 13, endFrame: 13 },
+  { id: "dhawan-charge", name: "Satish Dhawan Takes Charge", label: "15 / 39", startFrame: 14, endFrame: 14 },
+  { id: "new-priority", name: "Rocket Blueprint & Assembly", label: "16 / 39", startFrame: 15, endFrame: 15 },
+  { id: "build-the-rockets", name: "Build The Rockets Directive", label: "17 / 39", startFrame: 16, endFrame: 16 },
+  { id: "launch-intro", name: "The Launcher Bottleneck", label: "18 / 39", startFrame: 17, endFrame: 17 },
+  { id: "slv3", name: "First Launcher: SLV-3", label: "19 / 39", startFrame: 18, endFrame: 18 },
+  { id: "failure-1979", name: "Leadership: 1979 Failure", label: "20 / 39", startFrame: 19, endFrame: 19 },
+  { id: "aslv", name: "Booster Tech: ASLV", label: "21 / 39", startFrame: 20, endFrame: 20 },
+  { id: "pslv", name: "Trusted Workhorse: PSLV", label: "22 / 39", startFrame: 21, endFrame: 21 },
+  { id: "gslv", name: "Cryo Breakthrough: GSLV", label: "23 / 39", startFrame: 22, endFrame: 22 },
+  { id: "lvm3", name: "Heavy Lift: LVM3", label: "24 / 39", startFrame: 23, endFrame: 23 },
+  { id: "sslv", name: "On-Demand Launch: SSLV", label: "25 / 39", startFrame: 24, endFrame: 24 },
+  { id: "moon-bg", name: "Moon Mission: Chandrayaan (Visual)", label: "26 / 39", startFrame: 25, endFrame: 25 },
+  { id: "moon", name: "Moon Mission: Chandrayaan", label: "27 / 39", startFrame: 26, endFrame: 26 },
+  { id: "mars", name: "Interplanetary: Mangalyaan", label: "28 / 39", startFrame: 27, endFrame: 27 },
+  { id: "sun", name: "Solar Observation: Aditya L-1", label: "29 / 39", startFrame: 28, endFrame: 28 },
+  { id: "commercial-ascent", name: "Decades of Growth", label: "30 / 39", startFrame: 29, endFrame: 29 },
+  { id: "privatization", name: "Sector Privatization Influx", label: "31 / 39", startFrame: 30, endFrame: 30 },
+  { id: "market-growth", name: "Opportunity Scaling to $40B", label: "32 / 39", startFrame: 31, endFrame: 31 },
+  { id: "why-launch", name: "Why Do Companies Launch?", label: "33 / 39", startFrame: 32, endFrame: 32 },
+  { id: "constellations", name: "Global Constellation Demand", label: "34 / 39", startFrame: 33, endFrame: 33 },
+  { id: "jio-proof", name: "Broadband Proof: Jio", label: "35 / 39", startFrame: 34, endFrame: 34 },
+  { id: "downstream-soft", name: "Downstream Network Map", label: "36 / 39", startFrame: 35, endFrame: 35 },
+  { id: "railways-realization", name: "Downstream Infrastructure", label: "37 / 39", startFrame: 36, endFrame: 36 },
+  { id: "opportunity-sign", name: "Conclusion: The Frontier", label: "38 / 39", startFrame: 37, endFrame: 37 },
+  { id: "climax-statement", name: "Conclusion: The Next Chapter", label: "39 / 39", startFrame: 38, endFrame: 38 }
 ];
 
 const SECTIONS = [
   { name: "Hero", frames: [0] },
   { name: "Speaker", frames: [1] },
-  { name: "Beginning", frames: [2, 3, 4, 5, 6] },
-  { name: "Aryabhata", frames: [7, 8, 9, 10] },
-  { name: "TheBuilder", frames: [11, 12, 13, 14] },
-  { name: "LaunchEvolution", frames: [15, 16, 17, 18, 19, 20, 21, 22] },
-  { name: "Exploration", frames: [23, 24, 25, 26] },
-  { name: "NewEra", frames: [27, 28, 29, 30, 31, 32, 33, 34, 35, 36] }
+  { name: "Disclaimer", frames: [2] },
+  { name: "Webinars", frames: [3] },
+  { name: "Beginning", frames: [4, 5, 6, 7, 8] },
+  { name: "Aryabhata", frames: [9, 10, 11, 12] },
+  { name: "TheBuilder", frames: [13, 14, 15, 16] },
+  { name: "LaunchEvolution", frames: [17, 18, 19, 20, 21, 22, 23, 24] },
+  { name: "Exploration", frames: [25, 26, 27, 28] },
+  { name: "NewEra", frames: [29, 30, 31, 32, 33, 34, 35, 36, 37, 38] }
 ];
 
 export default function Home() {
@@ -448,16 +445,16 @@ export default function Home() {
 
   const handleNavigateChapter = (chapterNum: number) => {
     const chapterToFrameIndex: Record<number, number> = {
-      1: 0,  // Chapter 1: Hero Overview / Speaker
-      2: 2,  // Chapter 2: Where It All Began
-      3: 7,  // Chapter 3: Aryabhata
-      4: 11, // Chapter 4: The Builder
-      5: 15, // Chapter 5: LaunchEvolution
-      6: 23, // Chapter 6: Exploration
-      7: 27, // Chapter 7: NewEra intro
-      8: 30, // Chapter 8: Case Studies
-      9: 31, // Chapter 9: What Most People Miss
-      10: 35 // Chapter 10: The Opportunity
+      1: 0,  // Chapter 1: Hero Overview / Speaker / Disclaimer / Webinars
+      2: 4,  // Chapter 2: Where It All Began (Sputnik starts at Frame 4 now)
+      3: 9,  // Chapter 3: Aryabhata (starts at Frame 9 now)
+      4: 13, // Chapter 4: The Builder (starts at Frame 13 now)
+      5: 17, // Chapter 5: LaunchEvolution (starts at Frame 17 now)
+      6: 25, // Chapter 6: Exploration (starts at Frame 25 now)
+      7: 29, // Chapter 7: NewEra intro (starts at Frame 29 now)
+      8: 32, // Chapter 8: Case Studies (starts at Frame 32 now)
+      9: 33, // Chapter 9: What Most People Miss (starts at Frame 33 now)
+      10: 37 // Chapter 10: The Opportunity (starts at Frame 37 now)
     };
 
     const targetFrameIndex = chapterToFrameIndex[chapterNum];
@@ -478,6 +475,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Speaker />
+      <Disclaimer />
+      <DeepTechWebinars />
       <Beginning />
       <Aryabhata />
       <TheBuilder />
