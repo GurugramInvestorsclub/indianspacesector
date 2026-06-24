@@ -740,90 +740,16 @@ export function Beginning() {
           style={{ opacity: scene4Opacity }}
           className="absolute inset-0 z-20 flex flex-col md:flex-row items-center justify-between px-6 md:px-16 max-w-7xl mx-auto pointer-events-none"
         >
-          {/* Left Column: Southern India outline & node network */}
-          <div className="relative w-full md:w-1/2 aspect-square max-w-[400px] flex items-center justify-center">
+          {/* Left Column: Large Archival Photo Collage of Early Struggles */}
+          <div className="w-full md:w-1/2 flex items-center justify-center mt-6 md:mt-0">
             <motion.div 
               style={{ scale: mapScale }}
-              className="relative w-full h-full flex items-center justify-center"
+              className="relative w-[280px] h-[320px] md:w-[460px] md:h-[380px]"
             >
-              <svg 
-                className="w-full h-full text-white/10 stroke-current" 
-                viewBox="0 0 500 500" 
-                fill="none"
-              >
-                {/* Stylized Southern India Peninsula outline */}
-                <path 
-                  d="M 120,80 C 180,90 220,70 320,80 C 310,180 290,260 270,340 C 255,400 245,460 240,480 C 235,460 225,400 210,340 C 190,260 160,180 120,80 Z" 
-                  stroke="rgba(255, 255, 255, 0.15)" 
-                  strokeWidth="1.5" 
-                  fill="rgba(5, 5, 15, 0.4)" 
-                />
-                
-                {/* Grid Overlay inside the peninsula */}
-                <path d="M 180,180 H 260 M 195,260 H 285 M 210,340 H 270" stroke="rgba(255,255,255,0.03)" strokeWidth="0.8" />
-                <path d="M 240,80 V 480 M 300,80 V 300" stroke="rgba(255,255,255,0.03)" strokeWidth="0.8" />
-
-                {/* Animated connecting path length from Ahmedabad -> Bombay -> INCOSPAR -> Thumba */}
-                <motion.path
-                  style={{ pathLength }}
-                  d="M 150,110 L 180,190 L 250,150 L 240,460"
-                  stroke="#FFB800"
-                  strokeWidth="1.5"
-                  strokeDasharray="4, 4"
-                />
-
-                {/* Node Points for the network */}
-                <g className="nodes">
-                  {/* Ahmedabad Node (Vikram Sarabhai) */}
-                  <circle cx="150" cy="110" r="4" fill="#FF6B00" />
-                  <motion.circle 
-                    style={{ opacity: nodeConnectionsOpacity }} 
-                    cx="150" cy="110" r="8" stroke="#FF6B00" strokeWidth="0.8" 
-                    animate={{ scale: [1, 1.8, 1] }} 
-                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} 
-                  />
-                  <text x="135" y="98" className="font-mono text-[8px] tracking-wider fill-white/50 text-right">AHMEDABAD</text>
-                  <text x="135" y="106" className="font-mono text-[7px] fill-[#FFB800] text-right">V. SARABHAI</text>
-
-                  {/* Bombay Node (Homi Bhabha) */}
-                  <circle cx="180" cy="190" r="4" fill="#FF6B00" />
-                  <motion.circle 
-                    style={{ opacity: nodeConnectionsOpacity }} 
-                    cx="180" cy="190" r="8" stroke="#FF6B00" strokeWidth="0.8" 
-                    animate={{ scale: [1, 1.8, 1] }} 
-                    transition={{ repeat: Infinity, duration: 3, delay: 1, ease: "easeInOut" }} 
-                  />
-                  <text x="105" y="188" className="font-mono text-[8px] tracking-wider fill-white/50">BOMBAY</text>
-                  <text x="105" y="196" className="font-mono text-[7px] fill-[#FFB800]">H. BHABHA</text>
-
-                  {/* New Delhi / INCOSPAR Coordination Node */}
-                  <circle cx="250" cy="150" r="5" fill="#FFB800" />
-                  <motion.circle 
-                    style={{ opacity: nodeConnectionsOpacity }} 
-                    cx="250" cy="150" r="10" stroke="#FFB800" strokeWidth="0.8" 
-                    animate={{ scale: [1, 2, 1] }} 
-                    transition={{ repeat: Infinity, duration: 4, delay: 0.5, ease: "easeInOut" }} 
-                  />
-                  <text x="262" y="148" className="font-mono text-[8px] font-bold tracking-widest fill-white">INCOSPAR</text>
-                  <text x="262" y="156" className="font-mono text-[7px] fill-white/50">ESTD. 1962</text>
-
-                  {/* Thumba Launch site Node */}
-                  <circle cx="240" cy="460" r="4.5" fill="#FFB800" />
-                  <motion.circle 
-                    style={{ opacity: nodeConnectionsOpacity }} 
-                    cx="240" cy="460" r="9" stroke="#FFB800" strokeWidth="0.8" 
-                    animate={{ scale: [1, 2, 1] }} 
-                    transition={{ repeat: Infinity, duration: 2.5, delay: 1.5, ease: "easeInOut" }} 
-                  />
-                  <text x="254" y="458" className="font-mono text-[8px] tracking-wider fill-white">THUMBA</text>
-                  <text x="254" y="466" className="font-mono text-[7px] fill-[#FFB800]">LAUNCH SITE</text>
-                </g>
-              </svg>
-
               {/* Left Polaroid - Rocket on Bicycle */}
               <motion.div
-                style={{ opacity: bicycleOpacity, x: bicycleX, rotate: -4 }}
-                className="absolute left-[-6%] top-[15%] md:left-[-25%] md:top-[12%] w-[110px] md:w-[180px] bg-[#090912]/90 border border-white/10 rounded-xl p-1.5 md:p-3 flex flex-col gap-1.5 backdrop-blur-md shadow-2xl z-20 pointer-events-none"
+                style={{ opacity: bicycleOpacity, x: bicycleX }}
+                className="absolute left-0 top-0 w-[160px] md:w-[250px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-10 rotate-[-4deg]"
               >
                 {/* Film Grain overlay */}
                 <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
@@ -832,22 +758,23 @@ export function Beginning() {
                     src="/rocket_bicycle.png"
                     alt="Nike-Apache rocket parts on a bicycle, Thumba 1963"
                     fill
-                    sizes="(max-w-768px) 110px, 180px"
+                    sizes="(max-w-768px) 160px, 250px"
                     className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
                   />
                 </div>
-                <div className="font-mono text-[6px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
+                <div className="font-mono text-[7px] md:text-[9px] tracking-wider text-white/50 flex justify-between items-center">
                   <span className="text-[#FFB800] font-bold">1963 — BICYCLE TRANSIT</span>
+                  <span className="text-white/40">THUMBA</span>
                 </div>
-                <p className="text-[6px] md:text-[8px] font-mono text-white/40 leading-normal">
-                  Nike-Apache rocket nose cone carried by bicycle.
+                <p className="text-[7px] md:text-[9px] font-mono text-white/40 leading-relaxed">
+                  Nike-Apache rocket nose cone transported by bicycle.
                 </p>
               </motion.div>
 
               {/* Right Polaroid - Satellite on Bullock Cart */}
               <motion.div
-                style={{ opacity: cartOpacity, x: cartX, rotate: 4 }}
-                className="absolute right-[-6%] bottom-[12%] md:right-[-25%] md:bottom-[10%] w-[110px] md:w-[180px] bg-[#090912]/90 border border-white/10 rounded-xl p-1.5 md:p-3 flex flex-col gap-1.5 backdrop-blur-md shadow-2xl z-20 pointer-events-none"
+                style={{ opacity: cartOpacity, x: cartX }}
+                className="absolute right-0 bottom-0 w-[160px] md:w-[250px] bg-[#090912]/90 border border-white/10 rounded-xl p-2 md:p-3.5 flex flex-col gap-2 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.8)] z-20 rotate-[4deg]"
               >
                 {/* Film Grain overlay */}
                 <div className="absolute inset-0 rounded-xl pointer-events-none z-10 bg-repeat opacity-[0.04] bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]" />
@@ -856,14 +783,15 @@ export function Beginning() {
                     src="/satellite_cart.png"
                     alt="APPLE satellite on a bullock cart for testing, 1981"
                     fill
-                    sizes="(max-w-768px) 110px, 180px"
+                    sizes="(max-w-768px) 160px, 250px"
                     className="object-cover grayscale brightness-[0.8] contrast-[1.2] pointer-events-none"
                   />
                 </div>
-                <div className="font-mono text-[6px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
+                <div className="font-mono text-[7px] md:text-[9px] tracking-wider text-white/50 flex justify-between items-center">
                   <span className="text-[#FFB800] font-bold">1981 — BULLOCK CART</span>
+                  <span className="text-white/40">APPLE</span>
                 </div>
-                <p className="text-[6px] md:text-[8px] font-mono text-white/40 leading-normal">
+                <p className="text-[7px] md:text-[9px] font-mono text-white/40 leading-relaxed">
                   APPLE satellite carried on a cart for antenna tests.
                 </p>
               </motion.div>
