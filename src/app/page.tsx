@@ -23,41 +23,42 @@ const FRAMES = [
   200,  // 2: Disclaimer
   300,  // 3: DeepTech Webinars
   450,  // 4: Beginning Part 1 (Sputnik 1957)
-  530,  // 5: Beginning Part 2 (Vikram Sarabhai Portrait)
-  615,  // 6: Beginning Part 3 (The Vision Quote)
-  695,  // 7: Beginning Part 4 (INCOSPAR Node Network)
-  770,  // 8: Beginning Part 5 (Thumba Rocket)
-  940,  // 9: Aryabhata Scene 1 (Thirteen years later...)
-  1020, // 10: Aryabhata Scene 2 (1975 Milestone Year)
-  1170, // 11: Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
-  1270, // 12: Aryabhata Scene 5 (Legacy Echoes)
+  565,  // 5: Beginning Part 2 (Vikram Sarabhai Portrait)
+  665,  // 6: Beginning Part 3 (The Vision Quote)
+  765,  // 7: Beginning Part 4 (INCOSPAR Node Network)
+  865,  // 8: Beginning Part 5 (Thumba Rocket)
+  950,  // 9: Aryabhata Scene 1 (Thirteen years later...)
+  1050, // 10: Aryabhata Scene 2 (1975 Milestone Year)
+  1230, // 11: Aryabhata Scene 3 & 4 (Sovereign Ascent Satellite & Story)
+  1360, // 12: Aryabhata Scene 5 (Legacy Echoes)
   1465, // 13: The Builder Scene 1 (December 1971)
   1600, // 14: The Builder Scene 2 (Satish Dhawan 1972)
-  1740, // 15: The Builder Scene 3 (A New Priority)
+  1720, // 15: The Builder Scene 3 (A New Priority)
   1780, // 16: The Builder Scene 3 Sub (Build The Rockets Directive)
-  1930, // 17: Launch Evolution Intro Text
-  2015, // 18: Launch Evolution SLV-3
-  2105, // 19: Leadership Lesson (Failure of 1979)
-  2200, // 20: Launch Evolution ASLV
-  2290, // 21: Launch Evolution PSLV
-  2380, // 22: Launch Evolution GSLV
-  2470, // 23: Launch Evolution LVM3
-  2550, // 24: Launch Evolution SSLV
-  2700, // 25: Exploration Act 1 (Moon - Background Only)
-  2745, // 26: Exploration Act 1 (Moon - Chandrayaan Text)
-  2840, // 27: Exploration Act 2 (Mars - Mangalyaan)
-  2940, // 28: Exploration Act 3 (Sun - Aditya L-1)
-  3125, // 29: New Era Scene 1 (Transition: For decades...)
-  3165, // 30: New Era Scene 1 Sub 1B (Sector Privatization)
-  3245, // 31: New Era Scene 2 (Opportunity Chart: $8B to $40B)
-  3330, // 32: New Era Scene 3 (Why would companies...)
-  3415, // 33: New Era Scene 4 & 5 (Constellation)
-  3470, // 34: New Era Scene 5 Sub (Jio Proof)
-  3555, // 35: New Era Scene 6 (Downstream Use Cases Network Map)
-  3650, // 36: New Era Scene 7 (The Big Realization - Railways)
-  3750, // 37: New Era Scene 8 (Conclusion / The Frontier Opens)
+  1840, // 17: Launch Evolution Intro Text
+  1930, // 18: Launch Evolution SLV-3
+  2030, // 19: Leadership Lesson (Failure of 1979)
+  2140, // 20: Launch Evolution ASLV
+  2240, // 21: Launch Evolution PSLV
+  2350, // 22: Launch Evolution GSLV
+  2450, // 23: Launch Evolution LVM3
+  2540, // 24: Launch Evolution SSLV
+  2630, // 25: Exploration Act 1 (Moon - Background Only)
+  2680, // 26: Exploration Act 1 (Moon - Chandrayaan Text)
+  2790, // 27: Exploration Act 2 (Mars - Mangalyaan)
+  2920, // 28: Exploration Act 3 (Sun - Aditya L-1)
+  3030, // 29: New Era Scene 1 (Transition: For decades...)
+  3075, // 30: New Era Scene 1 Sub 1B (Sector Privatization)
+  3160, // 31: New Era Scene 2 (Opportunity Chart: $8B to $40B)
+  3260, // 32: New Era Scene 3 (Why would companies...)
+  3360, // 33: New Era Scene 4 & 5 (Constellation)
+  3425, // 34: New Era Scene 5 Sub (Jio Proof)
+  3520, // 35: New Era Scene 6 (Downstream Use Cases Network Map)
+  3630, // 36: New Era Scene 7 (The Big Realization - Railways)
+  3735, // 37: New Era Scene 8 (Conclusion / The Frontier Opens)
   3770  // 38: New Era Scene 8 Sub (Conclusion / The Next Chapter Climax)
 ];
+
 
 // Map each frame index to a corresponding Chapter index (1 to 10) for PresenterMode speaker notes
 const FRAME_TO_CHAPTER = [
