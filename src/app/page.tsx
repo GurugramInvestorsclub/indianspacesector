@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { MonitorPlay } from "lucide-react";
+import { MonitorPlay, ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/sections/hero";
@@ -83,6 +83,30 @@ const FRAME_TO_CHAPTER = [
   10  // Frame 30 (NewEra 8) -> Chapter 10: The Opportunity
 ];
 
+// 12 Presentation scenes grouping the 31 frames:
+interface PresentationScene {
+  id: string;
+  name: string;
+  label: string;
+  startFrame: number;
+  endFrame: number;
+}
+
+const PRESENTATION_SCENES: PresentationScene[] = [
+  { id: "hero", name: "The Challenge", label: "01 / 12", startFrame: 0, endFrame: 0 },
+  { id: "sputnik", name: "Where It All Began", label: "02 / 12", startFrame: 1, endFrame: 1 },
+  { id: "sarabhai", name: "The Visionary", label: "03 / 12", startFrame: 2, endFrame: 4 },
+  { id: "thumba", name: "Thumba Launch", label: "04 / 12", startFrame: 5, endFrame: 5 },
+  { id: "dhawan", name: "The Rocket Problem", label: "05 / 12", startFrame: 6, endFrame: 12 },
+  { id: "rohini-success", name: "Rohini Success", label: "06 / 12", startFrame: 13, endFrame: 14 },
+  { id: "slv-failure", name: "The First Failure", label: "07 / 12", startFrame: 15, endFrame: 15 },
+  { id: "aslv", name: "ASLV Era", label: "08 / 12", startFrame: 16, endFrame: 16 },
+  { id: "pslv", name: "The Launch Lineup", label: "09 / 12", startFrame: 17, endFrame: 20 },
+  { id: "chandrayaan", name: "Deep Space Missions", label: "10 / 12", startFrame: 21, endFrame: 23 },
+  { id: "privatization", name: "Commercial Ascent", label: "11 / 12", startFrame: 24, endFrame: 28 },
+  { id: "opportunities", name: "The Opportunity", label: "12 / 12", startFrame: 29, endFrame: 30 }
+];
+
 export default function Home() {
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
   const [presentationActive, setPresentationActive] = useState(false);
@@ -102,11 +126,11 @@ export default function Home() {
     
     const scrollObj = { y: window.scrollY };
     
-    // Animate the window scroll position smoothly over 1.6s
+    // Animate the window scroll position smoothly over 1.2s with power3.inOut ease
     tweenRef.current = gsap.to(scrollObj, {
       y: targetScrollY,
-      duration: 1.6,
-      ease: "power3.out",
+      duration: 1.2,
+      ease: "power3.inOut",
       onUpdate: () => {
         window.scrollTo(0, scrollObj.y);
       },
@@ -116,9 +140,42 @@ export default function Home() {
     });
   };
 
-  // Cancel the transition animation if the user manually interrupts it via wheel/touch
+  // Sync presentation active status with URL parameter
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("presentation") === "true") {
+      setPresentationActive(true);
+    }
+  }, []);
+
+  // Lock manual scroll events when presentation mode is active
+  useEffect(() => {
+    if (!presentationActive) return;
+
+    const preventDefault = (e: Event) => {
+      e.preventDefault();
+    };
+
+    // Add scroll lock event listeners
+    window.addEventListener("wheel", preventDefault, { passive: false });
+    window.addEventListener("touchmove", preventDefault, { passive: false });
+
+    // Inject presentation scrollbar hiding classes
+    document.documentElement.classList.add("presentation-active");
+    document.body.classList.add("presentation-active");
+
+    return () => {
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
+      document.documentElement.classList.remove("presentation-active");
+      document.body.classList.remove("presentation-active");
+    };
+  }, [presentationActive]);
+
+  // Cancel the transition animation if the user manually interrupts it via wheel/touch (only when presentation mode is off)
   useEffect(() => {
     const handleInterrupt = () => {
+      if (presentationActive) return; // ignore manual interrupts during presentation mode
       if (tweenRef.current) {
         tweenRef.current.kill();
         tweenRef.current = null;
@@ -132,7 +189,7 @@ export default function Home() {
       window.removeEventListener("wheel", handleInterrupt);
       window.removeEventListener("touchmove", handleInterrupt);
     };
-  }, []);
+  }, [presentationActive]);
 
   // Sync currentFrameIndex dynamically with manual window scroll position
   useEffect(() => {
@@ -174,16 +231,31 @@ export default function Home() {
     scrollToFrame(targetIndex);
   }, []);
 
+  // Centralized Scene Controller Methods for Presentation Mode
+  const nextScene = useCallback(() => {
+    advanceFrame(true);
+  }, [advanceFrame]);
+
+  const previousScene = useCallback(() => {
+    advanceFrame(false);
+  }, [advanceFrame]);
+
+  const goToScene = useCallback((sceneIndex: number) => {
+    if (sceneIndex < 0 || sceneIndex >= PRESENTATION_SCENES.length) return;
+    const targetFrame = PRESENTATION_SCENES[sceneIndex].startFrame;
+    scrollToFrame(targetFrame);
+  }, []);
+
   // Set up click & contextmenu listeners for presentation mode
   useEffect(() => {
     if (!presentationActive) return;
 
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Ignore click if it is on nav links, buttons, inputs, HUD overlay console, or other control wrappers
+      // Ignore click if it is on nav links, buttons, inputs, HUD overlay, or presentation control containers
       if (
         target.closest(
-          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .presenter-hud-container"
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .presenter-hud-container, .presentation-controls"
         )
       ) {
         return;
@@ -199,7 +271,7 @@ export default function Home() {
       const target = e.target as HTMLElement;
       if (
         target.closest(
-          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .presenter-hud-container"
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .presenter-hud-container, .presentation-controls"
         )
       ) {
         return;
@@ -229,22 +301,31 @@ export default function Home() {
         return;
       }
 
+      // Spacebar, ArrowRight, ArrowDown, Enter advance
       if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " " || e.key === "Enter") {
         e.preventDefault();
-        advanceFrame(true);
-      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "Backspace") {
+        nextScene();
+      } 
+      // ArrowLeft, ArrowUp, Backspace go back
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "Backspace") {
         e.preventDefault();
-        advanceFrame(false);
-      } else if (e.key === "Escape") {
+        previousScene();
+      } 
+      // Block page scrolling keys
+      else if (e.key === "PageDown" || e.key === "PageUp" || e.key === "Home" || e.key === "End") {
+        e.preventDefault();
+      }
+      // Escape to exit
+      else if (e.key === "Escape") {
         e.preventDefault();
         setPresentationActive(false);
         setHudOpen(false);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown, { passive: false });
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [presentationActive, advanceFrame]);
+  }, [presentationActive, nextScene, previousScene]);
 
   // Sync HUD open state with Presentation mode toggle
   const handleToggleHud = (open: boolean) => {
@@ -277,6 +358,11 @@ export default function Home() {
 
   const activeChapter = FRAME_TO_CHAPTER[currentFrameIndex] || 1;
 
+  // Resolve current active scene for HUD indicator
+  const activeScene = PRESENTATION_SCENES.find(
+    (s) => currentFrameIndex >= s.startFrame && currentFrameIndex <= s.endFrame
+  ) || PRESENTATION_SCENES[0];
+
   return (
     <main className="min-h-screen bg-[#030308] text-white selection:bg-[#FFB800] selection:text-[#030308]">
       <Navbar />
@@ -287,6 +373,87 @@ export default function Home() {
       <LaunchEvolution />
       <Exploration />
       <NewEra />
+
+      {/* Top-Right Presentation Mode Toggle Button */}
+      <div className="fixed top-20 right-6 z-40 font-mono text-xs">
+        <div className="flex items-center gap-3 bg-[#030308]/75 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
+          <span className="text-white/60 tracking-wider uppercase text-[9px] font-bold">Presentation Mode</span>
+          <div className="flex items-center bg-black/40 border border-white/5 rounded-full p-0.5">
+            <button
+              onClick={() => {
+                setPresentationActive(true);
+              }}
+              className={`px-3 py-0.5 rounded-full text-[9px] font-bold tracking-widest transition-all ${
+                presentationActive 
+                  ? "bg-[#FFB800] text-[#030308]" 
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              ON
+            </button>
+            <button
+              onClick={() => {
+                setPresentationActive(false);
+                setHudOpen(false);
+              }}
+              className={`px-3 py-0.5 rounded-full text-[9px] font-bold tracking-widest transition-all ${
+                !presentationActive 
+                  ? "bg-white/15 text-white" 
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              OFF
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom-Right Floating Controls & Scene Indicator */}
+      {presentationActive && (
+        <div className="fixed bottom-6 right-6 z-40 font-mono flex flex-col gap-2 pointer-events-auto presentation-controls">
+          <div className="bg-[#030308]/80 border border-white/10 backdrop-blur-md px-5 py-4 rounded-xl shadow-2xl flex flex-col gap-3 min-w-[280px]">
+            
+            {/* Scene Indicator & Title */}
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[10px] text-[#FFB800] font-bold tracking-widest uppercase">
+                {activeScene.label}
+              </span>
+              <span className="text-sm font-semibold tracking-wide text-white font-sans uppercase">
+                {activeScene.name}
+              </span>
+            </div>
+
+            {/* Progress line */}
+            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-[#FFB800] transition-all duration-500 ease-out" 
+                style={{ 
+                  width: `${((PRESENTATION_SCENES.indexOf(activeScene) + 1) / PRESENTATION_SCENES.length) * 100}%` 
+                }}
+              />
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between gap-4 mt-1">
+              <button
+                onClick={previousScene}
+                disabled={currentFrameIndex === 0}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white/50 hover:text-white disabled:opacity-30 disabled:hover:text-white/50 transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-md cursor-pointer"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" /> Prev
+              </button>
+
+              <button
+                onClick={nextScene}
+                disabled={currentFrameIndex === FRAMES.length - 1}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#FFB800] hover:text-[#FFC830] disabled:opacity-30 disabled:hover:text-[#FFB800] transition-colors bg-[#FFB800]/10 hover:bg-[#FFB800]/20 border border-[#FFB800]/20 px-3 py-1.5 rounded-md cursor-pointer"
+              >
+                Next <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating Presentation Mode Toggle Badge (Bottom-Left) */}
       <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2 font-mono">

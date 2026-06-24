@@ -142,3 +142,15 @@ html.lenis, html.lenis body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Hides scrollbars when Presentation Mode is active */
+html.presentation-active,
+body.presentation-active {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE/Edge */
+}
+html.presentation-active::-webkit-scrollbar,
+body.presentation-active::-webkit-scrollbar {
+  display: none !important; /* Safari/Chrome */
+}
+
