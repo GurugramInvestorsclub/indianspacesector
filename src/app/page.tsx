@@ -49,7 +49,8 @@ const FRAMES = [
   3170, // 31: New Era Scene 5 Sub (Jio Proof)
   3255, // 32: New Era Scene 6 (Downstream Use Cases Network Map)
   3350, // 33: New Era Scene 7 (The Big Realization - Railways)
-  3450  // 34: New Era Scene 8 (Conclusion / Briefing signup)
+  3450, // 34: New Era Scene 8 (Conclusion / The Frontier Opens)
+  3470  // 35: New Era Scene 8 Sub (Conclusion / The Next Chapter Climax)
 ];
 
 // Map each frame index to a corresponding Chapter index (1 to 10) for PresenterMode speaker notes
@@ -88,7 +89,8 @@ const FRAME_TO_CHAPTER = [
   9,  // Frame 31 (NewEra Jio Proof) -> Chapter 9: What Most People Miss
   9,  // Frame 32 (NewEra 6) -> Chapter 9: What Most People Miss
   9,  // Frame 33 (NewEra 7) -> Chapter 9: What Most People Miss
-  10  // Frame 34 (NewEra 8) -> Chapter 10: The Opportunity
+  10, // Frame 34 (NewEra 8) -> Chapter 10: The Opportunity
+  10  // Frame 35 (NewEra 8 Climax) -> Chapter 10: The Opportunity
 ];
 
 interface PresentationScene {
@@ -100,41 +102,42 @@ interface PresentationScene {
 }
 
 const PRESENTATION_SCENES: PresentationScene[] = [
-  { id: "hero", name: "The Challenge", label: "01 / 35", startFrame: 0, endFrame: 0 },
-  { id: "sputnik", name: "Where It All Began", label: "02 / 35", startFrame: 1, endFrame: 1 },
-  { id: "sarabhai", name: "The Visionary", label: "03 / 35", startFrame: 2, endFrame: 2 },
-  { id: "vision", name: "The Core Philosophy", label: "04 / 35", startFrame: 3, endFrame: 3 },
-  { id: "incospar", name: "INCOSPAR Node Network", label: "05 / 35", startFrame: 4, endFrame: 4 },
-  { id: "thumba", name: "Thumba Sounding Rocket", label: "06 / 35", startFrame: 5, endFrame: 5 },
-  { id: "aryabhata-intro", name: "The Aryabhata Era", label: "07 / 35", startFrame: 6, endFrame: 6 },
-  { id: "milestone-1975", name: "1975 Satellite Milestone", label: "08 / 35", startFrame: 7, endFrame: 7 },
-  { id: "sovereign-ascent", name: "Aryabhata Orbital Success", label: "09 / 35", startFrame: 8, endFrame: 8 },
-  { id: "legacy-echoes", name: "Early Space Footprints", label: "10 / 35", startFrame: 9, endFrame: 9 },
-  { id: "loss-sarabhai", name: "Loss of the Architect", label: "11 / 35", startFrame: 10, endFrame: 10 },
-  { id: "dhawan-charge", name: "Satish Dhawan Takes Charge", label: "12 / 35", startFrame: 11, endFrame: 11 },
-  { id: "new-priority", name: "Rocket Blueprint & Assembly", label: "13 / 35", startFrame: 12, endFrame: 12 },
-  { id: "build-the-rockets", name: "Build The Rockets Directive", label: "14 / 35", startFrame: 13, endFrame: 13 },
-  { id: "launch-intro", name: "The Launcher Bottleneck", label: "15 / 35", startFrame: 14, endFrame: 14 },
-  { id: "slv3", name: "First Launcher: SLV-3", label: "16 / 35", startFrame: 15, endFrame: 15 },
-  { id: "failure-1979", name: "Leadership: 1979 Failure", label: "17 / 35", startFrame: 16, endFrame: 16 },
-  { id: "aslv", name: "Booster Tech: ASLV", label: "18 / 35", startFrame: 17, endFrame: 17 },
-  { id: "pslv", name: "Trusted Workhorse: PSLV", label: "19 / 35", startFrame: 18, endFrame: 18 },
-  { id: "gslv", name: "Cryo Breakthrough: GSLV", label: "20 / 35", startFrame: 19, endFrame: 19 },
-  { id: "lvm3", name: "Heavy Lift: LVM3", label: "21 / 35", startFrame: 20, endFrame: 20 },
-  { id: "sslv", name: "On-Demand Launch: SSLV", label: "22 / 35", startFrame: 21, endFrame: 21 },
-  { id: "moon-bg", name: "Moon Mission: Chandrayaan (Visual)", label: "23 / 35", startFrame: 22, endFrame: 22 },
-  { id: "moon", name: "Moon Mission: Chandrayaan", label: "24 / 35", startFrame: 23, endFrame: 23 },
-  { id: "mars", name: "Interplanetary: Mangalyaan", label: "25 / 35", startFrame: 24, endFrame: 24 },
-  { id: "sun", name: "Solar Observation: Aditya L-1", label: "26 / 35", startFrame: 25, endFrame: 25 },
-  { id: "commercial-ascent", name: "Decades of Growth", label: "27 / 35", startFrame: 26, endFrame: 26 },
-  { id: "privatization", name: "Sector Privatization Influx", label: "28 / 35", startFrame: 27, endFrame: 27 },
-  { id: "market-growth", name: "Opportunity Scaling to $40B", label: "29 / 35", startFrame: 28, endFrame: 28 },
-  { id: "why-launch", name: "Why Do Companies Launch?", label: "30 / 35", startFrame: 29, endFrame: 29 },
-  { id: "constellations", name: "Global Constellation Demand", label: "31 / 35", startFrame: 30, endFrame: 30 },
-  { id: "jio-proof", name: "Broadband Proof: Jio", label: "32 / 35", startFrame: 31, endFrame: 31 },
-  { id: "downstream-soft", name: "Downstream Network Map", label: "33 / 35", startFrame: 32, endFrame: 32 },
-  { id: "railways-realization", name: "Downstream Infrastructure", label: "34 / 35", startFrame: 33, endFrame: 33 },
-  { id: "opportunity-sign", name: "Conclusion & Signup", label: "35 / 35", startFrame: 34, endFrame: 34 }
+  { id: "hero", name: "The Challenge", label: "01 / 36", startFrame: 0, endFrame: 0 },
+  { id: "sputnik", name: "Where It All Began", label: "02 / 36", startFrame: 1, endFrame: 1 },
+  { id: "sarabhai", name: "The Visionary", label: "03 / 36", startFrame: 2, endFrame: 2 },
+  { id: "vision", name: "The Core Philosophy", label: "04 / 36", startFrame: 3, endFrame: 3 },
+  { id: "incospar", name: "INCOSPAR Node Network", label: "05 / 36", startFrame: 4, endFrame: 4 },
+  { id: "thumba", name: "Thumba Sounding Rocket", label: "06 / 36", startFrame: 5, endFrame: 5 },
+  { id: "aryabhata-intro", name: "The Aryabhata Era", label: "07 / 36", startFrame: 6, endFrame: 6 },
+  { id: "milestone-1975", name: "1975 Satellite Milestone", label: "08 / 36", startFrame: 7, endFrame: 7 },
+  { id: "sovereign-ascent", name: "Aryabhata Orbital Success", label: "09 / 36", startFrame: 8, endFrame: 8 },
+  { id: "legacy-echoes", name: "Early Space Footprints", label: "10 / 36", startFrame: 9, endFrame: 9 },
+  { id: "loss-sarabhai", name: "Loss of the Architect", label: "11 / 36", startFrame: 10, endFrame: 10 },
+  { id: "dhawan-charge", name: "Satish Dhawan Takes Charge", label: "12 / 36", startFrame: 11, endFrame: 11 },
+  { id: "new-priority", name: "Rocket Blueprint & Assembly", label: "13 / 36", startFrame: 12, endFrame: 12 },
+  { id: "build-the-rockets", name: "Build The Rockets Directive", label: "14 / 36", startFrame: 13, endFrame: 13 },
+  { id: "launch-intro", name: "The Launcher Bottleneck", label: "15 / 36", startFrame: 14, endFrame: 14 },
+  { id: "slv3", name: "First Launcher: SLV-3", label: "16 / 36", startFrame: 15, endFrame: 15 },
+  { id: "failure-1979", name: "Leadership: 1979 Failure", label: "17 / 36", startFrame: 16, endFrame: 16 },
+  { id: "aslv", name: "Booster Tech: ASLV", label: "18 / 36", startFrame: 17, endFrame: 17 },
+  { id: "pslv", name: "Trusted Workhorse: PSLV", label: "19 / 36", startFrame: 18, endFrame: 18 },
+  { id: "gslv", name: "Cryo Breakthrough: GSLV", label: "20 / 36", startFrame: 19, endFrame: 19 },
+  { id: "lvm3", name: "Heavy Lift: LVM3", label: "21 / 36", startFrame: 20, endFrame: 20 },
+  { id: "sslv", name: "On-Demand Launch: SSLV", label: "22 / 36", startFrame: 21, endFrame: 21 },
+  { id: "moon-bg", name: "Moon Mission: Chandrayaan (Visual)", label: "23 / 36", startFrame: 22, endFrame: 22 },
+  { id: "moon", name: "Moon Mission: Chandrayaan", label: "24 / 36", startFrame: 23, endFrame: 23 },
+  { id: "mars", name: "Interplanetary: Mangalyaan", label: "25 / 36", startFrame: 24, endFrame: 24 },
+  { id: "sun", name: "Solar Observation: Aditya L-1", label: "26 / 36", startFrame: 25, endFrame: 25 },
+  { id: "commercial-ascent", name: "Decades of Growth", label: "27 / 36", startFrame: 26, endFrame: 26 },
+  { id: "privatization", name: "Sector Privatization Influx", label: "28 / 36", startFrame: 27, endFrame: 27 },
+  { id: "market-growth", name: "Opportunity Scaling to $40B", label: "29 / 36", startFrame: 28, endFrame: 28 },
+  { id: "why-launch", name: "Why Do Companies Launch?", label: "30 / 36", startFrame: 29, endFrame: 29 },
+  { id: "constellations", name: "Global Constellation Demand", label: "31 / 36", startFrame: 30, endFrame: 30 },
+  { id: "jio-proof", name: "Broadband Proof: Jio", label: "32 / 36", startFrame: 31, endFrame: 31 },
+  { id: "downstream-soft", name: "Downstream Network Map", label: "33 / 36", startFrame: 32, endFrame: 32 },
+  { id: "railways-realization", name: "Downstream Infrastructure", label: "34 / 36", startFrame: 33, endFrame: 33 },
+  { id: "opportunity-sign", name: "Conclusion: The Frontier", label: "35 / 36", startFrame: 34, endFrame: 34 },
+  { id: "climax-statement", name: "Conclusion: The Next Chapter", label: "36 / 36", startFrame: 35, endFrame: 35 }
 ];
 
 const SECTIONS = [
@@ -144,7 +147,7 @@ const SECTIONS = [
   { name: "TheBuilder", frames: [10, 11, 12, 13] },
   { name: "LaunchEvolution", frames: [14, 15, 16, 17, 18, 19, 20, 21] },
   { name: "Exploration", frames: [22, 23, 24, 25] },
-  { name: "NewEra", frames: [26, 27, 28, 29, 30, 31, 32, 33, 34] }
+  { name: "NewEra", frames: [26, 27, 28, 29, 30, 31, 32, 33, 34, 35] }
 ];
 
 export default function Home() {
