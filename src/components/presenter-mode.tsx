@@ -50,7 +50,16 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
     ]
   },
   4: {
-    title: "Chapter 4: The Misconception",
+    title: "Chapter 4: The Builder",
+    notes: [
+      "LOSS OF THE ARCHITECT: Vikram Sarabhai passed away in December 1971. He did not live to witness Aryabhata's orbit in 1975.",
+      "ENTER SATISH DHAWAN (1972): Took charge of ISRO. An engineer-academician, Dhawan brought systemic rigor, aerospace standards, and wind tunnels.",
+      "A NEW PRIORITY: India could build satellites, but had no independent launcher. Satellites sat on the ground waiting for foreign slots.",
+      "THE DIRECTIVE: Dhawan established a single, defining priority: BUILD THE ROCKETS. Without launchers, India could never be a true spacefaring nation."
+    ]
+  },
+  5: {
+    title: "Chapter 5: The Misconception",
     notes: [
       "DEBUNK: 'Rockets are the space opportunity' is false.",
       "ANALOGY: Launchers are the railways; the money is made on the goods shipped and the cities built along the line.",
@@ -58,8 +67,8 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
       "TRANSITION: Direct the focus to defense and high-priority applications."
     ]
   },
-  5: {
-    title: "Chapter 5: Defense & Autonomy",
+  6: {
+    title: "Chapter 6: Defense & Autonomy",
     notes: [
       "GEOPOLITICS: Space is the ultimate high ground. Autonomy in space is a matter of national security.",
       "TOPICS: ISR (Intelligence, Surveillance, Reconnaissance) is crucial for border monitoring.",
@@ -67,31 +76,31 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
       "MARKET: Government defense procurement remains the largest capital sponsor of space hardware."
     ]
   },
-  6: {
-    title: "Chapter 6: Global Comparison",
+  7: {
+    title: "Chapter 7: Global Comparison",
     notes: [
       "COST ADVANTAGE: India satellite manufacturing is 30-40% cheaper than Europe or the US due to engineering talent cost margins.",
       "LAUNCH LIMITS: USA (via SpaceX) dominates payload mass, but India is catching up rapidly in private sector launcher capacity.",
       "REGULATORY: USA has high ITAR constraints, Europe is fragmented; India offers a fast-launch alternative for commercial satellite constellations."
     ]
   },
-  7: {
-    title: "Chapter 7: Case Studies",
+  8: {
+    title: "Chapter 8: Case Studies",
     notes: [
       "ANNOUNCE: Introduce our detailed research papers.",
       "NOTE: Highly recommend attendees to check out these routes (/chapters/[slug]) on their own devices.",
       "CASE STUDY METRIC: Earth Observation downstream software market is growing at a 18% CAGR."
     ]
   },
-  8: {
-    title: "Chapter 8: What Most People Miss",
+  9: {
+    title: "Chapter 9: What Most People Miss",
     notes: [
       "INSIGHT 1: Ground Segment underappreciation. Everyone looks at launchers, but ground stations are steady cash-flow utilities.",
       "INSIGHT 2: Data is the product. Raw imagery is cheap; vectorized tracking of crop health or maritime routes is gold."
     ]
   },
-  9: {
-    title: "Chapter 9: The Opportunity",
+  10: {
+    title: "Chapter 10: The Opportunity",
     notes: [
       "CLOSING CALL: India's space economy is scaling from $8B to $40B+ by 2040.",
       "SUMMARY: The stack is integrated. Private capital, government support, and cost-advantages are aligned.",
@@ -186,12 +195,13 @@ export function PresenterMode({
     { num: 1, title: "1. The Question" },
     { num: 2, title: "2. The Transformation" },
     { num: 3, title: "3. The Space Stack" },
-    { num: 4, title: "4. The Misconception" },
-    { num: 5, title: "5. Defense & Autonomy" },
-    { num: 6, title: "6. Global Comparison" },
-    { num: 7, title: "7. Case Studies" },
-    { num: 8, title: "8. What Most People Miss" },
-    { num: 9, title: "9. The Opportunity" }
+    { num: 4, title: "4. The Builder" },
+    { num: 5, title: "5. The Misconception" },
+    { num: 6, title: "6. Defense & Autonomy" },
+    { num: 7, title: "7. Global Comparison" },
+    { num: 8, title: "8. Case Studies" },
+    { num: 9, title: "9. What Most People Miss" },
+    { num: 10, title: "10. The Opportunity" }
   ];
 
   const filteredChapters = chapterList.filter(ch => 
