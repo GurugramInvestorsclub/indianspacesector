@@ -132,7 +132,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
         
         {/* Act 1 Background: The Moon */}
         <motion.div
-          style={{ opacity: moonBgOpacity, scale: moonScale }}
+          style={presentationActive ? undefined : { opacity: moonBgOpacity, scale: moonScale }}
+          animate={presentationActive ? { opacity: (currentFrameIndex === 25 || currentFrameIndex === 26) ? 0.85 : 0, scale: (currentFrameIndex === 25 || currentFrameIndex === 26) ? 1.0 : 1.02 } : undefined}
           className="absolute inset-0 z-0 w-full h-full pointer-events-none"
         >
           <Image
@@ -149,7 +150,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
 
         {/* Act 2 Background: Mars */}
         <motion.div
-          style={{ opacity: marsBgOpacity, scale: marsScale }}
+          style={presentationActive ? undefined : { opacity: marsBgOpacity, scale: marsScale }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 27 ? 0.85 : 0, scale: currentFrameIndex === 27 ? 1.0 : 1.04 } : undefined}
           className="absolute inset-0 z-0 w-full h-full pointer-events-none"
         >
           <Image
@@ -165,7 +167,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
 
         {/* Act 3 Background: The Sun */}
         <motion.div
-          style={{ opacity: sunBgOpacity, scale: sunScale }}
+          style={presentationActive ? undefined : { opacity: sunBgOpacity, scale: sunScale }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 28 ? 0.85 : 0, scale: currentFrameIndex === 28 ? 1.0 : 1.04 } : undefined}
           className="absolute inset-0 z-0 w-full h-full pointer-events-none"
         >
           <Image
@@ -188,7 +191,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
 
         {/* ACT 1 CONTENT: THE MOON */}
         <motion.div
-          style={{ opacity: moonTextOpacity, y: moonTextY }}
+          style={presentationActive ? undefined : { opacity: moonTextOpacity, y: moonTextY }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 26 ? 1 : 0, y: currentFrameIndex === 26 ? 0 : 20 } : undefined}
           className="absolute z-20 w-full max-w-7xl px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto h-[85vh]"
         >
           {/* Left Column: Title & Mission Timeline */}
@@ -246,7 +250,7 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             {/* Earth-Moon Trajectory vector graphic */}
             <div className="absolute w-[240px] h-[240px] md:w-[320px] md:h-[320px] pointer-events-none z-0 opacity-15">
               <motion.svg 
-                style={{ rotate: moonOrbitRotate }}
+                style={presentationActive ? undefined : { rotate: moonOrbitRotate }}
                 className="w-full h-full text-[#FFB800]" 
                 viewBox="0 0 120 120" 
                 fill="none" 
@@ -308,7 +312,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
 
         {/* ACT 2 CONTENT: MARS */}
         <motion.div
-          style={{ opacity: marsTextOpacity, y: marsTextY }}
+          style={presentationActive ? undefined : { opacity: marsTextOpacity, y: marsTextY }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 27 ? 1 : 0, y: currentFrameIndex === 27 ? 0 : 20 } : undefined}
           className="absolute z-20 w-full max-w-7xl px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto h-[85vh]"
         >
           {/* Left Column: Title & Mission Timeline */}
@@ -364,7 +369,7 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             {/* Hohmann transfer ellipse vector graphic */}
             <div className="absolute w-[240px] h-[240px] md:w-[320px] md:h-[320px] pointer-events-none z-0 opacity-15">
               <motion.svg 
-                style={{ rotate: marsOrbitRotate }}
+                style={presentationActive ? undefined : { rotate: marsOrbitRotate }}
                 className="w-full h-full text-[#C2410C]" 
                 viewBox="0 0 120 120" 
                 fill="none" 
@@ -425,7 +430,8 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
 
         {/* ACT 3 CONTENT: THE SUN */}
         <motion.div
-          style={{ opacity: sunTextOpacity, y: sunTextY }}
+          style={presentationActive ? undefined : { opacity: sunTextOpacity, y: sunTextY }}
+          animate={presentationActive ? { opacity: currentFrameIndex === 28 ? 1 : 0, y: currentFrameIndex === 28 ? 0 : 20 } : undefined}
           className="absolute z-20 w-full max-w-7xl px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pointer-events-auto h-[85vh]"
         >
           {/* Left Column: Title & Mission Timeline */}
@@ -481,7 +487,7 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             {/* L1 Halo Orbit vector graphic */}
             <div className="absolute w-[240px] h-[240px] md:w-[320px] md:h-[320px] pointer-events-none z-0 opacity-15">
               <motion.svg 
-                style={{ rotate: sunOrbitRotate }}
+                style={presentationActive ? undefined : { rotate: sunOrbitRotate }}
                 className="w-full h-full text-[#FFB800]" 
                 viewBox="0 0 120 120" 
                 fill="none" 

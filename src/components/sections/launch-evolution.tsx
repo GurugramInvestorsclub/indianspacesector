@@ -35,6 +35,9 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   
+  const presentationIndex = currentFrameIndex - 17;
+  const activeIndexToUse = presentationActive ? presentationIndex : activeIndex;
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -72,7 +75,12 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
   }, [presentationActive, currentFrameIndex, scrollYProgress, progress]);
 
   // Track active slide index using standard motion value event listener to toggle pointer-events
+<<<<<<< HEAD
   useMotionValueEvent(progress, "change", (latest) => {
+=======
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (presentationActive) return;
+>>>>>>> d83aa6cf06b0349d2e25cbc94e259034840616bf
     // 8 scenes split across 0 to 1 scroll progress range:
     if (latest < 0.125) {
       setActiveIndex(0);
@@ -314,11 +322,12 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
 
         {/* ----------------- Scene 0: Introduction ----------------- */}
         <motion.div
-          style={sceneStyles[0]}
+          style={presentationActive ? undefined : sceneStyles[0]}
+          animate={presentationActive ? { opacity: activeIndexToUse === 0 ? 1 : 0, y: activeIndexToUse === 0 ? 0 : -35 } : undefined}
           className={`absolute inset-0 z-10 flex-col justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
-            activeIndex === 0 ? "pointer-events-auto" : "pointer-events-none"
+            activeIndexToUse === 0 ? "pointer-events-auto" : "pointer-events-none"
           } ${
-            Math.abs(activeIndex - 0) <= 1 ? "flex" : "hidden"
+            Math.abs(activeIndexToUse - 0) <= 1 ? "flex" : "hidden"
           }`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 items-start">
@@ -349,17 +358,18 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
         {rockets.map((rocket, index) => {
           const isEven = index % 2 === 0;
           const rocketIndex = index + 1;
-          const isActive = activeIndex === rocketIndex;
+          const isActiveToUse = activeIndexToUse === rocketIndex;
           
           if (rocket.id === "leadership") {
             return (
               <motion.div
                 key={rocket.id}
-                style={sceneStyles[rocketIndex]}
+                style={presentationActive ? undefined : sceneStyles[rocketIndex]}
+                animate={presentationActive ? { opacity: activeIndexToUse === rocketIndex ? 1 : 0, y: activeIndexToUse === rocketIndex ? 0 : (activeIndexToUse < rocketIndex ? 35 : -35) } : undefined}
                 className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
-                  isActive ? "pointer-events-auto" : "pointer-events-none"
+                  isActiveToUse ? "pointer-events-auto" : "pointer-events-none"
                 } ${
-                  Math.abs(activeIndex - rocketIndex) <= 1 ? "flex" : "hidden"
+                  Math.abs(activeIndexToUse - rocketIndex) <= 1 ? "flex" : "hidden"
                 }`}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 lg:gap-16 items-center w-full">
@@ -387,10 +397,6 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
                           PROJECT DIRECTOR: SLV-3
                         </div>
                       </div>
-                    </div>
-                    {/* Caption details */}
-                    <div className="absolute bottom-[-22px] font-mono text-[8px] text-white/35 tracking-widest uppercase">
-                      DR. APJ ABDUL KALAM (1931 - 2015)
                     </div>
                   </div>
 
@@ -448,11 +454,12 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
           return (
             <motion.div
               key={rocket.id}
-              style={sceneStyles[rocketIndex]}
+              style={presentationActive ? undefined : sceneStyles[rocketIndex]}
+              animate={presentationActive ? { opacity: activeIndexToUse === rocketIndex ? 1 : 0, y: activeIndexToUse === rocketIndex ? 0 : (activeIndexToUse < rocketIndex ? 35 : -35) } : undefined}
               className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
-                isActive ? "pointer-events-auto" : "pointer-events-none"
+                isActiveToUse ? "pointer-events-auto" : "pointer-events-none"
               } ${
-                Math.abs(activeIndex - rocketIndex) <= 1 ? "flex" : "hidden"
+                Math.abs(activeIndexToUse - rocketIndex) <= 1 ? "flex" : "hidden"
               }`}
             >
               <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 w-full ${
@@ -477,12 +484,12 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
                       {/* Vignette Overlay to blend border */}
                       <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_35%,#05050f_95%] pointer-events-none" />
                       <div className="absolute inset-0 bg-gradient-to-b from-[#05050f]/80 via-transparent to-[#05050f]/80 pointer-events-none" />
-
+ 
                       {/* HUD Grid Overlay */}
                       <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
                       
                       {/* Telemetry Callout lines overlay - Staggered fade in when active */}
-                      {isActive && rocket.callouts.map((callout, cIdx) => {
+                      {isActiveToUse && rocket.callouts.map((callout, cIdx) => {
                         const isLeft = callout.align === "left";
                         return (
                           <motion.div
