@@ -64,6 +64,7 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
       "DEBUNK: 'Rockets are the space opportunity' is false.",
       "ANALOGY: Launchers are the railways; the money is made on the goods shipped and the cities built along the line.",
       "INSIGHT: Launch represents only 5% of space economy revenues. Applications, analytics, and navigation dominate the other 95%.",
+      "LEADERSHIP LESSON (1979 Failure): The first launch of SLV-3 failed. Satish Dhawan took the blame at the press conference. When it succeeded in 1980, Dhawan told Kalam to lead the press conference. Kalam's takeaway: 'A leader absorbs failure, and distributes success.'",
       "TRANSITION: Direct the focus to defense and high-priority applications."
     ]
   },

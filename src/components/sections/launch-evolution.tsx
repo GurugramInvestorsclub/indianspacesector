@@ -37,33 +37,36 @@ export function LaunchEvolution() {
 
   // Track active slide index using standard motion value event listener to toggle pointer-events
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // 7 scenes split across 0 to 1 scroll progress range:
-    if (latest < 0.12) {
+    // 8 scenes split across 0 to 1 scroll progress range:
+    if (latest < 0.11) {
       setActiveIndex(0);
-    } else if (latest < 0.26) {
+    } else if (latest < 0.24) {
       setActiveIndex(1);
-    } else if (latest < 0.40) {
+    } else if (latest < 0.37) {
       setActiveIndex(2);
-    } else if (latest < 0.54) {
+    } else if (latest < 0.50) {
       setActiveIndex(3);
-    } else if (latest < 0.68) {
+    } else if (latest < 0.63) {
       setActiveIndex(4);
-    } else if (latest < 0.82) {
+    } else if (latest < 0.76) {
       setActiveIndex(5);
-    } else {
+    } else if (latest < 0.89) {
       setActiveIndex(6);
+    } else {
+      setActiveIndex(7);
     }
   });
 
   const getSceneTransforms = (index: number) => {
     const ranges = [
-      { inStart: 0.0, inEnd: 0.0, outStart: 0.08, outEnd: 0.14 },       // Intro
-      { inStart: 0.10, inEnd: 0.14, outStart: 0.22, outEnd: 0.28 },     // SLV-3
-      { inStart: 0.24, inEnd: 0.28, outStart: 0.36, outEnd: 0.42 },     // ASLV
-      { inStart: 0.38, inEnd: 0.42, outStart: 0.50, outEnd: 0.57 },     // PSLV
-      { inStart: 0.52, inEnd: 0.57, outStart: 0.65, outEnd: 0.71 },     // GSLV
-      { inStart: 0.67, inEnd: 0.71, outStart: 0.79, outEnd: 0.85 },     // LVM3
-      { inStart: 0.81, inEnd: 0.85, outStart: 0.95, outEnd: 1.00 },     // SSLV
+      { inStart: 0.0, inEnd: 0.0, outStart: 0.08, outEnd: 0.12 },       // 0: Intro
+      { inStart: 0.09, inEnd: 0.12, outStart: 0.21, outEnd: 0.25 },     // 1: SLV-3
+      { inStart: 0.22, inEnd: 0.25, outStart: 0.34, outEnd: 0.38 },     // 2: Leadership Failure
+      { inStart: 0.35, inEnd: 0.38, outStart: 0.47, outEnd: 0.51 },     // 3: ASLV
+      { inStart: 0.48, inEnd: 0.51, outStart: 0.60, outEnd: 0.64 },     // 4: PSLV
+      { inStart: 0.61, inEnd: 0.64, outStart: 0.73, outEnd: 0.77 },     // 5: GSLV
+      { inStart: 0.74, inEnd: 0.77, outStart: 0.86, outEnd: 0.90 },     // 6: LVM3
+      { inStart: 0.87, inEnd: 0.90, outStart: 0.96, outEnd: 1.00 },     // 7: SSLV
     ];
     
     const r = ranges[index];
@@ -77,7 +80,7 @@ export function LaunchEvolution() {
       opacityOutput = [1, 1, 0, 0];
       yInput = [0.0, r.outEnd, 1.0];
       yOutput = [0, -35, -35];
-    } else if (index === 6) {
+    } else if (index === 7) {
       opacityInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
       opacityOutput = [0, 0, 1, 1, 0];
       yInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
@@ -121,6 +124,10 @@ export function LaunchEvolution() {
   const opacity6 = useTransform(scrollYProgress, t6.opacityInput, t6.opacityOutput, { clamp: true });
   const y6 = useTransform(scrollYProgress, t6.yInput, t6.yOutput, { clamp: true });
 
+  const t7 = getSceneTransforms(7);
+  const opacity7 = useTransform(scrollYProgress, t7.opacityInput, t7.opacityOutput, { clamp: true });
+  const y7 = useTransform(scrollYProgress, t7.yInput, t7.yOutput, { clamp: true });
+
   const sceneStyles = [
     { opacity: opacity0, y: y0 },
     { opacity: opacity1, y: y1 },
@@ -129,6 +136,7 @@ export function LaunchEvolution() {
     { opacity: opacity4, y: y4 },
     { opacity: opacity5, y: y5 },
     { opacity: opacity6, y: y6 },
+    { opacity: opacity7, y: y7 },
   ];
 
   const rockets: RocketData[] = [
@@ -149,6 +157,20 @@ export function LaunchEvolution() {
         { label: "4th Stage Solid Motor", x: 50, y: 45, align: "left" },
         { label: "1st Stage Core Booster", x: 50, y: 80, align: "right" }
       ]
+    },
+    {
+      id: "leadership",
+      name: "The Leadership Lesson",
+      year: "1979",
+      breakthrough: "Failure Analysis",
+      desc: "On August 10, 1979, India's first SLV-3 launch failed. A leak in the control system caused the rocket to plunge into the Bay of Bengal. As Project Director, APJ Abdul Kalam was devastated.",
+      height: "—",
+      weight: "—",
+      capacity: "—",
+      stages: "—",
+      statusText: "SRIHARIKOTA PRESS DEBRIEFING",
+      image: "/kalam.png",
+      callouts: []
     },
     {
       id: "aslv",
@@ -246,7 +268,7 @@ export function LaunchEvolution() {
     <div 
       ref={containerRef}
       id="launch-evolution"
-      className="relative w-full h-[700vh] bg-[#030308] border-b border-white/10"
+      className="relative w-full h-[800vh] bg-[#030308] border-b border-white/10"
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex flex-col justify-between py-16">
@@ -293,6 +315,100 @@ export function LaunchEvolution() {
           const rocketIndex = index + 1;
           const isActive = activeIndex === rocketIndex;
           
+          if (rocket.id === "leadership") {
+            return (
+              <motion.div
+                key={rocket.id}
+                style={sceneStyles[rocketIndex]}
+                className={`absolute inset-0 z-10 items-center justify-center max-w-7xl mx-auto px-6 md:px-12 w-full h-full transition-all duration-300 ${
+                  isActive ? "pointer-events-auto" : "pointer-events-none"
+                } ${
+                  Math.abs(activeIndex - rocketIndex) <= 1 ? "flex" : "hidden"
+                }`}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-[40%_1fr] gap-8 lg:gap-16 items-center w-full">
+                  
+                  {/* Left Column: Image of Kalam in double bezel */}
+                  <div className="relative flex justify-center w-full">
+                    {/* Double Bezel Enclosure */}
+                    <div className="relative w-full max-w-xs bg-white/[0.02] border border-white/10 rounded-[2rem] p-2 shadow-2xl">
+                      <div className="relative overflow-hidden w-full h-[30vh] md:h-[45vh] rounded-[calc(2rem-0.5rem)] bg-[#05050f] border border-white/5">
+                        
+                        <Image
+                          src={rocket.image}
+                          alt="Dr. APJ Abdul Kalam"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                          className="object-cover object-top grayscale contrast-[1.2] brightness-[0.75] select-none pointer-events-none"
+                        />
+                        
+                        {/* Vignette & grid overlays */}
+                        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#05050f_90%] pointer-events-none" />
+                        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+                        
+                        {/* Target reticle details */}
+                        <div className="absolute bottom-4 left-4 font-mono text-[8px] text-white/40 tracking-wider">
+                          PROJECT DIRECTOR: SLV-3
+                        </div>
+                      </div>
+                    </div>
+                    {/* Caption details */}
+                    <div className="absolute bottom-[-22px] font-mono text-[8px] text-white/35 tracking-widest uppercase">
+                      DR. APJ ABDUL KALAM (1931 - 2015)
+                    </div>
+                  </div>
+
+                  {/* Right Column: Failure & Leadership Story */}
+                  <div className="text-left flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase font-bold">
+                        August 10, 1979
+                      </span>
+                      <span className="h-[1px] w-6 bg-white/10" />
+                      <span className="inline-block border border-[#FF3B30]/20 bg-[#FF3B30]/5 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-[#FF3B30] font-semibold">
+                        Launch Failure
+                      </span>
+                    </div>
+
+                    <h3 
+                      className="text-3xl md:text-4xl font-extralight text-white leading-tight"
+                      style={{ fontFamily: "Georgia, serif" }}
+                    >
+                      The Management of Failure
+                    </h3>
+
+                    <p className="text-sm text-white/70 leading-relaxed font-sans max-w-2xl">
+                      During the first launch of SLV-3 in 1979, the rocket plunged into the Bay of Bengal due to a valve leak. Kalam, as the Project Director, was devastated. Yet, Chairman Satish Dhawan shielded the team and conducted the press conference himself.
+                    </p>
+
+                    <blockquote className="border-l-2 border-[#FFB800] pl-6 py-2 my-1 bg-white/[0.01] max-w-2xl">
+                      <p className="text-sm font-mono text-[#FFB800]/80 leading-relaxed uppercase mb-2">
+                        Dhawan to the Press (1979):
+                      </p>
+                      <p className="text-sm font-light text-white/60 italic leading-relaxed">
+                        &ldquo;Dear friends, we have failed today. I want to support my technologists, my scientists, my staff, so that next year they succeed.&rdquo;
+                      </p>
+                    </blockquote>
+
+                    <p className="text-sm text-white/70 leading-relaxed font-sans max-w-2xl mt-1">
+                      A year later, when SLV-3 succeeded in July 1980, Dhawan did not take the stage. He asked Kalam to conduct the press conference and address the nation.
+                    </p>
+
+                    <blockquote className="border-l-2 border-[#FFB800] pl-6 py-3 my-1 bg-[#FFB800]/5 max-w-2xl rounded-r-md">
+                      <p className="text-xs font-mono text-[#FFB800] tracking-widest uppercase mb-1.5 font-bold">
+                        Kalam&apos;s Leadership Takeaway:
+                      </p>
+                      <p className="text-lg md:text-xl font-extralight text-white leading-relaxed italic" style={{ fontFamily: "Georgia, serif" }}>
+                        &ldquo;When the failure occurred, the leader owned it up. When the success came, he gave it to his team.&rdquo;
+                      </p>
+                    </blockquote>
+                  </div>
+
+                </div>
+              </motion.div>
+            );
+          }
+
           return (
             <motion.div
               key={rocket.id}
