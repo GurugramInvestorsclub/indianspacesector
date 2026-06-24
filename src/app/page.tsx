@@ -477,7 +477,7 @@ export default function Home() {
       <Hero />
       <Speaker />
       <Disclaimer />
-      <DeepTechWebinars />
+      <DeepTechWebinars presentationActive={presentationActive} />
       <Beginning />
       <Aryabhata />
       <TheBuilder />

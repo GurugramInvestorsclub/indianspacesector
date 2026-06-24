@@ -16,6 +16,7 @@ interface Webinar {
   duration: string;
   syllabus: string[];
   takeaways: string[];
+  courseLink?: string;
 }
 
 const WEBINARS: Webinar[] = [
@@ -59,7 +60,8 @@ const WEBINARS: Webinar[] = [
       "Deep understanding of India's baseload power requirements and the role of nuclear",
       "Mapped list of private suppliers, fabricators, and heavy engineering firms in the supply chain",
       "The commercial viability and timelines of SMRs in the Indian industrial sector"
-    ]
+    ],
+    courseLink: "https://superprofile.bio/course/d51f7a8f-6e7e-4b88-898a-b2353f8cfd49"
   },
   {
     id: "aerospace",
@@ -80,17 +82,29 @@ const WEBINARS: Webinar[] = [
       "Understanding the procurement cycles and budget allocation dynamics of the MoD",
       "Identification of key tier-1 and tier-2 aerospace suppliers in private corridors",
       "Technical breakdown of avionics and engine technology bottlenecks and investment opportunities"
-    ]
+    ],
+    courseLink: "https://superprofile.bio/course/a8699cb8-7e46-4508-8444-927dbb9c625f"
   }
 ];
 
-export function DeepTechWebinars() {
+interface DeepTechWebinarsProps {
+  presentationActive?: boolean;
+}
+
+export function DeepTechWebinars({ presentationActive = false }: DeepTechWebinarsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedWebinar, setSelectedWebinar] = useState<Webinar | null>(null);
   const [registeredWebinarId, setRegisteredWebinarId] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [activeTab, setActiveTab] = useState<"syllabus" | "takeaways">("syllabus");
+
+  // Dismiss modal if presentation mode is activated
+  React.useEffect(() => {
+    if (presentationActive) {
+      setSelectedWebinar(null);
+    }
+  }, [presentationActive]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -158,7 +172,9 @@ export function DeepTechWebinars() {
           {WEBINARS.map((webinar, index) => (
             <div
               key={webinar.id}
-              className="min-w-[290px] sm:min-w-[340px] md:min-w-0 snap-center flex-shrink-0 group cursor-pointer"
+              className={`min-w-[290px] sm:min-w-[340px] md:min-w-0 snap-center flex-shrink-0 group ${
+                presentationActive ? "pointer-events-none select-none" : "cursor-pointer"
+              }`}
               onClick={() => setSelectedWebinar(webinar)}
             >
               {/* Cinematic Panel Cover */}
@@ -361,7 +377,28 @@ export function DeepTechWebinars() {
                     </p>
 
                     <AnimatePresence mode="wait">
-                      {registeredWebinarId === selectedWebinar.id ? (
+                      {selectedWebinar.courseLink ? (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="py-6 flex flex-col gap-4 text-left"
+                        >
+                          <p className="text-xs text-white/60 font-sans leading-relaxed">
+                            This briefing is hosted externally. Click below to register and secure your seat on Superprofile.
+                          </p>
+                          
+                          <a
+                            href={selectedWebinar.courseLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full bg-[#FFB800] hover:bg-[#FFC700] text-[#030308] font-bold py-3.5 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#FFB800]/10 hover:shadow-[#FFB800]/20 hover:-translate-y-0.5 cursor-pointer text-xs uppercase tracking-widest font-mono text-center"
+                          >
+                            <span>REGISTER ON SUPERPROFILE</span>
+                            <Send className="w-3.5 h-3.5" />
+                          </a>
+                        </motion.div>
+                      ) : registeredWebinarId === selectedWebinar.id ? (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
