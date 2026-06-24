@@ -10,6 +10,10 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth exponential easing
     });
 
+    if (typeof window !== "undefined") {
+      (window as any).lenis = lenis;
+    }
+
     // Request Animation Frame loop for Lenis
     let rafId: number;
     function raf(time: number) {
@@ -20,6 +24,9 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     rafId = requestAnimationFrame(raf);
 
     return () => {
+      if (typeof window !== "undefined") {
+        delete (window as any).lenis;
+      }
       lenis.destroy();
       cancelAnimationFrame(rafId);
     };

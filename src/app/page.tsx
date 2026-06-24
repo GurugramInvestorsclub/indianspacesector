@@ -107,6 +107,16 @@ const PRESENTATION_SCENES: PresentationScene[] = [
   { id: "opportunities", name: "The Opportunity", label: "12 / 12", startFrame: 29, endFrame: 30 }
 ];
 
+const SECTIONS = [
+  { name: "Hero", frames: [0] },
+  { name: "Beginning", frames: [1, 2, 3, 4, 5] },
+  { name: "Aryabhata", frames: [6, 7, 8, 9] },
+  { name: "TheBuilder", frames: [10, 11, 12] },
+  { name: "LaunchEvolution", frames: [13, 14, 15, 16, 17, 18, 19, 20] },
+  { name: "Exploration", frames: [21, 22, 23] },
+  { name: "NewEra", frames: [24, 25, 26, 27, 28, 29, 30] }
+];
+
 export default function Home() {
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
   const [presentationActive, setPresentationActive] = useState(false);
@@ -140,6 +150,43 @@ export default function Home() {
     });
   };
 
+  // Section State Machine Helpers
+  const getActiveSection = useCallback((frameIndex: number) => {
+    return SECTIONS.find(sec => sec.frames.includes(frameIndex)) || SECTIONS[0];
+  }, []);
+
+  const getLocalStateIndex = useCallback((frameIndex: number) => {
+    const sec = getActiveSection(frameIndex);
+    return sec.frames.indexOf(frameIndex);
+  }, [getActiveSection]);
+
+  const getStateCount = useCallback(() => {
+    const sec = getActiveSection(currentFrameIndex);
+    return sec.frames.length;
+  }, [currentFrameIndex, getActiveSection]);
+
+  const isFirstState = currentFrameIndex === 0;
+  const isLastState = currentFrameIndex === FRAMES.length - 1;
+
+  const nextState = useCallback(() => {
+    if (currentFrameIndex < FRAMES.length - 1) {
+      scrollToFrame(currentFrameIndex + 1);
+    }
+  }, [currentFrameIndex]);
+
+  const previousState = useCallback(() => {
+    if (currentFrameIndex > 0) {
+      scrollToFrame(currentFrameIndex - 1);
+    }
+  }, [currentFrameIndex]);
+
+  const goToState = useCallback((index: number) => {
+    const sec = getActiveSection(currentFrameIndex);
+    if (index >= 0 && index < sec.frames.length) {
+      scrollToFrame(sec.frames[index]);
+    }
+  }, [currentFrameIndex, getActiveSection]);
+
   // Sync presentation active status with URL parameter
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -148,13 +195,18 @@ export default function Home() {
     }
   }, []);
 
-  // Lock manual scroll events when presentation mode is active
+  // Lock manual scroll events and stop Lenis when presentation mode is active
   useEffect(() => {
     if (!presentationActive) return;
 
     const preventDefault = (e: Event) => {
       e.preventDefault();
     };
+
+    // Pause Lenis smooth scroll
+    if (typeof window !== "undefined" && (window as any).lenis) {
+      (window as any).lenis.stop();
+    }
 
     // Add scroll lock event listeners
     window.addEventListener("wheel", preventDefault, { passive: false });
@@ -165,6 +217,11 @@ export default function Home() {
     document.body.classList.add("presentation-active");
 
     return () => {
+      // Resume Lenis smooth scroll
+      if (typeof window !== "undefined" && (window as any).lenis) {
+        (window as any).lenis.start();
+      }
+
       window.removeEventListener("wheel", preventDefault);
       window.removeEventListener("touchmove", preventDefault);
       document.documentElement.classList.remove("presentation-active");
@@ -233,12 +290,12 @@ export default function Home() {
 
   // Centralized Scene Controller Methods for Presentation Mode
   const nextScene = useCallback(() => {
-    advanceFrame(true);
-  }, [advanceFrame]);
+    nextState();
+  }, [nextState]);
 
   const previousScene = useCallback(() => {
-    advanceFrame(false);
-  }, [advanceFrame]);
+    previousState();
+  }, [previousState]);
 
   const goToScene = useCallback((sceneIndex: number) => {
     if (sceneIndex < 0 || sceneIndex >= PRESENTATION_SCENES.length) return;
@@ -263,7 +320,11 @@ export default function Home() {
       
       e.preventDefault();
       // Shift+Click goes back, normal Click advances
-      advanceFrame(!e.shiftKey);
+      if (e.shiftKey) {
+        previousState();
+      } else {
+        nextState();
+      }
     };
 
     // Right click anywhere on the page to go back
@@ -277,7 +338,7 @@ export default function Home() {
         return;
       }
       e.preventDefault();
-      advanceFrame(false);
+      previousState();
     };
 
     window.addEventListener("click", handleGlobalClick);
@@ -287,7 +348,7 @@ export default function Home() {
       window.removeEventListener("click", handleGlobalClick);
       window.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, [presentationActive, advanceFrame]);
+  }, [presentationActive, nextState, previousState]);
 
   // Set up keyboard listeners for presentation mode
   useEffect(() => {
@@ -304,12 +365,12 @@ export default function Home() {
       // Spacebar, ArrowRight, ArrowDown, Enter advance
       if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " " || e.key === "Enter") {
         e.preventDefault();
-        nextScene();
+        nextState();
       } 
       // ArrowLeft, ArrowUp, Backspace go back
       else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "Backspace") {
         e.preventDefault();
-        previousScene();
+        previousState();
       } 
       // Block page scrolling keys
       else if (e.key === "PageDown" || e.key === "PageUp" || e.key === "Home" || e.key === "End") {
@@ -325,7 +386,7 @@ export default function Home() {
 
     window.addEventListener("keydown", handleKeyDown, { passive: false });
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [presentationActive, nextScene, previousScene]);
+  }, [presentationActive, nextState, previousState]);
 
   // Sync HUD open state with Presentation mode toggle
   const handleToggleHud = (open: boolean) => {
@@ -499,6 +560,10 @@ export default function Home() {
           onNavigateChapter={handleNavigateChapter}
           isOpen={hudOpen}
           onToggleOpen={handleToggleHud}
+          onPrevState={previousState}
+          onNextState={nextState}
+          isFirstState={isFirstState}
+          isLastState={isLastState}
         />
       </div>
     </main>

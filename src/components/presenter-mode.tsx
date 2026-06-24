@@ -115,13 +115,21 @@ interface PresenterModeProps {
   onNavigateChapter: (chapterNum: number) => void;
   isOpen?: boolean;
   onToggleOpen?: (isOpen: boolean) => void;
+  onPrevState?: () => void;
+  onNextState?: () => void;
+  isFirstState?: boolean;
+  isLastState?: boolean;
 }
 
 export function PresenterMode({ 
   activeChapter, 
   onNavigateChapter,
   isOpen: controlledIsOpen,
-  onToggleOpen
+  onToggleOpen,
+  onPrevState,
+  onNextState,
+  isFirstState = false,
+  isLastState = false
 }: PresenterModeProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
@@ -380,17 +388,17 @@ export function PresenterMode({
                   <div className="bg-[#080814] border border-space-border p-4 rounded-xl space-y-2">
                     <div className="flex justify-between items-center text-xs">
                       <span>Completed Chapters</span>
-                      <span className="font-mono font-bold text-white">{activeChapter} / 9</span>
+                      <span className="font-mono font-bold text-white">{activeChapter} / 10</span>
                     </div>
                     {/* Progress Bar */}
                     <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-accent-cyan transition-all duration-500 ease-out" 
-                        style={{ width: `${(activeChapter / 9) * 100}%` }}
+                        style={{ width: `${(activeChapter / 10) * 100}%` }}
                       ></div>
                     </div>
                     <div className="text-[10px] font-mono text-white/40 text-right mt-1">
-                      {Math.round((activeChapter / 9) * 100)}% Slide Weight
+                      {Math.round((activeChapter / 10) * 100)}% Slide Weight
                     </div>
                   </div>
                 </div>
@@ -399,16 +407,16 @@ export function PresenterMode({
               {/* Quick Prev/Next buttons in Presenter Mode */}
               <div className="grid grid-cols-2 gap-3 mt-4">
                 <button
-                  disabled={activeChapter <= 1}
-                  onClick={() => onNavigateChapter(activeChapter - 1)}
+                  disabled={isFirstState}
+                  onClick={onPrevState}
                   className="bg-white/5 hover:bg-white/15 disabled:opacity-40 disabled:hover:bg-white/5 py-3 rounded-lg flex items-center justify-center gap-1.5 border border-space-border transition-all text-xs font-mono text-white"
                 >
                   <ChevronLeft className="w-4 h-4" /> PREV
                 </button>
                 <button
-                  disabled={activeChapter >= 9}
-                  onClick={() => onNavigateChapter(activeChapter + 1)}
-                  className="bg-accent-cyan/15 hover:bg-accent-cyan/25 border border-accent-cyan/30 text-accent-cyan py-3 rounded-lg flex items-center justify-center gap-1.5 transition-all text-xs font-mono"
+                  disabled={isLastState}
+                  onClick={onNextState}
+                  className="bg-accent-cyan/15 hover:bg-accent-cyan/25 border border-accent-cyan/30 text-accent-cyan py-3 rounded-lg flex items-center justify-center gap-1.5 transition-all text-xs font-mono disabled:opacity-40"
                 >
                   NEXT <ChevronRight className="w-4 h-4" />
                 </button>
