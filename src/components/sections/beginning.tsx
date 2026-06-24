@@ -808,15 +808,15 @@ export function Beginning() {
                   <text x="262" y="156" className="font-mono text-[7px] fill-white/50">ESTD. 1962</text>
 
                   {/* Thumba Launch site Node */}
-                  <circle cx="240" cy="460" r="4.5" fill="#00E5FF" />
+                  <circle cx="240" cy="460" r="4.5" fill="#FFB800" />
                   <motion.circle 
                     style={{ opacity: nodeConnectionsOpacity }} 
-                    cx="240" cy="460" r="9" stroke="#00E5FF" strokeWidth="0.8" 
+                    cx="240" cy="460" r="9" stroke="#FFB800" strokeWidth="0.8" 
                     animate={{ scale: [1, 2, 1] }} 
                     transition={{ repeat: Infinity, duration: 2.5, delay: 1.5, ease: "easeInOut" }} 
                   />
                   <text x="254" y="458" className="font-mono text-[8px] tracking-wider fill-white">THUMBA</text>
-                  <text x="254" y="466" className="font-mono text-[7px] fill-[#00E5FF]">LAUNCH SITE</text>
+                  <text x="254" y="466" className="font-mono text-[7px] fill-[#FFB800]">LAUNCH SITE</text>
                 </g>
               </svg>
             </motion.div>
@@ -858,7 +858,7 @@ export function Beginning() {
         >
           {/* Header context */}
           <div className="text-center">
-            <span className="font-mono text-[10px] tracking-[0.25em] text-[#00E5FF] uppercase mb-2 block">
+            <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase mb-2 block">
               Scene V — Thumba Coastline
             </span>
             <h4 className="text-sm font-mono tracking-widest text-white/30 uppercase">
@@ -885,7 +885,7 @@ export function Beginning() {
                 />
               </div>
               <div className="font-mono text-[7px] md:text-[8px] tracking-wider text-white/50 flex justify-between items-center">
-                <span className="text-[#00E5FF] font-bold">1963 — BICYCLE TRANSIT</span>
+                <span className="text-[#FFB800] font-bold">1963 — BICYCLE TRANSIT</span>
                 <span className="hidden md:inline">THUMBA</span>
               </div>
               <p className="text-[7px] md:text-[8.5px] font-mono text-white/40 leading-normal">
@@ -937,9 +937,9 @@ export function Beginning() {
             {/* Earth's Magnetic Equator Line */}
             <motion.div
               style={{ opacity: magneticEquatorOpacity }}
-              className="absolute top-[35%] w-full h-[1px] bg-gradient-to-r from-transparent via-[#00E5FF]/40 to-transparent flex items-center justify-center font-mono text-[8px] tracking-[0.3em] text-[#00E5FF]/70"
+              className="absolute top-[35%] w-full h-[1px] bg-gradient-to-r from-transparent via-[#FFB800]/40 to-transparent flex items-center justify-center font-mono text-[8px] tracking-[0.3em] text-[#FFB800]/70"
             >
-              <span className="bg-[#030308] px-4 py-1 border border-[#00E5FF]/20 rounded-full shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+              <span className="bg-[#030308] px-4 py-1 border border-[#FFB800]/20 rounded-full shadow-[0_0_15px_rgba(255,184,0,0.1)]">
                 EARTH&apos;S MAGNETIC DIP EQUATOR
               </span>
             </motion.div>
@@ -947,7 +947,7 @@ export function Beginning() {
             {/* Sounding Rocket and trajectory */}
             <div className="absolute left-1/2 -translate-x-1/2 bottom-[12vh] flex flex-col items-center">
               {/* Trajectory dotted line */}
-              <div className="absolute bottom-[20px] w-[1px] h-[800px] bg-gradient-to-t from-[#00E5FF]/40 via-[#00E5FF]/10 to-transparent border-l border-dashed border-[#00E5FF]/30" />
+              <div className="absolute bottom-[20px] w-[1px] h-[800px] bg-gradient-to-t from-[#FFB800]/40 via-[#FFB800]/10 to-transparent border-l border-dashed border-[#FFB800]/30" />
 
               {/* Minimalist Sounding Rocket */}
               <motion.div 
@@ -959,10 +959,10 @@ export function Beginning() {
                 <div className="w-[9px] h-[1px] bg-[#FFB800]" />
                 
                 {/* Rocket fins */}
-                <div className="w-[11px] h-[4px] bg-[#00E5FF] rounded-b-sm" />
+                <div className="w-[11px] h-[4px] bg-[#FFB800] rounded-b-sm" />
                 
                 {/* Subtly glowing tail smoke (no fire/explosions, purely structural trail) */}
-                <div className="w-[1px] h-[22px] bg-gradient-to-b from-[#00E5FF]/60 to-transparent mt-0.5" />
+                <div className="w-[1px] h-[22px] bg-gradient-to-b from-[#FFB800]/60 to-transparent mt-0.5" />
               </motion.div>
             </div>
 
@@ -1004,7 +1004,7 @@ export function Beginning() {
           {/* Editorial narration */}
           <div className="relative z-10 w-full flex flex-col md:flex-row items-end justify-between gap-8 mt-auto mb-[25vh]">
             <div className="max-w-md text-left">
-              <span className="font-mono text-[9px] tracking-[0.25em] text-[#00E5FF] uppercase mb-3 block">
+              <span className="font-mono text-[9px] tracking-[0.25em] text-[#FFB800] uppercase mb-3 block">
                 Magnetic Equator Advantage
               </span>
               <p className="text-xl md:text-2xl font-extralight text-white leading-relaxed">
@@ -1012,8 +1012,8 @@ export function Beginning() {
               </p>
             </div>
             
-            <div className="max-w-md text-left bg-gradient-to-t from-[#030308]/90 to-transparent p-4 rounded-lg md:border-l md:border-[#00E5FF]/20 md:pl-6">
-              <h5 className="font-mono text-xs text-[#00E5FF] tracking-wider uppercase mb-1">
+            <div className="max-w-md text-left bg-gradient-to-t from-[#030308]/90 to-transparent p-4 rounded-lg md:border-l md:border-[#FFB800]/20 md:pl-6">
+              <h5 className="font-mono text-xs text-[#FFB800] tracking-wider uppercase mb-1">
                 Thumba Equatorial Rocket Launching Station
               </h5>
               <p className="text-xs font-mono text-white/55 leading-relaxed">
