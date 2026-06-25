@@ -1,0 +1,542 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1782347189.1546705,
+    "ast_hash": "7bf81dca0376bde3a32244b82bc7cbc0",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1782315111.104043,
+    "ast_hash": "a6974b0cc678c28ef9477841c587132e",
+    "semantic_hash": ""
+  },
+  "eslint.config.mjs": {
+    "mtime": 1781946957.3479,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": ""
+  },
+  "next.config.ts": {
+    "mtime": 1781946957.4973893,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1782315403.6481476,
+    "ast_hash": "db0084e3e81abbf86551dce3b23f314f",
+    "semantic_hash": ""
+  },
+  "postcss.config.mjs": {
+    "mtime": 1781946957.389,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": ""
+  },
+  "scripts/generate-space-images.mjs": {
+    "mtime": 1782315424.2976186,
+    "ast_hash": "575dc31027977644727514c781d22afb",
+    "semantic_hash": ""
+  },
+  "skills-lock.json": {
+    "mtime": 1781962754.625157,
+    "ast_hash": "d5ab6ed19e5a015de89521b2014fe3d0",
+    "semantic_hash": ""
+  },
+  "src/app/chapters/%5Bslug%5D/page.tsx": {
+    "mtime": 1781963741.3834844,
+    "ast_hash": "fea187e3465172c072e94e14b17969eb",
+    "semantic_hash": ""
+  },
+  "src/app/chapters/paradigm-shift/page.tsx": {
+    "mtime": 1782318052.1051748,
+    "ast_hash": "92b6d36de8af40d735e8cc97211f9fd2",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1781967224.331159,
+    "ast_hash": "de1532656bf754dfe0a1d0ed8c17068c",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1782303511.640307,
+    "ast_hash": "990a1864c69df1dbad2e51a9bd03425a",
+    "semantic_hash": ""
+  },
+  "src/components/background-engine.tsx": {
+    "mtime": 1782203810.9718344,
+    "ast_hash": "1166ae5aa3da324ae4be8fca4965a2df",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-eight.tsx": {
+    "mtime": 1781947556.425737,
+    "ast_hash": "44c4f0758d33b7d16b26bf1d25ebb7cd",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-five.tsx": {
+    "mtime": 1782203810.9768338,
+    "ast_hash": "f7980738baef7a8baa94a7712d3c08ee",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-four.tsx": {
+    "mtime": 1782203810.9783416,
+    "ast_hash": "1f91837e3c4d98bbe6aa01268e67ee46",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-nine.tsx": {
+    "mtime": 1782203810.9795282,
+    "ast_hash": "79181ee5d6b87844c5656f4fdd5f49d2",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-one.tsx": {
+    "mtime": 1781947852.9105408,
+    "ast_hash": "e6c1230aedeae258fae9682738637e0a",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-six.tsx": {
+    "mtime": 1782203810.9815283,
+    "ast_hash": "a3702282cfe2fc0b966f3a77f1d5d827",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-three.tsx": {
+    "mtime": 1782203810.9825232,
+    "ast_hash": "2798e5e2733601dbd17f38646ac3382b",
+    "semantic_hash": ""
+  },
+  "src/components/chapters/chapter-two.tsx": {
+    "mtime": 1782203810.9840376,
+    "ast_hash": "e3b511321e9a561003f25dfa5a3dbab3",
+    "semantic_hash": ""
+  },
+  "src/components/lenis-provider.tsx": {
+    "mtime": 1782287418.7928958,
+    "ast_hash": "ea3ff1ed5bcc17b05502e327ef7075d4",
+    "semantic_hash": ""
+  },
+  "src/components/marquee.tsx": {
+    "mtime": 1781947584.379191,
+    "ast_hash": "68e9bfe7ee36d80389f1961c0bc6fe96",
+    "semantic_hash": ""
+  },
+  "src/components/navbar.tsx": {
+    "mtime": 1782318216.1295516,
+    "ast_hash": "3c9c5915974d7f115b6e04c2c4e377fd",
+    "semantic_hash": ""
+  },
+  "src/components/presenter-mode.tsx": {
+    "mtime": 1782287477.60701,
+    "ast_hash": "0b58254a5979380e19babefbd4717372",
+    "semantic_hash": ""
+  },
+  "src/components/sections/aryabhata.tsx": {
+    "mtime": 1782304294.8131168,
+    "ast_hash": "f8abacb45bbe72062f31b03ce6f6f2c5",
+    "semantic_hash": ""
+  },
+  "src/components/sections/beginning.tsx": {
+    "mtime": 1782304448.3188503,
+    "ast_hash": "6b02f70a0aaf6096a6c28abfe0873634",
+    "semantic_hash": ""
+  },
+  "src/components/sections/briefing-signup.tsx": {
+    "mtime": 1782203810.9870448,
+    "ast_hash": "96286a363c7c29433be0a87b876f05f1",
+    "semantic_hash": ""
+  },
+  "src/components/sections/case-studies.tsx": {
+    "mtime": 1782203810.988553,
+    "ast_hash": "d28da7dcb66051232624f1ab04f7024d",
+    "semantic_hash": ""
+  },
+  "src/components/sections/closing-shot.tsx": {
+    "mtime": 1782203810.990649,
+    "ast_hash": "4ab5527ff6c4951d3382560ff333dd73",
+    "semantic_hash": ""
+  },
+  "src/components/sections/disclaimer.tsx": {
+    "mtime": 1782300283.850313,
+    "ast_hash": "f9e7991598641bf2f4edf943b6de6837",
+    "semantic_hash": ""
+  },
+  "src/components/sections/ecosystem-visualization.tsx": {
+    "mtime": 1782203810.9916632,
+    "ast_hash": "873e6c76cb55f570a2f9399b4982dac0",
+    "semantic_hash": ""
+  },
+  "src/components/sections/exploration.tsx": {
+    "mtime": 1782304460.5782814,
+    "ast_hash": "7bd044f45a91022d84cf206cc73e8526",
+    "semantic_hash": ""
+  },
+  "src/components/sections/footer.tsx": {
+    "mtime": 1781958502.0583386,
+    "ast_hash": "5acdf78905f1e837a8a1884bf5993b0b",
+    "semantic_hash": ""
+  },
+  "src/components/sections/four-pillars.tsx": {
+    "mtime": 1782203810.9941115,
+    "ast_hash": "cda695a021cdc8eeae93183b82c04da7",
+    "semantic_hash": ""
+  },
+  "src/components/sections/hero.tsx": {
+    "mtime": 1782034930.1374266,
+    "ast_hash": "0d94fb5dcfcbbd2596c28c7a1e534ae6",
+    "semantic_hash": ""
+  },
+  "src/components/sections/inflection-point.tsx": {
+    "mtime": 1782203810.995764,
+    "ast_hash": "621e66a419355140959a4ce0cbb0db89",
+    "semantic_hash": ""
+  },
+  "src/components/sections/launch-evolution.tsx": {
+    "mtime": 1782304467.3436759,
+    "ast_hash": "48889bc4769a4404951bdfe7743128e3",
+    "semantic_hash": ""
+  },
+  "src/components/sections/mission-control.tsx": {
+    "mtime": 1782203810.9981625,
+    "ast_hash": "bdaf613e25de629b260c62e500f8bdbf",
+    "semantic_hash": ""
+  },
+  "src/components/sections/new-era.tsx": {
+    "mtime": 1782318222.7317138,
+    "ast_hash": "465516c524a60f9afa801f68ea8c1745",
+    "semantic_hash": ""
+  },
+  "src/components/sections/origins.tsx": {
+    "mtime": 1782203811.0019503,
+    "ast_hash": "2ae4088f70c38c2e827643b9da39569a",
+    "semantic_hash": ""
+  },
+  "src/components/sections/sector-analysis.tsx": {
+    "mtime": 1782203811.0019503,
+    "ast_hash": "29cc65b856fa4e0ed85a9b02d2849cfe",
+    "semantic_hash": ""
+  },
+  "src/components/sections/segment-deep-dives.tsx": {
+    "mtime": 1782203811.004409,
+    "ast_hash": "05076c1837da5df3fa0bf5fcb2164e7f",
+    "semantic_hash": ""
+  },
+  "src/components/sections/speaker.tsx": {
+    "mtime": 1782298570.036592,
+    "ast_hash": "a4987351a7b40bb42f36aaa9a53e9717",
+    "semantic_hash": ""
+  },
+  "src/components/sections/stats.tsx": {
+    "mtime": 1782203811.0054073,
+    "ast_hash": "fa1f1b20b7ca8e069cb027be4a717181",
+    "semantic_hash": ""
+  },
+  "src/components/sections/tactical-feature.tsx": {
+    "mtime": 1782203811.0086088,
+    "ast_hash": "a3e39b0f746ec1e19ec596d2fcbf3558",
+    "semantic_hash": ""
+  },
+  "src/components/sections/the-builder.tsx": {
+    "mtime": 1782304349.50796,
+    "ast_hash": "08461c8f2de32e70fb944bc62efcf0e5",
+    "semantic_hash": ""
+  },
+  "src/components/sections/timeline.tsx": {
+    "mtime": 1782203811.010496,
+    "ast_hash": "f6bd71f4e4bf5e876272b54d5f632c4c",
+    "semantic_hash": ""
+  },
+  "src/components/sections/webinars.tsx": {
+    "mtime": 1782300961.9450302,
+    "ast_hash": "c989c74797215a74cdd6676dc72ceb06",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1781947090.17386,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": ""
+  },
+  ".agents/skills/brandkit/SKILL.md": {
+    "mtime": 1781962752.7734566,
+    "ast_hash": "7491f8fb77b0ebf517b758d096ac4ab4",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend-v1/SKILL.md": {
+    "mtime": 1781962752.7943115,
+    "ast_hash": "05b271f9985412ac9c081a0511bb6cbe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/design-taste-frontend/SKILL.md": {
+    "mtime": 1781962752.796291,
+    "ast_hash": "648c8bf98f84fbe7f14bf2da035c57fe",
+    "semantic_hash": ""
+  },
+  ".agents/skills/full-output-enforcement/SKILL.md": {
+    "mtime": 1781962752.786452,
+    "ast_hash": "2072dc2c1357dc9cd6384d1f441e05c3",
+    "semantic_hash": ""
+  },
+  ".agents/skills/gpt-taste/SKILL.md": {
+    "mtime": 1781962752.7776494,
+    "ast_hash": "e2a7560cbfce7a853dd8f65eca12c103",
+    "semantic_hash": ""
+  },
+  ".agents/skills/high-end-visual-design/SKILL.md": {
+    "mtime": 1781962752.790552,
+    "ast_hash": "64f7c1069a5a3d18797950d8fac7b63a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/image-to-code/SKILL.md": {
+    "mtime": 1781962752.7788265,
+    "ast_hash": "b18a810930da9c6b558b15c85bc74007",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-mobile/SKILL.md": {
+    "mtime": 1781962752.7803068,
+    "ast_hash": "6253c18387ca5d561a945ffe14e70d54",
+    "semantic_hash": ""
+  },
+  ".agents/skills/imagegen-frontend-web/SKILL.md": {
+    "mtime": 1781962752.7823157,
+    "ast_hash": "728f55ab7e44330e78aac4ca8331d83a",
+    "semantic_hash": ""
+  },
+  ".agents/skills/industrial-brutalist-ui/SKILL.md": {
+    "mtime": 1781962752.7765217,
+    "ast_hash": "da7f92d7e3b8b526ecbd71009fe973ca",
+    "semantic_hash": ""
+  },
+  ".agents/skills/minimalist-ui/SKILL.md": {
+    "mtime": 1781962752.7859442,
+    "ast_hash": "32f8681f79a681d00a4b72ddce4415b1",
+    "semantic_hash": ""
+  },
+  ".agents/skills/redesign-existing-projects/SKILL.md": {
+    "mtime": 1781962752.788557,
+    "ast_hash": "c8d729e3e807df37dcd5e6262c9b8843",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/DESIGN.md": {
+    "mtime": 1781962752.791555,
+    "ast_hash": "7f8c91aeecc8983b687965c2fc23438c",
+    "semantic_hash": ""
+  },
+  ".agents/skills/stitch-design-taste/SKILL.md": {
+    "mtime": 1781962752.7930615,
+    "ast_hash": "fcbb4f37d67a66a53013b484dcfc9f25",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1781947170.5225399,
+    "ast_hash": "9e09241799026ac05be315a2f0b50055",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1782347189.1516635,
+    "ast_hash": "b0517ee048d45b5cd5463430230eb52f",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1781946957.3077426,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": ""
+  },
+  "walkthrough.md": {
+    "mtime": 1782304600.0191367,
+    "ast_hash": "d1758be2ed20ec11fa565cf97da52e41",
+    "semantic_hash": ""
+  },
+  "public/aryabhata.png": {
+    "mtime": 1782035536.6309958,
+    "ast_hash": "4b2d223ba689d8024afac4ec7556caec",
+    "semantic_hash": ""
+  },
+  "public/aryabhata_satellite.jpg": {
+    "mtime": 1782037547.138448,
+    "ast_hash": "a61aa81aa029a399f6641d08cf60634b",
+    "semantic_hash": ""
+  },
+  "public/aslv.png": {
+    "mtime": 1782200947.3912601,
+    "ast_hash": "a606e3cf9b99dc0e03d0c3c39362be4a",
+    "semantic_hash": ""
+  },
+  "public/closing_cinematic.png": {
+    "mtime": 1781962350.1331642,
+    "ast_hash": "ca60ff6589ecf59c4d528498c6294b30",
+    "semantic_hash": ""
+  },
+  "public/earth_orbit_cinematic.png": {
+    "mtime": 1782313941.7099316,
+    "ast_hash": "7218bd978ab67e75aee27ad1943198ea",
+    "semantic_hash": ""
+  },
+  "public/file.svg": {
+    "mtime": 1781946957.4035854,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": ""
+  },
+  "public/globe.svg": {
+    "mtime": 1781946957.420452,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": ""
+  },
+  "public/ground_station.png": {
+    "mtime": 1781947408.704913,
+    "ast_hash": "e2ee42561c9a77cfc2b3222cf6d2e251",
+    "semantic_hash": ""
+  },
+  "public/gslv.png": {
+    "mtime": 1782200980.4476962,
+    "ast_hash": "87dc2601ca6776d4dded090e93f80c4a",
+    "semantic_hash": ""
+  },
+  "public/hero_background.png": {
+    "mtime": 1782034581.8361082,
+    "ast_hash": "b2ec88ef5f0f60ce8b89fc516659a163",
+    "semantic_hash": ""
+  },
+  "public/hero_cinematic.png": {
+    "mtime": 1781962334.0632775,
+    "ast_hash": "5e90820c356a0f0aa73f852bb809dcdf",
+    "semantic_hash": ""
+  },
+  "public/hero_earth.png": {
+    "mtime": 1781947365.068736,
+    "ast_hash": "61fe844e4f805cbdca186f3169380be8",
+    "semantic_hash": ""
+  },
+  "public/india_night_from_orbit.png": {
+    "mtime": 1782316048.41225,
+    "ast_hash": "bf27c2c5dfdcf439d2b57d4699e3870b",
+    "semantic_hash": ""
+  },
+  "public/kalam.png": {
+    "mtime": 1782283206.6345325,
+    "ast_hash": "07284320cc74bc51e9918d967ab56810",
+    "semantic_hash": ""
+  },
+  "public/lvm3.png": {
+    "mtime": 1782200995.4011855,
+    "ast_hash": "67bec0844279fceef61f38184565fe1a",
+    "semantic_hash": ""
+  },
+  "public/mars_exploration.png": {
+    "mtime": 1782038228.8387775,
+    "ast_hash": "39a26e83c594952d8b8c4ba8d0c52a70",
+    "semantic_hash": ""
+  },
+  "public/moon_exploration.png": {
+    "mtime": 1782038208.0734923,
+    "ast_hash": "ead27ca10c07034f2bef347cd048723b",
+    "semantic_hash": ""
+  },
+  "public/next.svg": {
+    "mtime": 1781946957.4335613,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": ""
+  },
+  "public/pslv.png": {
+    "mtime": 1782200962.7284973,
+    "ast_hash": "eaeffa303125afe8554424240ab6ec54",
+    "semantic_hash": ""
+  },
+  "public/rocket_bicycle.png": {
+    "mtime": 1782278214.5771046,
+    "ast_hash": "4104e51da3883ef58ea5cc77122897d5",
+    "semantic_hash": ""
+  },
+  "public/sat_const.png": {
+    "mtime": 1781947380.1202,
+    "ast_hash": "d9b104df5644f6a29990bcc11d2b2e22",
+    "semantic_hash": ""
+  },
+  "public/sat_network.png": {
+    "mtime": 1781947393.0827398,
+    "ast_hash": "abe2c81f193504e98c6614b80c620b41",
+    "semantic_hash": ""
+  },
+  "public/satellite_cart.png": {
+    "mtime": 1782278214.5747588,
+    "ast_hash": "c2f7e827009a8bd4d78636e41fd11469",
+    "semantic_hash": ""
+  },
+  "public/satellite_constellation_swarm.png": {
+    "mtime": 1782316116.8910933,
+    "ast_hash": "4778807de1f327742415911cb17a5957",
+    "semantic_hash": ""
+  },
+  "public/satish_dhawan.png": {
+    "mtime": 1782282766.7808957,
+    "ast_hash": "806801b139024814bb9537202bed811e",
+    "semantic_hash": ""
+  },
+  "public/slv3.png": {
+    "mtime": 1782200928.2372098,
+    "ast_hash": "51de804a2952bba0cec04d360857e8f8",
+    "semantic_hash": ""
+  },
+  "public/space_bg.png": {
+    "mtime": 1781958406.4409206,
+    "ast_hash": "0ab230c62ebe6c1c281bba16df22092a",
+    "semantic_hash": ""
+  },
+  "public/speaker.png": {
+    "mtime": 1782298436.4794705,
+    "ast_hash": "1baae3405626c47820f943e72640387d",
+    "semantic_hash": ""
+  },
+  "public/speaker_slide.png": {
+    "mtime": 1782298436.4765847,
+    "ast_hash": "b042efd4efe210fed2853d0caa9e500f",
+    "semantic_hash": ""
+  },
+  "public/sputnik_archive.png": {
+    "mtime": 1782277448.338468,
+    "ast_hash": "65046f54a1470a8e7fd95a909465aa57",
+    "semantic_hash": ""
+  },
+  "public/sslv.png": {
+    "mtime": 1782201009.0372467,
+    "ast_hash": "f91c2a6462f707c590d2a158afbdf697",
+    "semantic_hash": ""
+  },
+  "public/sun_exploration.png": {
+    "mtime": 1782038246.24044,
+    "ast_hash": "c9b3b9e75da106a5205af6acef025467",
+    "semantic_hash": ""
+  },
+  "public/thumba_launch.jpg": {
+    "mtime": 1782036876.1017978,
+    "ast_hash": "d8780919e392e1aa5177e821f5a6c38c",
+    "semantic_hash": ""
+  },
+  "public/value_flow.png": {
+    "mtime": 1781947424.8537807,
+    "ast_hash": "7890691f80d3d3583b89379c54c371ee",
+    "semantic_hash": ""
+  },
+  "public/vercel.svg": {
+    "mtime": 1781946957.4480188,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": ""
+  },
+  "public/vikram_sarabhai.jpg": {
+    "mtime": 1782036112.7981,
+    "ast_hash": "a648ace85a77c1931caa598d891a55d5",
+    "semantic_hash": ""
+  },
+  "public/webinar_aerospace.jpg": {
+    "mtime": 1782299872.4306078,
+    "ast_hash": "cc3c4443dfd988f2df9e753a8f0308d8",
+    "semantic_hash": ""
+  },
+  "public/webinar_nuclear.png": {
+    "mtime": 1782299872.4383333,
+    "ast_hash": "0a3bae342d745283d29e418ac595bca0",
+    "semantic_hash": ""
+  },
+  "public/webinar_space.jpg": {
+    "mtime": 1782299872.4267087,
+    "ast_hash": "4a223c9fa78758961583706a6b6651ee",
+    "semantic_hash": ""
+  },
+  "public/window.svg": {
+    "mtime": 1781946957.4601612,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  }
+}
