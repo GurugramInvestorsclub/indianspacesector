@@ -18,6 +18,8 @@ const navLinks = [
 // Dedicated chapter pages (full routes, not anchors).
 const pageLinks = [
   { label: "Paradigm Shift", href: "/chapters/paradigm-shift" },
+  { label: "Value Chain", href: "/chapters/value-chain" },
+  { label: "The Rocket", href: "/chapters/launch-vehicles" },
 ];
 
 export function Navbar() {

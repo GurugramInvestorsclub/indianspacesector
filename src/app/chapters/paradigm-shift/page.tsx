@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Navbar } from "@/components/navbar";
+import { ChapterNavButton } from "@/components/chapter-nav-button";
 import {
   motion,
   useScroll,
@@ -725,21 +726,27 @@ function Scene5Thesis() {
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-        <Link
+        <ChapterNavButton
           href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Return to Main Deck
-        </Link>
-        <Link
-          href="/chapters/launch-systems"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold transition-all duration-300 w-full sm:w-auto"
-        >
-          Browse Chapter Case Studies
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+          label="Return to Main Deck"
+          variant="ghost"
+          direction="back"
+        />
+        <ChapterNavButton
+          href="/chapters/value-chain"
+          label="Continue. The Value Chain"
+          variant="primary"
+          direction="forward"
+        />
       </div>
+
+      <Link
+        href="/chapters/launch-systems"
+        className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
+      >
+        Browse Chapter Case Studies
+        <ArrowRight className="w-3.5 h-3.5" />
+      </Link>
     </div>
   );
 }
