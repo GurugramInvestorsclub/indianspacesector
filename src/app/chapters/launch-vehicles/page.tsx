@@ -933,14 +933,21 @@ function Scene12Climax() {
           variant="ghost"
           direction="back"
         />
-        <Link
-          href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Return to Main Deck
-        </Link>
+        <ChapterNavButton
+          href="/chapters/satellites"
+          label="Continue. Satellites"
+          variant="primary"
+          direction="forward"
+        />
       </div>
+
+      <Link
+        href="/"
+        className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
+      >
+        <ArrowLeft className="w-3.5 h-3.5" />
+        Return to Main Deck
+      </Link>
     </div>
   );
 }

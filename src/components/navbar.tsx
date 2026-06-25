@@ -10,6 +10,7 @@ const pageLinks = [
   { label: "Paradigm Shift", href: "/chapters/paradigm-shift" },
   { label: "Value Chain", href: "/chapters/value-chain" },
   { label: "The Rocket", href: "/chapters/launch-vehicles" },
+  { label: "Satellites", href: "/chapters/satellites" },
 ];
 
 export function Navbar() {
