@@ -603,22 +603,14 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
             fade away with the cinematic statement). */}
         <motion.div
           style={{ opacity: reduceMotion ? 1 : finalCtaOpacity }}
-          className="absolute z-20 bottom-[14vh] left-1/2 -translate-x-1/2 pointer-events-auto flex flex-col sm:flex-row items-center gap-4 w-full justify-center max-w-xl px-4"
+          className="absolute z-20 bottom-[14vh] left-1/2 -translate-x-1/2 pointer-events-auto"
         >
           <Link
             href="/chapters/paradigm-shift"
-            className="interactive-control group inline-flex items-center justify-center gap-3 px-7 py-3.5 bg-[#FFB800] hover:bg-[#ffc62e] text-[#030308] font-mono text-xs uppercase tracking-[0.18em] rounded-full font-bold shadow-[0_0_20px_rgba(255,184,0,0.18)] transition-all duration-300 w-full sm:w-auto text-center"
+            className="interactive-control group inline-flex items-center gap-3 px-8 py-4 bg-[#FFB800] hover:bg-[#ffc62e] text-[#030308] font-mono text-xs uppercase tracking-[0.18em] rounded-full font-bold shadow-[0_0_30px_rgba(255,184,0,0.25)] transition-all duration-300"
           >
-            <span>Enter Paradigm Shift</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
-
-          <Link
-            href="/chapters/space-economy"
-            className="interactive-control group inline-flex items-center justify-center gap-3 px-7 py-3.5 bg-teal-600 hover:bg-teal-500 text-white font-mono text-xs uppercase tracking-[0.18em] rounded-full font-bold shadow-[0_0_20px_rgba(13,148,136,0.18)] transition-all duration-300 w-full sm:w-auto text-center border border-teal-500/30"
-          >
-            <span>Explore Space Economy</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            <span>Enter the Paradigm Shift</span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
 

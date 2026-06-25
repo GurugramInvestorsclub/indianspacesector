@@ -928,23 +928,17 @@ function Scene12Climax() {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
         <ChapterNavButton
           href="/chapters/value-chain"
-          label="Explore Value Chain"
+          label="Back to The Value Chain"
           variant="ghost"
           direction="back"
         />
         <Link
           href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold transition-all duration-300 w-full sm:w-auto"
+          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
         >
           <ArrowLeft className="w-4 h-4" />
-          Main Deck
+          Return to Main Deck
         </Link>
-        <ChapterNavButton
-          href="/chapters/space-economy"
-          label="Explore Space Economy"
-          variant="primary"
-          direction="forward"
-        />
       </div>
     </div>
   );
