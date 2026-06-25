@@ -206,7 +206,7 @@ function RocketSchematic({ active }: { active: string | null }) {
       {/* Nose cone / fairing */}
       <path
         d="M100 20 L128 110 L72 110 Z"
-        fill={isOn("fairing") ? "rgba(255,184,0,0.18)" : "#0a0a14"}
+        fill={isOn("fairing") ? "rgba(255,184,0,0.18)" : "transparent"}
         stroke={isOn("fairing") ? "#FFB800" : "rgba(255,255,255,0.18)"}
         strokeWidth="1.5"
         className={lineBase}
@@ -224,7 +224,7 @@ function RocketSchematic({ active }: { active: string | null }) {
       {/* Upper stage body */}
       <rect
         x="74" y="150" width="52" height="78" rx="3"
-        fill={isOn("upper") ? "rgba(255,184,0,0.18)" : "#0a0a14"}
+        fill={isOn("upper") ? "rgba(255,184,0,0.18)" : "transparent"}
         stroke={isOn("upper") || isOn("avionics") ? "#FFB800" : "rgba(255,255,255,0.18)"}
         strokeWidth="1.5"
         className={lineBase}
@@ -241,7 +241,7 @@ function RocketSchematic({ active }: { active: string | null }) {
       {/* First stage body with tanks */}
       <rect
         x="68" y="238" width="64" height="190" rx="3"
-        fill={isOn("firststage") ? "rgba(255,184,0,0.1)" : "#0a0a14"}
+        fill={isOn("firststage") ? "rgba(255,184,0,0.1)" : "transparent"}
         stroke={isOn("firststage") ? "#FFB800" : "rgba(255,255,255,0.18)"}
         strokeWidth="1.5"
         className={lineBase}
@@ -263,7 +263,7 @@ function RocketSchematic({ active }: { active: string | null }) {
       {/* Engine section */}
       <rect
         x="74" y="428" width="52" height="22"
-        fill={isOn("engines") || isOn("tvc") ? "rgba(255,184,0,0.2)" : "#06060e"}
+        fill={isOn("engines") || isOn("tvc") ? "rgba(255,184,0,0.2)" : "transparent"}
         stroke={isOn("engines") || isOn("tvc") ? "#FFB800" : "rgba(255,255,255,0.18)"}
         strokeWidth="1.5"
         className={lineBase}
@@ -271,14 +271,14 @@ function RocketSchematic({ active }: { active: string | null }) {
       {/* Nozzles */}
       <path
         d="M82 450 L76 486 L92 486 L88 450 Z"
-        fill={isOn("nozzle") ? "rgba(255,184,0,0.22)" : "#0a0a14"}
+        fill={isOn("nozzle") ? "rgba(255,184,0,0.22)" : "transparent"}
         stroke={isOn("nozzle") ? "#FFB800" : "rgba(255,255,255,0.2)"}
         strokeWidth="1.5"
         className={lineBase}
       />
       <path
         d="M118 450 L124 486 L108 486 L112 450 Z"
-        fill={isOn("nozzle") ? "rgba(255,184,0,0.22)" : "#0a0a14"}
+        fill={isOn("nozzle") ? "rgba(255,184,0,0.22)" : "transparent"}
         stroke={isOn("nozzle") ? "#FFB800" : "rgba(255,255,255,0.2)"}
         strokeWidth="1.5"
         className={lineBase}
@@ -335,8 +335,14 @@ function Scene1Anatomy({
       <SceneHeading sub="01. Anatomy" main="Reading a launch vehicle" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full max-w-6xl z-10">
         {/* Schematic */}
-        <div className="lg:col-span-4 flex items-center justify-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 backdrop-blur-md min-h-[40vh]">
-          <RocketSchematic active={active} />
+        <div className="lg:col-span-4 flex items-center justify-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 backdrop-blur-md min-h-[40vh] relative overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-45 pointer-events-none mix-blend-screen"
+            style={{ backgroundImage: "url('/rocket_schematic.png')" }}
+          />
+          <div className="relative z-10 w-full h-full flex items-center justify-center">
+            <RocketSchematic active={active} />
+          </div>
         </div>
 
         {/* Legend */}
