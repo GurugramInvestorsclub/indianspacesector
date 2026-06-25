@@ -631,7 +631,7 @@ function Scene6TimelineMapping() {
 
 // 8. PSLV CASE STUDY
 function Scene7PSLVCaseStudy() {
-  const [activeStage, setActiveStage] = useState(0);
+  const [activeStage, setActiveStage] = useState(3);
   const stages = [
     {
       name: "PS1 — First Stage (Solid)",
@@ -667,7 +667,8 @@ function Scene7PSLVCaseStudy() {
           <div className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-[0.08]" style={{ backgroundImage: "url('/pslv.png')" }} />
           
           <div className="relative flex flex-col gap-2 items-center z-10 w-full">
-            {stages.map((s, idx) => {
+            {stages.slice().reverse().map((s) => {
+              const idx = stages.indexOf(s);
               const active = idx === activeStage;
               return (
                 <button
@@ -679,8 +680,8 @@ function Scene7PSLVCaseStudy() {
                       : "bg-[#080c12]/80 border-white/5 text-white/50 hover:border-white/10"
                   }`}
                 >
-                  <span className="font-mono text-[9px] uppercase tracking-wider block">Stage 0{4 - idx}</span>
-                  <span className="text-[10px] font-sans block mt-0.5">{stages[3 - idx].purpose}</span>
+                  <span className="font-mono text-[9px] uppercase tracking-wider block">Stage 0{idx + 1}</span>
+                  <span className="text-[10px] font-sans block mt-0.5">{s.purpose}</span>
                 </button>
               );
             })}
