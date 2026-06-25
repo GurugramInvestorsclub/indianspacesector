@@ -123,7 +123,7 @@ const SENSORS = [
 
 function SceneLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[9px] tracking-[0.32em] text-[#0d9488] uppercase font-bold block mb-3">
+    <span className="font-mono text-[9px] tracking-[0.32em] text-[#FFB800] uppercase font-bold block mb-3">
       {children}
     </span>
   );
@@ -149,7 +149,7 @@ function OrbitalRingBg() {
       {[440, 620, 800, 980].map((r, i) => (
         <div
           key={r}
-          className="absolute rounded-full border border-teal-500/[0.02]"
+          className="absolute rounded-full border border-[#FFB800]/[0.02]"
           style={{
             width: r,
             height: r,
@@ -177,7 +177,7 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 80% at 50% 60%, rgba(13,148,136,0.06) 0%, transparent 60%)",
+              "radial-gradient(ellipse 70% 80% at 50% 60%, rgba(255,184,0,0.06) 0%, transparent 60%)",
           }}
         />
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
@@ -192,23 +192,23 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
         >
           The Machines
           <br />
-          <span className="text-[#0d9488]">That Never Blink</span>
+          <span className="text-[#FFB800]">That Never Blink</span>
         </h1>
 
         <p className="text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed mb-10 font-light">
           Every weather forecast, navigation system, disaster warning, military image and communication network begins with a silent machine orbiting hundreds of kilometres above Earth.
         </p>
 
-        <div className="grid grid-cols-2 gap-0 border border-teal-500/10 rounded-2xl overflow-hidden font-mono mb-10 w-full max-w-sm">
+        <div className="grid grid-cols-2 gap-0 border border-[#FFB800]/10 rounded-2xl overflow-hidden font-mono mb-10 w-full max-w-sm">
           {[
             { val: "Chapter XIV", label: "Satellite Engineering" },
             { val: "12 Days", label: "NISAR Global Mapping" },
           ].map((s, i) => (
             <div
               key={s.label}
-              className={`text-center py-4 px-3 ${i !== 1 ? "border-r border-teal-500/10" : ""}`}
+              className={`text-center py-4 px-3 ${i !== 1 ? "border-r border-[#FFB800]/10" : ""}`}
             >
-              <span className="text-xl font-extrabold text-[#0d9488] block">{s.val}</span>
+              <span className="text-xl font-extrabold text-[#FFB800] block">{s.val}</span>
               <span className="text-[9px] uppercase text-white/55 tracking-wider">
                 {s.label}
               </span>
@@ -217,10 +217,10 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
         </div>
 
         {!presentationActive && (
-          <div className="flex flex-col items-center gap-2 font-mono text-[9px] text-[#0d9488]/70 tracking-[0.25em] uppercase">
+          <div className="flex flex-col items-center gap-2 font-mono text-[9px] text-[#FFB800]/70 tracking-[0.25em] uppercase">
             <span>Scroll to begin</span>
-            <span className="w-px h-8 bg-[#0d9488]/30 relative overflow-hidden rounded-full block">
-              <span className="absolute top-0 inset-x-0 h-3 bg-[#0d9488] rounded-full animate-bounce" />
+            <span className="w-px h-8 bg-[#FFB800]/30 relative overflow-hidden rounded-full block">
+              <span className="absolute top-0 inset-x-0 h-3 bg-[#FFB800] rounded-full animate-bounce" />
             </span>
           </div>
         )}
@@ -235,16 +235,16 @@ function Scene1WhatIsASatellite() {
     <>
       <SceneHeading sub="01. Orbital Ballistics" main="Why Satellites Don&apos;t Fall" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-teal-500/10 rounded-2xl p-6 min-h-[350px]">
+        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[350px]">
           <svg viewBox="0 0 200 200" className="w-full h-full max-h-[280px]">
             {/* Earth */}
-            <circle cx="100" cy="100" r="45" fill="rgba(13,148,136,0.06)" stroke="#0d9488" strokeWidth="1.5" />
+            <circle cx="100" cy="100" r="45" fill="rgba(255,184,0,0.06)" stroke="#FFB800" strokeWidth="1.5" />
             
             {/* Orbit path */}
             <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="3 3" />
             
             {/* Satellite */}
-            <circle cx="153" cy="47" r="5" fill="#0d9488" />
+            <circle cx="153" cy="47" r="5" fill="#FFB800" />
             
             {/* Gravity vector (pulling down) */}
             <path d="M 153 47 L 122 78" stroke="#ff6b00" strokeWidth="1.5" />
@@ -252,22 +252,22 @@ function Scene1WhatIsASatellite() {
             <text x="110" y="66" fill="#ff6b00" className="font-mono text-[7px]" fontWeight="bold">GRAVITY</text>
             
             {/* Velocity vector (horizontal push) */}
-            <path d="M 153 47 L 188 12" stroke="#0d9488" strokeWidth="1.5" />
-            <polygon points="188,12 181,14 185,18" fill="#0d9488" />
-            <text x="180" y="27" fill="#0d9488" className="font-mono text-[7px]" fontWeight="bold">VELOCITY</text>
+            <path d="M 153 47 L 188 12" stroke="#FFB800" strokeWidth="1.5" />
+            <polygon points="188,12 181,14 185,18" fill="#FFB800" />
+            <text x="180" y="27" fill="#FFB800" className="font-mono text-[7px]" fontWeight="bold">VELOCITY</text>
           </svg>
         </div>
 
         <div className="lg:col-span-7 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             The Orbital Balance
           </span>
           <h3 className="text-xl font-bold text-white mb-4">Gravity vs Sideways Velocity</h3>
           <p className="text-sm text-white/70 leading-relaxed mb-6">
             A satellite remains in orbit by falling constantly around the Earth without hitting it. By matching its forward velocity with Earth&apos;s gravitational pull, it moves in a circular or elliptical curve. At 400km altitude, this balance requires a speed of **7.8 km/s**.
           </p>
-          <div className="bg-[#0a0a14]/80 border border-teal-500/10 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#0d9488] font-bold block mb-1">Concept:</span>
+          <div className="bg-[#0a0a14]/80 border border-[#FFB800]/10 p-4 rounded-xl font-mono text-xs text-white/60">
+            <span className="text-[#FFB800] font-bold block mb-1">Concept:</span>
             Space has no air resistance to slow the satellite down, allowing it to orbit for decades on inertia alone.
           </div>
         </div>
@@ -294,7 +294,7 @@ function Scene2MeetTheSatellite() {
                 onClick={() => setActiveId(p.id)}
                 className={`w-full px-4 py-2.5 rounded-xl border text-left font-mono text-xs transition-all cursor-pointer ${
                   active
-                    ? "bg-[#0d9488]/10 border-[#0d9488] text-[#0d9488] font-bold"
+                    ? "bg-[#FFB800]/10 border-[#FFB800] text-[#FFB800] font-bold"
                     : "bg-[#0a0a14]/70 border-white/5 text-white/60 hover:border-white/20"
                 }`}
               >
@@ -305,15 +305,15 @@ function Scene2MeetTheSatellite() {
         </div>
 
         {/* Component explanation */}
-        <div className="lg:col-span-8 bg-[#0a0a14]/90 border border-teal-500/20 rounded-2xl p-8 flex flex-col justify-between text-left">
+        <div className="lg:col-span-8 bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 flex flex-col justify-between text-left">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-white leading-tight">{selected.name}</h3>
-              <span className="p-2 rounded-lg bg-teal-500/5 text-[#0d9488]">
+              <span className="p-2 rounded-lg bg-[#FFB800]/5 text-[#FFB800]">
                 <Cpu className="w-5 h-5" />
               </span>
             </div>
-            <span className="font-mono text-[10px] text-[#0d9488] block mb-4 font-bold">
+            <span className="font-mono text-[10px] text-[#FFB800] block mb-4 font-bold">
               Subsystem Duty: {selected.purpose}
             </span>
             <p className="text-xs text-white/70 leading-relaxed">
@@ -337,28 +337,28 @@ function Scene3BusVsPayload() {
     <>
       <SceneHeading sub="03. Core Division" main="Satellite Bus vs Payload" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 bg-[#0a0a14]/70 border border-teal-500/15 p-6 rounded-2xl text-left flex flex-col justify-between">
+        <div className="lg:col-span-6 bg-[#0a0a14]/70 border border-[#FFB800]/15 p-6 rounded-2xl text-left flex flex-col justify-between">
           <div>
-            <span className="font-mono text-[9px] uppercase text-[#0d9488] font-bold block mb-2">The Platform</span>
+            <span className="font-mono text-[9px] uppercase text-[#FFB800] font-bold block mb-2">The Platform</span>
             <h3 className="text-lg font-bold text-white mb-3">The Satellite Bus</h3>
             <p className="text-xs text-white/70 leading-relaxed mb-4">
               The Bus is the vehicle. It provides power generation, temperature regulation, data routing, thrust, and orientation stabilization. It acts as the utility chassis that keeps the payload alive in orbit.
             </p>
           </div>
-          <div className="border-t border-teal-500/5 pt-3 mt-4 text-[9px] font-mono text-white/40 uppercase">
+          <div className="border-t border-[#FFB800]/5 pt-3 mt-4 text-[9px] font-mono text-white/40 uppercase">
             Includes: Batteries, solar arrays, thrusters, computer bus.
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-teal-950/10 border border-teal-500/30 p-6 rounded-2xl text-left flex flex-col justify-between">
+        <div className="lg:col-span-6 bg-[#FFB800]/5 border border-[#FFB800]/30 p-6 rounded-2xl text-left flex flex-col justify-between">
           <div>
-            <span className="font-mono text-[9px] uppercase text-[#0d9488] font-bold block mb-2">The Mission</span>
+            <span className="font-mono text-[9px] uppercase text-[#FFB800] font-bold block mb-2">The Mission</span>
             <h3 className="text-lg font-bold text-white mb-3">The Payload</h3>
             <p className="text-xs text-white/70 leading-relaxed mb-4">
               The Payload is the functional utility. It performs the specific operational mission, such as capturing pictures, firing radar waves, or broadcasting telecommunication signals. The payload dictates the design of the entire satellite.
             </p>
           </div>
-          <div className="border-t border-teal-500/10 pt-3 mt-4 text-[9px] font-mono text-teal-400/60 uppercase">
+          <div className="border-t border-[#FFB800]/10 pt-3 mt-4 text-[9px] font-mono text-[#FFB800]/60 uppercase">
             Includes: Multispectral cameras, active radar, communication transceivers.
           </div>
         </div>
@@ -383,10 +383,10 @@ function Scene4FirstPrinciple() {
           ].map((v) => (
             <div
               key={v.step}
-              className="bg-[#0a0a14]/80 border border-teal-500/15 rounded-2xl p-5 text-left flex flex-col justify-between min-h-[180px] hover:border-teal-500/40 transition-colors"
+              className="bg-[#0a0a14]/80 border border-[#FFB800]/15 rounded-2xl p-5 text-left flex flex-col justify-between min-h-[180px] hover:border-[#FFB800]/40 transition-colors"
             >
               <div>
-                <span className="font-mono text-xs text-[#0d9488] block mb-2">{v.step}</span>
+                <span className="font-mono text-xs text-[#FFB800] block mb-2">{v.step}</span>
                 <h3 className="text-sm font-bold text-white mb-2">{v.name}</h3>
                 <p className="text-[10px] text-white/60 leading-relaxed">{v.desc}</p>
               </div>
@@ -394,8 +394,8 @@ function Scene4FirstPrinciple() {
           ))}
         </div>
 
-        <div className="bg-[#0a0a14]/60 border border-teal-500/5 rounded-2xl p-5 text-left flex items-start gap-4">
-          <Layers3 className="w-5 h-5 text-[#0d9488] shrink-0 mt-0.5" />
+        <div className="bg-[#0a0a14]/60 border border-[#FFB800]/5 rounded-2xl p-5 text-left flex items-start gap-4">
+          <Layers3 className="w-5 h-5 text-[#FFB800] shrink-0 mt-0.5" />
           <p className="text-xs text-white/70 leading-relaxed">
             <span className="text-white font-bold">First Principle: </span>
             A satellite is always built back-to-front. You do not design a satellite and then choose a mission. You define the mission, choose the physics to measure it, engineer the payload, and finally size the solar panels and battery systems to power it.
@@ -422,27 +422,27 @@ function Scene5FamilyOfSensors() {
                 onClick={() => setActiveIdx(idx)}
                 className={`p-5 rounded-2xl text-left border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
                   active
-                    ? "bg-teal-500/10 border-[#0d9488] shadow-lg shadow-teal-500/5"
-                    : "bg-[#080c12]/70 border-teal-500/5 hover:border-teal-500/20"
+                    ? "bg-[#FFB800]/10 border-[#FFB800] shadow-lg shadow-[#FFB800]/5 text-[#FFB800]"
+                    : "bg-[#080c12]/70 border-[#FFB800]/5 hover:border-[#FFB800]/20 text-white/60"
                 }`}
               >
                 <div>
                   <h4 className={`text-xs font-mono font-bold tracking-wide mb-1 ${
-                    active ? "text-[#0d9488]" : "text-white/40"
+                    active ? "text-[#FFB800]" : "text-white/40"
                   }`}>
                     Option 0{idx + 1}
                   </h4>
-                  <span className="text-sm font-sans font-bold text-white block leading-snug">{s.name}</span>
+                  <span className={`text-sm font-sans font-bold block leading-snug ${active ? "text-[#FFB800]" : "text-white"}`}>{s.name}</span>
                 </div>
-                <span className="font-mono text-[9px] text-[#0d9488] mt-4 block font-bold">{s.spec}</span>
+                <span className={`font-mono text-[9px] mt-4 block font-bold ${active ? "text-[#FFB800]" : "text-[#FFB800]/70"}`}>{s.spec}</span>
               </button>
             );
           })}
         </div>
 
         <div className="lg:col-span-6 flex flex-col justify-center text-left">
-          <div className="bg-[#0a0a14]/90 border border-teal-500/20 rounded-2xl p-8 h-full flex flex-col justify-center">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <div className="bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 h-full flex flex-col justify-center">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
               Instrument Details
             </span>
             <h3 className="text-xl font-bold text-white mb-4">
@@ -451,8 +451,8 @@ function Scene5FamilyOfSensors() {
             <p className="text-xs text-white/70 leading-relaxed mb-6">
               {SENSORS[activeIdx].use}
             </p>
-            <div className="flex items-center gap-2 pt-4 border-t border-teal-500/5 font-mono text-xs">
-              <CheckCircle2 className="w-4 h-4 text-[#0d9488]" />
+            <div className="flex items-center gap-2 pt-4 border-t border-[#FFB800]/5 font-mono text-xs">
+              <CheckCircle2 className="w-4 h-4 text-[#FFB800]" />
               <span className="text-white/50">Performance envelope: </span>
               <span className="text-white font-bold">{SENSORS[activeIdx].spec}</span>
             </div>
@@ -470,11 +470,11 @@ function Scene6OwlAndBat() {
     <>
       <SceneHeading sub="06. Passive vs Active" main="The Owl and the Bat" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 flex flex-col items-center bg-[#0a0a14]/60 border border-teal-500/10 rounded-2xl p-6 min-h-[340px] relative">
+        <div className="lg:col-span-6 flex flex-col items-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[340px] relative">
           <div className="absolute top-4 right-4 z-20">
             <button
               onClick={() => setClouds(!clouds)}
-              className="px-4 py-1.5 rounded-full font-mono text-[9px] font-bold uppercase transition-all bg-[#0d9488] text-white hover:bg-[#0b7a70] cursor-pointer"
+              className="px-4 py-1.5 rounded-full font-mono text-[9px] font-bold uppercase transition-all bg-[#FFB800] text-[#030308] hover:bg-[#cc9300] cursor-pointer"
             >
               {clouds ? "Clear Skies" : "Cover with Clouds"}
             </button>
@@ -510,9 +510,9 @@ function Scene6OwlAndBat() {
             </div>
 
             {/* Radar Sensor Box */}
-            <div className="flex-1 bg-teal-950/10 border border-teal-500/25 p-4 rounded-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
-              <Radio className="w-6 h-6 text-[#0d9488] mb-2 animate-pulse" />
-              <span className="text-[10px] font-mono text-[#0d9488] block mb-2">RADAR (BAT)</span>
+            <div className="flex-1 bg-[#FFB800]/5 border border-[#FFB800]/25 p-4 rounded-xl relative overflow-hidden flex flex-col items-center justify-center text-center">
+              <Radio className="w-6 h-6 text-[#FFB800] mb-2 animate-pulse" />
+              <span className="text-[10px] font-mono text-[#FFB800] block mb-2">RADAR (BAT)</span>
               <span className="text-[9px] font-mono text-emerald-500 font-bold uppercase tracking-wider">
                 {clouds ? "Penetrates Clouds" : "Target Visible"}
               </span>
@@ -521,7 +521,7 @@ function Scene6OwlAndBat() {
         </div>
 
         <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             Sensor Physics
           </span>
           <h3 className="text-xl font-bold text-white mb-4">Passive (Optical) vs Active (Radar)</h3>
@@ -549,25 +549,25 @@ function Scene7HowRadarWorks() {
     <>
       <SceneHeading sub="07. Pulse Propagation" main="How Radar Sees" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 flex items-center justify-center bg-[#0a0a14]/60 border border-teal-500/10 rounded-2xl p-6 min-h-[350px]">
+        <div className="lg:col-span-6 flex items-center justify-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[350px]">
           <svg viewBox="0 0 300 240" className="w-full h-full max-h-[260px]">
             {/* Satellite */}
-            <circle cx="150" cy="30" r="8" fill="#0d9488" />
+            <circle cx="150" cy="30" r="8" fill="#FFB800" />
             <rect x="142" y="38" width="16" height="4" fill="rgba(255,255,255,0.2)" />
             
             {/* Target Ground */}
             <line x1="30" y1="210" x2="270" y2="210" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
-            <polygon points="150,210 142,202 158,202" fill="rgba(13,148,136,0.5)" />
+            <polygon points="150,210 142,202 158,202" fill="rgba(255,184,0,0.5)" />
 
             {/* Pulse Animation */}
             {pulse === 0 && (
-              <circle cx="150" cy="80" r="15" fill="none" stroke="#0d9488" strokeWidth="2" strokeDasharray="3 3" />
+              <circle cx="150" cy="80" r="15" fill="none" stroke="#FFB800" strokeWidth="2" strokeDasharray="3 3" />
             )}
             {pulse === 1 && (
               <circle cx="150" cy="150" r="30" fill="none" stroke="#ff6b00" strokeWidth="2" />
             )}
             {pulse === 2 && (
-              <path d="M 110 160 Q 150 120 190 160" fill="none" stroke="#0d9488" strokeWidth="1.5" />
+              <path d="M 110 160 Q 150 120 190 160" fill="none" stroke="#FFB800" strokeWidth="1.5" />
             )}
 
             <text x="150" y="230" textAnchor="middle" fill="white" className="font-mono text-[9px] uppercase tracking-wider">
@@ -579,7 +579,7 @@ function Scene7HowRadarWorks() {
         </div>
 
         <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             Distance & Textures
           </span>
           <h3 className="text-xl font-bold text-white mb-4">The Radar Wave Loop</h3>
@@ -607,27 +607,27 @@ function Scene8SyntheticApertureRadar() {
     <>
       <SceneHeading sub="08. Virtual Antennas" main="Synthetic Aperture Radar (SAR)" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 flex items-center justify-center bg-[#0a0a14]/60 border border-teal-500/10 rounded-2xl p-6 min-h-[350px]">
+        <div className="lg:col-span-6 flex items-center justify-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[350px]">
           <svg viewBox="0 0 320 220" className="w-full h-full max-h-[260px]">
             {/* Sat path */}
             <line x1="20" y1="40" x2="300" y2="40" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" strokeDasharray="3 3" />
             
             {/* Virtual Aperture bracket */}
-            <path d="M 60 25 L 60 15 L 260 15 L 260 25" fill="none" stroke="#0d9488" strokeWidth="1" />
-            <text x="160" y="10" textAnchor="middle" fill="#0d9488" className="font-mono text-[8px] font-bold uppercase tracking-wider">Virtual Aperture (Stitched)</text>
+            <path d="M 60 25 L 60 15 L 260 15 L 260 25" fill="none" stroke="#FFB800" strokeWidth="1" />
+            <text x="160" y="10" textAnchor="middle" fill="#FFB800" className="font-mono text-[8px] font-bold uppercase tracking-wider">Virtual Aperture (Stitched)</text>
 
             {/* Satellite positions */}
-            <circle cx="60" cy="40" r="4" fill={pulseCount >= 1 ? "#0d9488" : "rgba(255,255,255,0.15)"} />
-            <circle cx="160" cy="40" r="4" fill={pulseCount >= 2 ? "#0d9488" : "rgba(255,255,255,0.15)"} />
-            <circle cx="260" cy="40" r="4" fill={pulseCount >= 3 ? "#0d9488" : "rgba(255,255,255,0.15)"} />
+            <circle cx="60" cy="40" r="4" fill={pulseCount >= 1 ? "#FFB800" : "rgba(255,255,255,0.15)"} />
+            <circle cx="160" cy="40" r="4" fill={pulseCount >= 2 ? "#FFB800" : "rgba(255,255,255,0.15)"} />
+            <circle cx="260" cy="40" r="4" fill={pulseCount >= 3 ? "#FFB800" : "rgba(255,255,255,0.15)"} />
 
             {/* Target */}
             <polygon points="160,180 155,170 165,170" fill="#ff6b00" />
             
             {/* Pulses */}
-            {pulseCount >= 1 && <line x1="60" y1="40" x2="160" y2="175" stroke="rgba(13,148,136,0.2)" strokeWidth="1" />}
-            {pulseCount >= 2 && <line x1="160" y1="40" x2="160" y2="175" stroke="rgba(13,148,136,0.4)" strokeWidth="1" />}
-            {pulseCount >= 3 && <line x1="260" y1="40" x2="160" y2="175" stroke="rgba(13,148,136,0.2)" strokeWidth="1" />}
+            {pulseCount >= 1 && <line x1="60" y1="40" x2="160" y2="175" stroke="rgba(255,184,0,0.2)" strokeWidth="1" />}
+            {pulseCount >= 2 && <line x1="160" y1="40" x2="160" y2="175" stroke="rgba(255,184,0,0.4)" strokeWidth="1" />}
+            {pulseCount >= 3 && <line x1="260" y1="40" x2="160" y2="175" stroke="rgba(255,184,0,0.2)" strokeWidth="1" />}
             
             <text x="160" y="205" textAnchor="middle" fill="white" className="font-mono text-[9px] uppercase tracking-wider font-bold">
               {pulseCount === 0 && "Initiating flight track"}
@@ -639,7 +639,7 @@ function Scene8SyntheticApertureRadar() {
         </div>
 
         <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             Virtual Apertures
           </span>
           <h3 className="text-xl font-bold text-white mb-4">Synthesizing Resolution</h3>
@@ -659,12 +659,12 @@ function Scene9MissionConfig() {
     <>
       <SceneHeading sub="09. Parameter Tuning" main="The Mission Sets the Dials" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 flex flex-col items-center bg-[#0a0a14]/60 border border-teal-500/10 rounded-2xl p-6 min-h-[350px] relative">
+        <div className="lg:col-span-6 flex flex-col items-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[350px] relative">
           <div className="absolute top-4 right-4 flex bg-black/40 border border-white/10 rounded-full p-0.5 z-20">
             <button
               onClick={() => setActiveMode("ocean")}
               className={`px-3 py-1 rounded-full font-mono text-[9px] font-bold uppercase transition-all cursor-pointer ${
-                activeMode === "ocean" ? "bg-[#0d9488] text-white" : "text-white/50 hover:text-white"
+                activeMode === "ocean" ? "bg-[#FFB800] text-[#030308]" : "text-white/50 hover:text-white"
               }`}
             >
               Ocean Swell (C-band)
@@ -672,7 +672,7 @@ function Scene9MissionConfig() {
             <button
               onClick={() => setActiveMode("urban")}
               className={`px-3 py-1 rounded-full font-mono text-[9px] font-bold uppercase transition-all cursor-pointer ${
-                activeMode === "urban" ? "bg-[#0d9488] text-white" : "text-white/50 hover:text-white"
+                activeMode === "urban" ? "bg-[#FFB800] text-[#030308]" : "text-white/50 hover:text-white"
               }`}
             >
               Urban Drift (X-band)
@@ -684,7 +684,7 @@ function Scene9MissionConfig() {
               <div className="flex flex-col gap-4 font-mono text-xs text-left">
                 <div className="border-b border-white/5 pb-2">
                   <span className="text-white/40 block text-[9px]">FREQUENCY PROFILE</span>
-                  <span className="text-[#0d9488] font-bold text-sm">C-Band (5.4 GHz)</span>
+                  <span className="text-[#FFB800] font-bold text-sm">C-Band (5.4 GHz)</span>
                 </div>
                 <div className="border-b border-white/5 pb-2">
                   <span className="text-white/40 block text-[9px]">ALTITUDE ORBIT</span>
@@ -703,7 +703,7 @@ function Scene9MissionConfig() {
               <div className="flex flex-col gap-4 font-mono text-xs text-left">
                 <div className="border-b border-white/5 pb-2">
                   <span className="text-white/40 block text-[9px]">FREQUENCY PROFILE</span>
-                  <span className="text-[#0d9488] font-bold text-sm">X-Band (9.6 GHz)</span>
+                  <span className="text-[#FFB800] font-bold text-sm">X-Band (9.6 GHz)</span>
                 </div>
                 <div className="border-b border-white/5 pb-2">
                   <span className="text-white/40 block text-[9px]">ALTITUDE ORBIT</span>
@@ -723,7 +723,7 @@ function Scene9MissionConfig() {
         </div>
 
         <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             Engineering Tradeoffs
           </span>
           <h3 className="text-xl font-bold text-white mb-4">No Single Best Satellite</h3>
@@ -743,14 +743,14 @@ function Scene10NISAR() {
       <SceneHeading sub="10. NASA-ISRO Collaborative" main="NISAR: Dual-Frequency Radar" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
         {/* Visual Badge */}
-        <div className="lg:col-span-5 flex flex-col justify-center bg-teal-950/10 border border-teal-500/20 rounded-2xl p-8 backdrop-blur-md min-h-[320px] text-left">
-          <span className="font-mono text-[9px] uppercase text-[#0d9488] font-bold block mb-1">Mission Profile</span>
+        <div className="lg:col-span-5 flex flex-col justify-center bg-[#FFB800]/5 border border-[#FFB800]/20 rounded-2xl p-8 backdrop-blur-md min-h-[320px] text-left">
+          <span className="font-mono text-[9px] uppercase text-[#FFB800] font-bold block mb-1">Mission Profile</span>
           <h3 className="text-3xl font-black text-white mb-4 leading-none">NISAR</h3>
           
-          <div className="flex flex-col gap-3 font-mono text-xs border-t border-teal-500/10 pt-4 mt-2">
+          <div className="flex flex-col gap-3 font-mono text-xs border-t border-[#FFB800]/10 pt-4 mt-2">
             <div>
               <span className="text-white/40 block text-[8px]">BAND STACK</span>
-              <span className="text-[#0d9488] font-bold text-sm">L-Band (NASA) + S-Band (ISRO)</span>
+              <span className="text-[#FFB800] font-bold text-sm">L-Band (NASA) + S-Band (ISRO)</span>
             </div>
             <div>
               <span className="text-white/40 block text-[8px]">GLOBAL SWEEPFREQ</span>
@@ -764,7 +764,7 @@ function Scene10NISAR() {
         </div>
 
         <div className="lg:col-span-7 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
             Flagship Engineering
           </span>
           <h3 className="text-xl font-bold text-white mb-4">NASA and ISRO Joint Sentinel</h3>
@@ -793,10 +793,10 @@ function Scene11InsideRadarPayload() {
           {chain.map((v, i) => (
             <div
               key={v.label}
-              className="bg-[#0a0a14]/80 border border-teal-500/15 rounded-2xl p-5 text-left flex flex-col justify-between min-h-[160px]"
+              className="bg-[#0a0a14]/80 border border-[#FFB800]/15 rounded-2xl p-5 text-left flex flex-col justify-between min-h-[160px]"
             >
               <div>
-                <span className="font-mono text-xs text-[#0d9488] block mb-2">0{i + 1}</span>
+                <span className="font-mono text-xs text-[#FFB800] block mb-2">0{i + 1}</span>
                 <h3 className="text-sm font-bold text-white mb-2">{v.label}</h3>
                 <p className="text-[10px] text-white/60 leading-relaxed">{v.note}</p>
               </div>
@@ -804,8 +804,8 @@ function Scene11InsideRadarPayload() {
           ))}
         </div>
 
-        <div className="bg-[#0a0a14]/60 border border-teal-500/5 rounded-2xl p-5 text-left flex items-start gap-4">
-          <Cpu className="w-5 h-5 text-[#0d9488] shrink-0 mt-0.5" />
+        <div className="bg-[#0a0a14]/60 border border-[#FFB800]/5 rounded-2xl p-5 text-left flex items-start gap-4">
+          <Cpu className="w-5 h-5 text-[#FFB800] shrink-0 mt-0.5" />
           <p className="text-xs text-white/70 leading-relaxed">
             <span className="text-white font-bold">Hardware Challenge: </span>
             A radar payload demands extreme power. The **Power Amplifiers** must boost radar chirp signals to several kilowatts, and the **TR (Transmit/Receive) Modules** must steer the beam electronically in microseconds without moving parts.
@@ -829,14 +829,14 @@ function Scene12IndianEcosystem() {
       <SceneHeading sub="12. Industrial Ecosystem" main="The Indian Supply Chain Map" />
       <div className="w-full max-w-5xl z-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         {subs.map((s) => (
-          <div key={s.area} className="bg-[#0a0a14]/90 border border-teal-500/15 rounded-2xl p-6 text-left flex flex-col justify-between">
+          <div key={s.area} className="bg-[#0a0a14]/90 border border-[#FFB800]/15 rounded-2xl p-6 text-left flex flex-col justify-between">
             <div>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#0d9488] block mb-2 font-bold">Subsystem Fab</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">Subsystem Fab</span>
               <h3 className="text-sm font-bold text-white mb-2 leading-tight">{s.area}</h3>
             </div>
             <div className="border-t border-white/5 pt-4 mt-6 flex justify-between font-mono text-[9px] uppercase tracking-widest text-white/40">
               <span>Key Listed Fabricators:</span>
-              <span className="text-[#0d9488] font-bold">{s.partners}</span>
+              <span className="text-[#FFB800] font-bold">{s.partners}</span>
             </div>
           </div>
         ))}
@@ -853,7 +853,7 @@ function Scene13Thesis() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at center, rgba(13,148,136,0.04) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 50% at center, rgba(255,184,0,0.04) 0%, transparent 70%)",
         }}
       />
       <SceneLabel>13. Satellite Thesis</SceneLabel>
@@ -878,7 +878,7 @@ function Scene13Thesis() {
         />
         <Link
           href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0d9488] hover:bg-[#0b7a70] text-white font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
+          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
         >
           <ArrowLeft className="w-4 h-4" />
           Return to Main Deck
@@ -940,7 +940,7 @@ export default function SatellitesPage() {
   const s13Y = useTransform(progress, [0.90, 0.9286, 1.0], [24, 0, 0]);
 
   return (
-    <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#0d9488] selection:text-white relative">
+    <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
       <Navbar />
       <PresentationChrome controller={p} />
 
