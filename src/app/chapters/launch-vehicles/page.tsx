@@ -1299,10 +1299,10 @@ function Scene12Climax({ presentationActive = false }: { presentationActive?: bo
       <SceneLabel>12. Historical Sequence</SceneLabel>
       
       <h2
-        className={`font-light tracking-wide text-white max-w-4xl relative z-10 ${
+        className={`font-light tracking-wide text-white max-w-4xl relative z-10 leading-snug ${
           presentationActive
-            ? "mb-4 text-xl sm:text-2xl lg:text-3xl leading-snug"
-            : "mb-8 text-2xl sm:text-3xl lg:text-4xl leading-relaxed"
+            ? "mb-4 text-xl sm:text-2xl lg:text-3xl"
+            : "mb-4 sm:mb-6 text-2xl sm:text-3xl lg:text-4xl"
         }`}
         style={{ fontFamily: "Georgia, serif" }}
       >
@@ -1310,8 +1310,8 @@ function Scene12Climax({ presentationActive = false }: { presentationActive?: bo
       </h2>
 
       {/* Historical sequence horizontal scroll track */}
-      <div className={`w-full overflow-x-auto flex items-center justify-start sm:justify-center gap-2 py-4 border-y border-white/5 relative z-10 no-scrollbar ${
-        presentationActive ? "mb-4 py-2" : "mb-8"
+      <div className={`w-full overflow-x-auto flex items-center justify-start sm:justify-center gap-2 border-y border-white/5 relative z-10 no-scrollbar ${
+        presentationActive ? "mb-4 py-2" : "mb-4 sm:mb-6 py-3"
       }`}>
         {line.map((item, idx) => (
           <React.Fragment key={item}>
@@ -1326,7 +1326,7 @@ function Scene12Climax({ presentationActive = false }: { presentationActive?: bo
       </div>
 
       <p className={`max-w-3xl leading-relaxed font-light relative z-10 text-center ${
-        presentationActive ? "mb-4 text-xs text-white/60" : "mb-10 text-sm text-white/70"
+        presentationActive ? "mb-4 text-xs text-white/60" : "mb-6 sm:mb-8 text-xs sm:text-sm text-white/70"
       }`}>
         The history of rocketry isn&apos;t a story of building larger rockets. It is the story of engineers solving one impossible physical limitation after another. Every breakthrough - from staging to cryogenic engines to reusable boosters - exists because the previous generation reached its limits.
       </p>

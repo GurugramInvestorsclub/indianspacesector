@@ -633,10 +633,10 @@ function Scene6Thesis({ presentationActive = false }: { presentationActive?: boo
       <SceneLabel>The Thesis</SceneLabel>
 
       <h2
-        className={`text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide text-white max-w-3xl relative z-10 ${
+        className={`font-light tracking-wide text-white max-w-3xl relative z-10 leading-tight ${
           presentationActive
-            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl leading-tight"
-            : "mb-10 leading-relaxed"
+            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
+            : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
         }`}
         style={{ fontFamily: "Georgia, serif" }}
       >
@@ -645,8 +645,8 @@ function Scene6Thesis({ presentationActive = false }: { presentationActive?: boo
         <span className="block text-[#FFB800] font-bold">Lower the toll, multiply the traffic.</span>
       </h2>
 
-      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
-        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      <p className={`text-xs sm:text-sm text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4" : "mb-6 sm:mb-8"
       }`}>
         If the ground segment is the prize, then the lever that unlocks it is
         the cost of reaching orbit. Cheaper launch does not just grow the launch

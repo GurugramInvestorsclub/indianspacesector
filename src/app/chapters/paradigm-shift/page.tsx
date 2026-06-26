@@ -706,10 +706,10 @@ function Scene5Thesis({ presentationActive = false }: { presentationActive?: boo
       <SceneLabel>The Thesis</SceneLabel>
 
       <h2
-        className={`font-light tracking-wide text-white max-w-3xl relative z-10 ${
+        className={`font-light tracking-wide text-white max-w-3xl relative z-10 leading-tight ${
           presentationActive
-            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl leading-tight"
-            : "mb-10 text-3xl sm:text-5xl lg:text-6xl leading-relaxed"
+            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
+            : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
         }`}
       >
         <span className="block mb-1 text-white/65">From sole architect</span>
@@ -721,8 +721,8 @@ function Scene5Thesis({ presentationActive = false }: { presentationActive?: boo
         </span>
       </h2>
 
-      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
-        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      <p className={`text-xs sm:text-sm text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4" : "mb-6 sm:mb-8"
       }`}>
         Liberalized policy, geopolitical urgency, and a maturing private
         engineering base are converging. India&apos;s space economy is being

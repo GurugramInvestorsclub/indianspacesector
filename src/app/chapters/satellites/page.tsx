@@ -1502,15 +1502,15 @@ function Scene13Thesis({ presentationActive = false }: { presentationActive?: bo
         className={`font-light tracking-wide leading-tight text-white max-w-3xl relative z-10 ${
           presentationActive
             ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
-            : "mb-8 text-3xl sm:text-4xl lg:text-5xl"
+            : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
         }`}
         style={{ fontFamily: "Georgia, serif" }}
       >
         A Satellite Doesn&apos;t Just Observe Earth. It Learns To Measure It.
       </h2>
 
-      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
-        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      <p className={`text-xs sm:text-sm text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4" : "mb-6 sm:mb-8"
       }`}>
         Every satellite is a carefully engineered balance of power, precision, communication, guidance and sensing. The mission determines the signal, the signal determines the payload, and the payload determines how humanity understands our planet.
       </p>
