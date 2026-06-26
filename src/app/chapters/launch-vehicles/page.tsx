@@ -790,51 +790,398 @@ function Scene8ReusabilityEconomics() {
 }
 
 // 10. REUSABLE REENTRY
+const REENTRY_BACKGROUNDS = [
+  "/booster_stage_sep.png",
+  "/booster_boostback_burn.png",
+  "/booster_entry_burn.png",
+  "/booster_grid_fins.png",
+  "/booster_landing_burn.png"
+];
+
+function StageSeparationDebris() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(12)].map((_, i) => {
+        const initialX = Math.random() * 100;
+        const initialY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = 15 + Math.random() * 20;
+        const size = 1 + Math.random() * 2;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: `${initialX}vw`,
+              y: `${initialY}vh`,
+              opacity: 0.1,
+              scale: 0.5,
+            }}
+            animate={{
+              x: [`${initialX}vw`, `${initialX + (Math.random() * 10 - 5)}vw`],
+              y: [`${initialY}vh`, `${initialY - (10 + Math.random() * 20)}vh`],
+              opacity: [0.1, 0.4, 0],
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: duration,
+              delay: delay,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute bg-white/60 rounded-full"
+            style={{
+              width: size,
+              height: size,
+              boxShadow: "0 0 4px rgba(255,255,255,0.4)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function BoostbackFlicker() {
+  return (
+    <motion.div
+      animate={{
+        opacity: [0.15, 0.35, 0.20, 0.4, 0.18, 0.3]
+      }}
+      transition={{
+        duration: 1.2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-color-dodge"
+      style={{
+        background: "radial-gradient(circle at 50% 85%, rgba(255,120,0,0.3) 0%, transparent 60%)"
+      }}
+    />
+  );
+}
+
+function EntryPlasmaShimmer() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {/* Base glow */}
+      <motion.div
+        animate={{
+          opacity: [0.25, 0.4, 0.28, 0.45, 0.3],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute inset-0 w-full h-full mix-blend-color-dodge"
+        style={{
+          background: "radial-gradient(ellipse at 50% 90%, rgba(255,80,0,0.25) 0%, transparent 70%)"
+        }}
+      />
+      {/* Rising sparks */}
+      {[...Array(8)].map((_, i) => {
+        const initialX = 35 + Math.random() * 30;
+        const delay = Math.random() * 2;
+        const duration = 1.5 + Math.random() * 1.5;
+        const size = 1.5 + Math.random() * 2;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: `${initialX}vw`,
+              y: "100vh",
+              opacity: 0,
+            }}
+            animate={{
+              y: ["100vh", "0vh"],
+              opacity: [0, 0.8, 0],
+              scale: [0.8, 1.5, 0.8],
+            }}
+            transition={{
+              duration: duration,
+              delay: delay,
+              repeat: Infinity,
+              ease: "easeIn",
+            }}
+            className="absolute bg-gradient-to-t from-red-600 to-amber-400 rounded-full"
+            style={{
+              width: size,
+              height: size * 6,
+              filter: "blur(0.5px)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function GridFinsCloudDrift() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(3)].map((_, i) => {
+        const duration = 40 + i * 15;
+        const delay = i * 8;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: "-30vw",
+              y: `${20 + i * 25}vh`,
+              opacity: 0,
+            }}
+            animate={{
+              x: ["-30vw", "110vw"],
+              opacity: [0, 0.08, 0.08, 0],
+            }}
+            transition={{
+              duration: duration,
+              delay: delay,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute rounded-full bg-white blur-[80px]"
+            style={{
+              width: "400px",
+              height: "200px",
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function LandingSmokeSwirl() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {/* Dust glow */}
+      <motion.div
+        animate={{
+          opacity: [0.15, 0.25, 0.18, 0.28, 0.15]
+        }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute inset-0 w-full h-full mix-blend-color-dodge"
+        style={{
+          background: "radial-gradient(circle at 50% 90%, rgba(255,180,100,0.15) 0%, transparent 60%)"
+        }}
+      />
+      {/* Swirling smoke clouds at bottom */}
+      {[...Array(4)].map((_, i) => {
+        const isLeft = i % 2 === 0;
+        const initialX = isLeft ? "20vw" : "80vw";
+        const targetX = isLeft ? "40vw" : "60vw";
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: initialX,
+              y: "90vh",
+              scale: 0.8,
+              opacity: 0,
+              rotate: 0,
+            }}
+            animate={{
+              x: [initialX, targetX],
+              y: ["90vh", "75vh"],
+              scale: [0.8, 1.8, 2.5],
+              opacity: [0, 0.08, 0],
+              rotate: [0, isLeft ? 45 : -45],
+            }}
+            transition={{
+              duration: 8 + i * 3,
+              repeat: Infinity,
+              ease: "easeOut",
+              delay: i * 2,
+            }}
+            className="absolute rounded-full bg-white/20 blur-[50px]"
+            style={{
+              width: "250px",
+              height: "150px",
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function ReentryBackgrounds({ activeIndex }: { activeIndex: number }) {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none bg-[#030308]">
+      {REENTRY_BACKGROUNDS.map((bg, idx) => {
+        const active = idx === activeIndex;
+        
+        let motionAnimate = {};
+        let motionTransition = {};
+        
+        if (idx === 0) {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            rotate: [0, 0.4, 0],
+            x: [0, 4, 0],
+            y: [0, -2, 0]
+          };
+          motionTransition = {
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (idx === 1) {
+          motionAnimate = {
+            scale: [1.02, 1.05, 1.02],
+            x: [0, -3, 0],
+            y: [0, 4, 0]
+          };
+          motionTransition = {
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (idx === 2) {
+          motionAnimate = {
+            scale: [1.03, 1.01, 1.03],
+            x: [0, 2, -2, 0],
+            y: [0, -3, 3, 0]
+          };
+          motionTransition = {
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (idx === 3) {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            y: [0, -8, 0],
+            x: [0, 3, 0]
+          };
+          motionTransition = {
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (idx === 4) {
+          motionAnimate = {
+            scale: [1.01, 1.03, 1.01],
+            rotate: [0, -0.3, 0.3, 0],
+            x: [0, -4, 4, 0]
+          };
+          motionTransition = {
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        }
+
+        return (
+          <motion.div
+            key={bg}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: active ? 1 : 0,
+            }}
+            transition={{
+              duration: 1.1,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <motion.div
+              animate={active ? motionAnimate : {}}
+              transition={motionTransition}
+              className="absolute inset-0 w-full h-full"
+            >
+              <img
+                src={bg}
+                alt={`Booster Phase ${idx}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </motion.div>
+
+            {active && idx === 0 && <StageSeparationDebris />}
+            {active && idx === 1 && <BoostbackFlicker />}
+            {active && idx === 2 && <EntryPlasmaShimmer />}
+            {active && idx === 3 && <GridFinsCloudDrift />}
+            {active && idx === 4 && <LandingSmokeSwirl />}
+          </motion.div>
+        );
+      })}
+
+      {/* Dark overlay between 65–75% (70% here) for text contrast */}
+      <div className="absolute inset-0 bg-[#030308]/70 pointer-events-none mix-blend-multiply" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-transparent to-[#030308]/85 pointer-events-none" />
+    </div>
+  );
+}
+
 function Scene9ReentryProfile() {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const images = [
+      "/booster_stage_sep.png",
+      "/booster_boostback_burn.png",
+      "/booster_entry_burn.png",
+      "/booster_grid_fins.png",
+      "/booster_landing_burn.png"
+    ];
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <>
-      <SceneHeading sub="09. Landing Dynamics" main="Bringing the Booster Home" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        {/* Timeline visualization */}
-        <div className="lg:col-span-7 flex flex-col gap-2">
-          {REENTRY_STEPS.map((s, idx) => {
-            const active = idx === index;
-            return (
-              <button
-                key={s.num}
-                onClick={() => setIndex(idx)}
-                className={`interactive-control flex items-center gap-4 px-4 py-3 rounded-xl border text-left transition-all cursor-pointer ${
-                  active
-                    ? "bg-[#FFB800]/10 border-[#FFB800]"
-                    : "bg-[#0a0a14]/70 border-white/5 hover:border-white/10"
-                }`}
-              >
-                <span className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold ${
-                  active ? "bg-[#FFB800] text-[#030308]" : "bg-white/5 text-[#FFB800]"
-                }`}>
-                  {s.num}
-                </span>
-                <div>
-                  <span className={`text-[12px] font-sans font-bold block ${active ? "text-white" : "text-white/60"}`}>{s.name}</span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+      <ReentryBackgrounds activeIndex={index} />
 
-        {/* Selected step details */}
-        <div className="lg:col-span-5 text-left flex flex-col justify-center">
-          <div className="bg-[#0a0a14]/90 border border-[#FFB800]/25 rounded-2xl p-6 min-h-[220px] flex flex-col justify-center">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
-              Phase 0{index + 1} Detail
-            </span>
-            <h3 className="text-lg font-bold text-white mb-3">
-              {REENTRY_STEPS[index].name}
-            </h3>
-            <p className="text-xs text-white/70 leading-relaxed">
-              {REENTRY_STEPS[index].desc}
-            </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full h-full flex flex-col items-center justify-center">
+        <SceneHeading sub="09. Landing Dynamics" main="Bringing the Booster Home" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl">
+          {/* Timeline visualization */}
+          <div className="lg:col-span-7 flex flex-col gap-2">
+            {REENTRY_STEPS.map((s, idx) => {
+              const active = idx === index;
+              return (
+                <button
+                  key={s.num}
+                  onClick={() => setIndex(idx)}
+                  className={`interactive-control flex items-center gap-4 px-4 py-3 rounded-xl border text-left transition-all cursor-pointer ${
+                    active
+                      ? "bg-[#FFB800]/10 border-[#FFB800]"
+                      : "bg-[#0a0a14]/70 border-white/5 hover:border-white/10"
+                  }`}
+                >
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center font-mono text-[10px] font-bold ${
+                    active ? "bg-[#FFB800] text-[#030308]" : "bg-white/5 text-[#FFB800]"
+                  }`}>
+                    {s.num}
+                  </span>
+                  <div>
+                    <span className={`text-[12px] font-sans font-bold block ${active ? "text-white" : "text-white/60"}`}>{s.name}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Selected step details */}
+          <div className="lg:col-span-5 text-left flex flex-col justify-center">
+            <div className="bg-[#0a0a14]/90 border border-[#FFB800]/25 rounded-2xl p-6 min-h-[220px] flex flex-col justify-center">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
+                Phase 0{index + 1} Detail
+              </span>
+              <h3 className="text-lg font-bold text-white mb-3">
+                {REENTRY_STEPS[index].name}
+              </h3>
+              <p className="text-xs text-white/70 leading-relaxed">
+                {REENTRY_STEPS[index].desc}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1056,7 +1403,7 @@ export default function LaunchVehiclesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 6].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
+                className={`${[0, 6, 10].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -1169,7 +1516,7 @@ export default function LaunchVehiclesPage() {
 
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
