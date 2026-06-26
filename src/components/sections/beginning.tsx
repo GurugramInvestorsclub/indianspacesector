@@ -730,12 +730,6 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
         >
           <div className="text-left md:text-center space-y-6 md:space-y-8 select-none">
             <motion.p
-              style={{ opacity: quoteLine1Opacity }}
-              className="text-xl md:text-2xl font-mono text-[#FFB800]/60 tracking-wider"
-            >
-              For Vikram Sarabhai,
-            </motion.p>
-            <motion.p
               style={{ opacity: quoteLine2Opacity }}
               className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-white/90"
             >
@@ -758,9 +752,6 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
               </motion.span>
               <motion.span style={{ opacity: quoteLine6Opacity }} className="text-white/60">
                 Weather forecasting.
-              </motion.span>
-              <motion.span style={{ opacity: quoteLine7Opacity }} className="text-[#FFB800] font-bold">
-                National progress.
               </motion.span>
             </div>
           </div>

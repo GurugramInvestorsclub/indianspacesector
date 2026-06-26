@@ -221,11 +221,7 @@ export function PresenterMode({
 
   return (
     <>
-      {/* P-Key Quick Badge Indicator */}
-      <div className="fixed bottom-6 right-6 z-40 bg-space-dark/80 backdrop-blur-md border border-space-border px-3 py-1.5 rounded-full text-[10px] font-mono tracking-wider text-accent-cyan flex items-center gap-2 pointer-events-none">
-        <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse"></span>
-        PRESS <kbd className="bg-white/10 px-1.5 py-0.5 rounded border border-white/20 font-bold text-white text-[9px]">P</kbd> FOR PRESENTER HUD
-      </div>
+
 
       {/* Main Presenter Overlay Console */}
       {isOpen && (

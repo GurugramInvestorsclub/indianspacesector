@@ -76,6 +76,7 @@ export function OrbitsIllustration({ active }: OrbitsIllustrationProps) {
   const [leoIsFront, setLeoIsFront] = useState(true);
   const [polarIsFront, setPolarIsFront] = useState(true);
   const [geoIsFront, setGeoIsFront] = useState(true);
+  const [isTableExpanded, setIsTableExpanded] = useState(false);
 
   // Orbit Geometry Parameters (calibrated to match the static image composition perfectly)
   const earthRadius = 120; // 240px diameter
@@ -762,58 +763,6 @@ export function OrbitsIllustration({ active }: OrbitsIllustrationProps) {
         {/* ================================================================= */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-40">
           
-          {/* ORBITAL PARAMETERS HUD TABLE - TOP LEFT */}
-          <div 
-            className="absolute left-6 md:left-10 top-24 z-40 bg-[#090912]/85 border border-white/10 backdrop-blur-md p-4 rounded-xl shadow-2xl min-w-[280px] font-mono text-[9px] select-none hidden lg:block pointer-events-auto"
-          >
-            <div className="flex items-center gap-2 mb-3 pb-1.5 border-b border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse"></span>
-              <span className="text-[8px] text-white/45 tracking-[0.2em] uppercase font-bold">
-                Orbital Telemetry Database
-              </span>
-            </div>
-            
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="text-white/30 uppercase text-[7.5px] tracking-wider border-b border-white/5">
-                  <th className="py-1.5 font-normal">Orbit</th>
-                  <th className="py-1.5 font-normal">Altitude</th>
-                  <th className="py-1.5 font-normal">Velocity</th>
-                  <th className="py-1.5 font-normal">Period</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 text-white/80">
-                {/* LEO Row */}
-                <tr>
-                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#00d2ff]">
-                    <span className="w-1 h-1 rounded-full bg-[#00d2ff]"></span> LEO
-                  </td>
-                  <td className="py-2">160 – 2,000 km</td>
-                  <td className="py-2">~7.8 km/s</td>
-                  <td className="py-2">~90 min</td>
-                </tr>
-                {/* Polar SSO Row */}
-                <tr>
-                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#ffb800]">
-                    <span className="w-1 h-1 rounded-full bg-[#ffb800]"></span> SSO
-                  </td>
-                  <td className="py-2">600 – 1,000 km</td>
-                  <td className="py-2">~7.5 km/s</td>
-                  <td className="py-2">~98 min</td>
-                </tr>
-                {/* GEO Row */}
-                <tr>
-                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#ff6b00]">
-                    <span className="w-1 h-1 rounded-full bg-[#ff6b00]"></span> GEO
-                  </td>
-                  <td className="py-2">~35,786 km (36k)</td>
-                  <td className="py-2">~3.07 km/s</td>
-                  <td className="py-2">24 hrs</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          
           {/* LOW EARTH ORBIT (LEO) - LEFT */}
           <div 
             className="absolute flex items-center gap-3.5"
@@ -915,6 +864,81 @@ export function OrbitsIllustration({ active }: OrbitsIllustrationProps) {
           </div>
         </div>
 
+      </div>
+
+      {/* ORBITAL PARAMETERS HUD TABLE - TOP LEFT */}
+      {/* On mobile: Collapsed toggle button */}
+      <button
+        onClick={() => setIsTableExpanded(!isTableExpanded)}
+        className="md:hidden absolute left-4 top-24 z-50 flex items-center gap-1.5 px-2.5 py-1.5 bg-[#090912]/90 border border-[#00d2ff]/30 text-[#00d2ff] rounded-md font-mono text-[8px] tracking-wider pointer-events-auto interactive-control shadow-[0_0_15px_rgba(0,210,255,0.15)]"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#00d2ff] animate-pulse"></span>
+        <span>ORBIT RANGE HUD</span>
+      </button>
+
+      {/* Main Table Panel */}
+      <div 
+        className={`absolute left-4 md:left-10 top-24 md:top-28 z-40 bg-[#090912]/90 border border-white/10 backdrop-blur-md p-4 rounded-xl shadow-2xl w-[260px] md:w-[320px] font-mono text-[9px] select-none pointer-events-auto interactive-control transition-all duration-300 ${
+          isTableExpanded 
+            ? "opacity-100 translate-y-0 scale-100 pointer-events-auto visible" 
+            : "opacity-0 md:opacity-100 -translate-y-2 md:translate-y-0 scale-95 md:scale-100 pointer-events-none md:pointer-events-auto invisible md:visible"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-3 pb-1.5 border-b border-white/10">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse"></span>
+            <span className="text-[8px] text-white/45 tracking-[0.2em] uppercase font-bold">
+              Orbital Telemetry Database
+            </span>
+          </div>
+          {/* Mobile Close Button */}
+          <button 
+            onClick={() => setIsTableExpanded(false)}
+            className="md:hidden text-white/40 hover:text-white text-[11px] p-1 font-sans interactive-control"
+          >
+            ✕
+          </button>
+        </div>
+        
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="text-white/30 uppercase text-[7.5px] tracking-wider border-b border-white/5">
+              <th className="py-1.5 font-normal">Orbit</th>
+              <th className="py-1.5 font-normal">Altitude (Range)</th>
+              <th className="py-1.5 font-normal hidden sm:table-cell">Velocity</th>
+              <th className="py-1.5 font-normal hidden sm:table-cell">Period</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-white/5 text-white/80">
+            {/* LEO Row */}
+            <tr>
+              <td className="py-2 flex items-center gap-1.5 font-bold text-[#00d2ff]">
+                <span className="w-1 h-1 rounded-full bg-[#00d2ff]"></span> LEO
+              </td>
+              <td className="py-2">160 – 2,000 km</td>
+              <td className="py-2 hidden sm:table-cell">~7.8 km/s</td>
+              <td className="py-2 hidden sm:table-cell">~90 min</td>
+            </tr>
+            {/* Polar SSO Row */}
+            <tr>
+              <td className="py-2 flex items-center gap-1.5 font-bold text-[#ffb800]">
+                <span className="w-1 h-1 rounded-full bg-[#ffb800]"></span> SSO
+              </td>
+              <td className="py-2">600 – 1,000 km</td>
+              <td className="py-2 hidden sm:table-cell">~7.5 km/s</td>
+              <td className="py-2 hidden sm:table-cell">~98 min</td>
+            </tr>
+            {/* GEO Row */}
+            <tr>
+              <td className="py-2 flex items-center gap-1.5 font-bold text-[#ff6b00]">
+                <span className="w-1 h-1 rounded-full bg-[#ff6b00]"></span> GEO
+              </td>
+              <td className="py-2 font-semibold">35,786 km <span className="text-white/40 font-normal">(~36,000 km)</span></td>
+              <td className="py-2 hidden sm:table-cell">~3.07 km/s</td>
+              <td className="py-2 hidden sm:table-cell">24 hrs</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       {/* CSS KEYFRAME ANIMATIONS INJECTED DIRECTLY */}
