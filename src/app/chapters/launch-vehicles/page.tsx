@@ -499,64 +499,86 @@ function Scene5Chemistry() {
   const selected = FUELS.find((f) => f.id === activeTab) || FUELS[0];
   return (
     <>
-      <SceneHeading sub="05. Propulsion Chemistry" main="Propellants and Tradeoffs" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
-        {/* Navigation list */}
-        <div className="lg:col-span-4 flex flex-col gap-2">
-          {FUELS.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => setActiveTab(f.id)}
-              className={`w-full px-4 py-3 rounded-xl border text-left font-mono transition-all cursor-pointer ${
-                f.id === activeTab
-                  ? "bg-[#FFB800]/10 border-[#FFB800] text-[#FFB800]"
-                  : "bg-[#0a0a14]/70 border-white/5 text-white/60 hover:border-white/20"
-              }`}
-            >
-              {f.name}
-            </button>
-          ))}
-        </div>
+      {/* Background Image for the entire frame */}
+      <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none">
+        <img
+          src="/propellants_bg.jpg"
+          alt="Propellants Background"
+          className="w-full h-full object-cover object-center opacity-25"
+        />
+        {/* Subtle dark vignette to fit the luxury cinematic styling */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-transparent to-[#030308]/90"
+        />
+        <div
+          className="absolute inset-0 bg-radial-gradient"
+          style={{
+            background: "radial-gradient(circle at center, transparent 20%, #030308 90%)"
+          }}
+        />
+      </div>
 
-        {/* Selected detail */}
-        <div className="lg:col-span-8 bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 flex flex-col justify-between text-left">
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-white leading-tight">{selected.name}</h3>
-              <span className="p-2 rounded-lg bg-[#FFB800]/5 text-[#FFB800]">
-                <Flame className="w-5 h-5" />
-              </span>
-            </div>
-            
-            <div className="grid grid-cols-3 gap-4 mb-6 font-mono border-b border-white/5 pb-4">
-              <div>
-                <span className="text-[9px] uppercase text-white/40 block">Efficiency (Isp)</span>
-                <span className="text-lg font-black text-[#FFB800]">{selected.isp}</span>
-              </div>
-              <div>
-                <span className="text-[9px] uppercase text-white/40 block">Thrust Level</span>
-                <span className="text-lg font-black text-white">{selected.thrust}</span>
-              </div>
-              <div>
-                <span className="text-[9px] uppercase text-white/40 block">Complexity</span>
-                <span className="text-lg font-black text-white">{selected.complexity}</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4 text-xs">
-              <div>
-                <span className="text-white/40 font-mono block mb-1">ADVANTAGES:</span>
-                <p className="text-white/80">{selected.pro}</p>
-              </div>
-              <div>
-                <span className="text-white/40 font-mono block mb-1">LIMITATIONS:</span>
-                <p className="text-white/80">{selected.con}</p>
-              </div>
-            </div>
+      {/* Content Container (aligned to SLIDE_BASE style) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full h-full flex flex-col items-center justify-center">
+        <SceneHeading sub="05. Propulsion Chemistry" main="Propellants and Tradeoffs" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl">
+          {/* Navigation list */}
+          <div className="lg:col-span-4 flex flex-col gap-2">
+            {FUELS.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setActiveTab(f.id)}
+                className={`w-full px-4 py-3 rounded-xl border text-left font-mono transition-all cursor-pointer ${
+                  f.id === activeTab
+                    ? "bg-[#FFB800]/14 border-[#FFB800] text-[#FFB800] font-bold shadow-lg shadow-[#FFB800]/5"
+                    : "bg-[#0a0a14]/88 border-white/10 text-white/70 hover:border-white/20 backdrop-blur-md"
+                }`}
+              >
+                {f.name}
+              </button>
+            ))}
           </div>
 
-          <div className="mt-8 pt-4 border-t border-white/5 text-xs text-white/40 font-mono">
-            Primary Application: <span className="text-white font-bold">{selected.app}</span>
+          {/* Selected detail */}
+          <div className="lg:col-span-8 bg-[#0a0a14]/92 border border-[#FFB800]/20 rounded-2xl p-8 flex flex-col justify-between text-left backdrop-blur-md shadow-2xl">
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xl font-bold text-white leading-tight">{selected.name}</h3>
+                <span className="p-2 rounded-lg bg-[#FFB800]/5 text-[#FFB800]">
+                  <Flame className="w-5 h-5" />
+                </span>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4 mb-6 font-mono border-b border-white/5 pb-4">
+                <div>
+                  <span className="text-[9px] uppercase text-white/40 block">Efficiency (Isp)</span>
+                  <span className="text-lg font-black text-[#FFB800]">{selected.isp}</span>
+                </div>
+                <div>
+                  <span className="text-[9px] uppercase text-white/40 block">Thrust Level</span>
+                  <span className="text-lg font-black text-white">{selected.thrust}</span>
+                </div>
+                <div>
+                  <span className="text-[9px] uppercase text-white/40 block">Complexity</span>
+                  <span className="text-lg font-black text-white">{selected.complexity}</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 text-xs">
+                <div>
+                  <span className="text-white/40 font-mono block mb-1">ADVANTAGES:</span>
+                  <p className="text-white/80 leading-relaxed">{selected.pro}</p>
+                </div>
+                <div>
+                  <span className="text-white/40 font-mono block mb-1">LIMITATIONS:</span>
+                  <p className="text-white/80 leading-relaxed">{selected.con}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-white/5 text-xs text-white/40 font-mono">
+              Primary Application: <span className="text-white font-bold">{selected.app}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1034,7 +1056,7 @@ export default function LaunchVehiclesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${currentFrameIndex === 0 ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
+                className={`${[0, 6].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -1111,7 +1133,7 @@ export default function LaunchVehiclesPage() {
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
