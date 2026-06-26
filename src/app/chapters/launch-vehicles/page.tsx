@@ -29,7 +29,7 @@ import {
 // CONSTANTS & STRUCTURES
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 13;
+const TOTAL_FRAMES = 14;
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
 
@@ -153,9 +153,35 @@ function OrbitalRingBg() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// SCENE COMPONENTS
-// ---------------------------------------------------------------------------
+// 0. SPLASH COVER
+function Scene0Splash({ presentationActive }: { presentationActive: boolean }) {
+  return (
+    <>
+      <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
+        {/* Background Image occupying the entire screen */}
+        <img
+          src="/launch_vehicles_bg.jpg"
+          alt="Launch Vehicles Cover"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Subtle dark vignette to fit the luxury cinematic styling */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#030308]/20 via-transparent to-[#030308]/60"
+        />
+      </div>
+
+      {/* Navigation cues or minor accents */}
+      {!presentationActive && (
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 font-mono text-[9px] text-white/50 tracking-[0.25em] uppercase">
+          <span>Scroll to begin</span>
+          <span className="w-px h-8 bg-white/30 relative overflow-hidden rounded-full block">
+            <span className="absolute top-0 inset-x-0 h-3 bg-[#FFB800] rounded-full animate-bounce" />
+          </span>
+        </div>
+      )}
+    </>
+  );
+}
 
 // 1. HERO
 function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
@@ -960,45 +986,48 @@ export default function LaunchVehiclesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 13 frames
-  const s0Opacity = useTransform(progress, [0.0, 0.05, 0.0769], [1, 1, 0]);
-  const s0Scale = useTransform(progress, [0.0, 0.0769], [1, 0.96]);
+  // Scroll transforms for 14 frames
+  const s0SplashOpacity = useTransform(progress, [0.0, 0.04, 0.0714], [1, 1, 0]);
+  const s0SplashScale = useTransform(progress, [0.0, 0.0714], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.05, 0.0769, 0.13, 0.1538], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.05, 0.0769, 0.13, 0.1538], [24, 0, 0, -24]);
+  const s0Opacity = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [0, 1, 1, 0]);
+  const s0Scale = useTransform(progress, [0.05, 0.1429], [1, 0.96]);
 
-  const s2Opacity = useTransform(progress, [0.13, 0.1538, 0.21, 0.2308], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.13, 0.1538, 0.21, 0.2308], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.21, 0.2308, 0.285, 0.3077], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.21, 0.2308, 0.285, 0.3077], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.285, 0.3077, 0.36, 0.3846], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.285, 0.3077, 0.36, 0.3846], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.36, 0.3846, 0.44, 0.4615], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.36, 0.3846, 0.44, 0.4615], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.44, 0.4615, 0.51, 0.5385], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.44, 0.4615, 0.51, 0.5385], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [24, 0, 0, -24]);
 
-  const s7Opacity = useTransform(progress, [0.51, 0.5385, 0.59, 0.6154], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.51, 0.5385, 0.59, 0.6154], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [24, 0, 0, -24]);
 
-  const s8Opacity = useTransform(progress, [0.59, 0.6154, 0.67, 0.6923], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.59, 0.6154, 0.67, 0.6923], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [24, 0, 0, -24]);
 
-  const s9Opacity = useTransform(progress, [0.67, 0.6923, 0.745, 0.7692], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.67, 0.6923, 0.745, 0.7692], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [24, 0, 0, -24]);
 
-  const s10Opacity = useTransform(progress, [0.745, 0.7692, 0.82, 0.8462], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.745, 0.7692, 0.82, 0.8462], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [24, 0, 0, -24]);
 
-  const s11Opacity = useTransform(progress, [0.82, 0.8462, 0.90, 0.9231], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.82, 0.8462, 0.90, 0.9231], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [0, 1, 1, 0]);
+  const s10Y = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [24, 0, 0, -24]);
 
-  const s12Opacity = useTransform(progress, [0.90, 0.9231, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [0.90, 0.9231, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [0, 1, 1, 0]);
+  const s11Y = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [24, 0, 0, -24]);
+
+  const s12Opacity = useTransform(progress, [0.90, 0.9286, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [0.90, 0.9286, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1006,7 +1035,7 @@ export default function LaunchVehiclesPage() {
       <PresentationChrome controller={p} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1020,21 +1049,22 @@ export default function LaunchVehiclesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${currentFrameIndex === 0 ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
               >
-                {currentFrameIndex === 0 && <Scene0Hero presentationActive />}
-                {currentFrameIndex === 1 && <Scene1SoundingRockets />}
-                {currentFrameIndex === 2 && <Scene2OrbitalVelocity />}
-                {currentFrameIndex === 3 && <Scene3MassTyranny />}
-                {currentFrameIndex === 4 && <Scene4Staging />}
-                {currentFrameIndex === 5 && <Scene5Chemistry />}
-                {currentFrameIndex === 6 && <Scene6TimelineMapping />}
-                {currentFrameIndex === 7 && <Scene7PSLVCaseStudy />}
-                {currentFrameIndex === 8 && <Scene8ReusabilityEconomics />}
-                {currentFrameIndex === 9 && <Scene9ReentryProfile />}
-                {currentFrameIndex === 10 && <Scene10MethaloxEra />}
-                {currentFrameIndex === 11 && <Scene11NextFrontier />}
-                {currentFrameIndex === 12 && <Scene12Climax />}
+                {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
+                {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
+                {currentFrameIndex === 2 && <Scene1SoundingRockets />}
+                {currentFrameIndex === 3 && <Scene2OrbitalVelocity />}
+                {currentFrameIndex === 4 && <Scene3MassTyranny />}
+                {currentFrameIndex === 5 && <Scene4Staging />}
+                {currentFrameIndex === 6 && <Scene5Chemistry />}
+                {currentFrameIndex === 7 && <Scene6TimelineMapping />}
+                {currentFrameIndex === 8 && <Scene7PSLVCaseStudy />}
+                {currentFrameIndex === 9 && <Scene8ReusabilityEconomics />}
+                {currentFrameIndex === 10 && <Scene9ReentryProfile />}
+                {currentFrameIndex === 11 && <Scene10MethaloxEra />}
+                {currentFrameIndex === 12 && <Scene11NextFrontier />}
+                {currentFrameIndex === 13 && <Scene12Climax />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1043,8 +1073,17 @@ export default function LaunchVehiclesPage() {
           {!presentationActive && (
             <>
               <motion.div
+                style={{ opacity: s0SplashOpacity, scale: s0SplashScale }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+              >
+                <Scene0Splash presentationActive={false} />
+              </motion.div>
+
+              <motion.div
                 style={{ opacity: s0Opacity, scale: s0Scale }}
-                className={`${SLIDE_BASE} text-center pointer-events-none`}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 1 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
               >
                 <Scene0Hero presentationActive={false} />
               </motion.div>
@@ -1052,7 +1091,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s1Opacity, y: s1Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 1 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene1SoundingRockets />
@@ -1061,7 +1100,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s2Opacity, y: s2Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene2OrbitalVelocity />
@@ -1070,7 +1109,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene3MassTyranny />
@@ -1079,7 +1118,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene4Staging />
@@ -1088,7 +1127,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene5Chemistry />
@@ -1097,7 +1136,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene6TimelineMapping />
@@ -1106,7 +1145,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s7Opacity, y: s7Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene7PSLVCaseStudy />
@@ -1115,7 +1154,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene8ReusabilityEconomics />
@@ -1124,7 +1163,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene9ReentryProfile />
@@ -1133,7 +1172,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene10MethaloxEra />
@@ -1142,7 +1181,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s11Opacity, y: s11Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene11NextFrontier />
@@ -1151,7 +1190,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s12Opacity, y: s12Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene12Climax />
