@@ -373,11 +373,11 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
                           alt="Dr. APJ Abdul Kalam"
                           fill
                           sizes="(max-width: 768px) 100vw, 40vw"
-                          className="object-cover object-top grayscale contrast-[1.2] brightness-[0.75] select-none pointer-events-none"
+                          className="object-cover object-top grayscale contrast-[1.1] brightness-[0.95] select-none pointer-events-none"
                         />
                         
                         {/* Vignette & grid overlays */}
-                        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#05050f_90%] pointer-events-none" />
+                        <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_40%,#05050f_90%] pointer-events-none" />
                         <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                         
                         {/* Target reticle details */}
@@ -465,12 +465,12 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
                         fill
                         priority={index < 2}
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover object-center grayscale hover:grayscale-0 contrast-[1.05] brightness-[0.7] hover:brightness-[0.85] transition-all duration-700 pointer-events-none select-none"
+                        className="object-cover object-center contrast-[1.02] brightness-[1.05] hover:brightness-[1.15] transition-all duration-700 pointer-events-none select-none"
                       />
                       
                       {/* Vignette Overlay to blend border */}
-                      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_35%,#05050f_95%] pointer-events-none" />
-                      <div className="absolute inset-0 bg-gradient-to-b from-[#05050f]/80 via-transparent to-[#05050f]/80 pointer-events-none" />
+                      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_45%,#05050f_92%] pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#05050f]/40 via-transparent to-[#05050f]/40 pointer-events-none" />
  
                       {/* HUD Grid Overlay */}
                       <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
