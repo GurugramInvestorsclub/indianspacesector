@@ -36,10 +36,8 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
       else if (currentFrameIndex === 33) p = 0.43;
       else if (currentFrameIndex === 34) p = 0.54;
       else if (currentFrameIndex === 35) p = 0.64;
-      else if (currentFrameIndex === 36) p = 0.76;
-      else if (currentFrameIndex === 37) p = 0.88;
-      else if (currentFrameIndex === 38) p = 0.965;
-      else if (currentFrameIndex === 39) p = 0.985;
+      else if (currentFrameIndex === 36) p = 0.88;
+      else if (currentFrameIndex === 37) p = 0.98;
       else if (currentFrameIndex < 30) p = 0.0;
       else p = 1.0;
 
@@ -84,11 +82,11 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
 
   // -------------------------------------------------------------
   // Scene 4 & 5: The Constellation & Jio Proof
-  // Range: 0.50 -> 0.70
+  // Range: 0.50 -> 0.82 (extended to cover Scene 6's removal)
   // -------------------------------------------------------------
-  const scene4Opacity = useTransform(progress, [0.48, 0.50, 0.68, 0.70], [0, 1, 1, 0]);
-  const constellationScale = useTransform(progress, [0.48, 0.70], [1.02, 0.97]);
-  const constellationImgOpacity = useTransform(progress, [0.48, 0.50, 0.68, 0.70], [0, 0.4, 0.4, 0]);
+  const scene4Opacity = useTransform(progress, [0.48, 0.50, 0.80, 0.82], [0, 1, 1, 0]);
+  const constellationScale = useTransform(progress, [0.48, 0.82], [1.02, 0.97]);
+  const constellationImgOpacity = useTransform(progress, [0.48, 0.50, 0.80, 0.82], [0, 0.4, 0.4, 0]);
   
   // Controls the emergence of the constellation nodes and paths
   const orbitRingScale = useTransform(progress, [0.48, 0.60], [0.85, 1.05]);
@@ -104,41 +102,27 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   }, [satelliteCount]);
 
   // Jio Statement Opacity
-  const jioTextOpacity = useTransform(progress, [0.58, 0.60, 0.68, 0.70], [0, 1, 1, 0]);
-  const jioTextY = useTransform(progress, [0.58, 0.60, 0.68, 0.70], [15, 0, 0, -15]);
-
-  // -------------------------------------------------------------
-  // Scene 6: Why It Matters (Use Cases Network Map)
-  // Range: 0.70 -> 0.83
-  // -------------------------------------------------------------
-  const scene6Opacity = useTransform(progress, [0.68, 0.70, 0.81, 0.83], [0, 1, 1, 0]);
-  const networkImgOpacity = useTransform(progress, [0.68, 0.70, 0.81, 0.83], [0, 0.35, 0.35, 0]);
-  const networkImgScale = useTransform(progress, [0.68, 0.83], [1.03, 0.98]);
-
-  // Staggered reveal of the use cases callouts
-  const useCase1Opacity = useTransform(progress, [0.70, 0.72], [0, 1]);
-  const useCase2Opacity = useTransform(progress, [0.72, 0.74], [0, 1]);
-  const useCase3Opacity = useTransform(progress, [0.74, 0.76], [0, 1]);
-  const useCase4Opacity = useTransform(progress, [0.76, 0.78], [0, 1]);
+  const jioTextOpacity = useTransform(progress, [0.58, 0.60, 0.80, 0.82], [0, 1, 1, 0]);
+  const jioTextY = useTransform(progress, [0.58, 0.60, 0.80, 0.82], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
   // Scene 7: The Big Realization ("Railways connected...")
-  // Range: 0.83 -> 0.94
+  // Range: 0.82 -> 0.94
   // -------------------------------------------------------------
-  const scene7Opacity = useTransform(progress, [0.81, 0.83, 0.92, 0.94], [0, 1, 1, 0]);
+  const scene7Opacity = useTransform(progress, [0.80, 0.82, 0.92, 0.94], [0, 1, 1, 0]);
   
   // Staggered lines
-  const line7AOpacity = useTransform(progress, [0.82, 0.84, 0.92, 0.94], [0, 1, 1, 0]);
-  const line7AY = useTransform(progress, [0.82, 0.84, 0.92, 0.94], [15, 0, 0, -15]);
+  const line7AOpacity = useTransform(progress, [0.81, 0.83, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7AY = useTransform(progress, [0.81, 0.83, 0.92, 0.94], [15, 0, 0, -15]);
 
-  const line7BOpacity = useTransform(progress, [0.84, 0.86, 0.92, 0.94], [0, 1, 1, 0]);
-  const line7BY = useTransform(progress, [0.84, 0.86, 0.92, 0.94], [15, 0, 0, -15]);
+  const line7BOpacity = useTransform(progress, [0.83, 0.85, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7BY = useTransform(progress, [0.83, 0.85, 0.92, 0.94], [15, 0, 0, -15]);
 
-  const line7COpacity = useTransform(progress, [0.86, 0.88, 0.92, 0.94], [0, 1, 1, 0]);
-  const line7CY = useTransform(progress, [0.86, 0.88, 0.92, 0.94], [15, 0, 0, -15]);
+  const line7COpacity = useTransform(progress, [0.85, 0.87, 0.92, 0.94], [0, 1, 1, 0]);
+  const line7CY = useTransform(progress, [0.85, 0.87, 0.92, 0.94], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
-  // Scene 8: The Finale (Vision -> Moon -> $44B -> Climax)
+  // Scene 8: The Finale (Vision -> Moon -> $44B)
   // Range: 0.94 -> 1.0 (Ends in complete fade-to-black at 1.0)
   // -------------------------------------------------------------
   const scene8Opacity = useTransform(progress, [0.92, 0.94, 0.99, 1.0], [0, 1, 1, 0]);
@@ -155,9 +139,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   const finalCOpacity = useTransform(progress, [0.96, 0.97], [0, 1]);
   const finalCY = useTransform(progress, [0.96, 0.97], [15, 0]);
 
-  const finalClimaxOpacity = useTransform(progress, [0.97, 0.98], [0, 1]);
-  const finalClimaxY = useTransform(progress, [0.97, 0.98], [15, 0]);
-  const finalCtaOpacity = useTransform(progress, [0.985, 0.995], [0, 1]);
+  const finalCtaOpacity = useTransform(progress, [0.97, 0.98], [0, 1]);
   const finalStatementY = useTransform(progress, [0.92, 0.94, 0.99, 1.0], [20, 0, 0, -20]);
 
   return (
@@ -369,125 +351,6 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
         </motion.div>
 
         {/* ------------------------------------------------------------- */}
-        {/* SCENE 6: Why It Matters (Use Cases) */}
-        {/* ------------------------------------------------------------- */}
-        <motion.div
-          style={{ opacity: reduceMotion ? 1 : scene6Opacity }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 max-w-6xl mx-auto w-full"
-        >
-          {/* Global Network Image Background */}
-          <motion.div 
-            style={{ 
-              opacity: reduceMotion ? 0.35 : networkImgOpacity, 
-              scale: reduceMotion ? 1 : networkImgScale 
-            }}
-            className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
-          >
-            <Image
-              src="/sat_network.png"
-              alt="Global Satellite Network Layer"
-              fill
-              sizes="100vw"
-              className="object-contain object-center opacity-85 grayscale contrast-[1.1] select-none"
-            />
-          </motion.div>
-
-          <div className="relative z-10 w-full flex flex-col items-center justify-center min-h-[75vh]">
-            <div className="text-center mb-12 max-w-md pointer-events-none">
-              <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-3 block opacity-70">
-                Downstream Horizon
-              </span>
-              <h3 
-                className="text-2xl md:text-3xl font-light tracking-tight text-white"
-                style={{ fontFamily: "Georgia, serif" }}
-              >
-                Space Is The Next Layer of Infrastructure
-              </h3>
-            </div>
-
-            {/* Split Grid for Responsive Visual Callouts (No standard cards) */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full max-w-5xl items-center">
-              
-              {/* Left Column Callouts */}
-              <div className="col-span-1 md:col-span-4 flex flex-col gap-8 md:gap-16">
-                
-                {/* Callout 1: Connectivity */}
-                <motion.div 
-                  style={{ opacity: reduceMotion ? 1 : useCase1Opacity }}
-                  className="flex flex-col text-left border-l border-[#FFB800]/30 pl-4 py-1"
-                >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#FFB800] uppercase font-bold mb-1">
-                    01 / Connectivity
-                  </span>
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-2">
-                    Universal Coverage
-                  </h4>
-                  <p className="text-xs text-white/50 leading-relaxed max-w-[280px]">
-                    Direct-to-device broadband linking remote fishing villages, maritime ships, and commercial aircraft.
-                  </p>
-                </motion.div>
-
-                {/* Callout 2: Earth Observation */}
-                <motion.div 
-                  style={{ opacity: reduceMotion ? 1 : useCase2Opacity }}
-                  className="flex flex-col text-left border-l border-white/20 pl-4 py-1"
-                >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-white/50 uppercase font-bold mb-1">
-                    02 / Observation
-                  </span>
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-2">
-                    Planetary Telemetry
-                  </h4>
-                  <p className="text-xs text-white/50 leading-relaxed max-w-[280px]">
-                    Real-time monitoring of agricultural yields, climate disruptions, and monsoon tracking.
-                  </p>
-                </motion.div>
-              </div>
-
-              {/* Center Gap for Rotating Network Graphic Visual */}
-              <div className="hidden md:block md:col-span-4 h-32" />
-
-              {/* Right Column Callouts */}
-              <div className="col-span-1 md:col-span-4 flex flex-col gap-8 md:gap-16">
-                
-                {/* Callout 3: Navigation */}
-                <motion.div 
-                  style={{ opacity: reduceMotion ? 1 : useCase3Opacity }}
-                  className="flex flex-col text-left border-l border-white/20 md:border-l-0 md:border-r md:border-white/20 md:pr-4 md:text-right py-1"
-                >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-white/50 uppercase font-bold mb-1">
-                    03 / Navigation
-                  </span>
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-2">
-                    Sovereign Precision
-                  </h4>
-                  <p className="text-xs text-white/50 leading-relaxed max-w-[280px] md:ml-auto">
-                    Independent positioning networks driving transport logistics, aviation networks, and infrastructure sync.
-                  </p>
-                </motion.div>
-
-                {/* Callout 4: Security */}
-                <motion.div 
-                  style={{ opacity: reduceMotion ? 1 : useCase4Opacity }}
-                  className="flex flex-col text-left border-l border-[#FF6B00]/30 md:border-l-0 md:border-r md:border-[#FF6B00]/30 md:pr-4 md:text-right py-1"
-                >
-                  <span className="font-mono text-[9px] tracking-[0.2em] text-[#FF6B00] uppercase font-bold mb-1">
-                    04 / Defense
-                  </span>
-                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-2">
-                    Sovereign Telemetry
-                  </h4>
-                  <p className="text-xs text-white/50 leading-relaxed max-w-[280px] md:ml-auto">
-                    Low Earth Orbit surveillance, secure intelligence channels, and dynamic boundary monitoring.
-                  </p>
-                </motion.div>
-              </div>
-
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ------------------------------------------------------------- */}
         {/* SCENE 7: The Big Realization */}
         {/* ------------------------------------------------------------- */}
         <motion.div
@@ -529,7 +392,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
         </motion.div>
 
         {/* ------------------------------------------------------------- */}
-        {/* SCENE 8: The Finale Climax */}
+        {/* SCENE 8: The Finale */}
         {/* ------------------------------------------------------------- */}
         
         {/* Backdrop Visual */}
@@ -566,7 +429,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
           </span>
           
           <h2 
-            className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide leading-relaxed text-white/90 max-w-4xl mb-12"
+            className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide leading-relaxed text-white/90 max-w-4xl"
             style={{ fontFamily: "Georgia, serif" }}
           >
             <motion.span 
@@ -588,14 +451,6 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
               To a $44 billion opportunity.
             </motion.span>
           </h2>
-
-          <motion.h3 
-            style={{ opacity: reduceMotion ? 1 : finalClimaxOpacity, y: reduceMotion ? 0 : finalClimaxY, fontFamily: "Georgia, serif" }}
-            className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tight text-white uppercase leading-tight"
-          >
-            The next chapter <br />
-            <span className="text-[#FF6B00]">has already begun.</span>
-          </motion.h3>
         </motion.div>
 
         {/* CTA into the premium Space Economy chapter — sits outside the
