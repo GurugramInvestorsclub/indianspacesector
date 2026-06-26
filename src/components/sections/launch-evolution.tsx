@@ -175,6 +175,20 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
 
   const rockets: RocketData[] = [
     {
+      id: "leadership",
+      name: "The Leadership Lesson",
+      year: "1979",
+      breakthrough: "Failure Analysis",
+      desc: "On August 10, 1979, India's first SLV-3 launch failed. A leak in the control system caused the rocket to plunge into the Bay of Bengal. As Project Director, APJ Abdul Kalam was devastated.",
+      height: "—",
+      weight: "—",
+      capacity: "—",
+      stages: "—",
+      statusText: "SRIHARIKOTA PRESS DEBRIEFING",
+      image: "/kalam.png",
+      callouts: []
+    },
+    {
       id: "slv3",
       name: "SLV-3",
       year: "1980",
@@ -191,20 +205,6 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
         { label: "4th Stage Solid Motor", x: 50, y: 45, align: "left" },
         { label: "1st Stage Core Booster", x: 50, y: 80, align: "right" }
       ]
-    },
-    {
-      id: "leadership",
-      name: "The Leadership Lesson",
-      year: "1979",
-      breakthrough: "Failure Analysis",
-      desc: "On August 10, 1979, India's first SLV-3 launch failed. A leak in the control system caused the rocket to plunge into the Bay of Bengal. As Project Director, APJ Abdul Kalam was devastated.",
-      height: "—",
-      weight: "—",
-      capacity: "—",
-      stages: "—",
-      statusText: "SRIHARIKOTA PRESS DEBRIEFING",
-      image: "/kalam.png",
-      callouts: []
     },
     {
       id: "aslv",
