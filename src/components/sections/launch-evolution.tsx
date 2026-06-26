@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue, animate } from "motion/react";
+import { OrbitsIllustration } from "./orbits-illustration";
 
 interface Callout {
   label: string;
@@ -49,13 +50,14 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
     if (presentationActive) {
       let p = 0;
       if (currentFrameIndex === 17) p = 0.05;
-      else if (currentFrameIndex === 18) p = 0.18;
-      else if (currentFrameIndex === 19) p = 0.31;
-      else if (currentFrameIndex === 20) p = 0.44;
-      else if (currentFrameIndex === 21) p = 0.56;
-      else if (currentFrameIndex === 22) p = 0.69;
-      else if (currentFrameIndex === 23) p = 0.81;
-      else if (currentFrameIndex === 24) p = 0.94;
+      else if (currentFrameIndex === 18) p = 0.16;
+      else if (currentFrameIndex === 19) p = 0.27;
+      else if (currentFrameIndex === 20) p = 0.38;
+      else if (currentFrameIndex === 21) p = 0.50;
+      else if (currentFrameIndex === 22) p = 0.61;
+      else if (currentFrameIndex === 23) p = 0.72;
+      else if (currentFrameIndex === 24) p = 0.83;
+      else if (currentFrameIndex === 25) p = 0.94;
       else if (currentFrameIndex < 17) p = 0.0;
       else p = 1.0;
 
@@ -71,36 +73,39 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
 
   // Track active slide index using standard motion value event listener to toggle pointer-events
   useMotionValueEvent(progress, "change", (latest) => {
-    // 8 scenes split across 0 to 1 scroll progress range:
-    if (latest < 0.125) {
+    // 9 scenes split across 0 to 1 scroll progress range:
+    if (latest < 0.11) {
       setActiveIndex(0);
-    } else if (latest < 0.25) {
+    } else if (latest < 0.22) {
       setActiveIndex(1);
-    } else if (latest < 0.375) {
+    } else if (latest < 0.33) {
       setActiveIndex(2);
-    } else if (latest < 0.50) {
+    } else if (latest < 0.44) {
       setActiveIndex(3);
-    } else if (latest < 0.625) {
+    } else if (latest < 0.55) {
       setActiveIndex(4);
-    } else if (latest < 0.75) {
+    } else if (latest < 0.66) {
       setActiveIndex(5);
-    } else if (latest < 0.875) {
+    } else if (latest < 0.77) {
       setActiveIndex(6);
-    } else {
+    } else if (latest < 0.88) {
       setActiveIndex(7);
+    } else {
+      setActiveIndex(8);
     }
   });
 
   const getSceneTransforms = (index: number) => {
     const ranges = [
-      { inStart: 0.0, inEnd: 0.0, outStart: 0.11, outEnd: 0.125 },       // 0: Intro
-      { inStart: 0.125, inEnd: 0.14, outStart: 0.235, outEnd: 0.25 },   // 1: SLV-3
-      { inStart: 0.25, inEnd: 0.265, outStart: 0.36, outEnd: 0.375 },   // 2: Leadership Failure
-      { inStart: 0.375, inEnd: 0.39, outStart: 0.485, outEnd: 0.50 },   // 3: ASLV
-      { inStart: 0.50, inEnd: 0.515, outStart: 0.61, outEnd: 0.625 },   // 4: PSLV
-      { inStart: 0.625, inEnd: 0.64, outStart: 0.735, outEnd: 0.75 },   // 5: GSLV
-      { inStart: 0.75, inEnd: 0.765, outStart: 0.86, outEnd: 0.875 },   // 6: LVM3
-      { inStart: 0.875, inEnd: 0.89, outStart: 0.98, outEnd: 1.00 },   // 7: SSLV
+      { inStart: 0.0, inEnd: 0.0, outStart: 0.09, outEnd: 0.11 },       // 0: Intro
+      { inStart: 0.11, inEnd: 0.13, outStart: 0.20, outEnd: 0.22 },     // 1: Leadership Failure
+      { inStart: 0.22, inEnd: 0.24, outStart: 0.31, outEnd: 0.33 },     // 2: SLV-3
+      { inStart: 0.33, inEnd: 0.35, outStart: 0.42, outEnd: 0.44 },     // 3: ASLV
+      { inStart: 0.44, inEnd: 0.46, outStart: 0.53, outEnd: 0.55 },     // 4: PSLV
+      { inStart: 0.55, inEnd: 0.57, outStart: 0.64, outEnd: 0.66 },     // 5: Orbit Illustration (NEW)
+      { inStart: 0.66, inEnd: 0.68, outStart: 0.75, outEnd: 0.77 },     // 6: GSLV
+      { inStart: 0.77, inEnd: 0.79, outStart: 0.86, outEnd: 0.88 },     // 7: LVM3
+      { inStart: 0.88, inEnd: 0.90, outStart: 0.98, outEnd: 1.00 },     // 8: SSLV
     ];
     
     const r = ranges[index];
@@ -114,7 +119,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
       opacityOutput = [1, 1, 0, 0];
       yInput = [0.0, r.outEnd, 1.0];
       yOutput = [0, -35, -35];
-    } else if (index === 7) {
+    } else if (index === 8) {
       opacityInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
       opacityOutput = [0, 0, 1, 1, 0];
       yInput = [0.0, r.inStart, r.inEnd, r.outStart, 1.0];
@@ -162,6 +167,10 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
   const opacity7 = useTransform(progress, t7.opacityInput, t7.opacityOutput, { clamp: true });
   const y7 = useTransform(progress, t7.yInput, t7.yOutput, { clamp: true });
 
+  const t8 = getSceneTransforms(8);
+  const opacity8 = useTransform(progress, t8.opacityInput, t8.opacityOutput, { clamp: true });
+  const y8 = useTransform(progress, t8.yInput, t8.yOutput, { clamp: true });
+
   const sceneStyles = [
     { opacity: opacity0, y: y0 },
     { opacity: opacity1, y: y1 },
@@ -171,6 +180,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
     { opacity: opacity5, y: y5 },
     { opacity: opacity6, y: y6 },
     { opacity: opacity7, y: y7 },
+    { opacity: opacity8, y: y8 },
   ];
 
   const rockets: RocketData[] = [
@@ -302,7 +312,7 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
     <div 
       ref={containerRef}
       id="launch-evolution"
-      className="relative w-full h-[800vh] bg-[#030308] border-b border-white/10"
+      className="relative w-full h-[900vh] bg-[#030308] border-b border-white/10"
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex flex-col justify-between py-16">
@@ -343,10 +353,22 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
           </div>
         </motion.div>
 
+        {/* ----------------- Scene 5: Orbit Illustration (NEW) ----------------- */}
+        <motion.div
+          style={sceneStyles[5]}
+          className={`absolute inset-0 z-10 items-center justify-center w-full h-full transition-all duration-300 ${
+            activeIndexToUse === 5 ? "pointer-events-auto" : "pointer-events-none"
+          } ${
+            Math.abs(activeIndexToUse - 5) <= 1 ? "flex" : "hidden"
+          }`}
+        >
+          <OrbitsIllustration active={activeIndexToUse === 5} />
+        </motion.div>
+
         {/* ----------------- Scenes 1 to 6: Launch Vehicles ----------------- */}
         {rockets.map((rocket, index) => {
           const isEven = index % 2 === 0;
-          const rocketIndex = index + 1;
+          const rocketIndex = index < 4 ? index + 1 : index + 2;
           const isActiveToUse = activeIndexToUse === rocketIndex;
           
           if (rocket.id === "leadership") {
