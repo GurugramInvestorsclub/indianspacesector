@@ -317,53 +317,443 @@ function Scene1WhatIsASatellite() {
 }
 
 // 3. MEET THE SATELLITE (EXPLODED ANATOMY)
+const SUBSYSTEM_BACKGROUNDS = {
+  bus: "/sat_sub_bus.png",
+  payload: "/sat_sub_payload.png",
+  solar: "/sat_sub_solar.png",
+  battery: "/sat_sub_battery.png",
+  antenna: "/sat_sub_antenna.png",
+  wheels: "/sat_sub_wheels.png",
+  propulsion: "/sat_sub_propulsion.png",
+  thermal: "/sat_sub_thermal.png",
+};
+
+function SatelliteBusGlow() {
+  return (
+    <motion.div
+      animate={{
+        opacity: [0.1, 0.25, 0.12, 0.3, 0.15]
+      }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-screen"
+      style={{
+        background: "radial-gradient(circle at 40% 50%, rgba(255,184,0,0.15) 0%, transparent 50%)"
+      }}
+    />
+  );
+}
+
+function PayloadScanLines() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      <motion.div
+        initial={{ y: "-100%" }}
+        animate={{ y: "100%" }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        className="absolute left-0 w-full h-[2px] bg-sky-500/10 shadow-[0_0_15px_rgba(14,165,233,0.3)]"
+      />
+    </div>
+  );
+}
+
+function SolarArraySunGleam() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      <motion.div
+        animate={{
+          opacity: [0.15, 0.3, 0.18, 0.35, 0.15]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute inset-0 mix-blend-color-dodge"
+        style={{
+          background: "radial-gradient(circle at 10% 20%, rgba(255,200,100,0.2) 0%, transparent 60%)"
+        }}
+      />
+    </div>
+  );
+}
+
+function BatteryPowerFlow() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(6)].map((_, i) => {
+        const initialX = 30 + Math.random() * 20;
+        const initialY = 40 + Math.random() * 20;
+        const delay = Math.random() * 3;
+        const duration = 1 + Math.random() * 2;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: `${initialX}%`,
+              y: `${initialY}%`,
+              opacity: 0,
+              scale: 0.5,
+            }}
+            animate={{
+              opacity: [0, 0.6, 0],
+              scale: [0.5, 1.2, 0.5],
+            }}
+            transition={{
+              duration: duration,
+              delay: delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute w-1.5 h-1.5 bg-sky-400 rounded-full blur-[0.5px]"
+            style={{
+              boxShadow: "0 0 6px rgba(56,189,248,0.6)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function AntennaPulseBeams() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(3)].map((_, i) => {
+        return (
+          <motion.div
+            key={i}
+            initial={{ scale: 0, opacity: 0.3 }}
+            animate={{ scale: 2, opacity: 0 }}
+            transition={{
+              duration: 4,
+              delay: i * 1.3,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+            className="absolute rounded-full border border-amber-400/20 mix-blend-screen"
+            style={{
+              width: "300px",
+              height: "300px",
+              left: "30%",
+              top: "40%",
+              transform: "translate(-50%, -50%)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function ReactionWheelSpins() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10 mix-blend-overlay">
+      <motion.div
+        animate={{
+          rotate: 360
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        className="absolute border border-white/5 rounded-full"
+        style={{
+          width: "120px",
+          height: "120px",
+          left: "45%",
+          top: "50%",
+          transform: "translate(-50%, -50%)"
+        }}
+      />
+    </div>
+  );
+}
+
+function ThrusterPlumes() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10 mix-blend-color-dodge">
+      {[...Array(2)].map((_, i) => {
+        const isUpper = i === 0;
+        return (
+          <motion.div
+            key={i}
+            animate={{
+              opacity: [0.1, 0.4, 0.15, 0.35, 0.1],
+              scaleY: [0.8, 1.2, 0.9, 1.1, 0.8]
+            }}
+            transition={{
+              duration: 0.15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute bg-gradient-to-t from-sky-400/30 to-transparent blur-[2px]"
+            style={{
+              width: "15px",
+              height: "50px",
+              left: isUpper ? "32%" : "35%",
+              top: isUpper ? "42%" : "55%",
+              transform: `rotate(${isUpper ? 45 : 135}deg)`,
+              transformOrigin: "top center"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function ThermalSpaceDust() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(8)].map((_, i) => {
+        const initialX = Math.random() * 100;
+        const initialY = Math.random() * 100;
+        const duration = 20 + Math.random() * 20;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: `${initialX}vw`,
+              y: `${initialY}vh`,
+              opacity: 0.05,
+              scale: 0.5,
+               }}
+            animate={{
+              y: [`${initialY}vh`, `${initialY - (10 + Math.random() * 10)}vh`],
+              opacity: [0.05, 0.25, 0],
+            }}
+            transition={{
+              duration: duration,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute bg-[#FFB800]/40 rounded-full"
+            style={{
+              width: "2px",
+              height: "2px",
+              boxShadow: "0 0 3px rgba(255,184,0,0.3)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function SubsystemBackgrounds({ activeId }: { activeId: string }) {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none bg-[#030308]">
+      {Object.entries(SUBSYSTEM_BACKGROUNDS).map(([id, bg]) => {
+        const active = id === activeId;
+        
+        let motionAnimate = {};
+        let motionTransition = {};
+        
+        if (id === "bus") {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            rotate: [0, 0.3, 0],
+            x: [0, 2, 0],
+            y: [0, -2, 0]
+          };
+          motionTransition = {
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "payload") {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            x: [0, -3, 0],
+            y: [0, 3, 0]
+          };
+          motionTransition = {
+            duration: 22,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "solar") {
+          motionAnimate = {
+            scale: [1.01, 1.03, 1.01],
+            x: [0, 3, 0],
+            y: [0, -2, 0]
+          };
+          motionTransition = {
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "battery") {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            x: [0, 2, 0],
+            y: [0, 2, 0]
+          };
+          motionTransition = {
+            duration: 28,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "antenna") {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            rotate: [0, 0.2, 0],
+            y: [0, -4, 0]
+          };
+          motionTransition = {
+            duration: 24,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "wheels") {
+          motionAnimate = {
+            scale: [1.01, 1.03, 1.01],
+            x: [0, -2, 0],
+            y: [0, 2, 0]
+          };
+          motionTransition = {
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "propulsion") {
+          motionAnimate = {
+            scale: [1.02, 1.04, 1.02],
+            x: [0, -4, 0],
+            y: [0, 3, 0]
+          };
+          motionTransition = {
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        } else if (id === "thermal") {
+          motionAnimate = {
+            scale: [1.01, 1.03, 1.01],
+            rotate: [0, -0.3, 0.3, 0],
+            x: [0, 3, -3, 0]
+          };
+          motionTransition = {
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut"
+          };
+        }
+
+        return (
+          <motion.div
+            key={id}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: active ? 1 : 0,
+            }}
+            transition={{
+              duration: 1.0,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <motion.div
+              animate={active ? motionAnimate : {}}
+              transition={motionTransition}
+              className="absolute inset-0 w-full h-full"
+            >
+              <img
+                src={bg}
+                alt={`Satellite Part ${id}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </motion.div>
+
+            {active && id === "bus" && <SatelliteBusGlow />}
+            {active && id === "payload" && <PayloadScanLines />}
+            {active && id === "solar" && <SolarArraySunGleam />}
+            {active && id === "battery" && <BatteryPowerFlow />}
+            {active && id === "antenna" && <AntennaPulseBeams />}
+            {active && id === "wheels" && <ReactionWheelSpins />}
+            {active && id === "propulsion" && <ThrusterPlumes />}
+            {active && id === "thermal" && <ThermalSpaceDust />}
+          </motion.div>
+        );
+      })}
+
+      {/* Dark overlay between 70–75% for text contrast */}
+      <div className="absolute inset-0 bg-[#030308]/72 pointer-events-none mix-blend-multiply" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/65 via-transparent to-[#030308]/85 pointer-events-none" />
+    </div>
+  );
+}
+
 function Scene2MeetTheSatellite() {
   const [activeId, setActiveId] = useState("bus");
   const selected = SATELLITE_PARTS.find((p) => p.id === activeId) || SATELLITE_PARTS[0];
+
+  useEffect(() => {
+    const images = Object.values(SUBSYSTEM_BACKGROUNDS);
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <>
-      <SceneHeading sub="02. Spacecraft Anatomy" main="Meet The Satellite" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
-        {/* Interactive buttons */}
-        <div className="lg:col-span-4 flex flex-col gap-1.5 overflow-y-auto max-h-[380px] pr-1">
-          {SATELLITE_PARTS.map((p) => {
-            const active = p.id === activeId;
-            return (
-              <button
-                key={p.id}
-                onClick={() => setActiveId(p.id)}
-                className={`w-full px-4 py-2.5 rounded-xl border text-left font-mono text-xs transition-all cursor-pointer ${
-                  active
-                    ? "bg-[#FFB800]/10 border-[#FFB800] text-[#FFB800] font-bold"
-                    : "bg-[#0a0a14]/70 border-white/5 text-white/60 hover:border-white/20"
-                }`}
-              >
-                {p.name}
-              </button>
-            );
-          })}
-        </div>
+      <SubsystemBackgrounds activeId={activeId} />
 
-        {/* Component explanation */}
-        <div className="lg:col-span-8 bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 flex flex-col justify-between text-left">
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-white leading-tight">{selected.name}</h3>
-              <span className="p-2 rounded-lg bg-[#FFB800]/5 text-[#FFB800]">
-                <Cpu className="w-5 h-5" />
-              </span>
-            </div>
-            <span className="font-mono text-[10px] text-[#FFB800] block mb-4 font-bold">
-              Subsystem Duty: {selected.purpose}
-            </span>
-            <p className="text-xs text-white/70 leading-relaxed">
-              {selected.desc}
-            </p>
+      {/* Content Container (aligned to SLIDE_BASE style) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full h-full flex flex-col items-center justify-center">
+        <SceneHeading sub="02. Spacecraft Anatomy" main="Meet The Satellite" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
+          {/* Interactive buttons */}
+          <div className="lg:col-span-4 flex flex-col gap-1.5 overflow-y-auto max-h-[380px] pr-1">
+            {SATELLITE_PARTS.map((p) => {
+              const active = p.id === activeId;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => setActiveId(p.id)}
+                  className={`w-full px-4 py-2.5 rounded-xl border text-left font-mono text-xs transition-all cursor-pointer ${
+                    active
+                      ? "bg-[#FFB800]/10 border-[#FFB800] text-[#FFB800] font-bold"
+                      : "bg-[#0a0a14]/70 border-white/5 text-white/60 hover:border-white/20"
+                  }`}
+                >
+                  {p.name}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="mt-8 pt-4 border-t border-white/5 flex justify-between font-mono text-[9px] uppercase tracking-widest text-white/40">
-            <span>Primary System:</span>
-            <span className="text-white font-bold">{selected.purpose}</span>
+          {/* Component explanation */}
+          <div className="lg:col-span-8 bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 flex flex-col justify-between text-left">
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-white leading-tight">{selected.name}</h3>
+                <span className="p-2 rounded-lg bg-[#FFB800]/5 text-[#FFB800]">
+                  <Cpu className="w-5 h-5" />
+                </span>
+              </div>
+              <span className="font-mono text-[10px] text-[#FFB800] block mb-4 font-bold">
+                Subsystem Duty: {selected.purpose}
+              </span>
+              <p className="text-xs text-white/70 leading-relaxed">
+                {selected.desc}
+              </p>
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-white/5 flex justify-between font-mono text-[9px] uppercase tracking-widest text-white/40">
+              <span>Primary System:</span>
+              <span className="text-white font-bold">{selected.purpose}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1002,7 +1392,7 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${currentFrameIndex === 0 ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 3].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -1053,7 +1443,7 @@ export default function SatellitesPage() {
 
               <motion.div
                 style={{ opacity: s2Opacity, y: s2Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
