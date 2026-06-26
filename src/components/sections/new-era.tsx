@@ -129,18 +129,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   const finalBackdropOpacity = useTransform(progress, [0.92, 0.94, 0.99, 1.0], [0, 0.75, 0.75, 0]);
   const finalBackdropScale = useTransform(progress, [0.92, 1.0], [1.04, 0.97]);
 
-  // Finale lines stagger
-  const finalAOpacity = useTransform(progress, [0.94, 0.95], [0, 1]);
-  const finalAY = useTransform(progress, [0.94, 0.95], [15, 0]);
-
-  const finalBOpacity = useTransform(progress, [0.95, 0.96], [0, 1]);
-  const finalBY = useTransform(progress, [0.95, 0.96], [15, 0]);
-
-  const finalCOpacity = useTransform(progress, [0.96, 0.97], [0, 1]);
-  const finalCY = useTransform(progress, [0.96, 0.97], [15, 0]);
-
   const finalCtaOpacity = useTransform(progress, [0.97, 0.98], [0, 1]);
-  const finalStatementY = useTransform(progress, [0.92, 0.94, 0.99, 1.0], [20, 0, 0, -20]);
 
   return (
     <div 
@@ -416,49 +405,10 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
           <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-95" />
         </motion.div>
 
-        {/* Climax Statement */}
-        <motion.div
-          style={{ 
-            opacity: reduceMotion ? 1 : scene8Opacity, 
-            y: reduceMotion ? 0 : finalStatementY 
-          }}
-          className="absolute z-10 w-full max-w-5xl px-8 py-16 flex flex-col items-center justify-center text-center pointer-events-none"
-        >
-          <span className="font-mono text-[9px] tracking-[0.4em] text-[#FFB800] uppercase mb-8 opacity-60">
-            The Frontier Opens
-          </span>
-          
-          <h2 
-            className="text-2xl md:text-3xl lg:text-4xl font-light tracking-wide leading-relaxed text-white/90 max-w-4xl"
-            style={{ fontFamily: "Georgia, serif" }}
-          >
-            <motion.span 
-              style={{ opacity: reduceMotion ? 1 : finalAOpacity, y: reduceMotion ? 0 : finalAY }}
-              className="block mb-2"
-            >
-              From one scientist&apos;s vision...
-            </motion.span>
-            <motion.span 
-              style={{ opacity: reduceMotion ? 1 : finalBOpacity, y: reduceMotion ? 0 : finalBY }}
-              className="block mb-2"
-            >
-              To a nation reaching the Moon...
-            </motion.span>
-            <motion.span 
-              style={{ opacity: reduceMotion ? 1 : finalCOpacity, y: reduceMotion ? 0 : finalCY }}
-              className="block"
-            >
-              To a $44 billion opportunity.
-            </motion.span>
-          </h2>
-        </motion.div>
-
-        {/* CTA into the premium Space Economy chapter — sits outside the
-            climax container so it fades in once and stays solid (does not
-            fade away with the cinematic statement). */}
+        {/* CTA into the premium Space Economy chapter */}
         <motion.div
           style={{ opacity: reduceMotion ? 1 : finalCtaOpacity }}
-          className="absolute z-20 bottom-[14vh] left-1/2 -translate-x-1/2 pointer-events-auto"
+          className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
         >
           <Link
             href="/chapters/paradigm-shift"
