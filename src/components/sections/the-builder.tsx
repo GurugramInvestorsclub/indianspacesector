@@ -47,7 +47,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
     if (presentationActive) {
       let p = 0;
       if (currentFrameIndex === 13) {
-        p = 0.15;
+        p = 0.08;
         setActiveIndex(1);
         setAlignmentStatus("ALIGNING...");
       } else if (currentFrameIndex === 14) {
