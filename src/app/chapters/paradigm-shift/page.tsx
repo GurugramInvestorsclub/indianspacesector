@@ -22,8 +22,6 @@ import {
   Flame,
   Building2,
   Landmark,
-  Cpu,
-  GraduationCap,
   Factory,
   TrendingUp,
   Scale,
@@ -375,16 +373,6 @@ function Scene2Ecosystem({
   activePillar: number;
   setActivePillar: (n: number) => void;
 }) {
-  const publicNodes = [
-    { name: "ISRO", sub: "Nodal Space Agency" },
-    { name: "IN-SPACe", sub: "Commercial Authorisation" },
-  ];
-  const privateNodes = [
-    { name: "Component Mfrs", icon: Cpu },
-    { name: "Academia", icon: GraduationCap },
-    { name: "Spacetech Startups", icon: Rocket },
-  ];
-
   return (
     <>
       <SceneHeading
@@ -393,72 +381,20 @@ function Scene2Ecosystem({
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        {/* Org chart */}
-        <div className="lg:col-span-7">
-          <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl p-6 backdrop-blur-md">
-            {/* Root */}
-            <div className="flex justify-center mb-5">
-              <div className="px-5 py-2.5 rounded-lg bg-[#FFB800] text-[#030308] font-mono text-xs font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(255,184,0,0.25)]">
-                The Indian Space Ecosystem
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              {/* Public */}
-              <div className="text-center">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-white/45 block mb-3">
-                  Public Stakeholders
-                </span>
-                <div className="px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white text-[11px] font-bold uppercase mb-3">
-                  Dept. of Space (DoS)
-                </div>
-                <div className="flex flex-col gap-2">
-                  {publicNodes.map((n) => (
-                    <div
-                      key={n.name}
-                      className="px-3 py-2 rounded-lg bg-[#FFB800]/10 border border-[#FFB800]/25 text-left"
-                    >
-                      <span className="text-[#FFB800] text-[11px] font-bold block">
-                        {n.name}
-                      </span>
-                      <span className="text-white/45 text-[8px] font-mono uppercase tracking-wide">
-                        {n.sub}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Private */}
-              <div className="text-center">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-white/45 block mb-3">
-                  Private Stakeholders
-                </span>
-                <div className="px-3 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white text-[11px] font-bold uppercase mb-3">
-                  Industry &amp; Innovators
-                </div>
-                <div className="flex flex-col gap-2">
-                  {privateNodes.map((n) => {
-                    const NIcon = n.icon;
-                    return (
-                      <div
-                        key={n.name}
-                        className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/10 flex items-center gap-2"
-                      >
-                        <NIcon className="w-3.5 h-3.5 text-white/50 shrink-0" />
-                        <span className="text-white/80 text-[11px] font-semibold">
-                          {n.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <p className="text-center text-[8px] text-white/30 font-mono mt-4 uppercase tracking-wider">
-              Figure 1 - Key custodians (Agarwal, 2023)
-            </p>
+        {/* Org chart Image */}
+        <div className="lg:col-span-7 flex flex-col gap-3">
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a14]/60 backdrop-blur-md">
+            <Image
+              src="/indian_space_ecosystem.jpg"
+              alt="The Indian Space Ecosystem Map"
+              fill
+              sizes="(max-w-1024px) 100vw, 700px"
+              className="object-cover object-center select-none"
+            />
           </div>
+          <p className="text-center text-[8px] text-white/30 font-mono uppercase tracking-wider">
+            Figure 1 - Custodians of the Indian Space Ecosystem
+          </p>
         </div>
 
         {/* Pillars */}
