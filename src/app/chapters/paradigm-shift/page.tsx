@@ -286,9 +286,9 @@ function Scene1WhyCritical({
               key={idx}
               initial={false}
               animate={{
-                opacity: isActive ? 0.12 : 0,
+                opacity: isActive ? 0.18 : 0,
                 scale: prefersReducedMotion ? 1 : isActive ? 1.03 : 1.0,
-                filter: prefersReducedMotion ? "blur(0px)" : isActive ? "blur(0px)" : "blur(8px)",
+                filter: prefersReducedMotion ? "blur(0px)" : isActive ? "blur(0px)" : "blur(6px)",
                 x: prefersReducedMotion ? 0 : isActive ? 0 : (idx < active ? -12 : 12),
               }}
               transition={{
@@ -307,13 +307,13 @@ function Scene1WhyCritical({
             </motion.div>
           );
         })}
-        {/* Subtle overlays to blend with the dark theme and keep text highly readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/30 to-[#030308]/90" />
+        {/* Soft overlays to blend with the dark theme and keep text highly readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-transparent to-[#030308]/80" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 70% at center, transparent 30%, #030308 95%)",
+              "radial-gradient(ellipse 80% 70% at center, transparent 40%, #030308 90%)",
           }}
         />
       </div>
