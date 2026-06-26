@@ -1516,21 +1516,31 @@ function Scene13Thesis({ presentationActive = false }: { presentationActive?: bo
       </p>
 
       {!presentationActive && (
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-          <ChapterNavButton
-            href="/chapters/launch-vehicles"
-            label="Back to Rocket Engineering"
-            variant="ghost"
-            direction="back"
-          />
+        <>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
+            <ChapterNavButton
+              href="/chapters/launch-vehicles"
+              label="Back to Rocket Engineering"
+              variant="ghost"
+              direction="back"
+            />
+            <Link
+              href="/"
+              className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Return to Main Deck
+            </Link>
+          </div>
+
           <Link
-            href="/"
-            className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
+            href="/case-studies"
+            className="interactive-control mt-4 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/45 hover:text-[#FFB800] transition-colors relative z-10 cursor-pointer font-bold"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Return to Main Deck
+            Browse Chapter Case Studies
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
-        </div>
+        </>
       )}
     </div>
   );

@@ -11,6 +11,7 @@ const pageLinks = [
   { label: "Value Chain", href: "/chapters/value-chain" },
   { label: "The Rocket", href: "/chapters/launch-vehicles" },
   { label: "Satellites", href: "/chapters/satellites" },
+  { label: "Case Studies", href: "/case-studies" },
 ];
 
 export function Navbar() {
