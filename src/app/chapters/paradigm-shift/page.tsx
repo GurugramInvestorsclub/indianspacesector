@@ -357,11 +357,6 @@ function Scene1WhyCritical({
           </AnimatePresence>
         </div>
       </div>
-
-      <p className="mt-6 text-[10px] md:text-xs text-white/45 font-mono uppercase tracking-wider max-w-3xl text-center">
-        Shift driven by policy liberalization, geopolitical pressure & domestic
-        engineering - public funding gradually replaced by private capital.
-      </p>
     </>
   );
 }
