@@ -122,7 +122,7 @@ const MARKET_BARS = [
 // ---------------------------------------------------------------------------
 // FRAME CONFIG
 // ---------------------------------------------------------------------------
-const TOTAL_FRAMES = 6;
+const TOTAL_FRAMES = 7;
 
 // ---------------------------------------------------------------------------
 // SHARED UI
@@ -451,7 +451,7 @@ function Scene2Ecosystem({
   );
 }
 
-function Scene3FDI() {
+function Scene3FDI({ showPart }: { showPart: "table" | "highlights" }) {
   return (
     <>
       <SceneHeading
@@ -459,10 +459,9 @@ function Scene3FDI() {
         main="Liberalization & the FDI Framework"
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full max-w-5xl z-10">
-        {/* FDI table */}
-        <div className="lg:col-span-7">
-          <div className="bg-[#0a0a14]/90 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md shadow-2xl">
+      {showPart === "table" ? (
+        <div className="flex flex-col items-center w-full max-w-3xl z-10 mx-auto">
+          <div className="bg-[#0a0a14]/90 border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md shadow-2xl w-full">
             <div className="px-5 py-3 border-b border-white/[0.06] flex items-center gap-2">
               <Scale className="w-4 h-4 text-[#FFB800]" />
               <span className="font-mono text-[10px] uppercase tracking-widest text-white/60 font-bold">
@@ -500,37 +499,38 @@ function Scene3FDI() {
               </div>
             ))}
           </div>
-          <p className="text-[10px] text-white/40 font-mono mt-3 leading-relaxed">
+          <p className="text-[10px] text-white/40 font-mono mt-4 leading-relaxed text-center max-w-2xl">
             FDI reforms in 2024 enable increased foreign investment with caps
             tuned per sub-sector - de-risking capital and facilitating
             technology transfer & co-investment.
           </p>
         </div>
-
-        {/* Highlights */}
-        <div className="lg:col-span-5 flex flex-col gap-3">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] font-bold mb-1">
+      ) : (
+        <div className="flex flex-col items-center w-full max-w-5xl z-10 mx-auto">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] font-bold mb-6 text-center">
             2023–2024 Policy Highlights
           </span>
-          {POLICY_HIGHLIGHTS.map((h, i) => (
-            <div
-              key={i}
-              className="flex gap-3 p-4 rounded-xl bg-[#0a0a14]/90 border border-white/5"
-            >
-              <span className="font-mono text-[#FFB800] text-sm font-bold shrink-0">
-                0{i + 1}
-              </span>
-              <p className="text-xs text-white/80 leading-relaxed">{h}</p>
-            </div>
-          ))}
-          <div className="flex items-center gap-3 bg-[#FFB800]/5 border border-[#FFB800]/15 px-4 py-3 rounded-xl">
-            <Building2 className="w-4 h-4 text-[#FFB800] shrink-0" />
-            <span className="text-[11px] font-mono text-[#FFB800] uppercase tracking-wide">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-6">
+            {POLICY_HIGHLIGHTS.map((h, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-3 p-5 rounded-2xl bg-[#0a0a14]/90 border border-white/5 backdrop-blur-md hover:border-white/10 transition-colors text-left"
+              >
+                <span className="font-mono text-[#FFB800] text-sm font-bold">
+                  0{i + 1}
+                </span>
+                <p className="text-xs text-white/80 leading-relaxed">{h}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-3 bg-[#FFB800]/5 border border-[#FFB800]/15 px-6 py-4 rounded-2xl w-full max-w-2xl mx-auto backdrop-blur-md">
+            <Building2 className="w-5 h-5 text-[#FFB800] shrink-0" />
+            <span className="text-xs font-mono text-[#FFB800] uppercase tracking-wide text-center">
               Private players can now run end-to-end space activities.
             </span>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
@@ -720,17 +720,19 @@ export default function ParadigmShiftPage() {
     if (presentationActive) return;
     const unsub = progress.on("change", (v) => {
       const idx =
-        v < 1 / 6
+        v < 1 / 7
           ? 0
-          : v < 2 / 6
+          : v < 2 / 7
           ? 1
-          : v < 3 / 6
+          : v < 3 / 7
           ? 2
-          : v < 4 / 6
+          : v < 4 / 7
           ? 3
-          : v < 5 / 6
+          : v < 5 / 7
           ? 4
-          : 5;
+          : v < 6 / 7
+          ? 5
+          : 6;
       setCurrentFrameIndex(idx);
     });
     return unsub;
@@ -857,23 +859,26 @@ export default function ParadigmShiftPage() {
   };
 
   // ---- scroll transforms ----
-  const heroOpacity = useTransform(progress, [0.0, 0.12, 0.1667], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.1667], [1, 0.96]);
+  const heroOpacity = useTransform(progress, [0.0, 0.10, 0.1429], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.1429], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.13, 0.1667, 0.30, 0.333], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.13, 0.1667, 0.30, 0.333], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.10, 0.1429, 0.25, 0.2857], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.10, 0.1429, 0.25, 0.2857], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.30, 0.333, 0.47, 0.5], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.30, 0.333, 0.47, 0.5], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.25, 0.2857, 0.39, 0.4286], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.25, 0.2857, 0.39, 0.4286], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.47, 0.5, 0.63, 0.667], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.47, 0.5, 0.63, 0.667], [24, 0, 0, -24]);
+  const s3aOpacity = useTransform(progress, [0.39, 0.4286, 0.53, 0.5714], [0, 1, 1, 0]);
+  const s3aY = useTransform(progress, [0.39, 0.4286, 0.53, 0.5714], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.63, 0.667, 0.80, 0.833], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.63, 0.667, 0.80, 0.833], [24, 0, 0, -24]);
+  const s3bOpacity = useTransform(progress, [0.53, 0.5714, 0.67, 0.7143], [0, 1, 1, 0]);
+  const s3bY = useTransform(progress, [0.53, 0.5714, 0.67, 0.7143], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.80, 0.833, 1.0], [0, 1, 1]);
-  const s5Y = useTransform(progress, [0.80, 0.833, 1.0], [24, 0, 0]);
+  const s4Opacity = useTransform(progress, [0.67, 0.7143, 0.81, 0.8571], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.67, 0.7143, 0.81, 0.8571], [24, 0, 0, -24]);
+
+  const s5Opacity = useTransform(progress, [0.81, 0.8571, 1.0], [0, 1, 1]);
+  const s5Y = useTransform(progress, [0.81, 0.8571, 1.0], [24, 0, 0]);
 
   // ---- interaction state ----
   const [activeCatalyst, setActiveCatalyst] = useState(0);
@@ -983,7 +988,7 @@ export default function ParadigmShiftPage() {
       )}
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[600vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[700vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1006,9 +1011,10 @@ export default function ParadigmShiftPage() {
                 {currentFrameIndex === 2 && (
                   <Scene2Ecosystem activePillar={activePillar} setActivePillar={setActivePillar} />
                 )}
-                {currentFrameIndex === 3 && <Scene3FDI />}
-                {currentFrameIndex === 4 && <Scene4Market active={true} />}
-                {currentFrameIndex === 5 && <Scene5Thesis />}
+                {currentFrameIndex === 3 && <Scene3FDI showPart="table" />}
+                {currentFrameIndex === 4 && <Scene3FDI showPart="highlights" />}
+                {currentFrameIndex === 5 && <Scene4Market active={true} />}
+                {currentFrameIndex === 6 && <Scene5Thesis />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1042,19 +1048,28 @@ export default function ParadigmShiftPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: s3Opacity, y: s3Y }}
+                style={{ opacity: s3aOpacity, y: s3aY }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene3FDI />
+                <Scene3FDI showPart="table" />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s3bOpacity, y: s3bY }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <Scene3FDI showPart="highlights" />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-none`}
               >
-                <Scene4Market active={currentFrameIndex === 4} />
+                <Scene4Market active={currentFrameIndex === 5} />
               </motion.div>
 
               <motion.div
