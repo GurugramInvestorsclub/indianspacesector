@@ -345,10 +345,6 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
               <p className="text-lg md:text-xl text-white/70 leading-relaxed font-sans mb-6">
                 Aryabhata proved India could build satellites. The next challenge was harder: India needed its own wings. From a tiny 22-meter solid motor to heavy cryogenic systems, each launch generation solved a new challenge of thrust, staging, and mass.
               </p>
-              <div className="h-[1px] w-24 bg-[#FFB800]/30 mb-6" />
-              <span className="font-mono text-[10px] tracking-widest text-[#FFB800]/60 uppercase">
-                [SCROLL DOWN TO INITIATE LINEUP ANALYSIS]
-              </span>
             </div>
           </div>
         </motion.div>
