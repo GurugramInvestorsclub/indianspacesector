@@ -73,7 +73,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   // -------------------------------------------------------------
   const scene2Opacity = useTransform(progress, [0.23, 0.25, 0.35, 0.38], [0, 1, 1, 0]);
   const barHeight2023 = useTransform(progress, [0.25, 0.31], [0, 10]); // 10% height
-  const barHeight2030 = useTransform(progress, [0.25, 0.31], [0, 90]); // 90% height
+  const barHeight2030 = useTransform(progress, [0.25, 0.31], [0, 55]); // 55% height
 
   // -------------------------------------------------------------
   // Scene 3: The Question ("Why would companies...")
@@ -138,7 +138,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   const line7CY = useTransform(progress, [0.86, 0.88, 0.92, 0.94], [15, 0, 0, -15]);
 
   // -------------------------------------------------------------
-  // Scene 8: The Finale (Vision -> Moon -> $77B -> Climax)
+  // Scene 8: The Finale (Vision -> Moon -> $44B -> Climax)
   // Range: 0.94 -> 1.0 (Ends in complete fade-to-black at 1.0)
   // -------------------------------------------------------------
   const scene8Opacity = useTransform(progress, [0.92, 0.94, 0.99, 1.0], [0, 1, 1, 0]);
@@ -250,11 +250,11 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
 
             {/* 2030 Bar */}
             <div className="flex flex-col items-center justify-end h-full z-10 w-24">
-              <span className="font-mono text-xs text-[#FFB800] mb-3 font-semibold">$77 Billion</span>
+              <span className="font-mono text-xs text-[#FFB800] mb-3 font-semibold">$44 Billion</span>
               <motion.div 
                 className="w-full bg-gradient-to-t from-[#FFB800]/10 to-[#FFB800] border border-[#FFB800]/40 rounded-t-sm shadow-[0_0_40px_rgba(255, 184, 0,0.25)]"
                 style={{ 
-                  height: reduceMotion ? "90%" : useTransform(barHeight2030, (h) => `${h}%`),
+                  height: reduceMotion ? "55%" : useTransform(barHeight2030, (h) => `${h}%`),
                   transformOrigin: "bottom center"
                 }}
               />
@@ -263,7 +263,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
           </div>
 
           <p className="text-sm md:text-base text-white/60 leading-relaxed font-sans text-center max-w-lg">
-            India&apos;s space economy is emerging right now, projected to expand to approximately <strong>$77 billion</strong>. The opportunity is no longer theoretical; it is unfolding.
+            India&apos;s space economy is emerging right now, projected to expand to approximately <strong>$44 billion</strong>. The opportunity is no longer theoretical; it is unfolding.
           </p>
         </motion.div>
 
@@ -585,7 +585,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
               style={{ opacity: reduceMotion ? 1 : finalCOpacity, y: reduceMotion ? 0 : finalCY }}
               className="block"
             >
-              To a $77 billion opportunity.
+              To a $44 billion opportunity.
             </motion.span>
           </h2>
 

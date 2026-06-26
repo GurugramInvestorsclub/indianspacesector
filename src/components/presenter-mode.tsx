@@ -103,7 +103,7 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
   10: {
     title: "Chapter 10: The Opportunity",
     notes: [
-      "CLOSING CALL: India's space economy is scaling from $8B to $40B+ by 2040.",
+      "CLOSING CALL: India's space economy is scaling from $8B to $44B+ by 2040.",
       "SUMMARY: The stack is integrated. Private capital, government support, and cost-advantages are aligned.",
       "FINAL STATEMENT: 'India's Space Revolution Has Only Just Begun.' Invite questions."
     ]

@@ -146,7 +146,7 @@ const PRESENTATION_SCENES: PresentationScene[] = [
   { id: "sun", name: "Solar Observation: Aditya L-1", label: "30 / 40", startFrame: 29, endFrame: 29 },
   { id: "commercial-ascent", name: "Decades of Growth", label: "31 / 40", startFrame: 30, endFrame: 30 },
   { id: "privatization", name: "Sector Privatization Influx", label: "32 / 40", startFrame: 31, endFrame: 31 },
-  { id: "market-growth", name: "Opportunity Scaling to $40B", label: "33 / 40", startFrame: 32, endFrame: 32 },
+  { id: "market-growth", name: "Opportunity Scaling to $44B", label: "33 / 40", startFrame: 32, endFrame: 32 },
   { id: "why-launch", name: "Why Do Companies Launch?", label: "34 / 40", startFrame: 33, endFrame: 33 },
   { id: "constellations", name: "Global Constellation Demand", label: "35 / 40", startFrame: 34, endFrame: 34 },
   { id: "jio-proof", name: "Broadband Proof: Jio", label: "36 / 40", startFrame: 35, endFrame: 35 },
