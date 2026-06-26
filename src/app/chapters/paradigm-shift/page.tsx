@@ -33,7 +33,7 @@ import {
 // DATA
 // ---------------------------------------------------------------------------
 
-// Scene 1 — Why space is becoming critical
+// Scene 1 - Why space is becoming critical
 const CATALYSTS = [
   {
     id: 0,
@@ -41,10 +41,10 @@ const CATALYSTS = [
     label: "The SpaceX Wake-Up Call",
     stat: "$469M",
     statLabel: "earned launching foreign satellites",
-    headline: "ISRO ran launches at a fraction of global cost — then SpaceX ate our lunch.",
+    headline: "ISRO ran launches at a fraction of global cost - then SpaceX ate our lunch.",
     points: [
       "SpaceX's cost-per-kg undercut even ISRO's famously cheap launches.",
-      "ISRO became the bottleneck — historically the sole architect and executor of every mission.",
+      "ISRO became the bottleneck - historically the sole architect and executor of every mission.",
       "Private sector was limited to component fabrication under state-owned designs.",
     ],
   },
@@ -70,19 +70,19 @@ const CATALYSTS = [
     headline: "Incumbents that refuse to disrupt themselves get disrupted.",
     points: [
       "Steel and pharma (the GLP-1 wave) show how fast a dominant player can be overtaken.",
-      "ISRO must cede commercial ground to private players — or fall behind globally.",
+      "ISRO must cede commercial ground to private players - or fall behind globally.",
       "Public funding is gradually being replaced by private capital.",
     ],
   },
 ];
 
-// Scene 2 — Institutional pillars
+// Scene 2 - Institutional pillars
 const PILLARS = [
   {
     id: 0,
     name: "ISRO",
     role: "Indian Space Research Organisation",
-    desc: "Refocusing on advanced R&D and technology transfer — stepping back from being the sole operator.",
+    desc: "Refocusing on advanced R&D and technology transfer - stepping back from being the sole operator.",
     icon: Rocket,
   },
   {
@@ -201,7 +201,7 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
       </div>
 
       <div className="relative z-10 max-w-4xl flex flex-col items-center text-center">
-        <SceneLabel>Chapter XI &mdash; Tactical Briefing</SceneLabel>
+        <SceneLabel>Chapter XI - Tactical Briefing</SceneLabel>
 
         <h1
           className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6"
@@ -213,7 +213,7 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
         </h1>
 
         <p className="text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed mb-10 font-light">
-          India&apos;s space sector is being rebuilt — from a single
+          India&apos;s space sector is being rebuilt - from a single
           state-run architect into an open platform powered by private
           capital, liberalized policy, and strategic necessity.
         </p>
@@ -362,7 +362,7 @@ function Scene1WhyCritical({
 
       <p className="mt-6 text-[10px] md:text-xs text-white/45 font-mono uppercase tracking-wider max-w-3xl text-center">
         Shift driven by policy liberalization, geopolitical pressure & domestic
-        engineering — public funding gradually replaced by private capital.
+        engineering - public funding gradually replaced by private capital.
       </p>
     </>
   );
@@ -456,7 +456,7 @@ function Scene2Ecosystem({
               </div>
             </div>
             <p className="text-center text-[8px] text-white/30 font-mono mt-4 uppercase tracking-wider">
-              Figure 1 — Key custodians (Agarwal, 2023)
+              Figure 1 - Key custodians (Agarwal, 2023)
             </p>
           </div>
         </div>
@@ -566,7 +566,7 @@ function Scene3FDI() {
           </div>
           <p className="text-[10px] text-white/40 font-mono mt-3 leading-relaxed">
             FDI reforms in 2024 enable increased foreign investment with caps
-            tuned per sub-sector — de-risking capital and facilitating
+            tuned per sub-sector - de-risking capital and facilitating
             technology transfer & co-investment.
           </p>
         </div>
@@ -649,7 +649,7 @@ function Scene4Market({ active }: { active: boolean }) {
             </div>
           </div>
           <p className="text-[9px] text-white/30 font-mono mt-3 uppercase tracking-widest text-center">
-            Expenditure on space industry by GoI &mdash; valuation trajectory
+            Expenditure on space industry by GoI - valuation trajectory
           </p>
         </div>
 
@@ -668,7 +668,7 @@ function Scene4Market({ active }: { active: boolean }) {
               <span className="text-4xl font-black text-[#FFB800]">50</span>
             </div>
             <p className="text-[11px] text-white/55 font-mono uppercase tracking-wide mt-2">
-              launches per year &mdash; targeted by 2033
+              launches per year - targeted by 2033
             </p>
           </div>
 
@@ -676,7 +676,7 @@ function Scene4Market({ active }: { active: boolean }) {
             From <strong className="text-white">$8.4B</strong> in 2022 (~2–3% of
             the global space economy) to a projected{" "}
             <strong className="text-white">$44B by 2033</strong> and a long-term{" "}
-            <strong className="text-[#FFB800]">$100B by 2040</strong> — roughly
+            <strong className="text-[#FFB800]">$100B by 2040</strong> - roughly
             10% of the world market.
           </p>
 
@@ -722,7 +722,7 @@ function Scene5Thesis() {
       <p className="text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed mb-12 font-light relative z-10">
         Liberalized policy, geopolitical urgency, and a maturing private
         engineering base are converging. India&apos;s space economy is being
-        re-architected for private capital — and the window is open now.
+        re-architected for private capital - and the window is open now.
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">

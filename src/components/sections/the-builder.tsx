@@ -334,10 +334,10 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
           {/* Header context */}
           <div className="text-center mb-8">
             <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-2 block">
-              SECTION 3 — &ldquo;THE BUILDER&rdquo;
+              SECTION 3 - &ldquo;THE BUILDER&rdquo;
             </span>
             <p className="text-xs font-mono tracking-widest text-white/35 uppercase">
-              1971 — The Shift
+              1971 - The Shift
             </p>
           </div>
 
@@ -504,7 +504,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
             <div className="text-left flex flex-col gap-6">
               <div>
                 <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-2 block">
-                  Scene II — Enter The Architect of Scale
+                  Scene II - Enter The Architect of Scale
                 </span>
                 <h3 
                   className="text-3xl md:text-4xl font-extralight tracking-tight text-white mb-2"
@@ -547,7 +547,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
           {/* Header context */}
           <div className="text-center">
             <span className="font-mono text-[9px] tracking-[0.3em] text-[#FFB800] uppercase mb-2 block">
-              Scene III — The Directive
+              Scene III - The Directive
             </span>
             <p className="text-xs font-mono tracking-widest text-white/35 uppercase">
               Launch Vehicle Program Initialization
@@ -703,7 +703,7 @@ export function TheBuilder({ presentationActive = false, currentFrameIndex = 0 }
             </div>
             <div className="border-l border-white/10 pl-6">
               <p className="text-xs font-mono text-white/55 leading-relaxed">
-                In the early 1970s, India built satellites like Aryabhata but had to wait for Soviet launcher slots. Dhawan recognized that to be a true spacefaring nation, self-reliance in rocketry was not an option—it was a strategic necessity.
+                In the early 1970s, India built satellites like Aryabhata but had to wait for Soviet launcher slots. Dhawan recognized that to be a true spacefaring nation, self-reliance in rocketry was not an option - it was a strategic necessity.
               </p>
             </div>
           </div>

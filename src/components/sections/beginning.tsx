@@ -788,7 +788,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
                   />
                 </div>
                 <div className="font-mono text-[7px] md:text-[9px] tracking-wider text-white/50 flex justify-between items-center">
-                  <span className="text-[#FFB800] font-bold">1963 — BICYCLE TRANSIT</span>
+                  <span className="text-[#FFB800] font-bold">1963 - BICYCLE TRANSIT</span>
                   <span className="text-white/40">THUMBA</span>
                 </div>
                 <p className="text-[7px] md:text-[9px] font-mono text-white/40 leading-relaxed">
@@ -813,7 +813,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
                   />
                 </div>
                 <div className="font-mono text-[7px] md:text-[9px] tracking-wider text-white/50 flex justify-between items-center">
-                  <span className="text-[#FFB800] font-bold">1981 — BULLOCK CART</span>
+                  <span className="text-[#FFB800] font-bold">1981 - BULLOCK CART</span>
                   <span className="text-white/40">APPLE</span>
                 </div>
                 <p className="text-[7px] md:text-[9px] font-mono text-white/40 leading-relaxed">
@@ -826,7 +826,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
           {/* Right Column: Text and timeline */}
           <div className="w-full md:w-1/2 md:max-w-md flex flex-col gap-6 text-left justify-center mt-6 md:mt-0">
             <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase">
-              1962 — The Foundation
+              1962 - The Foundation
             </span>
             <h3 className="text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
               Indian National Committee for Space Research
@@ -860,7 +860,7 @@ export function Beginning({ presentationActive = false, currentFrameIndex = 0 }:
           {/* Header context */}
           <div className="text-center">
             <span className="font-mono text-[10px] tracking-[0.25em] text-[#FFB800] uppercase mb-2 block">
-              Scene V — Thumba Coastline
+              Scene V - Thumba Coastline
             </span>
             <h4 className="text-sm font-mono tracking-widest text-white/30 uppercase">
               November 21, 1963

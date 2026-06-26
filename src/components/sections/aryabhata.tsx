@@ -131,7 +131,7 @@ export function Aryabhata({ presentationActive = false, currentFrameIndex = 0 }:
               Aryabhata
             </h3>
             <p className="text-base md:text-lg text-white/80 leading-relaxed font-sans mb-6">
-              India had built and launched its first satellite. The dream of establishing a space program was no longer a theory—it was a tangible reality. The nation had taken its first bold step into the cosmos, demonstrating that self-reliance was achievable.
+              India had built and launched its first satellite. The dream of establishing a space program was no longer a theory - it was a tangible reality. The nation had taken its first bold step into the cosmos, demonstrating that self-reliance was achievable.
             </p>
             <div className="font-mono text-[9px] tracking-[0.2em] text-[#FF6B00] uppercase">
               Orbital Insertion Confirmed

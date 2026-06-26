@@ -42,7 +42,7 @@ const SATELLITE_PARTS = [
   {
     id: "bus",
     name: "Satellite Bus",
-    desc: "The structural chassis. It houses all housekeeping systems—power, guidance, thermal control—keeping the spacecraft alive in the harsh space environment.",
+    desc: "The structural chassis. It houses all housekeeping systems - power, guidance, thermal control - keeping the spacecraft alive in the harsh space environment.",
     purpose: "Spacecraft survival skeleton",
   },
   {

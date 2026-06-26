@@ -34,7 +34,7 @@ const SPEAKER_NOTES: Record<number, SpeakerNote> = {
     notes: [
       "HOOK: India's space journey did not begin with Chandrayaan or PSLV. It began with a vision in 1957 after Sputnik shocked the world.",
       "THE GLOBAL RACE: Sputnik 1 marked the dawn of the Space Age. While superpowers saw military prestige, Vikram Sarabhai saw developmental potential.",
-      "THE VISIONARY: Dr. Vikram Sarabhai believed space technology could solve India's greatest developmental challenges—communication, education, and weather forecasting.",
+      "THE VISIONARY: Dr. Vikram Sarabhai believed space technology could solve India's greatest developmental challenges - communication, education, and weather forecasting.",
       "INCOSPAR (1962): Sarabhai and Homi J. Bhabha established the Indian National Committee for Space Research, the foundation stone of India's space program.",
       "THUMBA (1963): Launched the first sounding rocket from Thumba, Kerala, near the magnetic equator. A tiny church and fishing village sparked a revolution."
     ]

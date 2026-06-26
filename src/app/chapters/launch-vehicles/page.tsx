@@ -354,7 +354,7 @@ function Scene2OrbitalVelocity() {
           </span>
           <h3 className="text-xl font-bold text-white mb-4">Speed vs Altitude</h3>
           <p className="text-sm text-white/70 leading-relaxed mb-6">
-            Getting to space (100km) requires minimal effort. Remaining in space is the true challenge. To keep from falling back, a rocket must travel sideways so fast—**7.8 km/s (28,000 km/h)**—that its curve of falling matches the curve of the Earth.
+            Getting to space (100km) requires minimal effort. Remaining in space is the true challenge. To keep from falling back, a rocket must travel sideways so fast - **7.8 km/s (28,000 km/h)** - that its curve of falling matches the curve of the Earth.
           </p>
           <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
             <span className="text-[#FFB800] font-bold block mb-1">The Problem:</span>
@@ -667,25 +667,25 @@ function Scene7PSLVCaseStudy() {
   const [activeStage, setActiveStage] = useState(3);
   const stages = [
     {
-      name: "PS1 — First Stage (Solid)",
+      name: "PS1 - First Stage (Solid)",
       prop: "HTPB (Hydroxyl-terminated polybutadiene)",
       desc: "Massive solid boosters providing raw thrust of 4,800 kN to punch through the thickest atmosphere at launch. Supported by 6 strap-on solid boosters.",
       purpose: "Liftoff & initial push",
     },
     {
-      name: "PS2 — Second Stage (Liquid)",
+      name: "PS2 - Second Stage (Liquid)",
       prop: "UH25 + N2O4 (Vikas Engine)",
       desc: "Uses the liquid Vikas engine, providing active steering and stable, throttlable acceleration above the thick atmospheric barrier.",
       purpose: "Main ascent & trajectory control",
     },
     {
-      name: "PS3 — Third Stage (Solid)",
+      name: "PS3 - Third Stage (Solid)",
       prop: "HTPB Solid Motor",
       desc: "A solid stage that provides high thrust in the upper atmosphere. Simplifies staging operations without needing low-pressure turbopumps in vacuum.",
       purpose: "Upper atmospheric acceleration",
     },
     {
-      name: "PS4 — Fourth Stage (Liquid)",
+      name: "PS4 - Fourth Stage (Liquid)",
       prop: "MMH + MON-3",
       desc: "Dual liquid engine stage capable of multiple restarts in vacuum, executing precise delta-v burns for complex, multi-satellite injections.",
       purpose: "Precision orbital placement",
@@ -1303,7 +1303,7 @@ function Scene12Climax() {
       </div>
 
       <p className="text-sm text-white/70 max-w-3xl leading-relaxed mb-10 font-light relative z-10 text-center">
-        The history of rocketry isn&apos;t a story of building larger rockets. It is the story of engineers solving one impossible physical limitation after another. Every breakthrough—from staging to cryogenic engines to reusable boosters—exists because the previous generation reached its limits.
+        The history of rocketry isn&apos;t a story of building larger rockets. It is the story of engineers solving one impossible physical limitation after another. Every breakthrough - from staging to cryogenic engines to reusable boosters - exists because the previous generation reached its limits.
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
