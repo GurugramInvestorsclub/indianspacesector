@@ -593,12 +593,6 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
           );
         })}
 
-        {/* Bottom Section: Technical Footnote & Pacing Ticker */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex items-center justify-between border-t border-white/5 pt-6 text-white/40 font-mono text-[9px] tracking-[0.25em] uppercase">
-          <span>Telemetry Evolution Grid</span>
-          <span>Scroll to advance launch lineup ↓</span>
-          <span>Sovereign Access</span>
-        </div>
 
       </div>
     </div>

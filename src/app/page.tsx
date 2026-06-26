@@ -590,21 +590,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Bottom Center Presentation Help Hint overlay */}
-      {presentationActive && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none select-none animate-fade-in hidden md:block">
-          <div className="bg-[#050512]/90 backdrop-blur-md border border-[#FFB800]/20 px-5 py-2.5 rounded-full flex items-center gap-4 text-[9px] font-mono tracking-widest text-white/50 uppercase shadow-lg shadow-black/40">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse"></span>
-            <span>Left-Click: Next Frame</span>
-            <span className="opacity-30">|</span>
-            <span>Right-Click: Prev Frame</span>
-            <span className="opacity-30">|</span>
-            <span>Arrow Keys: Navigate</span>
-            <span className="opacity-30">|</span>
-            <span>Press <kbd className="bg-white/10 px-1.5 py-0.5 rounded border border-white/20 text-white text-[8px] font-bold">P</kbd> for HUD</span>
-          </div>
-        </div>
-      )}
 
       {/* Presenter Mode Speaker Notes Console Overlay */}
       <div className="presenter-hud-container">

@@ -762,6 +762,58 @@ export function OrbitsIllustration({ active }: OrbitsIllustrationProps) {
         {/* ================================================================= */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-40">
           
+          {/* ORBITAL PARAMETERS HUD TABLE - TOP LEFT */}
+          <div 
+            className="absolute left-6 md:left-10 top-24 z-40 bg-[#090912]/85 border border-white/10 backdrop-blur-md p-4 rounded-xl shadow-2xl min-w-[280px] font-mono text-[9px] select-none hidden lg:block pointer-events-auto"
+          >
+            <div className="flex items-center gap-2 mb-3 pb-1.5 border-b border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse"></span>
+              <span className="text-[8px] text-white/45 tracking-[0.2em] uppercase font-bold">
+                Orbital Telemetry Database
+              </span>
+            </div>
+            
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="text-white/30 uppercase text-[7.5px] tracking-wider border-b border-white/5">
+                  <th className="py-1.5 font-normal">Orbit</th>
+                  <th className="py-1.5 font-normal">Altitude</th>
+                  <th className="py-1.5 font-normal">Velocity</th>
+                  <th className="py-1.5 font-normal">Period</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-white/80">
+                {/* LEO Row */}
+                <tr>
+                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#00d2ff]">
+                    <span className="w-1 h-1 rounded-full bg-[#00d2ff]"></span> LEO
+                  </td>
+                  <td className="py-2">160 – 2,000 km</td>
+                  <td className="py-2">~7.8 km/s</td>
+                  <td className="py-2">~90 min</td>
+                </tr>
+                {/* Polar SSO Row */}
+                <tr>
+                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#ffb800]">
+                    <span className="w-1 h-1 rounded-full bg-[#ffb800]"></span> SSO
+                  </td>
+                  <td className="py-2">600 – 1,000 km</td>
+                  <td className="py-2">~7.5 km/s</td>
+                  <td className="py-2">~98 min</td>
+                </tr>
+                {/* GEO Row */}
+                <tr>
+                  <td className="py-2 flex items-center gap-1.5 font-bold text-[#ff6b00]">
+                    <span className="w-1 h-1 rounded-full bg-[#ff6b00]"></span> GEO
+                  </td>
+                  <td className="py-2">~35,786 km (36k)</td>
+                  <td className="py-2">~3.07 km/s</td>
+                  <td className="py-2">24 hrs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
           {/* LOW EARTH ORBIT (LEO) - LEFT */}
           <div 
             className="absolute flex items-center gap-3.5"
