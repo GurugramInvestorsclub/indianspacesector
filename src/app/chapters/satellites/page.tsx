@@ -1486,7 +1486,7 @@ function Scene12IndianEcosystem() {
 }
 
 // 14. THESIS
-function Scene13Thesis() {
+function Scene13Thesis({ presentationActive = false }: { presentationActive?: boolean }) {
   return (
     <div className="max-w-4xl flex flex-col items-center text-center px-4 z-10">
       <div
@@ -1499,31 +1499,39 @@ function Scene13Thesis() {
       <SceneLabel>13. Satellite Thesis</SceneLabel>
       
       <h2
-        className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-wide leading-tight text-white max-w-3xl mb-8 relative z-10"
+        className={`font-light tracking-wide leading-tight text-white max-w-3xl relative z-10 ${
+          presentationActive
+            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
+            : "mb-8 text-3xl sm:text-4xl lg:text-5xl"
+        }`}
         style={{ fontFamily: "Georgia, serif" }}
       >
         A Satellite Doesn&apos;t Just Observe Earth. It Learns To Measure It.
       </h2>
 
-      <p className="text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed mb-12 font-light relative z-10">
+      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      }`}>
         Every satellite is a carefully engineered balance of power, precision, communication, guidance and sensing. The mission determines the signal, the signal determines the payload, and the payload determines how humanity understands our planet.
       </p>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-        <ChapterNavButton
-          href="/chapters/launch-vehicles"
-          label="Back to Rocket Engineering"
-          variant="ghost"
-          direction="back"
-        />
-        <Link
-          href="/"
-          className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Return to Main Deck
-        </Link>
-      </div>
+      {!presentationActive && (
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
+          <ChapterNavButton
+            href="/chapters/launch-vehicles"
+            label="Back to Rocket Engineering"
+            variant="ghost"
+            direction="back"
+          />
+          <Link
+            href="/"
+            className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Return to Main Deck
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
@@ -1618,7 +1626,7 @@ export default function SatellitesPage() {
                 {currentFrameIndex === 11 && <Scene10NISAR />}
                 {currentFrameIndex === 12 && <Scene11InsideRadarPayload />}
                 {currentFrameIndex === 13 && <Scene12IndianEcosystem />}
-                {currentFrameIndex === 14 && <Scene13Thesis />}
+                {currentFrameIndex === 14 && <Scene13Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1756,7 +1764,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene13Thesis />
+                <Scene13Thesis presentationActive={false} />
               </motion.div>
             </>
           )}

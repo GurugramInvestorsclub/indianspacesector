@@ -692,7 +692,7 @@ function Scene4Market({ active }: { active: boolean }) {
   );
 }
 
-function Scene5Thesis() {
+function Scene5Thesis({ presentationActive = false }: { presentationActive?: boolean }) {
   return (
     <div className="max-w-4xl flex flex-col items-center text-center px-4">
       <div
@@ -706,7 +706,11 @@ function Scene5Thesis() {
       <SceneLabel>The Thesis</SceneLabel>
 
       <h2
-        className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide leading-relaxed text-white max-w-3xl mb-10 relative z-10"
+        className={`font-light tracking-wide text-white max-w-3xl relative z-10 ${
+          presentationActive
+            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl leading-tight"
+            : "mb-10 text-3xl sm:text-5xl lg:text-6xl leading-relaxed"
+        }`}
       >
         <span className="block mb-1 text-white/65">From sole architect</span>
         <span className="block mb-2 text-white font-semibold">
@@ -717,34 +721,40 @@ function Scene5Thesis() {
         </span>
       </h2>
 
-      <p className="text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed mb-12 font-light relative z-10">
+      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      }`}>
         Liberalized policy, geopolitical urgency, and a maturing private
         engineering base are converging. India&apos;s space economy is being
         re-architected for private capital - and the window is open now.
       </p>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-        <ChapterNavButton
-          href="/"
-          label="Return to Main Deck"
-          variant="ghost"
-          direction="back"
-        />
-        <ChapterNavButton
-          href="/chapters/value-chain"
-          label="Continue. The Value Chain"
-          variant="primary"
-          direction="forward"
-        />
-      </div>
+      {!presentationActive && (
+        <>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
+            <ChapterNavButton
+              href="/"
+              label="Return to Main Deck"
+              variant="ghost"
+              direction="back"
+            />
+            <ChapterNavButton
+              href="/chapters/value-chain"
+              label="Continue. The Value Chain"
+              variant="primary"
+              direction="forward"
+            />
+          </div>
 
-      <Link
-        href="/chapters/launch-systems"
-        className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
-      >
-        Browse Chapter Case Studies
-        <ArrowRight className="w-3.5 h-3.5" />
-      </Link>
+          <Link
+            href="/chapters/launch-systems"
+            className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
+          >
+            Browse Chapter Case Studies
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </>
+      )}
     </div>
   );
 }
@@ -1146,7 +1156,7 @@ export default function ParadigmShiftPage() {
                 {currentFrameIndex === 3 && <Scene3FDI showPart="table" />}
                 {currentFrameIndex === 4 && <Scene3FDI showPart="highlights" />}
                 {currentFrameIndex === 5 && <Scene4Market active={true} />}
-                {currentFrameIndex === 6 && <Scene5Thesis />}
+                {currentFrameIndex === 6 && <Scene5Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1208,7 +1218,7 @@ export default function ParadigmShiftPage() {
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
-                <Scene5Thesis />
+                <Scene5Thesis presentationActive={false} />
               </motion.div>
             </>
           )}

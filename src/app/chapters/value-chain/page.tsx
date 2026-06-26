@@ -619,7 +619,7 @@ function Scene5India() {
   );
 }
 
-function Scene6Thesis() {
+function Scene6Thesis({ presentationActive = false }: { presentationActive?: boolean }) {
   return (
     <div className="max-w-4xl flex flex-col items-center text-center px-4">
       <div
@@ -633,7 +633,11 @@ function Scene6Thesis() {
       <SceneLabel>The Thesis</SceneLabel>
 
       <h2
-        className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide leading-relaxed text-white max-w-3xl mb-10 relative z-10"
+        className={`text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide text-white max-w-3xl relative z-10 ${
+          presentationActive
+            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl leading-tight"
+            : "mb-10 leading-relaxed"
+        }`}
         style={{ fontFamily: "Georgia, serif" }}
       >
         <span className="block mb-1 text-white/65">Revenue lives downstream.</span>
@@ -641,35 +645,41 @@ function Scene6Thesis() {
         <span className="block text-[#FFB800] font-bold">Lower the toll, multiply the traffic.</span>
       </h2>
 
-      <p className="text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed mb-12 font-light relative z-10">
+      <p className={`text-sm sm:text-base text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
+        presentationActive ? "mb-4 text-xs sm:text-sm" : "mb-12"
+      }`}>
         If the ground segment is the prize, then the lever that unlocks it is
         the cost of reaching orbit. Cheaper launch does not just grow the launch
         line. It multiplies everything downstream. That is why the next chapter
         goes back to the rocket.
       </p>
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-        <ChapterNavButton
-          href="/chapters/paradigm-shift"
-          label="Back to Paradigm Shift"
-          variant="ghost"
-          direction="back"
-        />
-        <ChapterNavButton
-          href="/chapters/launch-vehicles"
-          label="Continue. The Rocket"
-          variant="primary"
-          direction="forward"
-        />
-      </div>
+      {!presentationActive && (
+        <>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
+            <ChapterNavButton
+              href="/chapters/paradigm-shift"
+              label="Back to Paradigm Shift"
+              variant="ghost"
+              direction="back"
+            />
+            <ChapterNavButton
+              href="/chapters/launch-vehicles"
+              label="Continue. The Rocket"
+              variant="primary"
+              direction="forward"
+            />
+          </div>
 
-      <Link
-        href="/"
-        className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
-      >
-        <ArrowLeft className="w-3.5 h-3.5" />
-        Return to Main Deck
-      </Link>
+          <Link
+            href="/"
+            className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Return to Main Deck
+          </Link>
+        </>
+      )}
     </div>
   );
 }
@@ -736,7 +746,7 @@ export default function ValueChainPage() {
                 {currentFrameIndex === 3 && <Scene3Revenue active={true} />}
                 {currentFrameIndex === 4 && <Scene4Structure />}
                 {currentFrameIndex === 5 && <Scene5India />}
-                {currentFrameIndex === 6 && <Scene6Thesis />}
+                {currentFrameIndex === 6 && <Scene6Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -792,7 +802,7 @@ export default function ValueChainPage() {
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
-                <Scene6Thesis />
+                <Scene6Thesis presentationActive={false} />
               </motion.div>
             </>
           )}
