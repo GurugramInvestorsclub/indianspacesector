@@ -504,16 +504,16 @@ function Scene5Chemistry() {
         <img
           src="/propellants_bg.jpg"
           alt="Propellants Background"
-          className="w-full h-full object-cover object-center opacity-25"
+          className="w-full h-full object-cover object-center opacity-50"
         />
         {/* Subtle dark vignette to fit the luxury cinematic styling */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-transparent to-[#030308]/90"
+          className="absolute inset-0 bg-gradient-to-b from-[#030308]/40 via-transparent to-[#030308]/80"
         />
         <div
           className="absolute inset-0 bg-radial-gradient"
           style={{
-            background: "radial-gradient(circle at center, transparent 20%, #030308 90%)"
+            background: "radial-gradient(circle at center, transparent 30%, #030308 85%)"
           }}
         />
       </div>
