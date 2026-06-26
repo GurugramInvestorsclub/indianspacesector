@@ -34,6 +34,25 @@ import {
 // ---------------------------------------------------------------------------
 
 const TOTAL_FRAMES = 15;
+
+const SATELLITES_SCENES = [
+  { id: "splash", name: "Splash Cover", label: "01 / 15", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Satellite Platforms", label: "02 / 15", startFrame: 1, endFrame: 1 },
+  { id: "what-is", name: "What is a Satellite?", label: "03 / 15", startFrame: 2, endFrame: 2 },
+  { id: "components", name: "Components & Architecture", label: "04 / 15", startFrame: 3, endFrame: 3 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "05 / 15", startFrame: 4, endFrame: 4 },
+  { id: "orbit", name: "First Principle of Orbit", label: "06 / 15", startFrame: 5, endFrame: 5 },
+  { id: "sensors", name: "Family of Sensors", label: "07 / 15", startFrame: 6, endFrame: 6 },
+  { id: "owl-bat", name: "The Owl and the Bat", label: "08 / 15", startFrame: 7, endFrame: 7 },
+  { id: "radar-work", name: "How Radar Works", label: "09 / 15", startFrame: 8, endFrame: 8 },
+  { id: "sar", name: "Synthetic Aperture Radar", label: "10 / 15", startFrame: 9, endFrame: 9 },
+  { id: "mission-config", name: "Mission Config", label: "11 / 15", startFrame: 10, endFrame: 10 },
+  { id: "nisar", name: "NISAR Mission", label: "12 / 15", startFrame: 11, endFrame: 11 },
+  { id: "payload", name: "Inside Radar Payload", label: "13 / 15", startFrame: 12, endFrame: 12 },
+  { id: "ecosystem", name: "Indian Ecosystem", label: "14 / 15", startFrame: 13, endFrame: 13 },
+  { id: "thesis", name: "The Thesis", label: "15 / 15", startFrame: 14, endFrame: 14 },
+];
+
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
 
@@ -1566,7 +1585,7 @@ export default function SatellitesPage() {
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
       <Navbar />
-      <PresentationChrome controller={p} />
+      <PresentationChrome controller={p} scenes={SATELLITES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
       <div ref={containerRef} className="relative w-full h-[1500vh] bg-[#030308]">

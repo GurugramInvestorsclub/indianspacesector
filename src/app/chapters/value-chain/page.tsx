@@ -94,6 +94,16 @@ const LAYERS = [
 
 const TOTAL_FRAMES = 7;
 
+const VALUE_CHAIN_SCENES = [
+  { id: "hero", name: "Space Economy Value Chain", label: "01 / 07", startFrame: 0, endFrame: 0 },
+  { id: "reframe", name: "Reframe", label: "02 / 07", startFrame: 1, endFrame: 1 },
+  { id: "stack", name: "Value Chain Stack", label: "03 / 07", startFrame: 2, endFrame: 2 },
+  { id: "revenue", name: "Revenue Structure", label: "04 / 07", startFrame: 3, endFrame: 3 },
+  { id: "structure", name: "Ecosystem Structure", label: "05 / 07", startFrame: 4, endFrame: 4 },
+  { id: "india", name: "India Opportunity", label: "06 / 07", startFrame: 5, endFrame: 5 },
+  { id: "thesis", name: "The Thesis", label: "07 / 07", startFrame: 6, endFrame: 6 },
+];
+
 // ---------------------------------------------------------------------------
 // SHARED UI
 // ---------------------------------------------------------------------------
@@ -699,7 +709,7 @@ export default function ValueChainPage() {
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
       <Navbar />
-      <PresentationChrome controller={p} />
+      <PresentationChrome controller={p} scenes={VALUE_CHAIN_SCENES} />
 
       {/* Scroll track + sticky viewport */}
       <div ref={containerRef} className="relative w-full h-[700vh] bg-[#030308]">

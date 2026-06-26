@@ -30,6 +30,23 @@ import {
 // ---------------------------------------------------------------------------
 
 const TOTAL_FRAMES = 14;
+
+const LAUNCH_VEHICLES_SCENES = [
+  { id: "splash", name: "Splash Cover", label: "01 / 14", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Rocketry Evolution", label: "02 / 14", startFrame: 1, endFrame: 1 },
+  { id: "sounding", name: "Action & Reaction", label: "03 / 14", startFrame: 2, endFrame: 2 },
+  { id: "orbital-velocity", name: "The Orbital Boundary", label: "04 / 14", startFrame: 3, endFrame: 3 },
+  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "05 / 14", startFrame: 4, endFrame: 4 },
+  { id: "staging", name: "Multi-Stage Efficiency", label: "06 / 14", startFrame: 5, endFrame: 5 },
+  { id: "chemistry", name: "Chemistry of Rockets", label: "07 / 14", startFrame: 6, endFrame: 6 },
+  { id: "timeline", name: "ISRO Launcher Evolution", label: "08 / 14", startFrame: 7, endFrame: 7 },
+  { id: "pslv", name: "PSLV Case Study", label: "09 / 14", startFrame: 8, endFrame: 8 },
+  { id: "reusability", name: "Economics of Reusability", label: "10 / 14", startFrame: 9, endFrame: 9 },
+  { id: "reentry", name: "Reentry Profiles", label: "11 / 14", startFrame: 10, endFrame: 10 },
+  { id: "methalox", name: "The Methalox Transition", label: "12 / 14", startFrame: 11, endFrame: 11 },
+  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "13 / 14", startFrame: 12, endFrame: 12 },
+  { id: "climax", name: "The Frontier Awaits", label: "14 / 14", startFrame: 13, endFrame: 13 },
+];
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
 
@@ -1386,7 +1403,7 @@ export default function LaunchVehiclesPage() {
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
       <Navbar />
-      <PresentationChrome controller={p} />
+      <PresentationChrome controller={p} scenes={LAUNCH_VEHICLES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
       <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">

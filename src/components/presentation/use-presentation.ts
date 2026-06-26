@@ -155,14 +155,15 @@ export function usePresentation(totalFrames: number): PresentationController {
     return () => window.removeEventListener("keydown", onKey);
   }, [presentationActive, nextSlide, prevSlide, exit]);
 
-  // Click anywhere to advance (shift-click to go back). Interactive controls opt out.
+  // Click anywhere to advance (shift-click or right-click to go back). Interactive controls opt out.
   useEffect(() => {
     if (!presentationActive) return;
+
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
         target.closest(
-          "a, button, input, textarea, select, [role='button'], .interactive-control, .hud-overlay"
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .hud-overlay, .presentation-controls"
         )
       )
         return;
@@ -170,8 +171,26 @@ export function usePresentation(totalFrames: number): PresentationController {
       if (e.shiftKey) prevSlide();
       else nextSlide();
     };
+
+    const onContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.closest(
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .hud-overlay, .presentation-controls"
+        )
+      )
+        return;
+      e.preventDefault();
+      prevSlide();
+    };
+
     window.addEventListener("click", onClick);
-    return () => window.removeEventListener("click", onClick);
+    window.addEventListener("contextmenu", onContextMenu);
+
+    return () => {
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("contextmenu", onContextMenu);
+    };
   }, [presentationActive, nextSlide, prevSlide]);
 
   // P to enter the deck from scroll mode.

@@ -124,6 +124,16 @@ const MARKET_BARS = [
 // ---------------------------------------------------------------------------
 const TOTAL_FRAMES = 7;
 
+const PRESENTATION_SCENES = [
+  { id: "hero", name: "Tactical Briefing", label: "01 / 07", startFrame: 0, endFrame: 0 },
+  { id: "why-critical", name: "Why Space Became Critical", label: "02 / 07", startFrame: 1, endFrame: 1 },
+  { id: "ecosystem", name: "Ecosystem Architecture", label: "03 / 07", startFrame: 2, endFrame: 2 },
+  { id: "fdi-table", name: "FDI Sub-Sector Caps", label: "04 / 07", startFrame: 3, endFrame: 3 },
+  { id: "fdi-highlights", name: "FDI Policy Highlights", label: "05 / 07", startFrame: 4, endFrame: 4 },
+  { id: "market-trajectory", name: "Market Size & Projections", label: "06 / 07", startFrame: 5, endFrame: 5 },
+  { id: "thesis", name: "The Thesis", label: "07 / 07", startFrame: 6, endFrame: 6 },
+];
+
 // ---------------------------------------------------------------------------
 // SHARED UI
 // ---------------------------------------------------------------------------
@@ -856,14 +866,14 @@ export default function ParadigmShiftPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [presentationActive, nextSlide, prevSlide]);
 
-  // Click-to-advance
+  // Click-to-advance (shift-click or right-click to go back). Interactive controls opt out.
   useEffect(() => {
     if (!presentationActive) return;
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
         target.closest(
-          "a, button, input, textarea, select, [role='button'], .interactive-control, .hud-overlay"
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .hud-overlay, .presentation-controls"
         )
       )
         return;
@@ -871,8 +881,26 @@ export default function ParadigmShiftPage() {
       if (e.shiftKey) prevSlide();
       else nextSlide();
     };
+
+    const onContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.closest(
+          "a, button, input, textarea, select, kbd, [role='button'], .interactive-control, .hud-overlay, .presentation-controls"
+        )
+      )
+        return;
+      e.preventDefault();
+      prevSlide();
+    };
+
     window.addEventListener("click", onClick);
-    return () => window.removeEventListener("click", onClick);
+    window.addEventListener("contextmenu", onContextMenu);
+    
+    return () => {
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("contextmenu", onContextMenu);
+    };
   }, [presentationActive, nextSlide, prevSlide]);
 
   // P to enter (scroll mode)
@@ -935,6 +963,11 @@ export default function ParadigmShiftPage() {
   // ---- interaction state ----
   const [activeCatalyst, setActiveCatalyst] = useState(0);
   const [activePillar, setActivePillar] = useState(0);
+
+  const activeScene = PRESENTATION_SCENES.find(
+    (s) => currentFrameIndex >= s.startFrame && currentFrameIndex <= s.endFrame
+  ) || PRESENTATION_SCENES[0];
+  const activeSceneIndex = PRESENTATION_SCENES.indexOf(activeScene);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1023,6 +1056,53 @@ export default function ParadigmShiftPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Bottom-Right Floating Controls & Scene Indicator */}
+      {presentationActive && (
+        <div className="fixed bottom-6 right-6 z-40 font-mono flex flex-col gap-2 pointer-events-auto presentation-controls">
+          <div className="bg-[#030308]/80 border border-white/10 backdrop-blur-md px-5 py-4 rounded-xl shadow-2xl flex flex-col gap-3 min-w-[280px]">
+            
+            {/* Scene Indicator & Title */}
+            <div className="flex flex-col gap-0.5 text-left">
+              <span className="text-[10px] text-[#FFB800] font-bold tracking-widest uppercase">
+                {activeScene.label}
+              </span>
+              <span className="text-sm font-semibold tracking-wide text-white font-sans uppercase">
+                {activeScene.name}
+              </span>
+            </div>
+
+            {/* Progress line */}
+            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-[#FFB800] transition-all duration-500 ease-out" 
+                style={{ 
+                  width: `${((activeSceneIndex + 1) / PRESENTATION_SCENES.length) * 100}%` 
+                }}
+              />
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between gap-4 mt-1">
+              <button
+                onClick={prevSlide}
+                disabled={currentFrameIndex === 0}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white/50 hover:text-white disabled:opacity-30 disabled:hover:text-white/50 transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-md cursor-pointer"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" /> Prev
+              </button>
+
+              <button
+                onClick={nextSlide}
+                disabled={currentFrameIndex === TOTAL_FRAMES - 1}
+                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#FFB800] hover:text-[#FFC830] disabled:opacity-30 disabled:hover:text-[#FFB800] transition-colors bg-[#FFB800]/10 hover:bg-[#FFB800]/20 border border-[#FFB800]/20 px-3 py-1.5 rounded-md cursor-pointer"
+              >
+                Next <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Enter-presentation button (scroll mode) */}
       {!presentationActive && (
