@@ -258,8 +258,66 @@ function Scene1WhyCritical({
 }) {
   const cat = CATALYSTS[active];
   const Icon = cat.icon;
+
+  // Track prefers-reduced-motion for accessibility
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  const backgrounds = [
+    "/catalyst_spacex.png",
+    "/catalyst_geopolitical.png",
+    "/catalyst_innovator.png",
+  ];
+
   return (
     <>
+      {/* Cinematic Dynamic Background Layer */}
+      <div className="absolute w-screen h-[100dvh] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 overflow-hidden -z-10 pointer-events-none">
+        {backgrounds.map((bg, idx) => {
+          const isActive = idx === active;
+          return (
+            <motion.div
+              key={idx}
+              initial={false}
+              animate={{
+                opacity: isActive ? 0.12 : 0,
+                scale: prefersReducedMotion ? 1 : isActive ? 1.03 : 1.0,
+                filter: prefersReducedMotion ? "blur(0px)" : isActive ? "blur(0px)" : "blur(8px)",
+                x: prefersReducedMotion ? 0 : isActive ? 0 : (idx < active ? -12 : 12),
+              }}
+              transition={{
+                duration: prefersReducedMotion ? 0.35 : 0.85,
+                ease: [0.25, 1, 0.5, 1],
+              }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <Image
+                src={bg}
+                alt=""
+                fill
+                priority
+                className="object-cover object-center"
+              />
+            </motion.div>
+          );
+        })}
+        {/* Subtle overlays to blend with the dark theme and keep text highly readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/90 via-[#030308]/30 to-[#030308]/90" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 70% at center, transparent 30%, #030308 95%)",
+          }}
+        />
+      </div>
+
       <SceneHeading
         sub="01. THE TRIGGER"
         main="Why Space Became Critical"
