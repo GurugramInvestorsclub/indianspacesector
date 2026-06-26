@@ -30,17 +30,17 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
 
     if (presentationActive) {
       let p = 0;
-      if (currentFrameIndex === 29) p = 0.035;
-      else if (currentFrameIndex === 30) p = 0.15;
-      else if (currentFrameIndex === 31) p = 0.30;
-      else if (currentFrameIndex === 32) p = 0.43;
-      else if (currentFrameIndex === 33) p = 0.54;
-      else if (currentFrameIndex === 34) p = 0.64;
-      else if (currentFrameIndex === 35) p = 0.76;
-      else if (currentFrameIndex === 36) p = 0.88;
-      else if (currentFrameIndex === 37) p = 0.965;
-      else if (currentFrameIndex === 38) p = 0.985;
-      else if (currentFrameIndex < 29) p = 0.0;
+      if (currentFrameIndex === 30) p = 0.035;
+      else if (currentFrameIndex === 31) p = 0.15;
+      else if (currentFrameIndex === 32) p = 0.30;
+      else if (currentFrameIndex === 33) p = 0.43;
+      else if (currentFrameIndex === 34) p = 0.54;
+      else if (currentFrameIndex === 35) p = 0.64;
+      else if (currentFrameIndex === 36) p = 0.76;
+      else if (currentFrameIndex === 37) p = 0.88;
+      else if (currentFrameIndex === 38) p = 0.965;
+      else if (currentFrameIndex === 39) p = 0.985;
+      else if (currentFrameIndex < 30) p = 0.0;
       else p = 1.0;
 
       const controls = animate(progress, p, { duration: 0.6, ease: [0.25, 1, 0.5, 1] });

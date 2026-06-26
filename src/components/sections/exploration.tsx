@@ -36,10 +36,11 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
   useEffect(() => {
     if (presentationActive) {
       let p = 0;
-      if (currentFrameIndex === 25 || currentFrameIndex === 26) p = 0.15;
-      else if (currentFrameIndex === 27) p = 0.49;
-      else if (currentFrameIndex === 28) p = 0.83;
-      else if (currentFrameIndex < 25) p = 0.0;
+      if (currentFrameIndex === 26) p = 0.0;
+      else if (currentFrameIndex === 27) p = 0.15;
+      else if (currentFrameIndex === 28) p = 0.49;
+      else if (currentFrameIndex === 29) p = 0.83;
+      else if (currentFrameIndex < 26) p = 0.0;
       else p = 1.0;
 
       const controls = animate(progress, p, { duration: 0.6, ease: [0.25, 1, 0.5, 1] });
