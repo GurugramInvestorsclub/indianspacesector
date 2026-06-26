@@ -837,54 +837,245 @@ function Scene4FirstPrinciple() {
 }
 
 // 6. SENSORS GALLERY
+const SENSOR_BACKGROUNDS = [
+  "/sat_spec_optical.png",
+  "/sat_spec_multispectral.png",
+  "/sat_spec_thermal.png",
+  "/sat_spec_sar.png"
+];
+
+function OpticalAtmosphericHaze() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(6)].map((_, i) => {
+        const initialX = Math.random() * 100;
+        const duration = 20 + Math.random() * 25;
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              x: `${initialX}vw`,
+              y: "110vh",
+              opacity: 0.05,
+              scale: 0.8,
+            }}
+            animate={{
+              y: ["110vh", "-10vh"],
+              opacity: [0.05, 0.15, 0],
+            }}
+            transition={{
+              duration: duration,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute bg-white/20 rounded-full blur-[2px]"
+            style={{
+              width: "8px",
+              height: "8px"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function SpectralGridOverlay() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10 opacity-20">
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(16,185,129,0.1) 1px, transparent 1px)",
+          backgroundSize: "20px 20px"
+        }}
+      />
+    </div>
+  );
+}
+
+function ThermalHeatFlicker() {
+  return (
+    <motion.div
+      animate={{
+        opacity: [0.1, 0.25, 0.15, 0.3, 0.1]
+      }}
+      transition={{
+        duration: 2.5,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-color-dodge"
+      style={{
+        background: "radial-gradient(circle at 75% 65%, rgba(239,68,68,0.12) 0%, transparent 60%)"
+      }}
+    />
+  );
+}
+
+function RadarWavesRipple() {
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-10">
+      {[...Array(2)].map((_, i) => {
+        return (
+          <motion.div
+            key={i}
+            initial={{ scale: 0.1, opacity: 0.4 }}
+            animate={{ scale: 2, opacity: 0 }}
+            transition={{
+              duration: 6,
+              delay: i * 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute rounded-full border border-sky-400/10 mix-blend-color-dodge"
+            style={{
+              width: "500px",
+              height: "500px",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)"
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function SensorBackgrounds({ activeIdx }: { activeIdx: number }) {
+  let gradientOverlay = "";
+  
+  if (activeIdx === 0) {
+    gradientOverlay = "radial-gradient(circle at center, rgba(3,3,8,0.65) 0%, rgba(3,3,8,0.85) 90%), linear-gradient(to bottom, rgba(56,189,248,0.03), rgba(34,197,94,0.02))";
+  } else if (activeIdx === 1) {
+    gradientOverlay = "radial-gradient(circle at center, rgba(3,3,8,0.7) 0%, rgba(3,3,8,0.88) 95%), linear-gradient(to bottom, rgba(16,185,129,0.06), rgba(6,182,212,0.04))";
+  } else if (activeIdx === 2) {
+    gradientOverlay = "radial-gradient(circle at center, rgba(3,3,8,0.72) 0%, rgba(3,3,8,0.92) 100%), linear-gradient(to bottom, rgba(239,68,68,0.05), rgba(249,115,22,0.04))";
+  } else if (activeIdx === 3) {
+    gradientOverlay = "radial-gradient(circle at center, rgba(3,3,8,0.7) 0%, rgba(3,3,8,0.9) 95%), linear-gradient(to bottom, rgba(99,102,241,0.05), rgba(100,116,139,0.05))";
+  }
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden w-full h-full pointer-events-none bg-[#030308]">
+      {SENSOR_BACKGROUNDS.map((bg, idx) => {
+        const active = idx === activeIdx;
+
+        const motionAnimate = active ? {
+          scale: [1.02, 1.04, 1.02],
+          x: idx % 2 === 0 ? [0, 4, 0] : [0, -4, 0],
+          y: idx % 2 === 0 ? [0, -2, 0] : [0, 2, 0],
+        } : {};
+
+        return (
+          <motion.div
+            key={bg}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: active ? 1 : 0,
+            }}
+            transition={{
+              duration: 1.0,
+              ease: [0.25, 1, 0.5, 1],
+            }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <motion.div
+              animate={motionAnimate}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 w-full h-full"
+            >
+              <img
+                src={bg}
+                alt={`Sensor Background ${idx}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </motion.div>
+
+            {active && idx === 0 && <OpticalAtmosphericHaze />}
+            {active && idx === 1 && <SpectralGridOverlay />}
+            {active && idx === 2 && <ThermalHeatFlicker />}
+            {active && idx === 3 && <RadarWavesRipple />}
+          </motion.div>
+        );
+      })}
+
+      <div 
+        className="absolute inset-0 transition-all duration-1000 pointer-events-none"
+        style={{
+          background: gradientOverlay,
+        }}
+      />
+      <div className="absolute inset-0 bg-[#030308]/40 pointer-events-none mix-blend-multiply" />
+    </div>
+  );
+}
+
 function Scene5FamilyOfSensors() {
   const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    SENSOR_BACKGROUNDS.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <>
-      <SceneHeading sub="05. The Sensor Suite" main="Earth Observation Spectrum" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 grid grid-cols-2 gap-3 min-h-[300px]">
-          {SENSORS.map((s, idx) => {
-            const active = idx === activeIdx;
-            return (
-              <button
-                key={s.name}
-                onClick={() => setActiveIdx(idx)}
-                className={`p-5 rounded-2xl text-left border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
-                  active
-                    ? "bg-[#FFB800]/10 border-[#FFB800] shadow-lg shadow-[#FFB800]/5 text-[#FFB800]"
-                    : "bg-[#080c12]/70 border-[#FFB800]/5 hover:border-[#FFB800]/20 text-white/60"
-                }`}
-              >
-                <div>
-                  <h4 className={`text-xs font-mono font-bold tracking-wide mb-1 ${
-                    active ? "text-[#FFB800]" : "text-white/40"
-                  }`}>
-                    Option 0{idx + 1}
-                  </h4>
-                  <span className={`text-sm font-sans font-bold block leading-snug ${active ? "text-[#FFB800]" : "text-white"}`}>{s.name}</span>
-                </div>
-                <span className={`font-mono text-[9px] mt-4 block font-bold ${active ? "text-[#FFB800]" : "text-[#FFB800]/70"}`}>{s.spec}</span>
-              </button>
-            );
-          })}
-        </div>
+      <SensorBackgrounds activeIdx={activeIdx} />
 
-        <div className="lg:col-span-6 flex flex-col justify-center text-left">
-          <div className="bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 h-full flex flex-col justify-center">
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
-              Instrument Details
-            </span>
-            <h3 className="text-xl font-bold text-white mb-4">
-              {SENSORS[activeIdx].name}
-            </h3>
-            <p className="text-xs text-white/70 leading-relaxed mb-6">
-              {SENSORS[activeIdx].use}
-            </p>
-            <div className="flex items-center gap-2 pt-4 border-t border-[#FFB800]/5 font-mono text-xs">
-              <CheckCircle2 className="w-4 h-4 text-[#FFB800]" />
-              <span className="text-white/50">Performance envelope: </span>
-              <span className="text-white font-bold">{SENSORS[activeIdx].spec}</span>
+      {/* Content Container (aligned to SLIDE_BASE style) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full h-full flex flex-col items-center justify-center">
+        <SceneHeading sub="05. The Sensor Suite" main="Earth Observation Spectrum" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl">
+          <div className="lg:col-span-6 grid grid-cols-2 gap-3 min-h-[300px]">
+            {SENSORS.map((s, idx) => {
+              const active = idx === activeIdx;
+              return (
+                <button
+                  key={s.name}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`p-5 rounded-2xl text-left border flex flex-col justify-between transition-all duration-300 cursor-pointer ${
+                    active
+                      ? "bg-[#FFB800]/10 border-[#FFB800] shadow-lg shadow-[#FFB800]/5 text-[#FFB800]"
+                      : "bg-[#080c12]/70 border-[#FFB800]/5 hover:border-[#FFB800]/20 text-white/60"
+                  }`}
+                >
+                  <div>
+                    <h4 className={`text-xs font-mono font-bold tracking-wide mb-1 ${
+                      active ? "text-[#FFB800]" : "text-white/40"
+                    }`}>
+                      Option 0{idx + 1}
+                    </h4>
+                    <span className={`text-sm font-sans font-bold block leading-snug ${active ? "text-[#FFB800]" : "text-white"}`}>{s.name}</span>
+                  </div>
+                  <span className={`font-mono text-[9px] mt-4 block font-bold ${active ? "text-[#FFB800]" : "text-[#FFB800]/70"}`}>{s.spec}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="lg:col-span-6 flex flex-col justify-center text-left">
+            <div className="bg-[#0a0a14]/90 border border-[#FFB800]/20 rounded-2xl p-8 h-full flex flex-col justify-center">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
+                Instrument Details
+              </span>
+              <h3 className="text-xl font-bold text-white mb-4">
+                {SENSORS[activeIdx].name}
+              </h3>
+              <p className="text-xs text-white/70 leading-relaxed mb-6">
+                {SENSORS[activeIdx].use}
+              </p>
+              <div className="flex items-center gap-2 pt-4 border-t border-[#FFB800]/5 font-mono text-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#FFB800]" />
+                <span className="text-white/50">Performance envelope: </span>
+                <span className="text-white font-bold">{SENSORS[activeIdx].spec}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1392,7 +1583,7 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 3].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 3, 6].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -1470,7 +1661,7 @@ export default function SatellitesPage() {
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
