@@ -423,15 +423,6 @@ export function LaunchEvolution({ presentationActive = false, currentFrameIndex 
                     <p className="text-sm text-white/70 leading-relaxed font-sans max-w-2xl mt-1">
                       A year later, when SLV-3 succeeded in July 1980, Dhawan did not take the stage. He asked Kalam to conduct the press conference and address the nation.
                     </p>
-
-                    <blockquote className="border-l-2 border-[#FFB800] pl-6 py-3 my-1 bg-[#FFB800]/5 max-w-2xl rounded-r-md">
-                      <p className="text-xs font-mono text-[#FFB800] tracking-widest uppercase mb-1.5 font-bold">
-                        Kalam&apos;s Leadership Takeaway:
-                      </p>
-                      <p className="text-lg md:text-xl font-extralight text-white leading-relaxed italic" style={{ fontFamily: "Georgia, serif" }}>
-                        &ldquo;When the failure occurred, the leader owned it up. When the success came, he gave it to his team.&rdquo;
-                      </p>
-                    </blockquote>
                   </div>
 
                 </div>
