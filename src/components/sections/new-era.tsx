@@ -86,7 +86,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
   // -------------------------------------------------------------
   const scene4Opacity = useTransform(progress, [0.48, 0.50, 0.80, 0.82], [0, 1, 1, 0]);
   const constellationScale = useTransform(progress, [0.48, 0.82], [1.02, 0.97]);
-  const constellationImgOpacity = useTransform(progress, [0.48, 0.50, 0.80, 0.82], [0, 0.4, 0.4, 0]);
+  const constellationImgOpacity = useTransform(progress, [0.48, 0.50, 0.80, 0.82], [0, 0.75, 0.75, 0]);
   
   // Controls the emergence of the constellation nodes and paths
   const orbitRingScale = useTransform(progress, [0.48, 0.60], [0.85, 1.05]);
@@ -269,7 +269,7 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
           {/* Earth Constellation Image Background */}
           <motion.div 
             style={{ 
-              opacity: reduceMotion ? 0.4 : constellationImgOpacity, 
+              opacity: reduceMotion ? 0.75 : constellationImgOpacity, 
               scale: reduceMotion ? 1 : constellationScale 
             }}
             className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
@@ -279,10 +279,10 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
               alt="Satellite Constellation Network"
               fill
               sizes="100vw"
-              className="object-contain object-center opacity-70 grayscale brightness-[0.7] select-none"
+              className="object-contain object-center opacity-85 grayscale brightness-[0.95] select-none"
             />
             {/* Fade horizon */}
-            <div className="absolute inset-0 bg-[#030308]/40" />
+            <div className="absolute inset-0 bg-[#030308]/20" />
           </motion.div>
 
           <div className="relative w-full max-w-3xl aspect-video flex flex-col items-center justify-center z-10 mb-6">
@@ -397,12 +397,12 @@ export function NewEra({ presentationActive = false, currentFrameIndex = 0 }: Se
             alt="India's Space Horizon Finale"
             fill
             sizes="100vw"
-            className="object-cover object-center grayscale contrast-[1.25] brightness-[0.4] select-none"
+            className="object-cover object-center grayscale contrast-[1.25] brightness-[0.7] select-none"
           />
           {/* Deep dark radial vignette framing */}
-          <div className="absolute inset-0 bg-[#030308]/60" />
-          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_95%]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-95" />
+          <div className="absolute inset-0 bg-[#030308]/30" />
+          <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_80%]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-60" />
         </motion.div>
 
         {/* CTA into the premium Space Economy chapter */}

@@ -100,15 +100,15 @@ export function InflectionPoint() {
       <div className="sticky top-0 h-[100vh] w-full flex items-center justify-center overflow-hidden">
         
         {/* Full-bleed space background */}
-        <div className="absolute inset-0 z-0 opacity-40">
+        <div className="absolute inset-0 z-0 opacity-75">
           <Image
             src="/space_bg.png"
             alt="Deep space starfield"
             fill
             sizes="100vw"
-            className="object-cover object-center filter brightness-[0.4]"
+            className="object-cover object-center filter brightness-[0.7]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/95 via-[#030308]/65 to-[#030308]/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-[#030308]/30 to-[#030308]/75"></div>
           <div className="absolute inset-0 radial-vignette"></div>
         </div>
 

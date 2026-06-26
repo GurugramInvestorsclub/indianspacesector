@@ -186,14 +186,14 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
           alt="India at night viewed from orbit"
           fill
           priority
-          className="object-cover object-center opacity-35"
+          className="object-cover object-center opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/70 via-[#030308]/20 to-[#030308]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/40 via-[#030308]/15 to-[#030308]/80" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 70% at center, transparent 25%, #030308 90%)",
+              "radial-gradient(ellipse 80% 70% at center, transparent 25%, #030308 70%)",
           }}
         />
       </div>
@@ -278,7 +278,7 @@ function Scene1WhyCritical({
   return (
     <>
       {/* Cinematic Dynamic Background Layer */}
-      <div className="absolute w-screen h-[100dvh] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 overflow-hidden -z-10 pointer-events-none">
+      <div className="absolute w-screen h-[100dvh] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 overflow-hidden z-0 pointer-events-none">
         {backgrounds.map((bg, idx) => {
           const isActive = idx === active;
           return (
@@ -286,7 +286,7 @@ function Scene1WhyCritical({
               key={idx}
               initial={false}
               animate={{
-                opacity: isActive ? 0.18 : 0,
+                opacity: isActive ? 0.55 : 0,
                 scale: prefersReducedMotion ? 1 : isActive ? 1.03 : 1.0,
                 filter: prefersReducedMotion ? "blur(0px)" : isActive ? "blur(0px)" : "blur(6px)",
                 x: prefersReducedMotion ? 0 : isActive ? 0 : (idx < active ? -12 : 12),
@@ -308,24 +308,25 @@ function Scene1WhyCritical({
           );
         })}
         {/* Soft overlays to blend with the dark theme and keep text highly readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/60 via-transparent to-[#030308]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308]/30 via-transparent to-[#030308]/55" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 70% at center, transparent 40%, #030308 90%)",
+              "radial-gradient(ellipse 80% 70% at center, transparent 40%, #030308 70%)",
           }}
         />
       </div>
 
-      <SceneHeading
-        sub="01. THE TRIGGER"
-        main="Why Space Became Critical"
-      />
+      <div className="relative z-10 w-full flex flex-col items-center">
+        <SceneHeading
+          sub="01. THE TRIGGER"
+          main="Why Space Became Critical"
+        />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full max-w-5xl z-10">
-        {/* Selector rail */}
-        <div className="lg:col-span-5 flex flex-col gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full max-w-5xl">
+          {/* Selector rail */}
+          <div className="lg:col-span-5 flex flex-col gap-3">
           {CATALYSTS.map((c) => {
             const CIcon = c.icon;
             const isActive = c.id === active;
@@ -414,6 +415,7 @@ function Scene1WhyCritical({
             </motion.div>
           </AnimatePresence>
         </div>
+      </div>
       </div>
     </>
   );

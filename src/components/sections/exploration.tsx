@@ -143,10 +143,10 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center grayscale contrast-[1.1] brightness-[0.45] select-none"
+            className="object-cover object-center grayscale contrast-[1.1] brightness-[0.75] select-none"
           />
           <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_85%]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-55" />
         </motion.div>
 
         {/* Act 2 Background: Mars */}
@@ -159,10 +159,10 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             alt="Mars planet"
             fill
             sizes="100vw"
-            className="object-cover object-center grayscale contrast-[1.15] brightness-[0.38] select-none"
+            className="object-cover object-center grayscale contrast-[1.15] brightness-[0.7] select-none"
           />
           <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_30%,#030308_85%]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-95" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-55" />
         </motion.div>
 
         {/* Act 3 Background: The Sun */}
@@ -175,10 +175,10 @@ export function Exploration({ presentationActive = false, currentFrameIndex = 0 
             alt="Solar Corona flares"
             fill
             sizes="100vw"
-            className="object-cover object-center contrast-[1.1] brightness-[0.38] select-none"
+            className="object-cover object-center contrast-[1.1] brightness-[0.7] select-none"
           />
           <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_35%,#030308_85%]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-[#030308] opacity-55" />
         </motion.div>
 
         {/* Subtle grid pattern for technical schematic look */}
