@@ -156,7 +156,7 @@ body.presentation-active::-webkit-scrollbar {
 
 /* Typography and Font families constraint: Only 3 fonts */
 h1, h2, h3, h4, h5, h6, .font-headline {
-  font-family: Georgia, serif !important;
+  font-family: "Aptos", "Segoe UI", Arial, sans-serif !important;
 }
 
 body, p, span, li, a, .font-sans {

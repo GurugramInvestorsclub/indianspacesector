@@ -42,7 +42,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`interactive-control px-3.5 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 rounded-[4px] ${
+                className={`interactive-control px-3.5 py-2 font-sans text-[11px] font-bold uppercase tracking-[0.12em] transition-all duration-300 rounded-[4px] ${
                   active
                     ? "bg-[#FFB800]/15 text-[#FFB800] border border-[#FFB800]/25 shadow-[inset_0_1px_0_rgba(255,184,0,0.15),0_0_12px_rgba(255,184,0,0.06)]"
                     : "text-white/58 hover:text-white border border-transparent hover:bg-white/[0.04]"
@@ -72,7 +72,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={handleNavigate}
-              className={`interactive-control block px-2 py-3 font-mono text-sm font-bold uppercase tracking-[0.14em] transition-colors duration-200 ${
+              className={`interactive-control block px-2 py-3 font-sans text-sm font-bold uppercase tracking-[0.14em] transition-colors duration-200 ${
                 pathname === link.href ? "text-[#FFB800]" : "text-white/76 hover:text-white"
               }`}
             >

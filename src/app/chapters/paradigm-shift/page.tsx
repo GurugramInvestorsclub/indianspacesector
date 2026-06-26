@@ -203,7 +203,6 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
 
         <h1
           className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6"
-          style={{ fontFamily: "Georgia, serif" }}
         >
           The Paradigm
           <br />
@@ -397,7 +396,6 @@ function Scene1WhyCritical({
 
               <h3
                 className="text-xl md:text-2xl font-light text-white leading-snug mb-5"
-                style={{ fontFamily: "Georgia, serif" }}
               >
                 {cat.headline}
               </h3>
@@ -699,7 +697,6 @@ function Scene5Thesis() {
 
       <h2
         className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide leading-relaxed text-white max-w-3xl mb-10 relative z-10"
-        style={{ fontFamily: "Georgia, serif" }}
       >
         <span className="block mb-1 text-white/65">From sole architect</span>
         <span className="block mb-2 text-white font-semibold">
