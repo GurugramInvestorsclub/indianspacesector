@@ -258,27 +258,12 @@ function Scene1SoundingRockets() {
     <>
       <SceneHeading sub="01. The Simplest Rocket" main="Action and Reaction" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 min-h-[350px]">
-          <svg viewBox="0 0 200 400" className="w-full h-full max-h-[300px]">
-            {/* Background Rocket Image */}
-            <image href="/rocket_schematic.png" x="0" y="0" width="200" height="400" opacity="0.15" />
-            
-            {/* Rocket body line-art */}
-            <path d="M 100 80 L 125 150 L 125 300 L 75 300 L 75 150 Z" fill="none" stroke="#FFB800" strokeWidth="1.5" />
-            <path d="M 75 300 L 60 330 L 75 330 Z" fill="none" stroke="#FFB800" strokeWidth="1" />
-            <path d="M 125 300 L 140 330 L 125 330 Z" fill="none" stroke="#FFB800" strokeWidth="1" />
-            
-            {/* Thrust action */}
-            <path d="M 100 305 L 100 380" stroke="#FF6B00" strokeWidth="3" strokeDasharray="5 3" />
-            <path d="M 90 305 L 80 360" stroke="#FF6B00" strokeWidth="1.5" />
-            <path d="M 110 305 L 120 360" stroke="#FF6B00" strokeWidth="1.5" />
-            
-            {/* Force vectors */}
-            <text x="100" y="395" textAnchor="middle" fill="#FF6B00" className="font-mono" fontSize="10">ACTION (THRUST)</text>
-            <path d="M 100 70 L 100 15" stroke="#FFB800" strokeWidth="2" />
-            <polygon points="100,10 96,18 104,18" fill="#FFB800" />
-            <text x="100" y="25" textAnchor="middle" fill="#FFB800" className="font-mono" fontSize="10">REACTION</text>
-          </svg>
+        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 min-h-[350px] overflow-hidden">
+          <img
+            src="/action_reaction.jpg"
+            alt="Newton's Third Law - Action and Reaction"
+            className="w-full h-full max-h-[320px] object-contain rounded-xl"
+          />
         </div>
 
         <div className="lg:col-span-7 text-left flex flex-col justify-center">
