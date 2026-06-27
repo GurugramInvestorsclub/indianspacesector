@@ -202,21 +202,20 @@ const GOV_CARDS = [
   },
 ];
 
-const TOTAL_FRAMES = 12;
+const TOTAL_FRAMES = 11;
 
 const VALUE_CHAIN_SCENES = [
-  { id: "hero", name: "Value Chain Intro", label: "01 / 12", startFrame: 0, endFrame: 0 },
-  { id: "changed", name: "The New Space Network", label: "02 / 12", startFrame: 1, endFrame: 1 },
-  { id: "reframe", name: "Downstream Focus", label: "03 / 12", startFrame: 2, endFrame: 2 },
-  { id: "stack", name: "Commercial Value Chain", label: "04 / 12", startFrame: 3, endFrame: 3 },
-  { id: "revenue", name: "Revenue Structure", label: "05 / 12", startFrame: 4, endFrame: 4 },
-  { id: "structure", name: "Complexity Insight", label: "06 / 12", startFrame: 5, endFrame: 5 },
-  { id: "india", name: "India Opportunity", label: "07 / 12", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Funding Velocity", label: "08 / 12", startFrame: 7, endFrame: 7 },
-  { id: "why-matters", name: "Value Flow Diagram", label: "09 / 12", startFrame: 8, endFrame: 8 },
-  { id: "policy-innovation", name: "Policy Innovation Flow", label: "10 / 12", startFrame: 9, endFrame: 9 },
-  { id: "startup-explosion", name: "Ecosystem Explosion", label: "11 / 12", startFrame: 10, endFrame: 10 },
-  { id: "thesis", name: "The Chapter Thesis", label: "12 / 12", startFrame: 11, endFrame: 11 },
+  { id: "hero", name: "Value Chain Intro", label: "01 / 11", startFrame: 0, endFrame: 0 },
+  { id: "changed", name: "The New Space Network", label: "02 / 11", startFrame: 1, endFrame: 1 },
+  { id: "reframe", name: "Downstream Focus", label: "03 / 11", startFrame: 2, endFrame: 2 },
+  { id: "stack", name: "Commercial Value Chain", label: "04 / 11", startFrame: 3, endFrame: 3 },
+  { id: "revenue", name: "Revenue Structure", label: "05 / 11", startFrame: 4, endFrame: 4 },
+  { id: "structure", name: "Complexity Insight", label: "06 / 11", startFrame: 5, endFrame: 5 },
+  { id: "india", name: "India Opportunity", label: "07 / 11", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Funding Velocity", label: "08 / 11", startFrame: 7, endFrame: 7 },
+  { id: "why-matters", name: "Value Flow Diagram", label: "09 / 11", startFrame: 8, endFrame: 8 },
+  { id: "startup-explosion", name: "Ecosystem Explosion", label: "10 / 11", startFrame: 9, endFrame: 9 },
+  { id: "thesis", name: "The Chapter Thesis", label: "11 / 11", startFrame: 10, endFrame: 10 },
 ];
 
 const SLIDE_BASE =
@@ -795,9 +794,9 @@ function Scene4Structure() {
 // 7. INDIA POSITION (Existing Scene5India)
 function Scene5India() {
   const names = [
-    { name: "Pixxel", role: "Earth observation", icon: Satellite },
-    { name: "SatSure", role: "Agri-analytics", icon: Globe2 },
-    { name: "Dhruva Space", role: "Deployment", icon: Rocket },
+    { name: "Pixxel", role: "Earth observation", logo: "/ecosystem/pixxel.png" },
+    { name: "SatSure", role: "Agri-analytics", logo: "/ecosystem/satsure.png" },
+    { name: "Dhruva Space", role: "Deployment", logo: "/ecosystem/dhruva.png" },
     { name: "IN-SPACe / NSIL", role: "Enabling structure", icon: Landmark },
   ];
   return (
@@ -820,8 +819,18 @@ function Scene5India() {
                   key={n.name}
                   className="bg-[#0a0a14]/90 border border-white/8 rounded-xl p-4 flex items-center gap-3"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-[#FFB800]/10 border border-[#FFB800]/25 flex items-center justify-center shrink-0">
-                    <NIcon className="w-4 h-4 text-[#FFB800]" />
+                  <div className="w-9 h-9 rounded-lg bg-[#FFB800]/10 border border-[#FFB800]/25 flex items-center justify-center shrink-0 overflow-hidden relative">
+                    {n.logo ? (
+                      <Image
+                        src={n.logo}
+                        alt={`${n.name} logo`}
+                        width={36}
+                        height={36}
+                        className="object-contain w-full h-full p-1"
+                      />
+                    ) : (
+                      NIcon && <NIcon className="w-4 h-4 text-[#FFB800]" />
+                    )}
                   </div>
                   <div>
                     <span className="text-white text-sm font-bold block leading-tight">
@@ -916,6 +925,7 @@ function SceneWhyMatters({ active }: { active: boolean }) {
     { label: "Government", sub: "Sets policy structures" },
     { label: "Infrastructure", sub: "Leases launchpads & stands" },
     { label: "Private Companies", sub: "Integrate launchers & buses" },
+    { label: "Rockets", sub: "Deliver orbital payloads" },
     { label: "Satellites", sub: "Orbit sensing constellations" },
     { label: "Applications", sub: "Calculate downstream vectors" },
     { label: "Economic Value", sub: "Generates strategic GDP assets" },
@@ -952,49 +962,6 @@ function SceneWhyMatters({ active }: { active: boolean }) {
 
             {/* Glowing signal node animation */}
             <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#FFB800]/60 hidden lg:block animate-ping" style={{ animationDelay: `${idx * 0.3}s` }} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// 11. NEW SECTION: Policy -> Innovation Flow
-function ScenePolicyInnovation() {
-  const steps = [
-    { title: "Policy", desc: "Regulatory clearance structures opened by IN-SPACe." },
-    { title: "Funding", desc: "Venture investment and strategic space reserves flow." },
-    { title: "Technology", desc: "Private space engine testing and modular bus designs." },
-    { title: "Commercial Products", desc: "Hyperspectral sensors, rockets, and downlinks built." },
-    { title: "Global Customers", desc: "Exporting capabilities to worldwide enterprise buyers." },
-  ];
-
-  return (
-    <div className="max-w-4xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
-      <SceneHeading sub="10. Strategic Sequence" main="Policy to Innovation" />
-      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
-        State reforms did not replace ISRO, they enabled a commercial commercial layer to build on top of state research.
-      </p>
-
-      {/* Horizontal Flow layout */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 pointer-events-auto max-w-4xl mx-auto w-full text-left">
-        {steps.map((s, idx) => (
-          <div
-            key={s.title}
-            className="bg-[#0a0a14]/60 border border-white/10 p-5 rounded-xl flex flex-col justify-between h-[160px] hover:border-[#FFB800]/30 transition-all duration-300"
-          >
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-mono text-[9px] text-[#FFB800]/60">STEP 0{idx+1}</span>
-                {idx < 4 && <span className="ml-auto text-white/20 font-mono text-xs hidden md:inline">→</span>}
-              </div>
-              <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2">
-                {s.title}
-              </h3>
-            </div>
-            <p className="text-[10px] text-white/60 leading-normal font-light mt-auto">
-              {s.desc}
-            </p>
           </div>
         ))}
       </div>
@@ -1206,43 +1173,40 @@ export default function ValueChainPage() {
 
   // Interactive value chain active stage
   const [activeStage, setActiveStage] = useState("launch");
+  
+  // Scroll transforms for 11 frames (each spans 1/11 ~ 0.0909 width)
+  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0909], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.0909], [1, 0.96]);
 
-  // Scroll transforms for 12 frames (each spans 1/12 ~ 0.0833 width)
-  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0833], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.0833], [1, 0.96]);
+  const s1Opacity = useTransform(progress, [0.05, 0.0909, 0.14, 0.1818], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.05, 0.0909, 0.14, 0.1818], [24, 0, 0, -24]);
 
-  const s1Opacity = useTransform(progress, [0.05, 0.0833, 0.13, 0.1667], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.05, 0.0833, 0.13, 0.1667], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.14, 0.1818, 0.23, 0.2727], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.14, 0.1818, 0.23, 0.2727], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.13, 0.1667, 0.21, 0.25], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.13, 0.1667, 0.21, 0.25], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.23, 0.2727, 0.32, 0.3636], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.23, 0.2727, 0.32, 0.3636], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.21, 0.25, 0.30, 0.3333], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.21, 0.25, 0.30, 0.3333], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.32, 0.3636, 0.41, 0.4545], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.32, 0.3636, 0.41, 0.4545], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.30, 0.3333, 0.38, 0.4167], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.30, 0.3333, 0.38, 0.4167], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.41, 0.4545, 0.50, 0.5455], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.41, 0.4545, 0.50, 0.5455], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.38, 0.4167, 0.46, 0.50], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.38, 0.4167, 0.46, 0.50], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, [0.50, 0.5455, 0.59, 0.6364], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.50, 0.5455, 0.59, 0.6364], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.46, 0.50, 0.55, 0.5833], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.46, 0.50, 0.55, 0.5833], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, [0.59, 0.6364, 0.68, 0.7273], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.59, 0.6364, 0.68, 0.7273], [24, 0, 0, -24]);
 
-  const s7Opacity = useTransform(progress, [0.55, 0.5833, 0.63, 0.6667], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.55, 0.5833, 0.63, 0.6667], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, [0.68, 0.7273, 0.77, 0.8182], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.68, 0.7273, 0.77, 0.8182], [24, 0, 0, -24]);
 
-  const s8Opacity = useTransform(progress, [0.63, 0.6667, 0.71, 0.75], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.63, 0.6667, 0.71, 0.75], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, [0.77, 0.8182, 0.86, 0.9091], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.77, 0.8182, 0.86, 0.9091], [24, 0, 0, -24]);
 
-  const s9Opacity = useTransform(progress, [0.71, 0.75, 0.80, 0.8333], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.71, 0.75, 0.80, 0.8333], [24, 0, 0, -24]);
-
-  const s10Opacity = useTransform(progress, [0.80, 0.8333, 0.88, 0.9167], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.80, 0.8333, 0.88, 0.9167], [24, 0, 0, -24]);
-
-  const s11Opacity = useTransform(progress, [0.88, 0.9167, 1.0], [0, 1, 1]);
-  const s11Y = useTransform(progress, [0.88, 0.9167, 1.0], [24, 0, 0]);
+  const s10Opacity = useTransform(progress, [0.86, 0.9091, 1.0], [0, 1, 1]);
+  const s10Y = useTransform(progress, [0.86, 0.9091, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1250,7 +1214,7 @@ export default function ValueChainPage() {
       <PresentationChrome controller={p} scenes={VALUE_CHAIN_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1200vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1100vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1277,9 +1241,8 @@ export default function ValueChainPage() {
                 {currentFrameIndex === 6 && <Scene5India />}
                 {currentFrameIndex === 7 && <SceneCapitalFlowing active={true} />}
                 {currentFrameIndex === 8 && <SceneWhyMatters active={true} />}
-                {currentFrameIndex === 9 && <ScenePolicyInnovation />}
-                {currentFrameIndex === 10 && <SceneStartupExplosion active={true} />}
-                {currentFrameIndex === 11 && <Scene6Thesis presentationActive />}
+                {currentFrameIndex === 9 && <SceneStartupExplosion active={true} />}
+                {currentFrameIndex === 10 && <Scene6Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1360,22 +1323,15 @@ export default function ValueChainPage() {
 
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
-                className={`${SLIDE_BASE} text-center pointer-events-none`}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
               >
-                <ScenePolicyInnovation />
+                <SceneStartupExplosion active={currentFrameIndex === 9} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <SceneStartupExplosion active={currentFrameIndex === 10} />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s11Opacity, y: s11Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
                 <Scene6Thesis presentationActive={false} />

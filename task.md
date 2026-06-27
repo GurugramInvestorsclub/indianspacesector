@@ -30,4 +30,8 @@
 - [x] Move the Timeline of Reform frame from the Value Chain page to the Paradigm Shift page
 - [x] Move the Government as an Ecosystem Builder (Sovereign Framework) frame from the Value Chain page to the Paradigm Shift page
 - [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 12, Paradigm Shift increased to 9)
+- [x] Replace representative icons with actual startup logos on the India Position slide for Pixxel, SatSure, and Dhruva Space
+- [x] Add "Rockets" block in between "Private Companies" and "Satellites" on the Value Flow Diagram slide
+- [x] Move the Policy to Innovation Flow slide from the Value Chain page to the Paradigm Shift page
+- [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 11, Paradigm Shift increased to 10)
 - [x] Verify full project compiles successfully after all additions
