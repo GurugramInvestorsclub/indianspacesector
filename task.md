@@ -47,4 +47,5 @@
 - [x] Update the founder profile card image with the correct square founder face photo asset
 - [x] Insert new "Understanding the Business" slide into Centum Electronics case study
 - [x] Update "Understanding the Business" slide layout to show consolidated financials table on the left and key insights on the right, centering the headline at the top
+- [x] Split "Understanding the Business" into two sequential slides: Slide 3 showing the financials table on the left with empty right panel, and Slide 4 adding the key insights panel on the right with entrance animations
 - [x] Verify full project compiles successfully after all additions

@@ -256,7 +256,8 @@ function SceneFounding({ active }: { active: boolean }) {
 // 1.5. Section 1.5: Understanding the Business
 function SceneBusinessUnderstanding({ active, showInsights = false }: { active: boolean; showInsights?: boolean }) {
   return (
-    <div className="max-w-6xl w-full px-4 z-10 flex flex-col justify-between h-full pt-16 pb-12">
+    <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar">
+      <div className="my-auto w-full flex flex-col gap-5">
       <div className="text-center w-full flex flex-col items-center">
         <SceneLabel>01.5. Core Financials</SceneLabel>
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase">
@@ -264,7 +265,7 @@ function SceneBusinessUnderstanding({ active, showInsights = false }: { active: 
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-center pointer-events-auto mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-center pointer-events-auto">
         {/* Table on the Left */}
         <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left">
           <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-4">
@@ -345,8 +346,8 @@ function SceneBusinessUnderstanding({ active, showInsights = false }: { active: 
           </span>
         </div>
 
-        {/* Highlights on the Right */}
-        <div className="lg:col-span-5 flex flex-col gap-4 text-left min-h-[220px]">
+        {/* Consolidation table on the Right */}
+        <div className="lg:col-span-5 flex flex-col justify-center text-left min-h-[220px]">
           <AnimatePresence mode="wait">
             {showInsights && (
               <motion.div
@@ -355,34 +356,95 @@ function SceneBusinessUnderstanding({ active, showInsights = false }: { active: 
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className="flex flex-col gap-4 w-full"
+                className="flex flex-col w-full"
               >
-                <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
-                  <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-2">
-                    Key Insights
+                <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-4 backdrop-blur-sm overflow-x-auto">
+                  <span className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider block mb-3">
+                    Table 2. Entities in the consolidation (FY26)
                   </span>
-                  <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
-                    Operating Leverage Expansion
-                  </h4>
-                  <p className="text-xs text-white/60 leading-relaxed font-light">
-                    Despite revenue adjustments in FY25, EBITDA margins expanded significantly to <strong className="text-[#FFB800]">14.2% in FY26*</strong> (from 9.5% in FY22), reflecting improved product mix and high-margin Build-to-Specification (BTS) payloads.
-                  </p>
-                </div>
-
-                <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
-                  <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
-                    PAT and EPS Turnaround
-                  </h4>
-                  <p className="text-xs text-white/60 leading-relaxed font-light">
-                    Profit After Tax (PAT) from continuing operations surged to <strong className="text-[#FFB800]">Rs 100.7 Cr in FY26*</strong> (reversing a loss of Rs 53.5 Cr in FY22), driving diluted EPS to <strong className="text-[#FFB800]">Rs 68.19</strong>.
-                  </p>
+                  <table className="w-full text-left font-mono text-[10px] text-white/75 border-collapse leading-snug">
+                    <thead>
+                      <tr className="border-b border-white/10 text-white font-bold">
+                        <th className="py-2 pr-2 font-sans font-semibold">Entity</th>
+                        <th className="py-2 px-2 font-sans font-semibold">Domicile</th>
+                        <th className="py-2 px-2 font-sans font-semibold">Holding</th>
+                        <th className="py-2 px-2 font-sans font-semibold">Type</th>
+                        <th className="py-2 pl-2 font-sans font-semibold">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      <tr className="bg-[#FFB800]/[0.04]">
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum Electronics Limited</td>
+                        <td className="py-2 px-2 align-top">India</td>
+                        <td className="py-2 px-2 align-top">Parent</td>
+                        <td className="py-2 px-2 align-top">Parent</td>
+                        <td className="py-2 pl-2 align-top text-[#FFB800]/80">Continuing, the core business</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum Electronics UK Ltd</td>
+                        <td className="py-2 px-2 align-top">United Kingdom</td>
+                        <td className="py-2 px-2 align-top">Subsidiary</td>
+                        <td className="py-2 px-2 align-top">Intermediate holding vehicle</td>
+                        <td className="py-2 pl-2 align-top">Holds the overseas group</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum T&amp;S Group S.A. (CTSG)</td>
+                        <td className="py-2 px-2 align-top">France</td>
+                        <td className="py-2 px-2 align-top">90.08%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (France restructuring, Q4 FY26)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum T&amp;S (Technologies et Solutions)</td>
+                        <td className="py-2 px-2 align-top">France</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (France)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum R&amp;D (Recherche et Développement)</td>
+                        <td className="py-2 px-2 align-top">France</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (France)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum Adetel Transportation System SAS</td>
+                        <td className="py-2 px-2 align-top">France</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (France)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum T&amp;S (Technologies et Solutions)</td>
+                        <td className="py-2 px-2 align-top">Canada</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (Canada wind-up, Q3 FY26)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum E&amp;S (Équipements et Systèmes)</td>
+                        <td className="py-2 px-2 align-top">Canada</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (Canada wind-up)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-2 font-sans text-white font-medium align-top">Centum Technologies et Solutions SRL</td>
+                        <td className="py-2 px-2 align-top">Belgium</td>
+                        <td className="py-2 px-2 align-top">100%</td>
+                        <td className="py-2 px-2 align-top">Step-down subsidiary</td>
+                        <td className="py-2 pl-2 align-top text-white/50">Discontinued (Belgium site to buyer)</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </div>
-      <div className="h-4" /> {/* Spacer */}
+      </div>
     </div>
   );
 }
