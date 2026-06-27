@@ -254,60 +254,121 @@ function SceneFounding({ active }: { active: boolean }) {
 
 // 1.5. Section 1.5: Understanding the Business
 function SceneBusinessUnderstanding({ active }: { active: boolean }) {
-  const pillars = [
-    {
-      title: "Space & Defense Subsystems",
-      tag: "High Reliability",
-      desc: "Proprietary design and manufacturing of complex payloads, power supply systems, and onboard computers. Built to survive extreme vibration and space vacuum.",
-      metric: "50%+"
-    },
-    {
-      title: "Industrial & Medical Control",
-      tag: "High Complexity",
-      desc: "Zero-downtime microelectronics, smart grids, converters, and high-frequency controllers. Serves automated infrastructure globally.",
-      metric: "30%+"
-    },
-    {
-      title: "Global Subsidiary Network",
-      tag: "Design Engineering",
-      desc: "Subsidiary Centum Adetel (France) delivers direct subsystem design expertise to European defense, transit, and aviation primes.",
-      metric: "20%+"
-    }
-  ];
-
   return (
-    <div className="max-w-5xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
-      <SceneHeading sub="01.5. Core Pillars" main="Understanding the Business" />
-      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
-        Centum scales across three operational divisions, combining domestic defense manufacturing with international design laboratories.
-      </p>
+    <div className="max-w-6xl w-full px-4 z-10 flex flex-col justify-between h-full pt-16 pb-12">
+      <div className="text-center w-full flex flex-col items-center">
+        <SceneLabel>01.5. Core Financials</SceneLabel>
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase">
+          Understanding the Business
+        </h2>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto w-full pointer-events-auto">
-        {pillars.map((p, idx) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 15 }}
-            animate={active ? { opacity: 1, y: 0 } : { opacity: 0 }}
-            transition={{ duration: 0.4, delay: idx * 0.1 }}
-            className="bg-[#0a0a14]/80 border border-white/5 hover:border-[#FFB800]/30 rounded-xl p-5 text-left relative z-10 w-full backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,184,0,0.03)]"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-mono text-[9px] text-[#FFB800] bg-[#FFB800]/10 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                {p.tag}
-              </span>
-              <span className="font-mono text-[11px] font-black text-white/40">
-                {p.metric}
-              </span>
-            </div>
-            <h4 className="text-sm font-bold text-white mb-2 tracking-tight">
-              {p.title}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-center pointer-events-auto mt-4">
+        {/* Table on the Left */}
+        <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left">
+          <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-4">
+            Summarised consolidated financials, last 5 years (Rs crore)
+          </h3>
+          <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+            <thead>
+              <tr className="border-b border-white/10 text-white font-bold">
+                <th className="py-2.5 pr-2 font-sans font-semibold">Line item</th>
+                <th className="py-2.5 px-2 text-right">FY22</th>
+                <th className="py-2.5 px-2 text-right">FY23</th>
+                <th className="py-2.5 px-2 text-right">FY24</th>
+                <th className="py-2.5 px-2 text-right">FY25*</th>
+                <th className="py-2.5 pl-2 text-right">FY26*</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">Operational revenue</td>
+                <td className="py-2 px-2 text-right">779.9</td>
+                <td className="py-2 px-2 text-right">923.0</td>
+                <td className="py-2 px-2 text-right">1,090.8</td>
+                <td className="py-2 px-2 text-right">740.3</td>
+                <td className="py-2 pl-2 text-right">952.7</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">EBITDA</td>
+                <td className="py-2 px-2 text-right">74.2</td>
+                <td className="py-2 px-2 text-right">76.2</td>
+                <td className="py-2 px-2 text-right">85.9</td>
+                <td className="py-2 px-2 text-right">99.0</td>
+                <td className="py-2 pl-2 text-right">135.4</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">EBITDA margin (%)</td>
+                <td className="py-2 px-2 text-right">9.5%</td>
+                <td className="py-2 px-2 text-right">8.3%</td>
+                <td className="py-2 px-2 text-right">7.9%</td>
+                <td className="py-2 px-2 text-right">13.4%</td>
+                <td className="py-2 pl-2 text-right">14.2%</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">Profit before tax (PBT)</td>
+                <td className="py-2 px-2 text-right">(52.2)</td>
+                <td className="py-2 px-2 text-right">12.1</td>
+                <td className="py-2 px-2 text-right">7.9</td>
+                <td className="py-2 px-2 text-right">66.5</td>
+                <td className="py-2 pl-2 text-right">114.8</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">PAT (continuing)</td>
+                <td className="py-2 px-2 text-right">(53.5)</td>
+                <td className="py-2 px-2 text-right">6.7</td>
+                <td className="py-2 px-2 text-right">(2.8)</td>
+                <td className="py-2 px-2 text-right">50.4</td>
+                <td className="py-2 pl-2 text-right">100.7</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">Reported PAT</td>
+                <td className="py-2 px-2 text-right">(53.5)</td>
+                <td className="py-2 px-2 text-right">6.7</td>
+                <td className="py-2 px-2 text-right">(2.8)</td>
+                <td className="py-2 px-2 text-right">(1.9)</td>
+                <td className="py-2 pl-2 text-right">(51.8)</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-2 font-sans text-white font-medium">Diluted EPS (Rs)</td>
+                <td className="py-2 px-2 text-right">n/a</td>
+                <td className="py-2 px-2 text-right">7.55</td>
+                <td className="py-2 px-2 text-right">1.36</td>
+                <td className="py-2 px-2 text-right">38.49</td>
+                <td className="py-2 pl-2 text-right">68.19</td>
+              </tr>
+            </tbody>
+          </table>
+          <span className="block mt-4 font-mono text-[9px] text-white/40">
+            * FY25 and FY26 are on a continuing operations basis.
+          </span>
+        </div>
+
+        {/* Highlights on the Right */}
+        <div className="lg:col-span-5 flex flex-col gap-4 text-left">
+          <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+            <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-2">
+              Key Insights
+            </span>
+            <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+              Operating Leverage Expansion
             </h4>
             <p className="text-xs text-white/60 leading-relaxed font-light">
-              {p.desc}
+              Despite revenue adjustments in FY25, EBITDA margins expanded significantly to <strong className="text-[#FFB800]">14.2% in FY26*</strong> (from 9.5% in FY22), reflecting improved product mix and high-margin Build-to-Specification (BTS) payloads.
             </p>
-          </motion.div>
-        ))}
+          </div>
+
+          <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+            <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+              PAT and EPS Turnaround
+            </h4>
+            <p className="text-xs text-white/60 leading-relaxed font-light">
+              Profit After Tax (PAT) from continuing operations surged to <strong className="text-[#FFB800]">Rs 100.7 Cr in FY26*</strong> (reversing a loss of Rs 53.5 Cr in FY22), driving diluted EPS to <strong className="text-[#FFB800]">Rs 68.19</strong>.
+            </p>
+          </div>
+        </div>
       </div>
+      <div className="h-4" /> {/* Spacer */}
     </div>
   );
 }

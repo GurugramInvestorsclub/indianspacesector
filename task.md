@@ -46,4 +46,5 @@
 - [x] Add premium close-up product photo of Centum microelectronic module on the Centum Origins slide
 - [x] Update the founder profile card image with the correct square founder face photo asset
 - [x] Insert new "Understanding the Business" slide into Centum Electronics case study
+- [x] Update "Understanding the Business" slide layout to show consolidated financials table on the left and key insights on the right, centering the headline at the top
 - [x] Verify full project compiles successfully after all additions
