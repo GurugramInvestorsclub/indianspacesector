@@ -114,7 +114,7 @@ const POLICY_HIGHLIGHTS = [
 
 // Scene 4 — Market projections
 const MARKET_BARS = [
-  { year: "2022", value: 8.4, label: "$8.4B", share: "~2–3% global", pct: 8.4 },
+  { year: "2026", value: 8.4, label: "$8.4B", share: "~2–3% global", pct: 8.4 },
   { year: "2033", value: 44, label: "$44B", share: "~8% global", pct: 44 },
   { year: "2040", value: 100, label: "$100B", share: "~10% global", pct: 100 },
 ];
@@ -227,7 +227,7 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
 
         <div className="grid grid-cols-3 gap-0 border border-white/10 rounded-2xl overflow-hidden font-mono mb-10 w-full max-w-xl">
           {[
-            { val: "$8.4B", label: "Market today (2022)" },
+            { val: "$8.4B", label: "Market today (2026)" },
             { val: "$100B", label: "Target by 2040" },
             { val: "~10%", label: "Global share goal" },
           ].map((s, i) => (
@@ -672,7 +672,7 @@ function Scene4Market({ active }: { active: boolean }) {
           </div>
 
           <p className="text-sm text-white/80 leading-relaxed font-light">
-            From <strong className="text-white">$8.4B</strong> in 2022 (~2–3% of
+            From <strong className="text-white">$8.4B</strong> in 2026 (~2–3% of
             the global space economy) to a projected{" "}
             <strong className="text-white">$44B by 2033</strong> and a long-term{" "}
             <strong className="text-[#FFB800]">$100B by 2040</strong> - roughly
