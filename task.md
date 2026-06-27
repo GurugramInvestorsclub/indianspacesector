@@ -28,5 +28,6 @@
 - [x] Integrate Skyroot Vikram rocket background to the final Thesis slide of the Paradigm Shift chapter
 - [x] Add mouse parallax, floating particles, and slow breathing gradients to the final Thesis slide
 - [x] Move the Timeline of Reform frame from the Value Chain page to the Paradigm Shift page
-- [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 13, Paradigm Shift increased to 8)
+- [x] Move the Government as an Ecosystem Builder (Sovereign Framework) frame from the Value Chain page to the Paradigm Shift page
+- [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 12, Paradigm Shift increased to 9)
 - [x] Verify full project compiles successfully after all additions

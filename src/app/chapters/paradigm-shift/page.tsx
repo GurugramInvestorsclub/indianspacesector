@@ -25,6 +25,10 @@ import {
   Factory,
   TrendingUp,
   Scale,
+  FileText,
+  Coins,
+  Zap,
+  Activity,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -129,20 +133,54 @@ const REFORM_TIMELINE = [
   { year: "Today", title: "400+ Startups", desc: "Venture backed commercial acceleration across all layers." },
 ];
 
+const GOV_CARDS = [
+  {
+    title: "Indian Space Policy 2023",
+    desc: "Establishes a comprehensive framework for private players and outlines distinct roles.",
+    detail: "The policy clarifies that ISRO will transition out of commercial operations to focus on advanced research, leaving satellite communications and launcher markets open to private firms.",
+    icon: FileText,
+  },
+  {
+    title: "IN-SPACe",
+    desc: "Operates as a single window regulatory clearing agency for all private launches.",
+    detail: "IN-SPACe permits, authorizes, and facilitates the use of ISRO launch facilities, test stands, and clean rooms by private companies under non-discriminatory leases.",
+    icon: Landmark,
+  },
+  {
+    title: "NSIL",
+    desc: "Acts as the commercial arm to commercialize public space technologies and launch missions.",
+    detail: "New Space India Limited manages commercial rocket launches, coordinates technology transfers, and interfaces with global buyers seeking Indian orbital capabilities.",
+    icon: Coins,
+  },
+  {
+    title: "FDI Liberalisation",
+    desc: "Permits up to 100 percent foreign investment to spark interest from global venture funds.",
+    detail: "Foreign investment limits are raised to 74 percent for satellite manufacturing and 49 percent for launch systems without government routes, and 100 percent for components.",
+    icon: Zap,
+  },
+  {
+    title: "Technology Adoption Fund",
+    desc: "A strategic financial reserve designated to seed early stage space research.",
+    detail: "A dedicated sovereign fund designed to bridge the funding gap for deep tech hardware startups undertaking high-risk research and developmental cycles.",
+    icon: Activity,
+  },
+];
+
 // ---------------------------------------------------------------------------
 // FRAME CONFIG
 // ---------------------------------------------------------------------------
-const TOTAL_FRAMES = 8;
+const TOTAL_FRAMES = 9;
 
 const PRESENTATION_SCENES = [
-  { id: "hero", name: "Tactical Briefing", label: "01 / 08", startFrame: 0, endFrame: 0 },
-  { id: "why-critical", name: "Why Space Became Critical", label: "02 / 08", startFrame: 1, endFrame: 1 },
-  { id: "ecosystem", name: "Ecosystem Architecture", label: "03 / 08", startFrame: 2, endFrame: 2 },
-  { id: "timeline", name: "Timeline of Reform", label: "04 / 08", startFrame: 3, endFrame: 3 },
-  { id: "fdi-table", name: "FDI Sub-Sector Caps", label: "05 / 08", startFrame: 4, endFrame: 4 },
-  { id: "fdi-highlights", name: "FDI Policy Highlights", label: "06 / 08", startFrame: 5, endFrame: 5 },
-  { id: "market-trajectory", name: "Market Size & Projections", label: "07 / 08", startFrame: 6, endFrame: 6 },
-  { id: "thesis", name: "The Thesis", label: "08 / 08", startFrame: 7, endFrame: 7 },
+  { id: "hero", name: "Tactical Briefing", label: "01 / 09", startFrame: 0, endFrame: 0 },
+  { id: "why-critical", name: "Why Space Became Critical", label: "02 / 09", startFrame: 1, endFrame: 1 },
+  { id: "ecosystem", name: "Ecosystem Architecture", label: "03 / 09", startFrame: 2, endFrame: 2 },
+  { id: "timeline", name: "Timeline of Reform", label: "04 / 09", startFrame: 3, endFrame: 3 },
+  { id: "gov-builder", name: "Sovereign Framework", label: "05 / 09", startFrame: 4, endFrame: 4 },
+  { id: "fdi-table", name: "FDI Sub-Sector Caps", label: "06 / 09", startFrame: 5, endFrame: 5 },
+  { id: "fdi-highlights", name: "FDI Policy Highlights", label: "07 / 09", startFrame: 6, endFrame: 6 },
+  { id: "market-trajectory", name: "Market Size & Projections", label: "08 / 09", startFrame: 7, endFrame: 7 },
+  { id: "thesis", name: "The Thesis", label: "09 / 09", startFrame: 8, endFrame: 8 },
 ];
 
 // ---------------------------------------------------------------------------
@@ -572,11 +610,77 @@ function SceneTimeline({ active }: { active: boolean }) {
   );
 }
 
+// 4. Government as an Ecosystem Builder Slide
+function SceneGovBuilder({ active }: { active: boolean }) {
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full py-16 md:py-8 overflow-y-auto no-scrollbar">
+      <SceneHeading sub="04. INSTITUTIONAL ENABLEMENT" main="Government as an Ecosystem Builder" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
+        State agencies are moving from primary system builders to market facilitating operators.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 pointer-events-auto max-w-5xl mx-auto w-full">
+        {GOV_CARDS.map((card, idx) => {
+          const Icon = card.icon;
+          const isSelected = selectedCard === idx;
+
+          return (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 18 }}
+              animate={active ? { opacity: 1, y: 0 } : { opacity: 0 }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              onClick={() => setSelectedCard(isSelected ? null : idx)}
+              className={`group flex flex-col justify-between p-5 bg-[#0a0a14]/65 border hover:border-[#FFB800]/40 rounded-xl transition-all duration-300 relative overflow-hidden text-left shadow-lg cursor-pointer h-[260px] ${
+                isSelected ? "border-[#FFB800] shadow-[0_0_20px_rgba(255,184,0,0.1)]" : "border-white/10"
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="p-2.5 rounded-lg bg-white/[0.03] group-hover:bg-[#FFB800]/10 border border-white/5 group-hover:border-[#FFB800]/20 text-white/60 group-hover:text-[#FFB800] transition-colors duration-300">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-[8px] text-white/40 tracking-wider">
+                    REFORM 0{idx + 1}
+                  </span>
+                </div>
+
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2 group-hover:text-[#FFB800] transition-colors">
+                  {card.title}
+                </h3>
+
+                <p className="text-[10px] text-white/60 leading-normal font-light">
+                  {card.desc}
+                </p>
+
+                {/* Stretched detail view */}
+                <div className={`mt-3 pt-3 border-t border-white/5 transition-all duration-300 overflow-hidden ${
+                  isSelected ? "opacity-100 h-20" : "opacity-0 h-0"
+                }`}>
+                  <p className="text-[9px] text-white/80 leading-normal font-light">
+                    {card.detail}
+                  </p>
+                </div>
+              </div>
+
+              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-widest font-bold pt-2 mt-auto block">
+                {isSelected ? "Show less -" : "Learn more +"}
+              </span>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function Scene3FDI({ showPart }: { showPart: "table" | "highlights" }) {
   return (
     <>
       <SceneHeading
-        sub="03. REGULATORY LANDSCAPE"
+        sub="05. REGULATORY LANDSCAPE"
         main="Liberalization & the FDI Framework"
       />
 
@@ -661,7 +765,7 @@ function Scene4Market({ active }: { active: boolean }) {
   return (
     <>
       <SceneHeading
-        sub="04. MARKET TRAJECTORY"
+        sub="06. MARKET TRAJECTORY"
         main="Market Size & Projections"
       />
 
@@ -1059,30 +1163,33 @@ export default function ParadigmShiftPage() {
     return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
   };
 
-  // ---- scroll transforms (8 frames, each spans 1/8 ~ 0.125 width) ----
-  const heroOpacity = useTransform(progress, [0.0, 0.08, 0.125], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.125], [1, 0.96]);
+  // ---- scroll transforms (9 frames, each spans 1/9 ~ 0.1111 width) ----
+  const heroOpacity = useTransform(progress, [0.0, 0.07, 0.1111], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.1111], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.08, 0.125, 0.21, 0.25], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.08, 0.125, 0.21, 0.25], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.07, 0.1111, 0.18, 0.2222], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.07, 0.1111, 0.18, 0.2222], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.21, 0.25, 0.33, 0.375], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.21, 0.25, 0.33, 0.375], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.18, 0.2222, 0.29, 0.3333], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.18, 0.2222, 0.29, 0.3333], [24, 0, 0, -24]);
 
-  const s3TimelineOpacity = useTransform(progress, [0.33, 0.375, 0.46, 0.50], [0, 1, 1, 0]);
-  const s3TimelineY = useTransform(progress, [0.33, 0.375, 0.46, 0.50], [24, 0, 0, -24]);
+  const s3TimelineOpacity = useTransform(progress, [0.29, 0.3333, 0.40, 0.4444], [0, 1, 1, 0]);
+  const s3TimelineY = useTransform(progress, [0.29, 0.3333, 0.40, 0.4444], [24, 0, 0, -24]);
 
-  const s3aOpacity = useTransform(progress, [0.46, 0.50, 0.58, 0.625], [0, 1, 1, 0]);
-  const s3aY = useTransform(progress, [0.46, 0.50, 0.58, 0.625], [24, 0, 0, -24]);
+  const s3aOpacity = useTransform(progress, [0.40, 0.4444, 0.51, 0.5556], [0, 1, 1, 0]);
+  const s3aY = useTransform(progress, [0.40, 0.4444, 0.51, 0.5556], [24, 0, 0, -24]);
 
-  const s3bOpacity = useTransform(progress, [0.58, 0.625, 0.71, 0.75], [0, 1, 1, 0]);
-  const s3bY = useTransform(progress, [0.58, 0.625, 0.71, 0.75], [24, 0, 0, -24]);
+  const s3bOpacity = useTransform(progress, [0.51, 0.5556, 0.62, 0.6667], [0, 1, 1, 0]);
+  const s3bY = useTransform(progress, [0.51, 0.5556, 0.62, 0.6667], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.71, 0.75, 0.83, 0.875], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.71, 0.75, 0.83, 0.875], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.62, 0.6667, 0.73, 0.7778], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.62, 0.6667, 0.73, 0.7778], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.83, 0.875, 1.0], [0, 1, 1]);
-  const s5Y = useTransform(progress, [0.83, 0.875, 1.0], [24, 0, 0]);
+  const s5Opacity = useTransform(progress, [0.73, 0.7778, 0.84, 0.8889], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.73, 0.7778, 0.84, 0.8889], [24, 0, 0, -24]);
+
+  const s6Opacity = useTransform(progress, [0.84, 0.8889, 1.0], [0, 1, 1]);
+  const s6Y = useTransform(progress, [0.84, 0.8889, 1.0], [24, 0, 0]);
 
   // ---- interaction state ----
   const [activeCatalyst, setActiveCatalyst] = useState(0);
@@ -1244,7 +1351,7 @@ export default function ParadigmShiftPage() {
       )}
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[800vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[900vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1268,10 +1375,11 @@ export default function ParadigmShiftPage() {
                   <Scene2Ecosystem activePillar={activePillar} setActivePillar={setActivePillar} />
                 )}
                 {currentFrameIndex === 3 && <SceneTimeline active={true} />}
-                {currentFrameIndex === 4 && <Scene3FDI showPart="table" />}
-                {currentFrameIndex === 5 && <Scene3FDI showPart="highlights" />}
-                {currentFrameIndex === 6 && <Scene4Market active={true} />}
-                {currentFrameIndex === 7 && <Scene5Thesis presentationActive />}
+                {currentFrameIndex === 4 && <SceneGovBuilder active={true} />}
+                {currentFrameIndex === 5 && <Scene3FDI showPart="table" />}
+                {currentFrameIndex === 6 && <Scene3FDI showPart="highlights" />}
+                {currentFrameIndex === 7 && <Scene4Market active={true} />}
+                {currentFrameIndex === 8 && <Scene5Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1319,7 +1427,7 @@ export default function ParadigmShiftPage() {
                   currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene3FDI showPart="table" />
+                <SceneGovBuilder active={currentFrameIndex === 4} />
               </motion.div>
 
               <motion.div
@@ -1328,18 +1436,27 @@ export default function ParadigmShiftPage() {
                   currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene3FDI showPart="highlights" />
+                <Scene3FDI showPart="table" />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
-                className={`${SLIDE_BASE} text-center pointer-events-none`}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
               >
-                <Scene4Market active={currentFrameIndex === 6} />
+                <Scene3FDI showPart="highlights" />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
+                className={`${SLIDE_BASE} text-center pointer-events-none`}
+              >
+                <Scene4Market active={currentFrameIndex === 7} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s6Opacity, y: s6Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
                 <Scene5Thesis presentationActive={false} />

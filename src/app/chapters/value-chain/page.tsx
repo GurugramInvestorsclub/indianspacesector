@@ -202,22 +202,21 @@ const GOV_CARDS = [
   },
 ];
 
-const TOTAL_FRAMES = 13;
+const TOTAL_FRAMES = 12;
 
 const VALUE_CHAIN_SCENES = [
-  { id: "hero", name: "Value Chain Intro", label: "01 / 13", startFrame: 0, endFrame: 0 },
-  { id: "changed", name: "The New Space Network", label: "02 / 13", startFrame: 1, endFrame: 1 },
-  { id: "reframe", name: "Downstream Focus", label: "03 / 13", startFrame: 2, endFrame: 2 },
-  { id: "stack", name: "Commercial Value Chain", label: "04 / 13", startFrame: 3, endFrame: 3 },
-  { id: "revenue", name: "Revenue Structure", label: "05 / 13", startFrame: 4, endFrame: 4 },
-  { id: "structure", name: "Complexity Insight", label: "06 / 13", startFrame: 5, endFrame: 5 },
-  { id: "india", name: "India Opportunity", label: "07 / 13", startFrame: 6, endFrame: 6 },
-  { id: "gov-builder", name: "Sovereign Framework", label: "08 / 13", startFrame: 7, endFrame: 7 },
-  { id: "capital", name: "Funding Velocity", label: "09 / 13", startFrame: 8, endFrame: 8 },
-  { id: "why-matters", name: "Value Flow Diagram", label: "10 / 13", startFrame: 9, endFrame: 9 },
-  { id: "policy-innovation", name: "Policy Innovation Flow", label: "11 / 13", startFrame: 10, endFrame: 10 },
-  { id: "startup-explosion", name: "Ecosystem Explosion", label: "12 / 13", startFrame: 11, endFrame: 11 },
-  { id: "thesis", name: "The Chapter Thesis", label: "13 / 13", startFrame: 12, endFrame: 12 },
+  { id: "hero", name: "Value Chain Intro", label: "01 / 12", startFrame: 0, endFrame: 0 },
+  { id: "changed", name: "The New Space Network", label: "02 / 12", startFrame: 1, endFrame: 1 },
+  { id: "reframe", name: "Downstream Focus", label: "03 / 12", startFrame: 2, endFrame: 2 },
+  { id: "stack", name: "Commercial Value Chain", label: "04 / 12", startFrame: 3, endFrame: 3 },
+  { id: "revenue", name: "Revenue Structure", label: "05 / 12", startFrame: 4, endFrame: 4 },
+  { id: "structure", name: "Complexity Insight", label: "06 / 12", startFrame: 5, endFrame: 5 },
+  { id: "india", name: "India Opportunity", label: "07 / 12", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Funding Velocity", label: "08 / 12", startFrame: 7, endFrame: 7 },
+  { id: "why-matters", name: "Value Flow Diagram", label: "09 / 12", startFrame: 8, endFrame: 8 },
+  { id: "policy-innovation", name: "Policy Innovation Flow", label: "10 / 12", startFrame: 9, endFrame: 9 },
+  { id: "startup-explosion", name: "Ecosystem Explosion", label: "11 / 12", startFrame: 10, endFrame: 10 },
+  { id: "thesis", name: "The Chapter Thesis", label: "12 / 12", startFrame: 11, endFrame: 11 },
 ];
 
 const SLIDE_BASE =
@@ -869,71 +868,6 @@ function Scene5India() {
   );
 }
 
-// 8. NEW SECTION: Government as an Ecosystem Builder
-function SceneGovBuilder({ active }: { active: boolean }) {
-  const [selectedCard, setSelectedCard] = useState<number | null>(null);
-
-  return (
-    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full py-16 md:py-8 overflow-y-auto no-scrollbar">
-      <SceneHeading sub="07. Institutional Enablement" main="Government as an Ecosystem Builder" />
-      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
-        State agencies are moving from primary system builders to market facilitating operators.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 pointer-events-auto max-w-5xl mx-auto w-full">
-        {GOV_CARDS.map((card, idx) => {
-          const Icon = card.icon;
-          const isSelected = selectedCard === idx;
-
-          return (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 18 }}
-              animate={active ? { opacity: 1, y: 0 } : { opacity: 0 }}
-              transition={{ duration: 0.45, delay: idx * 0.08 }}
-              onClick={() => setSelectedCard(isSelected ? null : idx)}
-              className={`group flex flex-col justify-between p-5 bg-[#0a0a14]/65 border hover:border-[#FFB800]/40 rounded-xl transition-all duration-300 relative overflow-hidden text-left shadow-lg cursor-pointer h-[260px] ${
-                isSelected ? "border-[#FFB800] shadow-[0_0_20px_rgba(255,184,0,0.1)]" : "border-white/10"
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="p-2.5 rounded-lg bg-white/[0.03] group-hover:bg-[#FFB800]/10 border border-white/5 group-hover:border-[#FFB800]/20 text-white/60 group-hover:text-[#FFB800] transition-colors duration-300">
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  <span className="font-mono text-[8px] text-white/40 tracking-wider">
-                    REFORM 0{idx + 1}
-                  </span>
-                </div>
-
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2 group-hover:text-[#FFB800] transition-colors">
-                  {card.title}
-                </h3>
-
-                <p className="text-[10px] text-white/60 leading-normal font-light">
-                  {card.desc}
-                </p>
-
-                {/* Stretched detail view */}
-                <div className={`mt-3 pt-3 border-t border-white/5 transition-all duration-300 overflow-hidden ${
-                  isSelected ? "opacity-100 h-20" : "opacity-0 h-0"
-                }`}>
-                  <p className="text-[9px] text-white/80 leading-normal font-light">
-                    {card.detail}
-                  </p>
-                </div>
-              </div>
-
-              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-widest font-bold pt-2 mt-auto block">
-                {isSelected ? "Show less -" : "Learn more +"}
-              </span>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
 
 // 9. NEW SECTION: Capital is Flowing
 function SceneCapitalFlowing({ active }: { active: boolean }) {
@@ -1273,45 +1207,42 @@ export default function ValueChainPage() {
   // Interactive value chain active stage
   const [activeStage, setActiveStage] = useState("launch");
 
-  // Scroll transforms for 13 frames (each spans 1/13 ~ 0.0769 width)
-  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0769], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.0769], [1, 0.96]);
+  // Scroll transforms for 12 frames (each spans 1/12 ~ 0.0833 width)
+  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0833], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.0833], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.05, 0.0769, 0.12, 0.1538], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.05, 0.0769, 0.12, 0.1538], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.05, 0.0833, 0.13, 0.1667], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.05, 0.0833, 0.13, 0.1667], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.13, 0.1667, 0.21, 0.25], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.13, 0.1667, 0.21, 0.25], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.20, 0.2308, 0.28, 0.3077], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.20, 0.2308, 0.28, 0.3077], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.21, 0.25, 0.30, 0.3333], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.21, 0.25, 0.30, 0.3333], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.28, 0.3077, 0.35, 0.3846], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.28, 0.3077, 0.35, 0.3846], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.30, 0.3333, 0.38, 0.4167], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.30, 0.3333, 0.38, 0.4167], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.38, 0.4167, 0.46, 0.50], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.38, 0.4167, 0.46, 0.50], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.43, 0.4615, 0.51, 0.5385], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.43, 0.4615, 0.51, 0.5385], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, [0.46, 0.50, 0.55, 0.5833], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.46, 0.50, 0.55, 0.5833], [24, 0, 0, -24]);
 
-  const s7Opacity = useTransform(progress, [0.51, 0.5385, 0.59, 0.6154], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.51, 0.5385, 0.59, 0.6154], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, [0.55, 0.5833, 0.63, 0.6667], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.55, 0.5833, 0.63, 0.6667], [24, 0, 0, -24]);
 
-  const s8Opacity = useTransform(progress, [0.59, 0.6154, 0.66, 0.6923], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.59, 0.6154, 0.66, 0.6923], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, [0.63, 0.6667, 0.71, 0.75], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.63, 0.6667, 0.71, 0.75], [24, 0, 0, -24]);
 
-  const s9Opacity = useTransform(progress, [0.66, 0.6923, 0.74, 0.7692], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.66, 0.6923, 0.74, 0.7692], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, [0.71, 0.75, 0.80, 0.8333], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.71, 0.75, 0.80, 0.8333], [24, 0, 0, -24]);
 
-  const s10Opacity = useTransform(progress, [0.74, 0.7692, 0.82, 0.8462], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.74, 0.7692, 0.82, 0.8462], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, [0.80, 0.8333, 0.88, 0.9167], [0, 1, 1, 0]);
+  const s10Y = useTransform(progress, [0.80, 0.8333, 0.88, 0.9167], [24, 0, 0, -24]);
 
-  const s11Opacity = useTransform(progress, [0.82, 0.8462, 0.89, 0.9231], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.82, 0.8462, 0.89, 0.9231], [24, 0, 0, -24]);
-
-  const s12Opacity = useTransform(progress, [0.89, 0.9231, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [0.89, 0.9231, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, [0.88, 0.9167, 1.0], [0, 1, 1]);
+  const s11Y = useTransform(progress, [0.88, 0.9167, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1319,7 +1250,7 @@ export default function ValueChainPage() {
       <PresentationChrome controller={p} scenes={VALUE_CHAIN_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1200vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1344,12 +1275,11 @@ export default function ValueChainPage() {
                 {currentFrameIndex === 4 && <Scene3Revenue active={true} />}
                 {currentFrameIndex === 5 && <Scene4Structure />}
                 {currentFrameIndex === 6 && <Scene5India />}
-                {currentFrameIndex === 7 && <SceneGovBuilder active={true} />}
-                {currentFrameIndex === 8 && <SceneCapitalFlowing active={true} />}
-                {currentFrameIndex === 9 && <SceneWhyMatters active={true} />}
-                {currentFrameIndex === 10 && <ScenePolicyInnovation />}
-                {currentFrameIndex === 11 && <SceneStartupExplosion active={true} />}
-                {currentFrameIndex === 12 && <Scene6Thesis presentationActive />}
+                {currentFrameIndex === 7 && <SceneCapitalFlowing active={true} />}
+                {currentFrameIndex === 8 && <SceneWhyMatters active={true} />}
+                {currentFrameIndex === 9 && <ScenePolicyInnovation />}
+                {currentFrameIndex === 10 && <SceneStartupExplosion active={true} />}
+                {currentFrameIndex === 11 && <Scene6Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1416,7 +1346,7 @@ export default function ValueChainPage() {
                   currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneGovBuilder active={currentFrameIndex === 7} />
+                <SceneCapitalFlowing active={currentFrameIndex === 7} />
               </motion.div>
 
               <motion.div
@@ -1425,36 +1355,27 @@ export default function ValueChainPage() {
                   currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneCapitalFlowing active={currentFrameIndex === 8} />
+                <SceneWhyMatters active={currentFrameIndex === 8} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <SceneWhyMatters active={currentFrameIndex === 9} />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-none`}
               >
                 <ScenePolicyInnovation />
               </motion.div>
 
               <motion.div
-                style={{ opacity: s11Opacity, y: s11Y }}
+                style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneStartupExplosion active={currentFrameIndex === 11} />
+                <SceneStartupExplosion active={currentFrameIndex === 10} />
               </motion.div>
 
               <motion.div
-                style={{ opacity: s12Opacity, y: s12Y }}
+                style={{ opacity: s11Opacity, y: s11Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
                 <Scene6Thesis presentationActive={false} />
