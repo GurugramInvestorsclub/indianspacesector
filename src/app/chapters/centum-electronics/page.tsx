@@ -45,9 +45,9 @@ const CENTUM_SCENES = [
   { id: "standalone-segments", name: "Standalone Business - Segment Mix", label: "06 / 21", startFrame: 5, endFrame: 5 },
   { id: "segment-capabilities", name: "Segment Capabilities - EMS vs BTS", label: "07 / 21", startFrame: 6, endFrame: 6 },
   { id: "standalone-orderbook", name: "Standalone Order Book - By Segment", label: "08 / 21", startFrame: 7, endFrame: 7 },
-  { id: "standalone-capital", name: "Standalone Capital & Working Capital", label: "09 / 21", startFrame: 8, endFrame: 8 },
-  { id: "standalone-valuations", name: "Valuations", label: "10 / 21", startFrame: 9, endFrame: 9 },
-  { id: "evolution", name: "Value Chain Evolution", label: "11 / 21", startFrame: 10, endFrame: 10 },
+  { id: "evolution", name: "Value Chain Evolution", label: "09 / 21", startFrame: 8, endFrame: 8 },
+  { id: "standalone-capital", name: "Standalone Capital & Working Capital", label: "10 / 21", startFrame: 9, endFrame: 9 },
+  { id: "standalone-valuations", name: "Valuations", label: "11 / 21", startFrame: 10, endFrame: 10 },
   { id: "model", name: "EMS vs BTS Business Model", label: "12 / 21", startFrame: 11, endFrame: 11 },
   { id: "financials", name: "Financial Growth", label: "13 / 21", startFrame: 12, endFrame: 12 },
   { id: "mix", name: "Revenue Segmentation", label: "14 / 21", startFrame: 13, endFrame: 13 },
@@ -1852,14 +1852,14 @@ export default function CentumElectronicsPage() {
   const sOrderSegOpacity = useTransform(progress, fr(7), FADE);
   const sOrderSegY = useTransform(progress, fr(7), RISE);
 
-  const sCapitalOpacity = useTransform(progress, fr(8), FADE);
-  const sCapitalY = useTransform(progress, fr(8), RISE);
+  const s2Opacity = useTransform(progress, fr(8), FADE);
+  const s2Y = useTransform(progress, fr(8), RISE);
 
-  const sValuationsOpacity = useTransform(progress, fr(9), FADE);
-  const sValuationsY = useTransform(progress, fr(9), RISE);
+  const sCapitalOpacity = useTransform(progress, fr(9), FADE);
+  const sCapitalY = useTransform(progress, fr(9), RISE);
 
-  const s2Opacity = useTransform(progress, fr(10), FADE);
-  const s2Y = useTransform(progress, fr(10), RISE);
+  const sValuationsOpacity = useTransform(progress, fr(10), FADE);
+  const sValuationsY = useTransform(progress, fr(10), RISE);
 
   const s3Opacity = useTransform(progress, fr(11), FADE);
   const s3Y = useTransform(progress, fr(11), RISE);
@@ -1920,9 +1920,9 @@ export default function CentumElectronicsPage() {
                 {currentFrameIndex === 5 && <SceneStandaloneSegments />}
                 {currentFrameIndex === 6 && <SceneSegmentCapabilities />}
                 {currentFrameIndex === 7 && <SceneStandaloneOrderBook />}
-                {currentFrameIndex === 8 && <SceneStandaloneCapital />}
-                {currentFrameIndex === 9 && <SceneStandaloneValuations />}
-                {currentFrameIndex === 10 && <SceneEvolution active={true} />}
+                {currentFrameIndex === 8 && <SceneEvolution active={true} />}
+                {currentFrameIndex === 9 && <SceneStandaloneCapital />}
+                {currentFrameIndex === 10 && <SceneStandaloneValuations />}
                 {currentFrameIndex === 11 && <SceneBusinessModel />}
                 {currentFrameIndex === 12 && <SceneFinancials active={true} />}
                 {currentFrameIndex === 13 && <SceneRevenueMix />}
@@ -2011,9 +2011,18 @@ export default function CentumElectronicsPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: sCapitalOpacity, y: sCapitalY }}
+                style={{ opacity: s2Opacity, y: s2Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneEvolution active={currentFrameIndex === 8} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: sCapitalOpacity, y: sCapitalY }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneStandaloneCapital />
@@ -2022,19 +2031,10 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: sValuationsOpacity, y: sValuationsY }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <SceneStandaloneValuations />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s2Opacity, y: s2Y }}
-                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneEvolution active={currentFrameIndex === 10} />
+                <SceneStandaloneValuations />
               </motion.div>
 
               <motion.div
