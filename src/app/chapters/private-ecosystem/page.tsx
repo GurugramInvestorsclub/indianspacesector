@@ -860,7 +860,7 @@ function SceneNetworkStack() {
   );
 }
 
-function SceneConclusion() {
+function SceneConclusion({ presentationActive }: { presentationActive: boolean }) {
   const logos = [
     "Skyroot", "Agnikul", "Pixxel", "GalaxEye", "Dhruva", "Bellatrix", 
     "Digantara", "EtherealX", "XDLINX", "PierSight", "KaleidEO", 
@@ -916,35 +916,37 @@ function SceneConclusion() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-4xl text-center px-4 flex flex-col items-center">
+      <div className="relative z-10 max-w-4xl text-center px-4 flex flex-col items-center justify-center h-full mx-auto pb-12">
         <SceneLabel>The Conclusion</SceneLabel>
 
         <h2
-          className="text-2xl sm:text-4xl lg:text-5xl font-light tracking-wide text-white max-w-3xl leading-snug mb-6 relative z-10"
+          className="text-xl sm:text-3xl lg:text-4xl font-light tracking-wide text-white max-w-3xl leading-snug mb-4 relative z-10"
         >
           The next decade won&apos;t be defined by one company. <br />
           <span className="text-[#FFB800] font-bold">It will be defined by an ecosystem.</span>
         </h2>
 
-        <p className="text-xs sm:text-sm text-white/60 max-w-xl leading-relaxed mb-10 font-light relative z-10 text-center">
+        <p className="text-[11px] sm:text-xs text-white/60 max-w-xl leading-relaxed mb-6 font-light relative z-10 text-center">
           Liberalized commercial frameworks, collaborative state assets under IN-SPACe, and private venture integration are converging. India&apos;s space sector is set to represent the primary high-yield logistics infrastructure of the global orbit.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10 pointer-events-auto">
-          <ChapterNavButton
-            href="/chapters/satellites"
-            label="Back to Satellites"
-            variant="ghost"
-            direction="back"
-          />
-          <Link
-            href="/"
-            className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Return to Main Deck
-          </Link>
-        </div>
+        {!presentationActive && (
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10 pointer-events-auto">
+            <ChapterNavButton
+              href="/chapters/satellites"
+              label="Back to Satellites"
+              variant="ghost"
+              direction="back"
+            />
+            <Link
+              href="/"
+              className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Return to Main Deck
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
@@ -1063,7 +1065,7 @@ export default function PrivateEcosystemPage() {
                 )}
                 {currentFrameIndex === 8 && <SceneMagnificentSeven />}
                 {currentFrameIndex === 9 && <SceneNetworkStack />}
-                {currentFrameIndex === 10 && <SceneConclusion />}
+                {currentFrameIndex === 10 && <SceneConclusion presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1193,7 +1195,7 @@ export default function PrivateEcosystemPage() {
                 style={{ opacity: s10Opacity, scale: s10Scale }}
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none"
               >
-                <SceneConclusion />
+                <SceneConclusion presentationActive={false} />
               </motion.div>
             </>
           )}
