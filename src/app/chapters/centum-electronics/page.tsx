@@ -34,25 +34,26 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 16;
+const TOTAL_FRAMES = 17;
 
 const CENTUM_SCENES = [
-  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 16", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 16", startFrame: 1, endFrame: 1 },
-  { id: "business-understanding-1", name: "Understanding the Business - Financials", label: "03 / 16", startFrame: 2, endFrame: 2 },
-  { id: "business-understanding-2", name: "Understanding the Business - Insights", label: "04 / 16", startFrame: 3, endFrame: 3 },
-  { id: "standalone", name: "Standalone Business", label: "05 / 16", startFrame: 4, endFrame: 4 },
-  { id: "evolution", name: "Value Chain Evolution", label: "06 / 16", startFrame: 5, endFrame: 5 },
-  { id: "model", name: "EMS vs BTS Business Model", label: "07 / 16", startFrame: 6, endFrame: 6 },
-  { id: "financials", name: "Financial Growth", label: "08 / 16", startFrame: 7, endFrame: 7 },
-  { id: "mix", name: "Revenue Segmentation", label: "09 / 16", startFrame: 8, endFrame: 8 },
-  { id: "orderbook", name: "Order Book Backlog", label: "10 / 16", startFrame: 9, endFrame: 9 },
-  { id: "technology", name: "Exploded Payload Tech", label: "11 / 16", startFrame: 10, endFrame: 10 },
-  { id: "space", name: "Orbital Integration", label: "12 / 16", startFrame: 11, endFrame: 11 },
-  { id: "defence", name: "Defense Systems", label: "13 / 16", startFrame: 12, endFrame: 12 },
-  { id: "efficiency", name: "Capital Metrics", label: "14 / 16", startFrame: 13, endFrame: 13 },
-  { id: "valuation", name: "Valuation Explorer", label: "15 / 16", startFrame: 14, endFrame: 14 },
-  { id: "thesis", name: "Investment Climax", label: "16 / 16", startFrame: 15, endFrame: 15 },
+  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 17", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 17", startFrame: 1, endFrame: 1 },
+  { id: "business-understanding-1", name: "Understanding the Business - Financials", label: "03 / 17", startFrame: 2, endFrame: 2 },
+  { id: "business-understanding-2", name: "Understanding the Business - Insights", label: "04 / 17", startFrame: 3, endFrame: 3 },
+  { id: "standalone", name: "Standalone Business - P&L", label: "05 / 17", startFrame: 4, endFrame: 4 },
+  { id: "standalone-segments", name: "Standalone Business - Segment Mix", label: "06 / 17", startFrame: 5, endFrame: 5 },
+  { id: "evolution", name: "Value Chain Evolution", label: "07 / 17", startFrame: 6, endFrame: 6 },
+  { id: "model", name: "EMS vs BTS Business Model", label: "08 / 17", startFrame: 7, endFrame: 7 },
+  { id: "financials", name: "Financial Growth", label: "09 / 17", startFrame: 8, endFrame: 8 },
+  { id: "mix", name: "Revenue Segmentation", label: "10 / 17", startFrame: 9, endFrame: 9 },
+  { id: "orderbook", name: "Order Book Backlog", label: "11 / 17", startFrame: 10, endFrame: 10 },
+  { id: "technology", name: "Exploded Payload Tech", label: "12 / 17", startFrame: 11, endFrame: 11 },
+  { id: "space", name: "Orbital Integration", label: "13 / 17", startFrame: 12, endFrame: 12 },
+  { id: "defence", name: "Defense Systems", label: "14 / 17", startFrame: 13, endFrame: 13 },
+  { id: "efficiency", name: "Capital Metrics", label: "15 / 17", startFrame: 14, endFrame: 14 },
+  { id: "valuation", name: "Valuation Explorer", label: "16 / 17", startFrame: 15, endFrame: 15 },
+  { id: "thesis", name: "Investment Climax", label: "17 / 17", startFrame: 16, endFrame: 16 },
 ];
 
 const SLIDE_BASE =
@@ -450,9 +451,46 @@ function SceneBusinessUnderstanding({ active, showInsights = false }: { active: 
   );
 }
 
-// 1.6. Section 1.6: Standalone Business
-function SceneStandaloneBusiness() {
-  const rows: { label: string; v: [string, string, string, string]; sub?: boolean; emphasis?: boolean }[] = [
+// Shared types/renderer for the standalone financial tables, so every standalone
+// frame renders rows with identical styling.
+type FinRow = { label: string; v: [string, string, string, string]; sub?: boolean; emphasis?: boolean };
+
+function FinTableRows({ rows }: { rows: FinRow[] }) {
+  return (
+    <tbody className="divide-y divide-white/5">
+      {rows.map((r) => (
+        <tr key={r.label} className={r.emphasis ? "bg-[#FFB800]/[0.04]" : ""}>
+          <td
+            className={`py-1.5 pr-2 font-sans ${
+              r.sub
+                ? "text-white/45 font-light pl-3"
+                : r.emphasis
+                  ? "text-white font-bold"
+                  : "text-white font-medium"
+            }`}
+          >
+            {r.label}
+          </td>
+          {r.v.map((val, i) => (
+            <td
+              key={i}
+              className={`py-1.5 text-right tabular-nums ${i === 3 ? "pl-2" : "px-2"} ${
+                r.sub ? "text-white/45" : r.emphasis ? "text-white font-bold" : "text-white/80"
+              }`}
+            >
+              {val}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  );
+}
+
+// Table 3 — the standalone P&L. Rendered identically (same width via its grid
+// column, same internals) on every standalone frame so its dimensions match.
+function StandalonePLCard() {
+  const rows: FinRow[] = [
     { label: "Operational revenue", v: ["500.6", "632.8", "776.1", "973.1"] },
     { label: "Revenue YoY (%)", v: ["–", "+26.4", "+22.6", "+25.4"], sub: true },
     { label: "EBITDA", v: ["53.6", "78.7", "94.1", "120.9"] },
@@ -470,66 +508,135 @@ function SceneStandaloneBusiness() {
   ];
 
   return (
+    <div className="w-full bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left">
+      <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-1.5">
+        Table 3. Standalone P&amp;L, last 4 years (Rs crore)
+      </h3>
+      <p className="text-[11px] text-white/50 font-light leading-snug mb-4">
+        The standalone entity is the core India business, and the cleaner read on operating performance.
+      </p>
+      <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+        <thead>
+          <tr className="border-b border-white/10 text-white font-bold">
+            <th className="py-2 pr-2 font-sans font-semibold">Line item</th>
+            <th className="py-2 px-2 text-right">FY23</th>
+            <th className="py-2 px-2 text-right">FY24</th>
+            <th className="py-2 px-2 text-right">FY25</th>
+            <th className="py-2 pl-2 text-right">FY26</th>
+          </tr>
+        </thead>
+        <FinTableRows rows={rows} />
+      </table>
+      <span className="block mt-4 font-mono text-[9px] text-white/40">
+        FY26 reported profit reflects a one-time exceptional charge from the overseas restructuring.
+      </span>
+    </div>
+  );
+}
+
+function StandaloneFrameShell({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
     <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar">
       <div className="my-auto w-full flex flex-col gap-5">
         <div className="text-center w-full flex flex-col items-center">
-          <SceneLabel>01.6. Standalone Entity</SceneLabel>
+          <SceneLabel>{label}</SceneLabel>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase">
             Standalone Business
           </h2>
         </div>
-
-        <div className="max-w-3xl mx-auto w-full bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 sm:p-6 backdrop-blur-sm overflow-x-auto text-left pointer-events-auto">
-          <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-1.5">
-            Table 3. Standalone P&amp;L, last 4 years (Rs crore)
-          </h3>
-          <p className="text-[11px] text-white/50 font-light leading-snug mb-4">
-            The standalone entity is the core India business, and the cleaner read on operating performance.
-          </p>
-          <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
-            <thead>
-              <tr className="border-b border-white/10 text-white font-bold">
-                <th className="py-2 pr-2 font-sans font-semibold">Line item</th>
-                <th className="py-2 px-2 text-right">FY23</th>
-                <th className="py-2 px-2 text-right">FY24</th>
-                <th className="py-2 px-2 text-right">FY25</th>
-                <th className="py-2 pl-2 text-right">FY26</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5">
-              {rows.map((r) => (
-                <tr key={r.label} className={r.emphasis ? "bg-[#FFB800]/[0.04]" : ""}>
-                  <td
-                    className={`py-1.5 pr-2 font-sans ${
-                      r.sub
-                        ? "text-white/45 font-light pl-3"
-                        : r.emphasis
-                          ? "text-white font-bold"
-                          : "text-white font-medium"
-                    }`}
-                  >
-                    {r.label}
-                  </td>
-                  {r.v.map((val, i) => (
-                    <td
-                      key={i}
-                      className={`py-1.5 text-right tabular-nums ${i === 3 ? "pl-2" : "px-2"} ${
-                        r.sub ? "text-white/45" : r.emphasis ? "text-white font-bold" : "text-white/80"
-                      }`}
-                    >
-                      {val}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <span className="block mt-4 font-mono text-[9px] text-white/40">
-            FY26 reported profit reflects a one-time exceptional charge from the overseas restructuring.
-          </span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-start pointer-events-auto">
+          {/* Table 3 — left, identical across standalone frames */}
+          <div className="lg:col-span-7">
+            <StandalonePLCard />
+          </div>
+          {/* Frame-specific content — right */}
+          <div className="lg:col-span-5 flex flex-col gap-4">{children}</div>
         </div>
       </div>
     </div>
+  );
+}
+
+// 1.6. Section 1.6: Standalone Business (P&L)
+function SceneStandaloneBusiness() {
+  return (
+    <StandaloneFrameShell label="01.6. Standalone Entity">
+      <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+        <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-2">
+          Key Read
+        </span>
+        <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+          Clean Operating Story
+        </h4>
+        <p className="text-xs text-white/60 leading-relaxed font-light">
+          Standalone revenue nearly doubled from <strong className="text-[#FFB800]">Rs 500.6 Cr (FY23)</strong> to <strong className="text-[#FFB800]">Rs 973.1 Cr (FY26)</strong>, with EBITDA margins holding around 12% — the core India business compounds steadily.
+        </p>
+      </div>
+
+      <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+        <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+          FY26 Exceptional Charge
+        </h4>
+        <p className="text-xs text-white/60 leading-relaxed font-light">
+          Pre-exceptional PBT reached <strong className="text-[#FFB800]">Rs 100.4 Cr</strong>, but a one-time <strong className="text-[#FFB800]">Rs 203.3 Cr</strong> charge from the overseas restructuring pushed reported PAT to a <strong className="text-[#FFB800]">Rs 117.1 Cr</strong> loss.
+        </p>
+      </div>
+    </StandaloneFrameShell>
+  );
+}
+
+// 1.7. Section 1.7: Standalone Business (Revenue by Segment)
+function SceneStandaloneSegments() {
+  const mix: FinRow[] = [
+    { label: "EMS", v: ["70.7", "78.8", "74.0", "71.5"] },
+    { label: "BTS", v: ["29.3", "21.2", "26.0", "28.5"] },
+  ];
+  const absolute: FinRow[] = [
+    { label: "EMS revenue", v: ["353.8", "498.5", "574.3", "696.1"] },
+    { label: "EMS YoY (%)", v: ["–", "+40.9", "+15.2", "+21.2"], sub: true },
+    { label: "BTS revenue", v: ["146.7", "134.3", "201.8", "277.0"] },
+    { label: "BTS YoY (%)", v: ["–", "(8.5)", "+50.3", "+37.3"], sub: true },
+    { label: "Total revenue", v: ["500.5", "632.8", "776.1", "973.1"], emphasis: true },
+  ];
+
+  return (
+    <StandaloneFrameShell label="01.7. Revenue By Segment">
+      <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto">
+        <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3">
+          Table 4. Standalone revenue mix by segment (%)
+        </h3>
+        <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+          <thead>
+            <tr className="border-b border-white/10 text-white font-bold">
+              <th className="py-2 pr-2 font-sans font-semibold">Segment</th>
+              <th className="py-2 px-2 text-right">FY23</th>
+              <th className="py-2 px-2 text-right">FY24</th>
+              <th className="py-2 px-2 text-right">FY25</th>
+              <th className="py-2 pl-2 text-right">FY26</th>
+            </tr>
+          </thead>
+          <FinTableRows rows={mix} />
+        </table>
+      </div>
+
+      <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto">
+        <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3 leading-snug">
+          Table 5. Standalone revenue by segment, absolute (Rs crore) with YoY growth
+        </h3>
+        <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+          <thead>
+            <tr className="border-b border-white/10 text-white font-bold">
+              <th className="py-2 pr-2 font-sans font-semibold">Line item</th>
+              <th className="py-2 px-2 text-right">FY23</th>
+              <th className="py-2 px-2 text-right">FY24</th>
+              <th className="py-2 px-2 text-right">FY25</th>
+              <th className="py-2 pl-2 text-right">FY26</th>
+            </tr>
+          </thead>
+          <FinTableRows rows={absolute} />
+        </table>
+      </div>
+    </StandaloneFrameShell>
   );
 }
 
@@ -1452,38 +1559,41 @@ export default function CentumElectronicsPage() {
   const sStandaloneOpacity = useTransform(progress, fr(4), FADE);
   const sStandaloneY = useTransform(progress, fr(4), RISE);
 
-  const s2Opacity = useTransform(progress, fr(5), FADE);
-  const s2Y = useTransform(progress, fr(5), RISE);
+  const sStandalone2Opacity = useTransform(progress, fr(5), FADE);
+  const sStandalone2Y = useTransform(progress, fr(5), RISE);
 
-  const s3Opacity = useTransform(progress, fr(6), FADE);
-  const s3Y = useTransform(progress, fr(6), RISE);
+  const s2Opacity = useTransform(progress, fr(6), FADE);
+  const s2Y = useTransform(progress, fr(6), RISE);
 
-  const s4Opacity = useTransform(progress, fr(7), FADE);
-  const s4Y = useTransform(progress, fr(7), RISE);
+  const s3Opacity = useTransform(progress, fr(7), FADE);
+  const s3Y = useTransform(progress, fr(7), RISE);
 
-  const s5Opacity = useTransform(progress, fr(8), FADE);
-  const s5Y = useTransform(progress, fr(8), RISE);
+  const s4Opacity = useTransform(progress, fr(8), FADE);
+  const s4Y = useTransform(progress, fr(8), RISE);
 
-  const s6Opacity = useTransform(progress, fr(9), FADE);
-  const s6Y = useTransform(progress, fr(9), RISE);
+  const s5Opacity = useTransform(progress, fr(9), FADE);
+  const s5Y = useTransform(progress, fr(9), RISE);
 
-  const s7Opacity = useTransform(progress, fr(10), FADE);
-  const s7Y = useTransform(progress, fr(10), RISE);
+  const s6Opacity = useTransform(progress, fr(10), FADE);
+  const s6Y = useTransform(progress, fr(10), RISE);
 
-  const s8Opacity = useTransform(progress, fr(11), FADE);
-  const s8Y = useTransform(progress, fr(11), RISE);
+  const s7Opacity = useTransform(progress, fr(11), FADE);
+  const s7Y = useTransform(progress, fr(11), RISE);
 
-  const s9Opacity = useTransform(progress, fr(12), FADE);
-  const s9Y = useTransform(progress, fr(12), RISE);
+  const s8Opacity = useTransform(progress, fr(12), FADE);
+  const s8Y = useTransform(progress, fr(12), RISE);
 
-  const s10Opacity = useTransform(progress, fr(13), FADE);
-  const s10Y = useTransform(progress, fr(13), RISE);
+  const s9Opacity = useTransform(progress, fr(13), FADE);
+  const s9Y = useTransform(progress, fr(13), RISE);
 
-  const s11Opacity = useTransform(progress, fr(14), FADE);
-  const s11Y = useTransform(progress, fr(14), RISE);
+  const s10Opacity = useTransform(progress, fr(14), FADE);
+  const s10Y = useTransform(progress, fr(14), RISE);
 
-  const s12Opacity = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, fr(15), FADE);
+  const s11Y = useTransform(progress, fr(15), RISE);
+
+  const s12Opacity = useTransform(progress, [16 * SEG - FADE_IN, 16 * SEG, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [16 * SEG - FADE_IN, 16 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1491,7 +1601,7 @@ export default function CentumElectronicsPage() {
       <PresentationChrome controller={p} scenes={CENTUM_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1600vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1700vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1504,24 +1614,25 @@ export default function CentumElectronicsPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 15].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 16].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
                 {currentFrameIndex === 2 && <SceneBusinessUnderstanding active={true} showInsights={false} />}
                 {currentFrameIndex === 3 && <SceneBusinessUnderstanding active={true} showInsights={true} />}
                 {currentFrameIndex === 4 && <SceneStandaloneBusiness />}
-                {currentFrameIndex === 5 && <SceneEvolution active={true} />}
-                {currentFrameIndex === 6 && <SceneBusinessModel />}
-                {currentFrameIndex === 7 && <SceneFinancials active={true} />}
-                {currentFrameIndex === 8 && <SceneRevenueMix />}
-                {currentFrameIndex === 9 && <SceneOrderBook active={true} />}
-                {currentFrameIndex === 10 && <SceneTechnology />}
-                {currentFrameIndex === 11 && <SceneSpaceBusiness />}
-                {currentFrameIndex === 12 && <SceneDefenceBusiness active={true} />}
-                {currentFrameIndex === 13 && <SceneCapitalEfficiency />}
-                {currentFrameIndex === 14 && <SceneValuation />}
-                {currentFrameIndex === 15 && <SceneThesis presentationActive={true} />}
+                {currentFrameIndex === 5 && <SceneStandaloneSegments />}
+                {currentFrameIndex === 6 && <SceneEvolution active={true} />}
+                {currentFrameIndex === 7 && <SceneBusinessModel />}
+                {currentFrameIndex === 8 && <SceneFinancials active={true} />}
+                {currentFrameIndex === 9 && <SceneRevenueMix />}
+                {currentFrameIndex === 10 && <SceneOrderBook active={true} />}
+                {currentFrameIndex === 11 && <SceneTechnology />}
+                {currentFrameIndex === 12 && <SceneSpaceBusiness />}
+                {currentFrameIndex === 13 && <SceneDefenceBusiness active={true} />}
+                {currentFrameIndex === 14 && <SceneCapitalEfficiency />}
+                {currentFrameIndex === 15 && <SceneValuation />}
+                {currentFrameIndex === 16 && <SceneThesis presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1573,18 +1684,27 @@ export default function CentumElectronicsPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: s2Opacity, y: s2Y }}
+                style={{ opacity: sStandalone2Opacity, y: sStandalone2Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneEvolution active={currentFrameIndex === 5} />
+                <SceneStandaloneSegments />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s2Opacity, y: s2Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneEvolution active={currentFrameIndex === 6} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneBusinessModel />
@@ -1593,16 +1713,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneFinancials active={currentFrameIndex === 7} />
+                <SceneFinancials active={currentFrameIndex === 8} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneRevenueMix />
@@ -1611,16 +1731,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneOrderBook active={currentFrameIndex === 9} />
+                <SceneOrderBook active={currentFrameIndex === 10} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s7Opacity, y: s7Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneTechnology />
@@ -1629,7 +1749,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneSpaceBusiness />
@@ -1638,16 +1758,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneDefenceBusiness active={currentFrameIndex === 12} />
+                <SceneDefenceBusiness active={currentFrameIndex === 13} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneCapitalEfficiency />
@@ -1656,7 +1776,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s11Opacity, y: s11Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneValuation />
