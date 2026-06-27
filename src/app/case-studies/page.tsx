@@ -25,6 +25,14 @@ const CASE_STUDIES_OVERVIEW = [
     highlight: "BTS Design-led Margins",
   },
   {
+    slug: "astra-microwave",
+    title: "Astra Microwave",
+    category: "Hardware & Payloads",
+    desc: "From ruggedized RF components to complete radar systems. Inside the demerger and growth of a private sector defence electronics pioneer.",
+    icon: Radio,
+    highlight: "RF & System Demerger Carve-Out",
+  },
+  {
     slug: "launch-systems",
     title: "Launch Systems & Infrastructure",
     category: "Upstream Logistics",
@@ -126,10 +134,13 @@ export default function CaseStudiesPage() {
           {CASE_STUDIES_OVERVIEW.map((cs) => {
             const Icon = cs.icon;
             const isCentum = cs.slug === "centum-electronics";
+            const isAstra = cs.slug === "astra-microwave";
             const isEcosystem = cs.slug === "private-ecosystem";
 
             const hrefPath = isCentum 
               ? "/chapters/centum-electronics" 
+              : isAstra
+              ? "/chapters/astra-microwave"
               : isEcosystem 
               ? "/chapters/private-ecosystem" 
               : `/chapters/${cs.slug}`;
@@ -143,6 +154,8 @@ export default function CaseStudiesPage() {
                 {/* Background rendering */}
                 {isCentum ? (
                   <CardCentumBackground />
+                ) : isAstra ? (
+                  <CardAstraBackground />
                 ) : isEcosystem ? (
                   <CardEarthBackground />
                 ) : (
@@ -177,7 +190,7 @@ export default function CaseStudiesPage() {
                     {cs.highlight}
                   </span>
                   <span className="inline-flex items-center gap-1 font-bold">
-                    {isCentum ? "Explore Case Study" : isEcosystem ? "Explore Ecosystem" : "Read Report"}{" "}
+                    {(isCentum || isAstra) ? "Explore Case Study" : isEcosystem ? "Explore Ecosystem" : "Read Report"}{" "}
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
@@ -283,6 +296,29 @@ function CardCentumBackground() {
       <img
         src="/centum/centum_hero.png"
         alt="Centum payload electronics blueprint"
+        className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030308] via-[#030308]/60 to-transparent" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+      
+      {/* Animated sweep line */}
+      <div className="absolute top-0 bottom-0 left-0 w-px bg-[#FFB800]/25 shadow-[0_0_8px_#FFB800] animate-pulse" 
+           style={{
+             animation: "pulse 3s infinite",
+             left: "30%"
+           }} 
+      />
+    </div>
+  );
+}
+
+function CardAstraBackground() {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+      <img
+        src="/astra/astra_hero.png"
+        alt="Astra radar electronics blueprint"
         className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-700 ease-out"
         loading="lazy"
       />
