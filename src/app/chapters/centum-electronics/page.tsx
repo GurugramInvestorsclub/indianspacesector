@@ -34,29 +34,30 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 20;
+const TOTAL_FRAMES = 21;
 
 const CENTUM_SCENES = [
-  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 20", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 20", startFrame: 1, endFrame: 1 },
-  { id: "business-understanding-1", name: "Understanding the Business - Financials", label: "03 / 20", startFrame: 2, endFrame: 2 },
-  { id: "business-understanding-2", name: "Understanding the Business - Insights", label: "04 / 20", startFrame: 3, endFrame: 3 },
-  { id: "standalone", name: "Standalone Business - P&L", label: "05 / 20", startFrame: 4, endFrame: 4 },
-  { id: "standalone-segments", name: "Standalone Business - Segment Mix", label: "06 / 20", startFrame: 5, endFrame: 5 },
-  { id: "segment-capabilities", name: "Segment Capabilities - EMS vs BTS", label: "07 / 20", startFrame: 6, endFrame: 6 },
-  { id: "standalone-orderbook", name: "Standalone Order Book - By Segment", label: "08 / 20", startFrame: 7, endFrame: 7 },
-  { id: "standalone-capital", name: "Standalone Capital & Working Capital", label: "09 / 20", startFrame: 8, endFrame: 8 },
-  { id: "evolution", name: "Value Chain Evolution", label: "10 / 20", startFrame: 9, endFrame: 9 },
-  { id: "model", name: "EMS vs BTS Business Model", label: "11 / 20", startFrame: 10, endFrame: 10 },
-  { id: "financials", name: "Financial Growth", label: "12 / 20", startFrame: 11, endFrame: 11 },
-  { id: "mix", name: "Revenue Segmentation", label: "13 / 20", startFrame: 12, endFrame: 12 },
-  { id: "orderbook", name: "Order Book Backlog", label: "14 / 20", startFrame: 13, endFrame: 13 },
-  { id: "technology", name: "Exploded Payload Tech", label: "15 / 20", startFrame: 14, endFrame: 14 },
-  { id: "space", name: "Orbital Integration", label: "16 / 20", startFrame: 15, endFrame: 15 },
-  { id: "defence", name: "Defense Systems", label: "17 / 20", startFrame: 16, endFrame: 16 },
-  { id: "efficiency", name: "Capital Metrics", label: "18 / 20", startFrame: 17, endFrame: 17 },
-  { id: "valuation", name: "Valuation Explorer", label: "19 / 20", startFrame: 18, endFrame: 18 },
-  { id: "thesis", name: "Investment Climax", label: "20 / 20", startFrame: 19, endFrame: 19 },
+  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 21", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 21", startFrame: 1, endFrame: 1 },
+  { id: "business-understanding-1", name: "Understanding the Business - Financials", label: "03 / 21", startFrame: 2, endFrame: 2 },
+  { id: "business-understanding-2", name: "Understanding the Business - Insights", label: "04 / 21", startFrame: 3, endFrame: 3 },
+  { id: "standalone", name: "Standalone Business - P&L", label: "05 / 21", startFrame: 4, endFrame: 4 },
+  { id: "standalone-segments", name: "Standalone Business - Segment Mix", label: "06 / 21", startFrame: 5, endFrame: 5 },
+  { id: "segment-capabilities", name: "Segment Capabilities - EMS vs BTS", label: "07 / 21", startFrame: 6, endFrame: 6 },
+  { id: "standalone-orderbook", name: "Standalone Order Book - By Segment", label: "08 / 21", startFrame: 7, endFrame: 7 },
+  { id: "standalone-capital", name: "Standalone Capital & Working Capital", label: "09 / 21", startFrame: 8, endFrame: 8 },
+  { id: "standalone-valuations", name: "Valuations", label: "10 / 21", startFrame: 9, endFrame: 9 },
+  { id: "evolution", name: "Value Chain Evolution", label: "11 / 21", startFrame: 10, endFrame: 10 },
+  { id: "model", name: "EMS vs BTS Business Model", label: "12 / 21", startFrame: 11, endFrame: 11 },
+  { id: "financials", name: "Financial Growth", label: "13 / 21", startFrame: 12, endFrame: 12 },
+  { id: "mix", name: "Revenue Segmentation", label: "14 / 21", startFrame: 13, endFrame: 13 },
+  { id: "orderbook", name: "Order Book Backlog", label: "15 / 21", startFrame: 14, endFrame: 14 },
+  { id: "technology", name: "Exploded Payload Tech", label: "16 / 21", startFrame: 15, endFrame: 15 },
+  { id: "space", name: "Orbital Integration", label: "17 / 21", startFrame: 16, endFrame: 16 },
+  { id: "defence", name: "Defense Systems", label: "18 / 21", startFrame: 17, endFrame: 17 },
+  { id: "efficiency", name: "Capital Metrics", label: "19 / 21", startFrame: 18, endFrame: 18 },
+  { id: "valuation", name: "Valuation Explorer", label: "20 / 21", startFrame: 19, endFrame: 19 },
+  { id: "thesis", name: "Investment Climax", label: "21 / 21", startFrame: 20, endFrame: 20 },
 ];
 
 const SLIDE_BASE =
@@ -726,6 +727,119 @@ function SceneStandaloneCapital() {
         </table>
       </div>
     </StandaloneFrameShell>
+  );
+}
+
+// 1.11. Section 1.11: Standalone Valuations
+function SceneStandaloneValuations() {
+  const rowsTable10: FinRow[] = [
+    { label: "18%", v: ["157", "169", "180", "186", "199", "212"] },
+    { label: "20%", v: ["160", "171", "183", "192", "206", "220"] },
+    { label: "25%", v: ["167", "179", "191", "208", "223", "238"] },
+  ];
+  const rowsTable11: FinRow[] = [
+    { label: "18%", v: ["33.1", "30.9", "29.0"] },
+    { label: "20%", v: ["32.6", "30.4", "28.5"] },
+    { label: "25%", v: ["31.3", "29.2", "27.4"] },
+  ];
+  const rowsTable12: FinRow[] = [
+    { label: "18%", v: ["28.1", "26.2", "24.6"] },
+    { label: "20%", v: ["27.1", "25.3", "23.7"] },
+    { label: "25%", v: ["25.0", "23.3", "21.9"] },
+  ];
+
+  return (
+    <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar justify-center">
+      <div className="my-auto w-full flex flex-col gap-6">
+        <div className="text-center w-full flex flex-col items-center">
+          <SceneLabel>01.11. Valuations</SceneLabel>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase mb-3">
+            Valuations
+          </h2>
+          <p className="text-xs sm:text-sm text-white/50 max-w-2xl mx-auto">
+            Sensitivity analysis of implied forward EBITDA and valuation multiples based on revenue growth and margin targets.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 w-full max-w-6xl mx-auto items-stretch pointer-events-auto">
+          {/* Table 10 */}
+          <div className="xl:col-span-6 bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto flex flex-col justify-between">
+            <div>
+              <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3 leading-snug">
+                Table 10. Implied forward EBITDA (Rs crore)
+              </h3>
+              <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10 text-white font-bold text-center">
+                    <th className="py-2 pr-2 font-sans font-semibold text-left" rowSpan={2}>Revenue growth (CAGR)</th>
+                    <th className="py-1 px-2 border-b border-white/5 border-l border-white/5 text-center font-bold text-white" colSpan={3}>FY27 EBITDA margin</th>
+                    <th className="py-1 px-2 border-b border-white/5 border-l border-white/5 text-center font-bold text-white" colSpan={3}>FY28 EBITDA margin</th>
+                  </tr>
+                  <tr className="border-b border-white/10 text-white font-bold">
+                    <th className="py-1 px-2 text-right border-l border-white/5">14%</th>
+                    <th className="py-1 px-2 text-right">15%</th>
+                    <th className="py-1 px-2 text-right">16%</th>
+                    <th className="py-1 px-2 text-right border-l border-white/5">14%</th>
+                    <th className="py-1 px-2 text-right">15%</th>
+                    <th className="py-1 px-2 text-right">16%</th>
+                  </tr>
+                </thead>
+                <FinTableRows rows={rowsTable10} />
+              </table>
+            </div>
+            <div className="mt-4 font-mono text-[9px] text-white/40 leading-relaxed font-light">
+              Columns: EBITDA margin, grouped by forecast year.
+            </div>
+          </div>
+
+          {/* Table 11 */}
+          <div className="xl:col-span-3 bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto flex flex-col justify-between">
+            <div>
+              <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3 leading-snug">
+                Table 11. Forward EV/EBITDA (x), FY27, EV held at Rs 5,210 crore
+              </h3>
+              <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10 text-white font-bold text-center">
+                    <th className="py-2 pr-2 font-sans font-semibold text-left" rowSpan={2}>Revenue growth (CAGR)</th>
+                    <th className="py-1 px-2 border-b border-white/5 border-l border-white/5 text-center font-bold text-white" colSpan={3}>EBITDA margin</th>
+                  </tr>
+                  <tr className="border-b border-white/10 text-white font-bold">
+                    <th className="py-1 px-2 text-right border-l border-white/5">14%</th>
+                    <th className="py-1 px-2 text-right">15%</th>
+                    <th className="py-1 px-2 text-right">16%</th>
+                  </tr>
+                </thead>
+                <FinTableRows rows={rowsTable11} />
+              </table>
+            </div>
+          </div>
+
+          {/* Table 12 */}
+          <div className="xl:col-span-3 bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto flex flex-col justify-between">
+            <div>
+              <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3 leading-snug">
+                Table 12. Forward EV/EBITDA (x), FY28, EV held at Rs 5,210 crore
+              </h3>
+              <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10 text-white font-bold text-center">
+                    <th className="py-2 pr-2 font-sans font-semibold text-left" rowSpan={2}>Revenue growth (CAGR)</th>
+                    <th className="py-1 px-2 border-b border-white/5 border-l border-white/5 text-center font-bold text-white" colSpan={3}>EBITDA margin</th>
+                  </tr>
+                  <tr className="border-b border-white/10 text-white font-bold">
+                    <th className="py-1 px-2 text-right border-l border-white/5">14%</th>
+                    <th className="py-1 px-2 text-right">15%</th>
+                    <th className="py-1 px-2 text-right">16%</th>
+                  </tr>
+                </thead>
+                <FinTableRows rows={rowsTable12} />
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -1741,38 +1855,41 @@ export default function CentumElectronicsPage() {
   const sCapitalOpacity = useTransform(progress, fr(8), FADE);
   const sCapitalY = useTransform(progress, fr(8), RISE);
 
-  const s2Opacity = useTransform(progress, fr(9), FADE);
-  const s2Y = useTransform(progress, fr(9), RISE);
+  const sValuationsOpacity = useTransform(progress, fr(9), FADE);
+  const sValuationsY = useTransform(progress, fr(9), RISE);
 
-  const s3Opacity = useTransform(progress, fr(10), FADE);
-  const s3Y = useTransform(progress, fr(10), RISE);
+  const s2Opacity = useTransform(progress, fr(10), FADE);
+  const s2Y = useTransform(progress, fr(10), RISE);
 
-  const s4Opacity = useTransform(progress, fr(11), FADE);
-  const s4Y = useTransform(progress, fr(11), RISE);
+  const s3Opacity = useTransform(progress, fr(11), FADE);
+  const s3Y = useTransform(progress, fr(11), RISE);
 
-  const s5Opacity = useTransform(progress, fr(12), FADE);
-  const s5Y = useTransform(progress, fr(12), RISE);
+  const s4Opacity = useTransform(progress, fr(12), FADE);
+  const s4Y = useTransform(progress, fr(12), RISE);
 
-  const s6Opacity = useTransform(progress, fr(13), FADE);
-  const s6Y = useTransform(progress, fr(13), RISE);
+  const s5Opacity = useTransform(progress, fr(13), FADE);
+  const s5Y = useTransform(progress, fr(13), RISE);
 
-  const s7Opacity = useTransform(progress, fr(14), FADE);
-  const s7Y = useTransform(progress, fr(14), RISE);
+  const s6Opacity = useTransform(progress, fr(14), FADE);
+  const s6Y = useTransform(progress, fr(14), RISE);
 
-  const s8Opacity = useTransform(progress, fr(15), FADE);
-  const s8Y = useTransform(progress, fr(15), RISE);
+  const s7Opacity = useTransform(progress, fr(15), FADE);
+  const s7Y = useTransform(progress, fr(15), RISE);
 
-  const s9Opacity = useTransform(progress, fr(16), FADE);
-  const s9Y = useTransform(progress, fr(16), RISE);
+  const s8Opacity = useTransform(progress, fr(16), FADE);
+  const s8Y = useTransform(progress, fr(16), RISE);
 
-  const s10Opacity = useTransform(progress, fr(17), FADE);
-  const s10Y = useTransform(progress, fr(17), RISE);
+  const s9Opacity = useTransform(progress, fr(17), FADE);
+  const s9Y = useTransform(progress, fr(17), RISE);
 
-  const s11Opacity = useTransform(progress, fr(18), FADE);
-  const s11Y = useTransform(progress, fr(18), RISE);
+  const s10Opacity = useTransform(progress, fr(18), FADE);
+  const s10Y = useTransform(progress, fr(18), RISE);
 
-  const s12Opacity = useTransform(progress, [19 * SEG - FADE_IN, 19 * SEG, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [19 * SEG - FADE_IN, 19 * SEG, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, fr(19), FADE);
+  const s11Y = useTransform(progress, fr(19), RISE);
+
+  const s12Opacity = useTransform(progress, [20 * SEG - FADE_IN, 20 * SEG, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [20 * SEG - FADE_IN, 20 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1780,7 +1897,7 @@ export default function CentumElectronicsPage() {
       <PresentationChrome controller={p} scenes={CENTUM_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1900vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[2000vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1793,7 +1910,7 @@ export default function CentumElectronicsPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 18].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 20].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -1804,17 +1921,18 @@ export default function CentumElectronicsPage() {
                 {currentFrameIndex === 6 && <SceneSegmentCapabilities />}
                 {currentFrameIndex === 7 && <SceneStandaloneOrderBook />}
                 {currentFrameIndex === 8 && <SceneStandaloneCapital />}
-                {currentFrameIndex === 9 && <SceneEvolution active={true} />}
-                {currentFrameIndex === 10 && <SceneBusinessModel />}
-                {currentFrameIndex === 11 && <SceneFinancials active={true} />}
-                {currentFrameIndex === 12 && <SceneRevenueMix />}
-                {currentFrameIndex === 13 && <SceneOrderBook active={true} />}
-                {currentFrameIndex === 14 && <SceneTechnology />}
-                {currentFrameIndex === 15 && <SceneSpaceBusiness />}
-                {currentFrameIndex === 16 && <SceneDefenceBusiness active={true} />}
-                {currentFrameIndex === 17 && <SceneCapitalEfficiency />}
-                {currentFrameIndex === 18 && <SceneValuation />}
-                {currentFrameIndex === 19 && <SceneThesis presentationActive={true} />}
+                {currentFrameIndex === 9 && <SceneStandaloneValuations />}
+                {currentFrameIndex === 10 && <SceneEvolution active={true} />}
+                {currentFrameIndex === 11 && <SceneBusinessModel />}
+                {currentFrameIndex === 12 && <SceneFinancials active={true} />}
+                {currentFrameIndex === 13 && <SceneRevenueMix />}
+                {currentFrameIndex === 14 && <SceneOrderBook active={true} />}
+                {currentFrameIndex === 15 && <SceneTechnology />}
+                {currentFrameIndex === 16 && <SceneSpaceBusiness />}
+                {currentFrameIndex === 17 && <SceneDefenceBusiness active={true} />}
+                {currentFrameIndex === 18 && <SceneCapitalEfficiency />}
+                {currentFrameIndex === 19 && <SceneValuation />}
+                {currentFrameIndex === 20 && <SceneThesis presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1902,18 +2020,27 @@ export default function CentumElectronicsPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: s2Opacity, y: s2Y }}
+                style={{ opacity: sValuationsOpacity, y: sValuationsY }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneEvolution active={currentFrameIndex === 9} />
+                <SceneStandaloneValuations />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s2Opacity, y: s2Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneEvolution active={currentFrameIndex === 10} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneBusinessModel />
@@ -1922,16 +2049,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneFinancials active={currentFrameIndex === 11} />
+                <SceneFinancials active={currentFrameIndex === 12} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneRevenueMix />
@@ -1940,16 +2067,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneOrderBook active={currentFrameIndex === 13} />
+                <SceneOrderBook active={currentFrameIndex === 14} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s7Opacity, y: s7Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneTechnology />
@@ -1958,7 +2085,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 16 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneSpaceBusiness />
@@ -1967,16 +2094,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 16 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 17 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneDefenceBusiness active={currentFrameIndex === 16} />
+                <SceneDefenceBusiness active={currentFrameIndex === 17} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 17 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 18 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneCapitalEfficiency />
@@ -1985,7 +2112,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s11Opacity, y: s11Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 18 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 19 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneValuation />
