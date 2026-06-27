@@ -242,7 +242,7 @@ function Scene0Splash({ presentationActive }: { presentationActive: boolean }) {
       <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
         {/* Background Image occupying the entire screen */}
         <img
-          src="/launch_vehicles_bg.png"
+          src="/launch_vehicles_bg.jpg"
           alt="Launch Vehicles Cover"
           className="w-full h-full object-cover object-center"
         />

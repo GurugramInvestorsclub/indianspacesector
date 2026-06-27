@@ -39,4 +39,5 @@
 - [x] Remove "Altitude is Not Enough" (The Orbital Boundary) slide from the Rockets page entirely
 - [x] Recalculate frame configs and scroll transforms for Rockets page (Launch Vehicles decreased to 13)
 - [x] Convert Problem and Solution blocks in the Rockets section into interactive hover-triggered accordions
+- [x] Use the user's uploaded image as the background cover for the Rockets page
 - [x] Verify full project compiles successfully after all additions
