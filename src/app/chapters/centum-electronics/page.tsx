@@ -34,23 +34,24 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 14;
+const TOTAL_FRAMES = 15;
 
 const CENTUM_SCENES = [
-  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 14", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 14", startFrame: 1, endFrame: 1 },
-  { id: "business-understanding", name: "Understanding the Business", label: "03 / 14", startFrame: 2, endFrame: 2 },
-  { id: "evolution", name: "Value Chain Evolution", label: "04 / 14", startFrame: 3, endFrame: 3 },
-  { id: "model", name: "EMS vs BTS Business Model", label: "05 / 14", startFrame: 4, endFrame: 4 },
-  { id: "financials", name: "Financial Growth", label: "06 / 14", startFrame: 5, endFrame: 5 },
-  { id: "mix", name: "Revenue Segmentation", label: "07 / 14", startFrame: 6, endFrame: 6 },
-  { id: "orderbook", name: "Order Book Backlog", label: "08 / 14", startFrame: 7, endFrame: 7 },
-  { id: "technology", name: "Exploded Payload Tech", label: "09 / 14", startFrame: 8, endFrame: 8 },
-  { id: "space", name: "Orbital Integration", label: "10 / 14", startFrame: 9, endFrame: 9 },
-  { id: "defence", name: "Defense Systems", label: "11 / 14", startFrame: 10, endFrame: 10 },
-  { id: "efficiency", name: "Capital Metrics", label: "12 / 14", startFrame: 11, endFrame: 11 },
-  { id: "valuation", name: "Valuation Explorer", label: "13 / 14", startFrame: 12, endFrame: 12 },
-  { id: "thesis", name: "Investment Climax", label: "14 / 14", startFrame: 13, endFrame: 13 },
+  { id: "hero", name: "Centum Electronics Case Study", label: "01 / 15", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 15", startFrame: 1, endFrame: 1 },
+  { id: "business-understanding-1", name: "Understanding the Business - Financials", label: "03 / 15", startFrame: 2, endFrame: 2 },
+  { id: "business-understanding-2", name: "Understanding the Business - Insights", label: "04 / 15", startFrame: 3, endFrame: 3 },
+  { id: "evolution", name: "Value Chain Evolution", label: "05 / 15", startFrame: 4, endFrame: 4 },
+  { id: "model", name: "EMS vs BTS Business Model", label: "06 / 15", startFrame: 5, endFrame: 5 },
+  { id: "financials", name: "Financial Growth", label: "07 / 15", startFrame: 6, endFrame: 6 },
+  { id: "mix", name: "Revenue Segmentation", label: "08 / 15", startFrame: 7, endFrame: 7 },
+  { id: "orderbook", name: "Order Book Backlog", label: "09 / 15", startFrame: 8, endFrame: 8 },
+  { id: "technology", name: "Exploded Payload Tech", label: "10 / 15", startFrame: 9, endFrame: 9 },
+  { id: "space", name: "Orbital Integration", label: "11 / 15", startFrame: 10, endFrame: 10 },
+  { id: "defence", name: "Defense Systems", label: "12 / 15", startFrame: 11, endFrame: 11 },
+  { id: "efficiency", name: "Capital Metrics", label: "13 / 15", startFrame: 12, endFrame: 12 },
+  { id: "valuation", name: "Valuation Explorer", label: "14 / 15", startFrame: 13, endFrame: 13 },
+  { id: "thesis", name: "Investment Climax", label: "15 / 15", startFrame: 14, endFrame: 14 },
 ];
 
 const SLIDE_BASE =
@@ -253,7 +254,7 @@ function SceneFounding({ active }: { active: boolean }) {
 }
 
 // 1.5. Section 1.5: Understanding the Business
-function SceneBusinessUnderstanding({ active }: { active: boolean }) {
+function SceneBusinessUnderstanding({ active, showInsights = false }: { active: boolean; showInsights?: boolean }) {
   return (
     <div className="max-w-6xl w-full px-4 z-10 flex flex-col justify-between h-full pt-16 pb-12">
       <div className="text-center w-full flex flex-col items-center">
@@ -345,27 +346,40 @@ function SceneBusinessUnderstanding({ active }: { active: boolean }) {
         </div>
 
         {/* Highlights on the Right */}
-        <div className="lg:col-span-5 flex flex-col gap-4 text-left">
-          <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
-            <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-2">
-              Key Insights
-            </span>
-            <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
-              Operating Leverage Expansion
-            </h4>
-            <p className="text-xs text-white/60 leading-relaxed font-light">
-              Despite revenue adjustments in FY25, EBITDA margins expanded significantly to <strong className="text-[#FFB800]">14.2% in FY26*</strong> (from 9.5% in FY22), reflecting improved product mix and high-margin Build-to-Specification (BTS) payloads.
-            </p>
-          </div>
+        <div className="lg:col-span-5 flex flex-col gap-4 text-left min-h-[220px]">
+          <AnimatePresence mode="wait">
+            {showInsights && (
+              <motion.div
+                key="insights-content"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex flex-col gap-4 w-full"
+              >
+                <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+                  <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-2">
+                    Key Insights
+                  </span>
+                  <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+                    Operating Leverage Expansion
+                  </h4>
+                  <p className="text-xs text-white/60 leading-relaxed font-light">
+                    Despite revenue adjustments in FY25, EBITDA margins expanded significantly to <strong className="text-[#FFB800]">14.2% in FY26*</strong> (from 9.5% in FY22), reflecting improved product mix and high-margin Build-to-Specification (BTS) payloads.
+                  </p>
+                </div>
 
-          <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
-            <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
-              PAT and EPS Turnaround
-            </h4>
-            <p className="text-xs text-white/60 leading-relaxed font-light">
-              Profit After Tax (PAT) from continuing operations surged to <strong className="text-[#FFB800]">Rs 100.7 Cr in FY26*</strong> (reversing a loss of Rs 53.5 Cr in FY22), driving diluted EPS to <strong className="text-[#FFB800]">Rs 68.19</strong>.
-            </p>
-          </div>
+                <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm">
+                  <h4 className="text-sm font-bold text-white mb-2 uppercase tracking-wide">
+                    PAT and EPS Turnaround
+                  </h4>
+                  <p className="text-xs text-white/60 leading-relaxed font-light">
+                    Profit After Tax (PAT) from continuing operations surged to <strong className="text-[#FFB800]">Rs 100.7 Cr in FY26*</strong> (reversing a loss of Rs 53.5 Cr in FY22), driving diluted EPS to <strong className="text-[#FFB800]">Rs 68.19</strong>.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
       <div className="h-4" /> {/* Spacer */}
@@ -1267,48 +1281,51 @@ export default function CentumElectronicsPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 14 frames (each spans 1/14 ~ 0.0714 width)
-  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0714], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.0714], [1, 0.96]);
+  // Scroll transforms for 15 frames (each spans 1/15 ~ 0.0667 width)
+  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0667], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.0667], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.05, 0.0667, 0.11, 0.1333], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.05, 0.0667, 0.11, 0.1333], [24, 0, 0, -24]);
 
-  const sNewOpacity = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [0, 1, 1, 0]);
-  const sNewY = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [24, 0, 0, -24]);
+  const sNew1Opacity = useTransform(progress, [0.11, 0.1333, 0.18, 0.2000], [0, 1, 1, 0]);
+  const sNew1Y = useTransform(progress, [0.11, 0.1333, 0.18, 0.2000], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [24, 0, 0, -24]);
+  const sNew2Opacity = useTransform(progress, [0.18, 0.2000, 0.25, 0.2667], [0, 1, 1, 0]);
+  const sNew2Y = useTransform(progress, [0.18, 0.2000, 0.25, 0.2667], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.25, 0.2667, 0.31, 0.3333], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.25, 0.2667, 0.31, 0.3333], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.31, 0.3333, 0.38, 0.4000], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.31, 0.3333, 0.38, 0.4000], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.38, 0.4000, 0.45, 0.4667], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.38, 0.4000, 0.45, 0.4667], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.45, 0.4667, 0.51, 0.5333], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.45, 0.4667, 0.51, 0.5333], [24, 0, 0, -24]);
 
-  const s7Opacity = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, [0.51, 0.5333, 0.58, 0.6000], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.51, 0.5333, 0.58, 0.6000], [24, 0, 0, -24]);
 
-  const s8Opacity = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, [0.58, 0.6000, 0.65, 0.6667], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.58, 0.6000, 0.65, 0.6667], [24, 0, 0, -24]);
 
-  const s9Opacity = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, [0.65, 0.6667, 0.71, 0.7333], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.65, 0.6667, 0.71, 0.7333], [24, 0, 0, -24]);
 
-  const s10Opacity = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, [0.71, 0.7333, 0.78, 0.8000], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.71, 0.7333, 0.78, 0.8000], [24, 0, 0, -24]);
 
-  const s11Opacity = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, [0.78, 0.8000, 0.85, 0.8667], [0, 1, 1, 0]);
+  const s10Y = useTransform(progress, [0.78, 0.8000, 0.85, 0.8667], [24, 0, 0, -24]);
 
-  const s12Opacity = useTransform(progress, [0.90, 0.9286, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [0.90, 0.9286, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, [0.85, 0.8667, 0.91, 0.9333], [0, 1, 1, 0]);
+  const s11Y = useTransform(progress, [0.85, 0.8667, 0.91, 0.9333], [24, 0, 0, -24]);
+
+  const s12Opacity = useTransform(progress, [0.91, 0.9333, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [0.91, 0.9333, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1316,7 +1333,7 @@ export default function CentumElectronicsPage() {
       <PresentationChrome controller={p} scenes={CENTUM_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1500vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1329,22 +1346,23 @@ export default function CentumElectronicsPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 13].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 14].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
-                {currentFrameIndex === 2 && <SceneBusinessUnderstanding active={true} />}
-                {currentFrameIndex === 3 && <SceneEvolution active={true} />}
-                {currentFrameIndex === 4 && <SceneBusinessModel />}
-                {currentFrameIndex === 5 && <SceneFinancials active={true} />}
-                {currentFrameIndex === 6 && <SceneRevenueMix />}
-                {currentFrameIndex === 7 && <SceneOrderBook active={true} />}
-                {currentFrameIndex === 8 && <SceneTechnology />}
-                {currentFrameIndex === 9 && <SceneSpaceBusiness />}
-                {currentFrameIndex === 10 && <SceneDefenceBusiness active={true} />}
-                {currentFrameIndex === 11 && <SceneCapitalEfficiency />}
-                {currentFrameIndex === 12 && <SceneValuation />}
-                {currentFrameIndex === 13 && <SceneThesis presentationActive={true} />}
+                {currentFrameIndex === 2 && <SceneBusinessUnderstanding active={true} showInsights={false} />}
+                {currentFrameIndex === 3 && <SceneBusinessUnderstanding active={true} showInsights={true} />}
+                {currentFrameIndex === 4 && <SceneEvolution active={true} />}
+                {currentFrameIndex === 5 && <SceneBusinessModel />}
+                {currentFrameIndex === 6 && <SceneFinancials active={true} />}
+                {currentFrameIndex === 7 && <SceneRevenueMix />}
+                {currentFrameIndex === 8 && <SceneOrderBook active={true} />}
+                {currentFrameIndex === 9 && <SceneTechnology />}
+                {currentFrameIndex === 10 && <SceneSpaceBusiness />}
+                {currentFrameIndex === 11 && <SceneDefenceBusiness active={true} />}
+                {currentFrameIndex === 12 && <SceneCapitalEfficiency />}
+                {currentFrameIndex === 13 && <SceneValuation />}
+                {currentFrameIndex === 14 && <SceneThesis presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1369,27 +1387,36 @@ export default function CentumElectronicsPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: sNewOpacity, y: sNewY }}
+                style={{ opacity: sNew1Opacity, y: sNew1Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneBusinessUnderstanding active={currentFrameIndex === 2} />
+                <SceneBusinessUnderstanding active={currentFrameIndex === 2} showInsights={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: sNew2Opacity, y: sNew2Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneBusinessUnderstanding active={currentFrameIndex === 3} showInsights={true} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s2Opacity, y: s2Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneEvolution active={currentFrameIndex === 3} />
+                <SceneEvolution active={currentFrameIndex === 4} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneBusinessModel />
@@ -1398,16 +1425,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneFinancials active={currentFrameIndex === 5} />
+                <SceneFinancials active={currentFrameIndex === 6} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneRevenueMix />
@@ -1416,16 +1443,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneOrderBook active={currentFrameIndex === 7} />
+                <SceneOrderBook active={currentFrameIndex === 8} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s7Opacity, y: s7Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneTechnology />
@@ -1434,7 +1461,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneSpaceBusiness />
@@ -1443,16 +1470,16 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneDefenceBusiness active={currentFrameIndex === 10} />
+                <SceneDefenceBusiness active={currentFrameIndex === 11} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneCapitalEfficiency />
@@ -1461,7 +1488,7 @@ export default function CentumElectronicsPage() {
               <motion.div
                 style={{ opacity: s11Opacity, y: s11Y }}
                 className={`absolute inset-0 w-full h-full z-10 ${
-                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <SceneValuation />
