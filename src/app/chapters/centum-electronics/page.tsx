@@ -1064,7 +1064,7 @@ function SceneThesis({ presentationActive = false }: { presentationActive?: bool
   const steps = ["Component", "Subsystem", "Payload", "Mission", "Platform", "Prime Contractor"];
 
   return (
-    <div className="max-w-4xl flex flex-col items-center text-center px-4">
+    <div className="max-w-4xl flex flex-col items-center justify-center h-full mx-auto text-center px-4 pb-12">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
