@@ -1,0 +1,32 @@
+- [x] Create `SATELLITES_SCENES` metadata in `src/app/chapters/satellites/page.tsx`
+- [x] Pass `SATELLITES_SCENES` to `<PresentationChrome />` in `src/app/chapters/satellites/page.tsx`
+- [x] Create `VALUE_CHAIN_SCENES` metadata in `src/app/chapters/value-chain/page.tsx`
+- [x] Pass `VALUE_CHAIN_SCENES` to `<PresentationChrome />` in `src/app/chapters/value-chain/page.tsx`
+- [x] Verify the application builds without error by running `npm run build`
+- [x] Fix text overflow and overlap on chapter final slides in presentation mode
+- [x] Verify layout compilation on build
+- [x] Create the Case Studies overview page under `/case-studies`
+- [x] Add the link of the Case Studies page to the end of the Satellites page
+- [x] Add the Case Studies page to the Navbar links
+- [x] Verify Case Studies compilation on build
+- [x] Generate 16 custom AI illustrations for the private space ecosystem
+- [x] Copy ecosystem images to `public/ecosystem/`
+- [x] Create the new chapter page `/chapters/private-ecosystem`
+- [x] Add the ecosystem card with animated Earth to `/case-studies`
+- [x] Add the ecosystem page link to global Navbar
+- [x] Integrate forward/backward transitions in satellites and private-ecosystem pages
+- [x] Verify the full application builds without error by running `npm run build`
+- [x] Enhance Value Chain chapter page with 7 new interactive slides (NSIL/ISRO network map, timeline of reform, 7-stage interactive chain, government glass cards, animated capital counters, value flow charts, and startup explosion maps)
+- [x] Verify no em-dashes are used in the enhanced Value Chain content
+- [x] Verify enhanced Value Chain compiles successfully without errors
+- [x] Generate custom illustration for Centum Electronics
+- [x] Create Centum Electronics Case Study page at `/chapters/centum-electronics` with 13 interactive scrollytelling slides
+- [x] Integrate Centum Electronics card as Case Study 1 on Case Studies page with blueprint overlays
+- [x] Verify no em-dashes are used in the Centum Electronics page content
+- [x] Verify full project compiles successfully after Centum Electronics integration
+- [x] Update references to $8.4B market size year from 2022 to 2026 globally in the codebase
+- [x] Integrate Skyroot Vikram rocket background to the final Thesis slide of the Paradigm Shift chapter
+- [x] Add mouse parallax, floating particles, and slow breathing gradients to the final Thesis slide
+- [x] Move the Timeline of Reform frame from the Value Chain page to the Paradigm Shift page
+- [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 13, Paradigm Shift increased to 8)
+- [x] Verify full project compiles successfully after all additions

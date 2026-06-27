@@ -119,19 +119,30 @@ const MARKET_BARS = [
   { year: "2040", value: 100, label: "$100B", share: "~10% global", pct: 100 },
 ];
 
+const REFORM_TIMELINE = [
+  { year: "2019", title: "NSIL Formed", desc: "Commercial interface of ISRO established to transfer technology." },
+  { year: "2020", title: "Private Sector Opened", desc: "Historical space reforms initialized by the central government." },
+  { year: "2022", title: "IN-SPACe Operational", desc: "Single window clearing regulator begins approving private operations." },
+  { year: "2023", title: "Indian Space Policy", desc: "Defines roles and outlines formal guidelines for private entities." },
+  { year: "2024", title: "Liberalised FDI", desc: "Allows up to 100 percent foreign investment in space components." },
+  { year: "2024-2025", title: "Tech Adoption Fund", desc: "Strategic capital pool to support deep tech startup research." },
+  { year: "Today", title: "400+ Startups", desc: "Venture backed commercial acceleration across all layers." },
+];
+
 // ---------------------------------------------------------------------------
 // FRAME CONFIG
 // ---------------------------------------------------------------------------
-const TOTAL_FRAMES = 7;
+const TOTAL_FRAMES = 8;
 
 const PRESENTATION_SCENES = [
-  { id: "hero", name: "Tactical Briefing", label: "01 / 07", startFrame: 0, endFrame: 0 },
-  { id: "why-critical", name: "Why Space Became Critical", label: "02 / 07", startFrame: 1, endFrame: 1 },
-  { id: "ecosystem", name: "Ecosystem Architecture", label: "03 / 07", startFrame: 2, endFrame: 2 },
-  { id: "fdi-table", name: "FDI Sub-Sector Caps", label: "04 / 07", startFrame: 3, endFrame: 3 },
-  { id: "fdi-highlights", name: "FDI Policy Highlights", label: "05 / 07", startFrame: 4, endFrame: 4 },
-  { id: "market-trajectory", name: "Market Size & Projections", label: "06 / 07", startFrame: 5, endFrame: 5 },
-  { id: "thesis", name: "The Thesis", label: "07 / 07", startFrame: 6, endFrame: 6 },
+  { id: "hero", name: "Tactical Briefing", label: "01 / 08", startFrame: 0, endFrame: 0 },
+  { id: "why-critical", name: "Why Space Became Critical", label: "02 / 08", startFrame: 1, endFrame: 1 },
+  { id: "ecosystem", name: "Ecosystem Architecture", label: "03 / 08", startFrame: 2, endFrame: 2 },
+  { id: "timeline", name: "Timeline of Reform", label: "04 / 08", startFrame: 3, endFrame: 3 },
+  { id: "fdi-table", name: "FDI Sub-Sector Caps", label: "05 / 08", startFrame: 4, endFrame: 4 },
+  { id: "fdi-highlights", name: "FDI Policy Highlights", label: "06 / 08", startFrame: 5, endFrame: 5 },
+  { id: "market-trajectory", name: "Market Size & Projections", label: "07 / 08", startFrame: 6, endFrame: 6 },
+  { id: "thesis", name: "The Thesis", label: "08 / 08", startFrame: 7, endFrame: 7 },
 ];
 
 // ---------------------------------------------------------------------------
@@ -511,6 +522,53 @@ function Scene2Ecosystem({
         </div>
       </div>
     </>
+  );
+}
+
+// 3. Timeline of Reform Frame
+function SceneTimeline({ active }: { active: boolean }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
+      <SceneHeading sub="03. STRUCTURAL REFORM" main="Timeline of Reform" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-lg mx-auto">
+        Key regulatory triggers that dismantled state monopolies and unlocked market access.
+      </p>
+
+      {/* Horizontal timeline */}
+      <div
+        ref={containerRef}
+        className="relative flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 lg:gap-4 pointer-events-auto overflow-x-auto no-scrollbar pb-6 w-full max-w-5xl mx-auto"
+      >
+        {/* Horizontal connect line */}
+        <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 hidden lg:block -translate-y-1/2 z-0" />
+
+        {REFORM_TIMELINE.map((m, idx) => (
+          <motion.div
+            key={m.year}
+            initial={{ opacity: 0.15, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: idx * 0.05 }}
+            className="flex-1 bg-[#0a0a14]/80 border border-white/10 hover:border-[#FFB800]/40 rounded-xl p-4 text-left relative z-10 backdrop-blur-sm transition-all duration-300 min-w-[200px]"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-mono text-xs font-bold text-[#FFB800] bg-[#FFB800]/10 px-2 py-0.5 rounded">
+                {m.year}
+              </span>
+              <div className="w-2 h-2 rounded-full bg-[#FFB800] animate-ping" />
+            </div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-1 line-clamp-1">
+              {m.title}
+            </h4>
+            <p className="text-[10px] text-white/60 leading-normal font-light">
+              {m.desc}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -1001,27 +1059,30 @@ export default function ParadigmShiftPage() {
     return `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
   };
 
-  // ---- scroll transforms ----
-  const heroOpacity = useTransform(progress, [0.0, 0.10, 0.1429], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.1429], [1, 0.96]);
+  // ---- scroll transforms (8 frames, each spans 1/8 ~ 0.125 width) ----
+  const heroOpacity = useTransform(progress, [0.0, 0.08, 0.125], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.125], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.10, 0.1429, 0.25, 0.2857], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.10, 0.1429, 0.25, 0.2857], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.08, 0.125, 0.21, 0.25], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.08, 0.125, 0.21, 0.25], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.25, 0.2857, 0.39, 0.4286], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.25, 0.2857, 0.39, 0.4286], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.21, 0.25, 0.33, 0.375], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.21, 0.25, 0.33, 0.375], [24, 0, 0, -24]);
 
-  const s3aOpacity = useTransform(progress, [0.39, 0.4286, 0.53, 0.5714], [0, 1, 1, 0]);
-  const s3aY = useTransform(progress, [0.39, 0.4286, 0.53, 0.5714], [24, 0, 0, -24]);
+  const s3TimelineOpacity = useTransform(progress, [0.33, 0.375, 0.46, 0.50], [0, 1, 1, 0]);
+  const s3TimelineY = useTransform(progress, [0.33, 0.375, 0.46, 0.50], [24, 0, 0, -24]);
 
-  const s3bOpacity = useTransform(progress, [0.53, 0.5714, 0.67, 0.7143], [0, 1, 1, 0]);
-  const s3bY = useTransform(progress, [0.53, 0.5714, 0.67, 0.7143], [24, 0, 0, -24]);
+  const s3aOpacity = useTransform(progress, [0.46, 0.50, 0.58, 0.625], [0, 1, 1, 0]);
+  const s3aY = useTransform(progress, [0.46, 0.50, 0.58, 0.625], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.67, 0.7143, 0.81, 0.8571], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.67, 0.7143, 0.81, 0.8571], [24, 0, 0, -24]);
+  const s3bOpacity = useTransform(progress, [0.58, 0.625, 0.71, 0.75], [0, 1, 1, 0]);
+  const s3bY = useTransform(progress, [0.58, 0.625, 0.71, 0.75], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.81, 0.8571, 1.0], [0, 1, 1]);
-  const s5Y = useTransform(progress, [0.81, 0.8571, 1.0], [24, 0, 0]);
+  const s4Opacity = useTransform(progress, [0.71, 0.75, 0.83, 0.875], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.71, 0.75, 0.83, 0.875], [24, 0, 0, -24]);
+
+  const s5Opacity = useTransform(progress, [0.83, 0.875, 1.0], [0, 1, 1]);
+  const s5Y = useTransform(progress, [0.83, 0.875, 1.0], [24, 0, 0]);
 
   // ---- interaction state ----
   const [activeCatalyst, setActiveCatalyst] = useState(0);
@@ -1183,7 +1244,7 @@ export default function ParadigmShiftPage() {
       )}
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[700vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[800vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1206,10 +1267,11 @@ export default function ParadigmShiftPage() {
                 {currentFrameIndex === 2 && (
                   <Scene2Ecosystem activePillar={activePillar} setActivePillar={setActivePillar} />
                 )}
-                {currentFrameIndex === 3 && <Scene3FDI showPart="table" />}
-                {currentFrameIndex === 4 && <Scene3FDI showPart="highlights" />}
-                {currentFrameIndex === 5 && <Scene4Market active={true} />}
-                {currentFrameIndex === 6 && <Scene5Thesis presentationActive />}
+                {currentFrameIndex === 3 && <SceneTimeline active={true} />}
+                {currentFrameIndex === 4 && <Scene3FDI showPart="table" />}
+                {currentFrameIndex === 5 && <Scene3FDI showPart="highlights" />}
+                {currentFrameIndex === 6 && <Scene4Market active={true} />}
+                {currentFrameIndex === 7 && <Scene5Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1243,9 +1305,18 @@ export default function ParadigmShiftPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: s3aOpacity, y: s3aY }}
+                style={{ opacity: s3TimelineOpacity, y: s3TimelineY }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneTimeline active={currentFrameIndex === 3} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s3aOpacity, y: s3aY }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene3FDI showPart="table" />
@@ -1254,7 +1325,7 @@ export default function ParadigmShiftPage() {
               <motion.div
                 style={{ opacity: s3bOpacity, y: s3bY }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene3FDI showPart="highlights" />
@@ -1264,7 +1335,7 @@ export default function ParadigmShiftPage() {
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-none`}
               >
-                <Scene4Market active={currentFrameIndex === 5} />
+                <Scene4Market active={currentFrameIndex === 6} />
               </motion.div>
 
               <motion.div
