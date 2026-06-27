@@ -44,4 +44,5 @@
 - [x] Center-align cover text content on Centum Electronics Case Study page
 - [x] Integrate custom founder photo of Apparao Mallavarapu on the Centum Origins slide
 - [x] Add premium close-up product photo of Centum microelectronic module on the Centum Origins slide
+- [x] Update the founder profile card image with the correct square founder face photo asset
 - [x] Verify full project compiles successfully after all additions
