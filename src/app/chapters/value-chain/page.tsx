@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Navbar } from "@/components/navbar";
@@ -10,6 +10,8 @@ import { PresentationChrome } from "@/components/presentation/presentation-chrom
 import { motion, useTransform, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
+  ArrowRight,
+  ChevronRight,
   Smartphone,
   Tv,
   Rocket,
@@ -21,14 +23,22 @@ import {
   Gauge,
   Layers,
   Globe2,
+  Calendar,
+  Zap,
+  Shield,
+  Activity,
+  Coins,
+  Server,
+  Radio,
+  FileText,
+  User,
+  Users,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// DATA
+// DATA & CONFIG
 // ---------------------------------------------------------------------------
 
-// The four commercial layers, ordered upstream to downstream. Shares are of
-// the $415B total commercial space economy (BryceTech / SIA, 2024).
 const LAYERS = [
   {
     id: "launch",
@@ -92,23 +102,141 @@ const LAYERS = [
   },
 ];
 
-const TOTAL_FRAMES = 7;
-
-const VALUE_CHAIN_SCENES = [
-  { id: "hero", name: "Space Economy Value Chain", label: "01 / 07", startFrame: 0, endFrame: 0 },
-  { id: "reframe", name: "Reframe", label: "02 / 07", startFrame: 1, endFrame: 1 },
-  { id: "stack", name: "Value Chain Stack", label: "03 / 07", startFrame: 2, endFrame: 2 },
-  { id: "revenue", name: "Revenue Structure", label: "04 / 07", startFrame: 3, endFrame: 3 },
-  { id: "structure", name: "Ecosystem Structure", label: "05 / 07", startFrame: 4, endFrame: 4 },
-  { id: "india", name: "India Opportunity", label: "06 / 07", startFrame: 5, endFrame: 5 },
-  { id: "thesis", name: "The Thesis", label: "07 / 07", startFrame: 6, endFrame: 6 },
+// Expanded 7-stage value chain data
+const DETAILED_STAGES = [
+  {
+    id: "launch",
+    name: "Launch",
+    value: "Upstream",
+    companies: "Skyroot, Agnikul, Bellatrix",
+    valueCreated: "Responsive rocket deployment and dedicated satellite orbital placement.",
+    opportunity: "$15B global payload insertion demand by 2030.",
+    icon: Rocket,
+  },
+  {
+    id: "satellites",
+    name: "Satellites",
+    value: "Upstream",
+    companies: "Dhruva Space, XDLINX, PierSight",
+    valueCreated: "Custom spacecraft bus construction and payload integration.",
+    opportunity: "$32B satellite assembly pipelines globally.",
+    icon: Factory,
+  },
+  {
+    id: "ground",
+    name: "Ground Segment",
+    value: "Midstream",
+    companies: "Digantara, Astrogate Labs",
+    valueCreated: "Tracking, telemetry, laser downlinks, and terminal receivers.",
+    opportunity: "$155B navigation chips and transceiver components.",
+    icon: RadioTower,
+  },
+  {
+    id: "communications",
+    name: "Communications",
+    value: "Downstream",
+    companies: "Astrome, OneWeb",
+    valueCreated: "Gigabit speed millimetre wave backhaul and satellite broadband.",
+    opportunity: "$120B consumer satellite broadband markets.",
+    icon: Radio,
+  },
+  {
+    id: "observation",
+    name: "Earth Observation",
+    value: "Downstream",
+    companies: "Pixxel, GalaxEye, KaleidEO",
+    valueCreated: "Hyperspectral and hybrid radar optical planetary scanning.",
+    opportunity: "$18B crop health and climate risk dataset markets.",
+    icon: Globe2,
+  },
+  {
+    id: "applications",
+    name: "Applications",
+    value: "Downstream",
+    companies: "SatSure, TakeMe2Space",
+    valueCreated: "Geospatial data APIs, agricultural risk models, and edge hosting.",
+    opportunity: "$380B downstream analytics and cloud services.",
+    icon: Server,
+  },
+  {
+    id: "users",
+    name: "End Users",
+    value: "Market",
+    companies: "Defence, Agri-cooperatives, Logistics",
+    valueCreated: "Strategic security, crop insurance, and maritime dark vessel tracking.",
+    opportunity: "Trillions of dollars of global enterprise efficiency.",
+    icon: Users,
+  },
 ];
 
-// ---------------------------------------------------------------------------
-// SHARED UI
-// ---------------------------------------------------------------------------
+const REFORM_TIMELINE = [
+  { year: "2019", title: "NSIL Formed", desc: "Commercial interface of ISRO established to transfer technology." },
+  { year: "2020", title: "Private Sector Opened", desc: "Historical space reforms initialized by the central government." },
+  { year: "2022", title: "IN-SPACe Operational", desc: "Single window clearing regulator begins approving private operations." },
+  { year: "2023", title: "Indian Space Policy", desc: "Defines roles and outlines formal guidelines for private entities." },
+  { year: "2024", title: "Liberalised FDI", desc: "Allows up to 100 percent foreign investment in space components." },
+  { year: "2024-2025", title: "Tech Adoption Fund", desc: "Strategic capital pool to support deep tech startup research." },
+  { year: "Today", title: "400+ Startups", desc: "Venture backed commercial acceleration across all layers." },
+];
+
+const GOV_CARDS = [
+  {
+    title: "Indian Space Policy 2023",
+    desc: "Establishes a comprehensive framework for private players and outlines distinct roles.",
+    detail: "The policy clarifies that ISRO will transition out of commercial operations to focus on advanced research, leaving satellite communications and launcher markets open to private firms.",
+    icon: FileText,
+  },
+  {
+    title: "IN-SPACe",
+    desc: "Operates as a single window regulatory clearing agency for all private launches.",
+    detail: "IN-SPACe permits, authorizes, and facilitates the use of ISRO launch facilities, test stands, and clean rooms by private companies under non-discriminatory leases.",
+    icon: Landmark,
+  },
+  {
+    title: "NSIL",
+    desc: "Acts as the commercial arm to commercialize public space technologies and launch missions.",
+    detail: "New Space India Limited manages commercial rocket launches, coordinates technology transfers, and interfaces with global buyers seeking Indian orbital capabilities.",
+    icon: Coins,
+  },
+  {
+    title: "FDI Liberalisation",
+    desc: "Permits up to 100 percent foreign investment to spark interest from global venture funds.",
+    detail: "Foreign investment limits are raised to 74 percent for satellite manufacturing and 49 percent for launch systems without government routes, and 100 percent for components.",
+    icon: Zap,
+  },
+  {
+    title: "Technology Adoption Fund",
+    desc: "A strategic financial reserve designated to seed early stage space research.",
+    detail: "A dedicated sovereign fund designed to bridge the funding gap for deep tech hardware startups undertaking high-risk research and developmental cycles.",
+    icon: Activity,
+  },
+];
+
+const TOTAL_FRAMES = 14;
+
+const VALUE_CHAIN_SCENES = [
+  { id: "hero", name: "Value Chain Intro", label: "01 / 14", startFrame: 0, endFrame: 0 },
+  { id: "changed", name: "The New Space Network", label: "02 / 14", startFrame: 1, endFrame: 1 },
+  { id: "reframe", name: "Downstream Focus", label: "03 / 14", startFrame: 2, endFrame: 2 },
+  { id: "timeline", name: "Timeline of Reform", label: "04 / 14", startFrame: 3, endFrame: 3 },
+  { id: "stack", name: "Commercial Value Chain", label: "05 / 14", startFrame: 4, endFrame: 4 },
+  { id: "revenue", name: "Revenue Structure", label: "06 / 14", startFrame: 5, endFrame: 5 },
+  { id: "structure", name: "Complexity Insight", label: "07 / 14", startFrame: 6, endFrame: 6 },
+  { id: "india", name: "India Opportunity", label: "08 / 14", startFrame: 7, endFrame: 7 },
+  { id: "gov-builder", name: "Sovereign Framework", label: "09 / 14", startFrame: 8, endFrame: 8 },
+  { id: "capital", name: "Funding Velocity", label: "10 / 14", startFrame: 9, endFrame: 9 },
+  { id: "why-matters", name: "Value Flow Diagram", label: "11 / 14", startFrame: 10, endFrame: 10 },
+  { id: "policy-innovation", name: "Policy Innovation Flow", label: "12 / 14", startFrame: 11, endFrame: 11 },
+  { id: "startup-explosion", name: "Ecosystem Explosion", label: "13 / 14", startFrame: 12, endFrame: 12 },
+  { id: "thesis", name: "The Chapter Thesis", label: "14 / 14", startFrame: 13, endFrame: 13 },
+];
+
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
+
+// ---------------------------------------------------------------------------
+// SHARED UI COMPONENTS
+// ---------------------------------------------------------------------------
 
 function SceneLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -122,10 +250,7 @@ function SceneHeading({ sub, main }: { sub: string; main: React.ReactNode }) {
   return (
     <div className="max-w-3xl mb-8 text-center">
       <SceneLabel>{sub}</SceneLabel>
-      <h2
-        className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
-        style={{ fontFamily: "Georgia, serif" }}
-      >
+      <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase">
         {main}
       </h2>
     </div>
@@ -155,16 +280,50 @@ function OrbitalRingBg() {
 
 function SourceLine() {
   return (
-    <p className="mt-6 text-[9px] text-white/35 font-mono uppercase tracking-[0.2em] text-center">
+    <p className="mt-4 text-[9px] text-white/35 font-mono uppercase tracking-[0.2em] text-center">
       Source: BryceTech / Satellite Industry Association 2025, Space Foundation 2025 Q2
     </p>
   );
 }
 
+function Counter({
+  end,
+  suffix = "",
+  duration = 1.2,
+  active,
+}: {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  active: boolean;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!active) {
+      setCount(0);
+      return;
+    }
+    let startTime: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+    requestAnimationFrame(step);
+  }, [end, duration, active]);
+
+  return <span className="font-extrabold text-[#FFB800]">{count}{suffix}</span>;
+}
+
 // ---------------------------------------------------------------------------
-// SCENES
+// SCENE COMPONENTS
 // ---------------------------------------------------------------------------
 
+// 0. HERO (Existing)
 function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
   return (
     <>
@@ -189,10 +348,7 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
       <div className="relative z-10 max-w-4xl flex flex-col items-center text-center">
         <SceneLabel>Chapter XII. Where The Money Is</SceneLabel>
 
-        <h1
-          className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6"
-          style={{ fontFamily: "Georgia, serif" }}
-        >
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6">
           The Value
           <br />
           <span className="text-[#FFB800]">Chain</span>
@@ -212,10 +368,10 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
           ].map((s, i) => (
             <div
               key={s.label}
-              className={`text-center py-5 px-3 ${i !== 2 ? "border-r border-white/10" : ""}`}
+              className={`text-center py-5 px-3 bg-black/20 backdrop-blur-sm ${i !== 2 ? "border-r border-white/10" : ""}`}
             >
               <span className="text-2xl font-extrabold text-[#FFB800] block">{s.val}</span>
-              <span className="text-[9px] uppercase text-white/55 tracking-wider">
+              <span className="text-[9px] uppercase text-white/55 tracking-wider font-bold">
                 {s.label}
               </span>
             </div>
@@ -235,6 +391,126 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
   );
 }
 
+// 1. NEW SECTION: "The Space Economy Has Changed"
+function SceneChanged({ active }: { active: boolean }) {
+  const [expanded, setExpanded] = useState(false);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!active) {
+      setExpanded(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setExpanded(true);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [active]);
+
+  const nodes = [
+    { id: "skyroot", name: "Skyroot", category: "Launcher Node", x: 100, y: 120, info: "First private launch operator." },
+    { id: "agnikul", name: "Agnikul", category: "Propulsion Node", x: 280, y: 100, info: "Single piece 3D printed engines." },
+    { id: "bellatrix", name: "Bellatrix", category: "Mobility Node", x: 380, y: 180, info: "Water thrusters and electric thrusters." },
+    { id: "pixxel", name: "Pixxel", category: "Observation Node", x: 350, y: 340, info: "Hyperspectral satellite constellations." },
+    { id: "galaxeye", name: "GalaxEye", category: "Radar Node", x: 260, y: 380, info: "SAR and optical data fusion." },
+    { id: "dhruva", name: "Dhruva Space", category: "Hardware Node", x: 90, y: 320, info: "Modular spacecraft bus assembly." },
+    { id: "digantara", name: "Digantara", category: "SSA Node", x: 70, y: 220, info: "Debris tracking and orbit safety." },
+    { id: "satsure", name: "SatSure", category: "Analytics Node", x: 220, y: 260, info: "Downstream agricultural financial data." },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10 px-4">
+      <div className="lg:col-span-5 text-left flex flex-col justify-center">
+        <SceneLabel>The Shift</SceneLabel>
+        <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase mb-6">
+          The space industry is no longer just ISRO.
+        </h2>
+        <p className="text-sm text-white/70 leading-relaxed font-light mb-6">
+          India&apos;s space ecosystem has evolved into a collaborative network of government agencies, startups, investors, manufacturers and application companies.
+        </p>
+        <div className="h-16 border-l-2 border-[#FFB800]/30 pl-4 flex flex-col justify-center">
+          {hoveredNode ? (
+            <div>
+              <span className="font-mono text-[10px] text-[#FFB800] uppercase block tracking-wider">
+                {nodes.find((n) => n.id === hoveredNode)?.category}
+              </span>
+              <span className="text-white text-xs font-semibold">
+                {nodes.find((n) => n.id === hoveredNode)?.name}: {nodes.find((n) => n.id === hoveredNode)?.info}
+              </span>
+            </div>
+          ) : (
+            <span className="text-white/40 text-xs italic">
+              Hover over network nodes to inspect commercial roles.
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="lg:col-span-7 flex justify-center items-center relative h-[360px] md:h-[420px] bg-white/[0.01] border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
+        
+        <svg className="w-full h-full max-w-[450px]" viewBox="0 0 450 450">
+          {/* Animated connections */}
+          {expanded &&
+            nodes.map((n) => (
+              <motion.line
+                key={`line-${n.id}`}
+                x1="225"
+                y1="225"
+                x2={n.x}
+                y2={n.y}
+                stroke={hoveredNode === n.id ? "#FFB800" : "rgba(255, 184, 0, 0.12)"}
+                strokeWidth={hoveredNode === n.id ? "2.5" : "1.2"}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+            ))}
+
+          {/* Central ISRO Node */}
+          <motion.g
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="cursor-pointer pointer-events-auto"
+            onMouseEnter={() => setHoveredNode("isro-center")}
+            onMouseLeave={() => setHoveredNode(null)}
+          >
+            <circle cx="225" cy="225" r="28" fill="#030308" stroke="#FFB800" strokeWidth="2.5" />
+            <circle cx="225" cy="225" r="24" fill="rgba(255, 184, 0, 0.08)" />
+            <text x="225" y="228" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
+              ISRO
+            </text>
+          </motion.g>
+
+          {/* Expanded Startup Nodes */}
+          {expanded &&
+            nodes.map((n) => (
+              <motion.g
+                key={n.id}
+                initial={{ scale: 0, x: 225 - n.x, y: 225 - n.y }}
+                animate={{ scale: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, type: "spring", stiffness: 80 }}
+                className="cursor-pointer pointer-events-auto"
+                onMouseEnter={() => setHoveredNode(n.id)}
+                onMouseLeave={() => setHoveredNode(null)}
+              >
+                <circle cx={n.x} cy={n.y} r="14" fill="#0a0a14" stroke={hoveredNode === n.id ? "#FFB800" : "rgba(255,255,255,0.25)"} strokeWidth="1.5" />
+                <circle cx={n.x} cy={n.y} r="10" fill={hoveredNode === n.id ? "rgba(255,184,0,0.15)" : "transparent"} />
+                {hoveredNode === n.id && (
+                  <text x={n.x} y={n.y - 18} fill="#FFB800" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
+                    {n.name}
+                  </text>
+                )}
+              </motion.g>
+            ))}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// 2. REFRAME (Existing)
 function Scene1Reframe() {
   const items = [
     {
@@ -252,11 +528,8 @@ function Scene1Reframe() {
   ];
   return (
     <>
-      <SceneHeading
-        sub="01. The Reframe"
-        main="The biggest line items are mundane"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl z-10">
+      <SceneHeading sub="01. The Reframe" main="The biggest line items are mundane" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl z-10 px-4">
         {items.map((it) => {
           const Icon = it.icon;
           return (
@@ -270,13 +543,10 @@ function Scene1Reframe() {
                   {it.stat}
                 </span>
               </div>
-              <h3
-                className="text-xl font-light text-white leading-snug mb-3"
-                style={{ fontFamily: "Georgia, serif" }}
-              >
+              <h3 className="text-xl font-bold text-white leading-snug mb-3">
                 {it.title}
               </h3>
-              <p className="text-sm text-white/80 leading-relaxed">{it.body}</p>
+              <p className="text-sm text-white/80 leading-relaxed font-light">{it.body}</p>
             </div>
           );
         })}
@@ -288,133 +558,168 @@ function Scene1Reframe() {
   );
 }
 
-function Scene2ValueChain({
-  active,
-  setActive,
-}: {
-  active: string;
-  setActive: (id: string) => void;
-}) {
-  const current = LAYERS.find((l) => l.id === active) || LAYERS[3];
-  const Icon = current.icon;
+// 3. NEW SECTION: Timeline of Reform
+function SceneTimeline({ active }: { active: boolean }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <>
-      <SceneHeading
-        sub="02. Upstream To Downstream"
-        main="Four commercial layers, one economy"
-      />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full max-w-6xl z-10">
-        {/* Layered stack */}
-        <div className="lg:col-span-7">
-          <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl p-5 md:p-6 backdrop-blur-md">
-            <div className="flex items-center justify-between mb-4 font-mono text-[8px] uppercase tracking-[0.2em] text-white/45">
-              <span>Upstream. Technical complexity</span>
-              <span>Downstream. Revenue</span>
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
+      <SceneHeading sub="02. Structural Reform" main="Timeline of Reform" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-lg mx-auto">
+        Key regulatory triggers that dismantled state monopolies and unlocked market access.
+      </p>
+
+      {/* Horizontal timeline */}
+      <div
+        ref={containerRef}
+        className="relative flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 lg:gap-4 pointer-events-auto overflow-x-auto no-scrollbar pb-6 w-full max-w-5xl mx-auto"
+      >
+        {/* Horizontal connect line */}
+        <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 hidden lg:block -translate-y-1/2 z-0" />
+
+        {REFORM_TIMELINE.map((m, idx) => (
+          <motion.div
+            key={m.year}
+            initial={{ opacity: 0.15, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: idx * 0.05 }}
+            className="flex-1 bg-[#0a0a14]/80 border border-white/10 hover:border-[#FFB800]/40 rounded-xl p-4 text-left relative z-10 backdrop-blur-sm transition-all duration-300 min-w-[200px]"
+          >
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-mono text-xs font-bold text-[#FFB800] bg-[#FFB800]/10 px-2 py-0.5 rounded">
+                {m.year}
+              </span>
+              <div className="w-2 h-2 rounded-full bg-[#FFB800] animate-ping" />
             </div>
-            <div className="flex flex-col gap-2.5">
-              {LAYERS.map((layer) => {
-                const LIcon = layer.icon;
-                const isActive = layer.id === active;
-                return (
-                  <button
-                    key={layer.id}
-                    onMouseEnter={() => setActive(layer.id)}
-                    onClick={() => setActive(layer.id)}
-                    className="interactive-control group block w-full text-left"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <LIcon
-                        className={`w-3.5 h-3.5 shrink-0 ${
-                          isActive ? "text-[#FFB800]" : "text-white/50"
-                        }`}
-                      />
-                      <span
-                        className={`font-mono text-[10px] uppercase tracking-wide ${
-                          isActive ? "text-[#FFB800]" : "text-white/70"
-                        }`}
-                      >
-                        {layer.name}
-                      </span>
-                      <span className="ml-auto font-mono text-[10px] text-white/45">
-                        {layer.valueLabel} / {layer.share}
-                      </span>
-                    </div>
-                    <div className="h-7 w-full bg-white/[0.03] rounded-md overflow-hidden">
-                      <div
-                        className={`h-full rounded-md transition-all duration-500 ${
-                          isActive
-                            ? "bg-gradient-to-r from-[#FFB800] to-[#ffd866] shadow-[0_0_18px_rgba(255,184,0,0.25)]"
-                            : "bg-[#FFB800]/35 group-hover:bg-[#FFB800]/55"
-                        }`}
-                        style={{ width: `${layer.width}%` }}
-                      />
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <p className="text-center text-[8px] text-white/30 font-mono mt-4 uppercase tracking-wider">
-              Bar width scaled to 2024 segment revenue
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-1 line-clamp-1">
+              {m.title}
+            </h4>
+            <p className="text-[10px] text-white/60 leading-normal font-light">
+              {m.desc}
             </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 4. UPGRADED Interactive Commercial Value Chain (Upgrades Scene2ValueChain)
+function Scene2ValueChainUpgraded({
+  activeStage,
+  setActiveStage,
+}: {
+  activeStage: string;
+  setActiveStage: (id: string) => void;
+}) {
+  const current = DETAILED_STAGES.find((s) => s.id === activeStage) || DETAILED_STAGES[0];
+  const Icon = current.icon;
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full py-16 md:py-8 overflow-y-auto no-scrollbar">
+      <SceneHeading sub="03. The Ecosystem Stack" main="The Commercial Value Chain" />
+      <p className="text-xs sm:text-sm text-white/50 mb-8 max-w-xl mx-auto">
+        From rockets reaching low Earth orbit to crop intelligence models on the ground. Hover to inspect.
+      </p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch w-full max-w-5xl mx-auto pointer-events-auto">
+        {/* The 7 Interactive Nodes */}
+        <div className="lg:col-span-7 flex flex-col gap-2 bg-[#0a0a14]/60 border border-white/5 p-4 md:p-5 rounded-2xl backdrop-blur-md justify-center">
+          <div className="flex justify-between items-center text-[8px] font-mono uppercase tracking-widest text-white/40 mb-2 px-1">
+            <span>Access segment</span>
+            <span>Downstream Applications</span>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            {DETAILED_STAGES.map((stage) => {
+              const SIcon = stage.icon;
+              const isActive = stage.id === activeStage;
+              return (
+                <button
+                  key={stage.id}
+                  onMouseEnter={() => setActiveStage(stage.id)}
+                  onClick={() => setActiveStage(stage.id)}
+                  className="interactive-control group block w-full text-left"
+                >
+                  <div className="flex items-center justify-between px-3.5 py-2 bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-[#FFB800]/30 rounded-xl transition-all duration-200">
+                    <div className="flex items-center gap-3">
+                      <SIcon className={`w-4 h-4 shrink-0 transition-colors ${isActive ? "text-[#FFB800]" : "text-white/60"}`} />
+                      <span className={`text-xs font-semibold uppercase tracking-wider transition-colors ${isActive ? "text-[#FFB800]" : "text-white/80"}`}>
+                        {stage.name}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-[9px] font-mono text-white/40">
+                        {stage.value}
+                      </span>
+                      <ChevronRight className="w-3 h-3 text-white/30" />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Detail */}
+        {/* Dynamic Detail Card */}
         <div className="lg:col-span-5">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
-              initial={{ opacity: 0, x: 16 }}
+              initial={{ opacity: 0, x: 12 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.25 }}
-              className="h-full bg-[#0a0a14]/90 border border-[#FFB800]/25 rounded-2xl p-6 text-left backdrop-blur-md shadow-2xl flex flex-col"
+              exit={{ opacity: 0, x: -12 }}
+              transition={{ duration: 0.22 }}
+              className="h-full bg-[#0a0a14]/90 border border-[#FFB800]/25 rounded-2xl p-6 text-left backdrop-blur-md shadow-2xl flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between border-b border-white/[0.06] pb-4 mb-4">
-                <div className="flex items-center gap-2">
-                  <Icon className="w-5 h-5 text-[#FFB800]" />
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-white/50">
-                    {current.flow}
-                  </span>
+              <div>
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Icon className="w-5 h-5 text-[#FFB800]" />
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] bg-[#FFB800]/10 px-2 py-0.5 rounded">
+                      {current.value}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-2xl font-black text-[#FFB800] block leading-none">
-                    {current.valueLabel}
-                  </span>
-                  <span className="text-[9px] text-white/45 font-mono">
-                    {current.share} of total
-                  </span>
+
+                <h3 className="text-xl font-bold text-white uppercase tracking-tight mb-2">
+                  {current.name}
+                </h3>
+                <p className="text-xs text-white/70 leading-relaxed font-light mb-4">
+                  {current.valueCreated}
+                </p>
+
+                <div className="space-y-3 mt-4">
+                  <div>
+                    <span className="font-mono text-[9px] text-[#FFB800]/70 uppercase block tracking-wider">Example Companies:</span>
+                    <span className="text-xs font-semibold text-white/95">{current.companies}</span>
+                  </div>
                 </div>
               </div>
-              <h3
-                className="text-lg text-white leading-snug mb-3 font-light"
-                style={{ fontFamily: "Georgia, serif" }}
-              >
-                {current.name}
-              </h3>
-              <p className="text-sm text-white/80 leading-relaxed mb-4">{current.note}</p>
-              <ul className="space-y-2 mt-auto">
-                {current.sub.map((s, i) => (
-                  <li key={i} className="flex gap-2 text-xs text-white/70">
-                    <span className="text-[#FFB800] font-mono mt-0.5 shrink-0">0{i + 1}</span>
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
+
+              <div className="pt-4 border-t border-white/5 mt-6">
+                <span className="font-mono text-[9px] text-[#FFB800]/70 uppercase block tracking-wider">Market Value Projection:</span>
+                <span className="text-xs font-bold text-white block leading-relaxed mt-0.5">
+                  {current.opportunity}
+                </span>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
+// 5. REVENUE BY LAYER (Existing Scene3Revenue)
 function Scene3Revenue({ active }: { active: boolean }) {
   const maxVal = 155;
   return (
     <>
-      <SceneHeading sub="03. Revenue By Layer" main="Where the dollars actually land" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full max-w-5xl z-10">
+      <SceneHeading sub="04. Revenue By Layer" main="Where the dollars actually land" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full max-w-5xl z-10 px-4">
         <div className="lg:col-span-7">
           <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-md">
             <div className="flex items-end justify-around gap-5 h-[260px]">
@@ -458,8 +763,8 @@ function Scene3Revenue({ active }: { active: boolean }) {
           </p>
         </div>
 
-        {/* Government anchor */}
-        <div className="lg:col-span-5 flex flex-col gap-5">
+        {/* Government Spend */}
+        <div className="lg:col-span-5 flex flex-col gap-5 text-left">
           <div className="bg-[#0a0a14]/90 border border-[#FFB800]/25 rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-3">
               <Landmark className="w-4 h-4 text-[#FFB800]" />
@@ -472,7 +777,7 @@ function Scene3Revenue({ active }: { active: boolean }) {
               <span className="font-mono text-[11px] text-emerald-400">+10% YoY</span>
             </div>
             <p className="text-[11px] text-white/60 font-mono uppercase tracking-wide mt-2">
-              Defense near 54% (about $73B). US alone near $80B.
+              Defense near 54 percent (about $73B). US alone near $80B.
             </p>
           </div>
           <p className="text-sm text-white/80 leading-relaxed font-light">
@@ -486,6 +791,7 @@ function Scene3Revenue({ active }: { active: boolean }) {
   );
 }
 
+// 6. COMPLEXITY VS REVENUE (Existing Scene4Structure)
 function Scene4Structure() {
   const rows = [
     { label: "Launch and propulsion", complexity: 100, revenue: 14, icon: Rocket },
@@ -495,8 +801,8 @@ function Scene4Structure() {
   ];
   return (
     <>
-      <SceneHeading sub="04. The Structural Insight" main="Complexity up, revenue down" />
-      <div className="w-full max-w-4xl z-10">
+      <SceneHeading sub="05. The Structural Insight" main="Complexity up, revenue down" />
+      <div className="w-full max-w-4xl z-10 px-4">
         <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-md">
           <div className="flex items-center justify-end gap-8 mb-4 font-mono text-[8px] uppercase tracking-[0.2em]">
             <span className="text-white/45">Technical complexity</span>
@@ -506,7 +812,7 @@ function Scene4Structure() {
             {rows.map((r) => {
               const RIcon = r.icon;
               return (
-                <div key={r.label} className="flex items-center gap-4">
+                <div key={r.label} className="flex items-center gap-4 text-left">
                   <div className="flex items-center gap-2 w-44 shrink-0">
                     <RIcon className="w-3.5 h-3.5 text-white/50 shrink-0" />
                     <span className="font-mono text-[10px] text-white/75 uppercase tracking-wide">
@@ -530,9 +836,9 @@ function Scene4Structure() {
             })}
           </div>
         </div>
-        <div className="mt-6 flex items-start gap-3 bg-[#FFB800]/5 border border-[#FFB800]/15 px-5 py-4 rounded-xl max-w-3xl mx-auto">
+        <div className="mt-6 flex items-start gap-3 bg-[#FFB800]/5 border border-[#FFB800]/15 px-5 py-4 rounded-xl max-w-3xl mx-auto text-left">
           <Gauge className="w-5 h-5 text-[#FFB800] shrink-0 mt-0.5" />
-          <p className="text-sm text-white/80 leading-relaxed">
+          <p className="text-sm text-white/80 leading-relaxed font-light">
             Rockets are essential infrastructure that carry a small slice of
             total value. They are the toll roads of space: hard to build,
             indispensable, and not where the fares are collected. Value
@@ -544,6 +850,7 @@ function Scene4Structure() {
   );
 }
 
+// 7. INDIA POSITION (Existing Scene5India)
 function Scene5India() {
   const names = [
     { name: "Pixxel", role: "Earth observation", icon: Satellite },
@@ -553,8 +860,8 @@ function Scene5India() {
   ];
   return (
     <>
-      <SceneHeading sub="05. The India Position" main="Strong upstream, the prize downstream" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-5xl z-10">
+      <SceneHeading sub="06. The India Position" main="Strong upstream, the prize downstream" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-5xl z-10 px-4 text-left">
         <div className="lg:col-span-6 flex flex-col gap-5">
           <p className="text-base text-white/80 leading-relaxed font-light">
             India is strong precisely where the commercial revenue is thin: the
@@ -607,7 +914,7 @@ function Scene5India() {
           </div>
           <div className="flex items-center gap-3 bg-white/[0.02] border border-white/8 px-5 py-4 rounded-xl">
             <Layers className="w-4 h-4 text-[#FFB800] shrink-0" />
-            <span className="text-[12px] text-white/75 leading-relaxed">
+            <span className="text-[12px] text-white/75 leading-relaxed font-light">
               Emerging Direct-to-Device connectivity could reach roughly $6B in
               annual revenue, a new downstream category sitting on existing orbits.
             </span>
@@ -619,6 +926,336 @@ function Scene5India() {
   );
 }
 
+// 8. NEW SECTION: Government as an Ecosystem Builder
+function SceneGovBuilder({ active }: { active: boolean }) {
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full py-16 md:py-8 overflow-y-auto no-scrollbar">
+      <SceneHeading sub="07. Institutional Enablement" main="Government as an Ecosystem Builder" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
+        State agencies are moving from primary system builders to market facilitating operators.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 pointer-events-auto max-w-5xl mx-auto w-full">
+        {GOV_CARDS.map((card, idx) => {
+          const Icon = card.icon;
+          const isSelected = selectedCard === idx;
+
+          return (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 18 }}
+              animate={active ? { opacity: 1, y: 0 } : { opacity: 0 }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              onClick={() => setSelectedCard(isSelected ? null : idx)}
+              className={`group flex flex-col justify-between p-5 bg-[#0a0a14]/65 border hover:border-[#FFB800]/40 rounded-xl transition-all duration-300 relative overflow-hidden text-left shadow-lg cursor-pointer h-[260px] ${
+                isSelected ? "border-[#FFB800] shadow-[0_0_20px_rgba(255,184,0,0.1)]" : "border-white/10"
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="p-2.5 rounded-lg bg-white/[0.03] group-hover:bg-[#FFB800]/10 border border-white/5 group-hover:border-[#FFB800]/20 text-white/60 group-hover:text-[#FFB800] transition-colors duration-300">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-[8px] text-white/40 tracking-wider">
+                    REFORM 0{idx + 1}
+                  </span>
+                </div>
+
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2 group-hover:text-[#FFB800] transition-colors">
+                  {card.title}
+                </h3>
+
+                <p className="text-[10px] text-white/60 leading-normal font-light">
+                  {card.desc}
+                </p>
+
+                {/* Stretched detail view */}
+                <div className={`mt-3 pt-3 border-t border-white/5 transition-all duration-300 overflow-hidden ${
+                  isSelected ? "opacity-100 h-20" : "opacity-0 h-0"
+                }`}>
+                  <p className="text-[9px] text-white/80 leading-normal font-light">
+                    {card.detail}
+                  </p>
+                </div>
+              </div>
+
+              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-widest font-bold pt-2 mt-auto block">
+                {isSelected ? "Show less -" : "Learn more +"}
+              </span>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// 9. NEW SECTION: Capital is Flowing
+function SceneCapitalFlowing({ active }: { active: boolean }) {
+  const stats = [
+    { value: 400, suffix: "+", label: "Space Startups", desc: "Active commercial operations registered under policy reforms." },
+    { value: 500, suffix: "M+", label: "Private Investment", desc: "Total private venture funding into local space tech enterprises." },
+    { value: 150, suffix: "M", label: "Raised in 2025", desc: "Annual capital inflows reflecting investor confidence velocity." },
+    { value: 40, suffix: "-45B", label: "Target Space Economy", desc: "Strategic target sector economic valuation by 2033." },
+    { value: 8, suffix: "%", label: "Global Market Share Target", desc: "Target commercial footprint footprint by 2030." },
+  ];
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full py-16 md:py-8 overflow-y-auto no-scrollbar">
+      <SceneHeading sub="08. Financial Velocity" main="Capital is Flowing" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
+        Private investments are backing deep tech launchers, satellite manufacturing, and analytical downstream services.
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pointer-events-auto max-w-5xl mx-auto w-full">
+        {stats.map((s, idx) => (
+          <div
+            key={s.label}
+            className="flex flex-col justify-between p-5 bg-[#0a0a14]/60 border border-white/10 rounded-xl text-left h-[180px] hover:border-white/20 transition-all duration-300"
+          >
+            <div>
+              <span className="text-3xl font-extrabold text-[#FFB800] leading-none block mb-1">
+                <Counter end={s.value} suffix={s.suffix} active={active} />
+              </span>
+              <span className="font-mono text-[9px] text-white uppercase tracking-wider block font-bold mb-3">
+                {s.label}
+              </span>
+            </div>
+            <p className="text-[10px] text-white/50 leading-relaxed font-light mt-auto">
+              {s.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 10. NEW SECTION: Why This Matters (Flowchart Infographic)
+function SceneWhyMatters({ active }: { active: boolean }) {
+  const steps = [
+    { label: "Government", sub: "Sets policy structures" },
+    { label: "Infrastructure", sub: "Leases launchpads & stands" },
+    { label: "Private Companies", sub: "Integrate launchers & buses" },
+    { label: "Satellites", sub: "Orbit sensing constellations" },
+    { label: "Applications", sub: "Calculate downstream vectors" },
+    { label: "Economic Value", sub: "Generates strategic GDP assets" },
+  ];
+
+  return (
+    <div className="max-w-6xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
+      <SceneHeading sub="09. Dynamic Impact" main="Why This Matters" />
+      <p className="text-xs sm:text-sm text-white/50 mb-12 max-w-xl mx-auto">
+        A representation of how public enablement translates directly into commercial value and global productivity.
+      </p>
+
+      {/* Infographic Flowchart */}
+      <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-3 pointer-events-auto max-w-5xl mx-auto w-full">
+        {/* Animated Connecting Lines */}
+        <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FFB800]/10 to-[#FFB800]/40 hidden lg:block -translate-y-1/2 z-0" />
+
+        {steps.map((step, idx) => (
+          <div
+            key={step.label}
+            className="flex-1 bg-[#0a0a14]/90 border border-white/10 hover:border-[#FFB800]/30 rounded-xl p-4 text-left relative z-10 w-full lg:w-auto backdrop-blur-md transition-all duration-300"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-mono text-[9px] bg-[#FFB800]/10 text-[#FFB800] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                0{idx + 1}
+              </span>
+              <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                {step.label}
+              </h4>
+            </div>
+            <p className="text-[10px] text-white/50 leading-relaxed font-light">
+              {step.sub}
+            </p>
+
+            {/* Glowing signal node animation */}
+            <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#FFB800]/60 hidden lg:block animate-ping" style={{ animationDelay: `${idx * 0.3}s` }} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 11. NEW SECTION: Policy -> Innovation Flow
+function ScenePolicyInnovation() {
+  const steps = [
+    { title: "Policy", desc: "Regulatory clearance structures opened by IN-SPACe." },
+    { title: "Funding", desc: "Venture investment and strategic space reserves flow." },
+    { title: "Technology", desc: "Private space engine testing and modular bus designs." },
+    { title: "Commercial Products", desc: "Hyperspectral sensors, rockets, and downlinks built." },
+    { title: "Global Customers", desc: "Exporting capabilities to worldwide enterprise buyers." },
+  ];
+
+  return (
+    <div className="max-w-4xl w-full text-center px-4 z-10 flex flex-col justify-center h-full">
+      <SceneHeading sub="10. Strategic Sequence" main="Policy to Innovation" />
+      <p className="text-xs sm:text-sm text-white/50 mb-10 max-w-xl mx-auto">
+        State reforms did not replace ISRO, they enabled a commercial commercial layer to build on top of state research.
+      </p>
+
+      {/* Horizontal Flow layout */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 pointer-events-auto max-w-4xl mx-auto w-full text-left">
+        {steps.map((s, idx) => (
+          <div
+            key={s.title}
+            className="bg-[#0a0a14]/60 border border-white/10 p-5 rounded-xl flex flex-col justify-between h-[160px] hover:border-[#FFB800]/30 transition-all duration-300"
+          >
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-mono text-[9px] text-[#FFB800]/60">STEP 0{idx+1}</span>
+                {idx < 4 && <span className="ml-auto text-white/20 font-mono text-xs hidden md:inline">→</span>}
+              </div>
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-2">
+                {s.title}
+              </h3>
+            </div>
+            <p className="text-[10px] text-white/60 leading-normal font-light mt-auto">
+              {s.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 12. NEW SECTION: Startup Explosion
+function SceneStartupExplosion({ active }: { active: boolean }) {
+  const [stage, setStage] = useState(0); // 0: 1, 1: 10, 2: 50, 3: 100, 4: 200, 5: 400
+  const counts = [1, 10, 50, 100, 200, 400];
+
+  useEffect(() => {
+    if (!active) {
+      setStage(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setStage((s) => {
+        if (s < counts.length - 1) return s + 1;
+        clearInterval(interval);
+        return s;
+      });
+    }, 450);
+    return () => clearInterval(interval);
+  }, [active]);
+
+  const currentCount = counts[stage];
+
+  // Stylized India Map particle nodes (seeded inside diamond boundary)
+  const indiaDots = useMemo(() => {
+    const dots: { x: number; y: number }[] = [];
+    const isInsideIndia = (x: number, y: number) => {
+      if (y < 30 || y > 380) return false;
+      if (y <= 190) {
+        const leftBound = 200 - ((200 - 70) * (y - 30)) / (190 - 30);
+        const rightBound = 200 + ((350 - 200) * (y - 30)) / (150 - 30);
+        return x >= leftBound && x <= rightBound;
+      } else {
+        const leftBound = 70 + ((195 - 70) * (y - 190)) / (380 - 190);
+        const rightBound = 350 - ((350 - 195) * (y - 150)) / (380 - 150);
+        return x >= leftBound && x <= rightBound;
+      }
+    };
+
+    // Generating background grid representation of India
+    for (let x = 60; x <= 360; x += 15) {
+      for (let y = 30; y <= 380; y += 15) {
+        if (isInsideIndia(x, y)) {
+          dots.push({ x, y });
+        }
+      }
+    }
+    return dots;
+  }, []);
+
+  // Map active startup nodes based on current count
+  const activeNodes = useMemo(() => {
+    const mainHubs = [
+      { name: "Bangalore", x: 195, y: 340 },
+      { name: "Hyderabad", x: 200, y: 300 },
+      { name: "Chennai", x: 210, y: 350 },
+      { name: "Mumbai", x: 135, y: 280 },
+      { name: "Delhi NCR", x: 180, y: 130 },
+      { name: "Thiruvananthapuram", x: 185, y: 380 },
+    ];
+
+    if (currentCount <= 1) return mainHubs.slice(0, 1);
+    if (currentCount <= 10) return mainHubs;
+
+    // Generate random nodes dispersing outward from main hubs
+    const extraNodes = [];
+    const targetCount = currentCount;
+    
+    // Seed random nodes
+    for (let i = 0; i < targetCount; i++) {
+      const hub = mainHubs[i % mainHubs.length];
+      const r = Math.random() * (currentCount / 6);
+      const theta = Math.random() * Math.PI * 2;
+      const x = Math.min(Math.max(hub.x + Math.cos(theta) * r, 60), 340);
+      const y = Math.min(Math.max(hub.y + Math.sin(theta) * r, 30), 380);
+      extraNodes.push({ name: `Node-${i}`, x, y });
+    }
+    return extraNodes;
+  }, [currentCount]);
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10 px-4">
+      <div className="lg:col-span-5 text-left flex flex-col justify-center">
+        <SceneLabel>Startup Explosion</SceneLabel>
+        <h2 className="text-3xl md:text-5xl font-black text-white leading-tight uppercase mb-6">
+          Ecosystem Velocity
+        </h2>
+        <p className="text-sm text-white/70 leading-relaxed font-light mb-8">
+          The scale of private space startups registered in India has increased exponentially since deregulation, forming deep tech clusters in aerospace hubs.
+        </p>
+
+        <div className="p-4 bg-white/[0.02] border border-white/10 rounded-xl font-mono text-left max-w-md">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] text-white/45 uppercase tracking-wider font-bold">Registration Cadence:</span>
+            <span className="text-xs font-bold text-[#FFB800]">{currentCount}+ Startups</span>
+          </div>
+          <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+            <div
+              className="bg-[#FFB800] h-full rounded-full transition-all duration-300"
+              style={{ width: `${(stage / (counts.length - 1)) * 100}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:col-span-7 flex justify-center items-center relative h-[360px] md:h-[420px] bg-white/[0.01] border border-white/5 rounded-2xl overflow-hidden backdrop-blur-md">
+        {/* Particle Dotted India Map */}
+        <div className="absolute inset-0 flex justify-center items-center">
+          <svg className="w-full h-full max-w-[400px] opacity-25" viewBox="0 0 400 400">
+            {indiaDots.map((dot, idx) => (
+              <circle key={idx} cx={dot.x} cy={dot.y} r="1.5" fill="rgba(255,255,255,0.4)" />
+            ))}
+          </svg>
+        </div>
+
+        {/* Spawning Active Constellation Nodes */}
+        <div className="absolute inset-0 flex justify-center items-center">
+          <svg className="w-full h-full max-w-[400px]" viewBox="0 0 400 400">
+            {activeNodes.map((n, idx) => (
+              <g key={idx}>
+                <circle cx={n.x} cy={n.y} r="2.5" fill="#FFB800" />
+                <circle cx={n.x} cy={n.y} r="6" fill="transparent" stroke="#FFB800" strokeWidth="0.8" className="animate-pulse" style={{ animationDelay: `${idx * 0.15}s` }} />
+              </g>
+            ))}
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 13. THESIS (Existing Scene6Thesis)
 function Scene6Thesis({ presentationActive = false }: { presentationActive?: boolean }) {
   return (
     <div className="max-w-4xl flex flex-col items-center text-center px-4">
@@ -638,7 +1275,6 @@ function Scene6Thesis({ presentationActive = false }: { presentationActive?: boo
             ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
             : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
         }`}
-        style={{ fontFamily: "Georgia, serif" }}
       >
         <span className="block mb-1 text-white/65">Revenue lives downstream.</span>
         <span className="block mb-2 text-white font-semibold">Complexity lives upstream.</span>
@@ -673,7 +1309,7 @@ function Scene6Thesis({ presentationActive = false }: { presentationActive?: boo
 
           <Link
             href="/"
-            className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
+            className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10 font-bold"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Return to Main Deck
@@ -685,36 +1321,57 @@ function Scene6Thesis({ presentationActive = false }: { presentationActive?: boo
 }
 
 // ---------------------------------------------------------------------------
-// MAIN PAGE
+// MAIN PAGE COMPONENT
 // ---------------------------------------------------------------------------
 export default function ValueChainPage() {
   const p = usePresentation(TOTAL_FRAMES);
-  const { progress, presentationActive, currentFrameIndex, containerRef } = p;
+  const { progress, presentationActive, currentFrameIndex, containerRef, goToFrame } = p;
 
-  // Interaction state
-  const [activeLayer, setActiveLayer] = useState("ground");
+  // Interactive value chain active stage
+  const [activeStage, setActiveStage] = useState("launch");
 
-  // Scroll transforms (7 frames, each ~1/7 of the track)
-  const heroOpacity = useTransform(progress, [0.0, 0.1, 0.1429], [1, 1, 0]);
-  const heroScale = useTransform(progress, [0.0, 0.1429], [1, 0.96]);
+  // Scroll transforms for 14 frames (each spans 1/14 ~ 0.0714 width)
+  const heroOpacity = useTransform(progress, [0.0, 0.05, 0.0714], [1, 1, 0]);
+  const heroScale = useTransform(progress, [0.0, 0.0714], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.11, 0.1429, 0.26, 0.2857], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.11, 0.1429, 0.26, 0.2857], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.26, 0.2857, 0.40, 0.4286], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.26, 0.2857, 0.40, 0.4286], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [0, 1, 1, 0]);
+  const s2Y = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.40, 0.4286, 0.547, 0.5714], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.40, 0.4286, 0.547, 0.5714], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.547, 0.5714, 0.69, 0.7143], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.547, 0.5714, 0.69, 0.7143], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.69, 0.7143, 0.833, 0.8571], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.69, 0.7143, 0.833, 0.8571], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.833, 0.8571, 1.0], [0, 1, 1]);
-  const s6Y = useTransform(progress, [0.833, 0.8571, 1.0], [24, 0, 0]);
+  const s6Opacity = useTransform(progress, [0.40, 0.4286, 0.47, 0.50], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.40, 0.4286, 0.47, 0.50], [24, 0, 0, -24]);
+
+  const s7Opacity = useTransform(progress, [0.47, 0.50, 0.55, 0.5714], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.47, 0.50, 0.55, 0.5714], [24, 0, 0, -24]);
+
+  const s8Opacity = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [24, 0, 0, -24]);
+
+  const s9Opacity = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [24, 0, 0, -24]);
+
+  const s10Opacity = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [0, 1, 1, 0]);
+  const s10Y = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [24, 0, 0, -24]);
+
+  const s11Opacity = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [0, 1, 1, 0]);
+  const s11Y = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [24, 0, 0, -24]);
+
+  const s12Opacity = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [0, 1, 1, 0]);
+  const s12Y = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [24, 0, 0, -24]);
+
+  const s13Opacity = useTransform(progress, [0.90, 0.9286, 1.0], [0, 1, 1]);
+  const s13Y = useTransform(progress, [0.90, 0.9286, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -722,7 +1379,7 @@ export default function ValueChainPage() {
       <PresentationChrome controller={p} scenes={VALUE_CHAIN_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[700vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -736,17 +1393,24 @@ export default function ValueChainPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <Scene0Hero presentationActive />}
-                {currentFrameIndex === 1 && <Scene1Reframe />}
-                {currentFrameIndex === 2 && (
-                  <Scene2ValueChain active={activeLayer} setActive={setActiveLayer} />
+                {currentFrameIndex === 1 && <SceneChanged active={true} />}
+                {currentFrameIndex === 2 && <Scene1Reframe />}
+                {currentFrameIndex === 3 && <SceneTimeline active={true} />}
+                {currentFrameIndex === 4 && (
+                  <Scene2ValueChainUpgraded activeStage={activeStage} setActiveStage={setActiveStage} />
                 )}
-                {currentFrameIndex === 3 && <Scene3Revenue active={true} />}
-                {currentFrameIndex === 4 && <Scene4Structure />}
-                {currentFrameIndex === 5 && <Scene5India />}
-                {currentFrameIndex === 6 && <Scene6Thesis presentationActive />}
+                {currentFrameIndex === 5 && <Scene3Revenue active={true} />}
+                {currentFrameIndex === 6 && <Scene4Structure />}
+                {currentFrameIndex === 7 && <Scene5India />}
+                {currentFrameIndex === 8 && <SceneGovBuilder active={true} />}
+                {currentFrameIndex === 9 && <SceneCapitalFlowing active={true} />}
+                {currentFrameIndex === 10 && <SceneWhyMatters active={true} />}
+                {currentFrameIndex === 11 && <ScenePolicyInnovation />}
+                {currentFrameIndex === 12 && <SceneStartupExplosion active={true} />}
+                {currentFrameIndex === 13 && <Scene6Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -763,43 +1427,106 @@ export default function ValueChainPage() {
 
               <motion.div
                 style={{ opacity: s1Opacity, y: s1Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 1 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneChanged active={currentFrameIndex === 1} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s2Opacity, y: s2Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-none`}
               >
                 <Scene1Reframe />
               </motion.div>
 
               <motion.div
-                style={{ opacity: s2Opacity, y: s2Y }}
+                style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene2ValueChain active={activeLayer} setActive={setActiveLayer} />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s3Opacity, y: s3Y }}
-                className={`${SLIDE_BASE} text-center pointer-events-none`}
-              >
-                <Scene3Revenue active={currentFrameIndex === 3} />
+                <SceneTimeline active={currentFrameIndex === 3} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
-                className={`${SLIDE_BASE} text-center pointer-events-none`}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
               >
-                <Scene4Structure />
+                <Scene2ValueChainUpgraded activeStage={activeStage} setActiveStage={setActiveStage} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-none`}
               >
-                <Scene5India />
+                <Scene3Revenue active={currentFrameIndex === 5} />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
+                className={`${SLIDE_BASE} text-center pointer-events-none`}
+              >
+                <Scene4Structure />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s7Opacity, y: s7Y }}
+                className={`${SLIDE_BASE} text-center pointer-events-none`}
+              >
+                <Scene5India />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s8Opacity, y: s8Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneGovBuilder active={currentFrameIndex === 8} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s9Opacity, y: s9Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneCapitalFlowing active={currentFrameIndex === 9} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s10Opacity, y: s10Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneWhyMatters active={currentFrameIndex === 10} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s11Opacity, y: s11Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <ScenePolicyInnovation />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s12Opacity, y: s12Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneStartupExplosion active={currentFrameIndex === 12} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s13Opacity, y: s13Y }}
                 className={`${SLIDE_BASE} text-center pointer-events-auto`}
               >
                 <Scene6Thesis presentationActive={false} />
