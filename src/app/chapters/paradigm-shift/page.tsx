@@ -678,14 +678,6 @@ function Scene4Market({ active }: { active: boolean }) {
             <strong className="text-[#FFB800]">$100B by 2040</strong> - roughly
             10% of the world market.
           </p>
-
-          <div className="flex items-center gap-3 bg-white/[0.02] border border-white/5 px-4 py-3 rounded-xl">
-            <Factory className="w-4 h-4 text-[#FFB800] shrink-0" />
-            <span className="text-[11px] text-white/70 leading-relaxed">
-              Opportunities for public-market investors in aerospace
-              manufacturing & defense-linked precision engineering.
-            </span>
-          </div>
         </div>
       </div>
     </>
@@ -693,68 +685,129 @@ function Scene4Market({ active }: { active: boolean }) {
 }
 
 function Scene5Thesis({ presentationActive = false }: { presentationActive?: boolean }) {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery.matches) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientWidth, clientHeight } = document.documentElement;
+      const x = (e.clientX / clientWidth - 0.5) * 10;
+      const y = (e.clientY / clientHeight - 0.5) * 10;
+      setMousePos({ x, y });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
-    <div className="max-w-4xl flex flex-col items-center text-center px-4">
+    <div className="max-w-4xl flex flex-col items-center justify-center h-full mx-auto text-center px-4 pb-12 relative z-10 w-full">
+      {/* 1. Full-screen background illustration with mouse parallax */}
+      <div className="fixed inset-0 w-screen h-screen z-0 overflow-hidden pointer-events-none">
+        <motion.div
+          style={{ x: mousePos.x, y: mousePos.y }}
+          className="absolute inset-0 z-0 pointer-events-none transition-transform duration-700 ease-out"
+        >
+          <Image
+            src="/skyroot_vikram_finale.png"
+            alt="Skyroot Vikram rocket concept standing vertically on launchpad"
+            fill
+            sizes="100vw"
+            className="object-cover object-left md:object-center opacity-30 filter brightness-[0.35]"
+            loading="lazy"
+          />
+        </motion.div>
+
+        {/* 2. Overlays: ~70% black / 30% transparent for perfect text readability */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#030308]/90 via-[#030308]/65 to-[#030308]/95 pointer-events-none" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#030308] via-transparent to-[#030308]/90 pointer-events-none" />
+        
+        {/* 3. Subtle slow drifting fog atmospheric effect */}
+        <div 
+          className="absolute inset-0 z-10 opacity-[0.06] pointer-events-none mix-blend-screen"
+          style={{
+            background: "radial-gradient(circle at 25% 75%, rgba(255, 184, 0, 0.25) 0%, transparent 60%)",
+            animation: "pulse 10s ease-in-out infinite alternate"
+          }}
+        />
+
+        {/* 4. Tiny slow floating ambient particles */}
+        <div className="absolute inset-0 z-10 opacity-[0.18] pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            <circle cx="15" cy="20" r="0.3" fill="#FFB800" className="animate-pulse" style={{ animationDuration: "5s" }} />
+            <circle cx="85" cy="45" r="0.2" fill="#ffffff" className="animate-pulse" style={{ animationDuration: "7s" }} />
+            <circle cx="35" cy="80" r="0.4" fill="#FFB800" className="animate-pulse" style={{ animationDuration: "6s" }} />
+            <circle cx="65" cy="15" r="0.3" fill="#ffffff" className="animate-pulse" style={{ animationDuration: "8s" }} />
+          </svg>
+        </div>
+      </div>
+
+      {/* 5. Concentric radial circle overlay (retained above the background) */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
             "radial-gradient(ellipse 60% 50% at center, rgba(255,184,0,0.06) 0%, transparent 70%)",
         }}
       />
 
-      <SceneLabel>The Thesis</SceneLabel>
+      {/* 6. Text content / Typography layer (z-20 relative) */}
+      <div className="relative z-20 w-full">
+        <SceneLabel>The Thesis</SceneLabel>
 
-      <h2
-        className={`font-light tracking-wide text-white max-w-3xl relative z-10 leading-tight ${
-          presentationActive
-            ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
-            : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
-        }`}
-      >
-        <span className="block mb-1 text-white/65">From sole architect</span>
-        <span className="block mb-2 text-white font-semibold">
-          to open platform.
-        </span>
-        <span className="block text-[#FFB800] font-bold">
-          The shift has already begun.
-        </span>
-      </h2>
+        <h2
+          className={`font-light tracking-wide text-white max-w-3xl mx-auto leading-tight ${
+            presentationActive
+              ? "mb-4 text-2xl sm:text-3xl lg:text-4xl"
+              : "mb-4 sm:mb-6 text-3xl sm:text-4xl lg:text-5xl"
+          }`}
+        >
+          <span className="block mb-1 text-white/65">From sole architect</span>
+          <span className="block mb-2 text-white font-semibold">
+            to open platform.
+          </span>
+          <span className="block text-[#FFB800] font-bold">
+            The shift has already begun.
+          </span>
+        </h2>
 
-      <p className={`text-xs sm:text-sm text-white/65 max-w-2xl leading-relaxed font-light relative z-10 ${
-        presentationActive ? "mb-4" : "mb-6 sm:mb-8"
-      }`}>
-        Liberalized policy, geopolitical urgency, and a maturing private
-        engineering base are converging. India&apos;s space economy is being
-        re-architected for private capital - and the window is open now.
-      </p>
+        <p className={`text-xs sm:text-sm text-white/65 max-w-2xl mx-auto leading-relaxed font-light ${
+          presentationActive ? "mb-4" : "mb-6 sm:mb-8"
+        }`}>
+          Liberalized policy, geopolitical urgency, and a maturing private
+          engineering base are converging. India&apos;s space economy is being
+          re-architected for private capital - and the window is open now.
+        </p>
 
-      {!presentationActive && (
-        <>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full relative z-10">
-            <ChapterNavButton
-              href="/"
-              label="Return to Main Deck"
-              variant="ghost"
-              direction="back"
-            />
-            <ChapterNavButton
-              href="/chapters/value-chain"
-              label="Continue. The Value Chain"
-              variant="primary"
-              direction="forward"
-            />
-          </div>
+        {!presentationActive && (
+          <>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+              <ChapterNavButton
+                href="/"
+                label="Return to Main Deck"
+                variant="ghost"
+                direction="back"
+              />
+              <ChapterNavButton
+                href="/chapters/value-chain"
+                label="Continue. The Value Chain"
+                variant="primary"
+                direction="forward"
+              />
+            </div>
 
-          <Link
-            href="/chapters/launch-systems"
-            className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors relative z-10"
-          >
-            Browse Chapter Case Studies
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </>
-      )}
+            <Link
+              href="/chapters/launch-systems"
+              className="interactive-control mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/40 hover:text-[#FFB800] transition-colors"
+            >
+              Browse Chapter Case Studies
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </>
+        )}
+      </div>
     </div>
   );
 }
