@@ -34,4 +34,9 @@
 - [x] Add "Rockets" block in between "Private Companies" and "Satellites" on the Value Flow Diagram slide
 - [x] Move the Policy to Innovation Flow slide from the Value Chain page to the Paradigm Shift page
 - [x] Recalculate frame configs and scroll transforms for both pages (Value Chain decreased to 11, Paradigm Shift increased to 10)
+- [x] Swap sentence clauses in Catalyst 02 point on Slide 2 of Paradigm Shift
+- [x] Edit the background cover image for the Rockets page to remove the text 'CHAPTER 2'
+- [x] Remove "Altitude is Not Enough" (The Orbital Boundary) slide from the Rockets page entirely
+- [x] Recalculate frame configs and scroll transforms for Rockets page (Launch Vehicles decreased to 13)
+- [x] Convert Problem and Solution blocks in the Rockets section into interactive hover-triggered accordions
 - [x] Verify full project compiles successfully after all additions

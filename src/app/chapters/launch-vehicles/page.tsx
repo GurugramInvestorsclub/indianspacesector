@@ -23,32 +23,97 @@ import {
   Network,
   RotateCcw,
   CheckCircle2,
+  HelpCircle,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // CONSTANTS & STRUCTURES
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 14;
+const TOTAL_FRAMES = 13;
 
 const LAUNCH_VEHICLES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 14", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Rocketry Evolution", label: "02 / 14", startFrame: 1, endFrame: 1 },
-  { id: "sounding", name: "Action & Reaction", label: "03 / 14", startFrame: 2, endFrame: 2 },
-  { id: "orbital-velocity", name: "The Orbital Boundary", label: "04 / 14", startFrame: 3, endFrame: 3 },
-  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "05 / 14", startFrame: 4, endFrame: 4 },
-  { id: "staging", name: "Multi-Stage Efficiency", label: "06 / 14", startFrame: 5, endFrame: 5 },
-  { id: "chemistry", name: "Chemistry of Rockets", label: "07 / 14", startFrame: 6, endFrame: 6 },
-  { id: "timeline", name: "ISRO Launcher Evolution", label: "08 / 14", startFrame: 7, endFrame: 7 },
-  { id: "pslv", name: "PSLV Case Study", label: "09 / 14", startFrame: 8, endFrame: 8 },
-  { id: "reusability", name: "Economics of Reusability", label: "10 / 14", startFrame: 9, endFrame: 9 },
-  { id: "reentry", name: "Reentry Profiles", label: "11 / 14", startFrame: 10, endFrame: 10 },
-  { id: "methalox", name: "The Methalox Transition", label: "12 / 14", startFrame: 11, endFrame: 11 },
-  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "13 / 14", startFrame: 12, endFrame: 12 },
-  { id: "climax", name: "The Frontier Awaits", label: "14 / 14", startFrame: 13, endFrame: 13 },
+  { id: "splash", name: "Splash Cover", label: "01 / 13", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Rocketry Evolution", label: "02 / 13", startFrame: 1, endFrame: 1 },
+  { id: "sounding", name: "Action & Reaction", label: "03 / 13", startFrame: 2, endFrame: 2 },
+  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "04 / 13", startFrame: 3, endFrame: 3 },
+  { id: "staging", name: "Multi-Stage Efficiency", label: "05 / 13", startFrame: 4, endFrame: 4 },
+  { id: "chemistry", name: "Chemistry of Rockets", label: "06 / 13", startFrame: 5, endFrame: 5 },
+  { id: "timeline", name: "ISRO Launcher Evolution", label: "07 / 13", startFrame: 6, endFrame: 6 },
+  { id: "pslv", name: "PSLV Case Study", label: "08 / 13", startFrame: 7, endFrame: 7 },
+  { id: "reusability", name: "Economics of Reusability", label: "09 / 13", startFrame: 8, endFrame: 8 },
+  { id: "reentry", name: "Reentry Profiles", label: "10 / 13", startFrame: 9, endFrame: 9 },
+  { id: "methalox", name: "The Methalox Transition", label: "11 / 13", startFrame: 10, endFrame: 10 },
+  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "12 / 13", startFrame: 11, endFrame: 11 },
+  { id: "climax", name: "The Frontier Awaits", label: "13 / 13", startFrame: 12, endFrame: 12 },
 ];
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
+
+interface ProblemSolutionProps {
+  problem: string;
+  solution: string;
+  isChallenge?: boolean;
+}
+
+function ProblemSolutionAccordion({ problem, solution, isChallenge = false }: ProblemSolutionProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group w-full bg-[#0a0a14]/85 border border-white/5 rounded-xl overflow-hidden transition-all duration-300 hover:border-[#FFB800]/30 hover:shadow-[0_0_20px_rgba(255,184,0,0.05)] cursor-help"
+    >
+      {/* Problem Header (Always Visible) */}
+      <div className="p-4 flex gap-3 text-left">
+        <div className="flex-shrink-0 mt-0.5">
+          <HelpCircle className="w-4 h-4 text-[#FFB800]" />
+        </div>
+        <div className="w-full">
+          <div className="flex justify-between items-center w-full mb-1">
+            <span className="text-[#FFB800] font-mono text-[9px] uppercase tracking-wider font-bold">
+              {isChallenge ? "The Challenge:" : "The Problem:"}
+            </span>
+            <span className="text-[8px] font-mono text-white/30 uppercase tracking-widest group-hover:text-[#FFB800]/50 transition-colors">
+              [ Hover to reveal solution ]
+            </span>
+          </div>
+          <p className="font-mono text-xs text-white/80 leading-relaxed">
+            {problem}
+          </p>
+        </div>
+      </div>
+
+      {/* Accordion Solution Content (Reveals on Hover) */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="border-t border-white/5 bg-[#030308]/40 p-4 flex gap-3 text-left">
+              <div className="flex-shrink-0 mt-0.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              </div>
+              <div>
+                <span className="text-emerald-400 font-mono text-[9px] uppercase tracking-wider font-bold block mb-1">
+                  The Solution:
+                </span>
+                <p className="font-mono text-xs text-white/70 leading-relaxed">
+                  {solution}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 // CHEMISTRY DATA
 const FUELS = [
@@ -177,7 +242,7 @@ function Scene0Splash({ presentationActive }: { presentationActive: boolean }) {
       <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
         {/* Background Image occupying the entire screen */}
         <img
-          src="/launch_vehicles_bg.jpg"
+          src="/launch_vehicles_bg.png"
           alt="Launch Vehicles Cover"
           className="w-full h-full object-cover object-center"
         />
@@ -291,10 +356,10 @@ function Scene1SoundingRockets() {
           <p className="text-sm text-white/70 leading-relaxed mb-6">
             To move a rocket forward, you must throw mass backward. A basic sounding rocket does just this: it heats a propellant into high-pressure gas and pushes it out of a nozzle. The rocket recoils in the opposite direction, flying straight up into space.
           </p>
-          <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">The Problem:</span>
-            No matter how much thrust you pack into a single stage, once the propellant burns out, the rocket slows down, stops, and gravity pulls it straight back down to Earth.
-          </div>
+          <ProblemSolutionAccordion
+            problem="No matter how much thrust you pack into a single stage, once the propellant burns out, the rocket slows down, stops, and gravity pulls it straight back down to Earth."
+            solution="Multi-stage staging. Discard empty fuel tanks during flight so the engines don't have to accelerate dead weight."
+          />
         </div>
       </div>
     </>
@@ -302,86 +367,6 @@ function Scene1SoundingRockets() {
 }
 
 // 3. THE PROBLEM: ORBITAL VELOCITY
-function Scene2OrbitalVelocity() {
-  const [mode, setMode] = useState<"vertical" | "orbital">("vertical");
-  return (
-    <>
-      <SceneHeading sub="02. The Orbital Boundary" main="Altitude is Not Enough" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 flex flex-col items-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 min-h-[350px] relative">
-          <div className="absolute top-4 right-4 flex bg-black/40 border border-white/10 rounded-full p-0.5 z-20">
-            <button
-              onClick={() => setMode("vertical")}
-              className={`px-3 py-1 rounded-full font-mono text-[9px] font-bold uppercase transition-all ${
-                mode === "vertical" ? "bg-[#FFB800] text-[#030308]" : "text-white/50 hover:text-white"
-              }`}
-            >
-              Vertical Launch
-            </button>
-            <button
-              onClick={() => setMode("orbital")}
-              className={`px-3 py-1 rounded-full font-mono text-[9px] font-bold uppercase transition-all ${
-                mode === "orbital" ? "bg-[#FFB800] text-[#030308]" : "text-white/50 hover:text-white"
-              }`}
-            >
-              Orbital Insertion
-            </button>
-          </div>
-
-          <svg viewBox="0 0 300 240" className="w-full h-full max-h-[260px] mt-6">
-            {/* Earth */}
-            <circle cx="150" cy="220" r="90" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-            <text x="150" y="240" textAnchor="middle" fill="rgba(255,255,255,0.3)" className="font-mono text-[10px] uppercase font-bold">Earth</text>
-            
-            {/* Trajectory */}
-            <AnimatePresence mode="wait">
-              {mode === "vertical" ? (
-                <motion.path
-                  key="vert"
-                  d="M 150 130 L 150 40 L 150 130"
-                  fill="none"
-                  stroke="#FF6B00"
-                  strokeWidth="2"
-                  strokeDasharray="4 2"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.5 }}
-                />
-              ) : (
-                <motion.path
-                  key="orb"
-                  d="M 150 130 C 150 50, 240 50, 240 130 C 240 210, 150 210, 60 130 C 60 50, 150 50, 150 130"
-                  fill="none"
-                  stroke="#FFB800"
-                  strokeWidth="2"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 2 }}
-                />
-              )}
-            </AnimatePresence>
-            <circle cx="150" cy="130" r="4" fill="#FFB800" />
-            <text x="150" y="145" textAnchor="middle" fill="#white" className="font-mono" fontSize="8">Kármán Line (100km)</text>
-          </svg>
-        </div>
-
-        <div className="lg:col-span-6 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
-            The Physics of Spaceflight
-          </span>
-          <h3 className="text-xl font-bold text-white mb-4">Speed vs Altitude</h3>
-          <p className="text-sm text-white/70 leading-relaxed mb-6">
-            Getting to space (100km) requires minimal effort. Remaining in space is the true challenge. To keep from falling back, a rocket must travel sideways so fast - **7.8 km/s (28,000 km/h)** - that its curve of falling matches the curve of the Earth.
-          </p>
-          <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">The Problem:</span>
-            Accelerating a massive metal tube to 7.8 km/s requires massive amounts of propellant. But propellant has weight. How do we lift the propellant needed to lift the propellant?
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
 
 // 4. MASS TYRANNY
 function Scene3MassTyranny() {
@@ -436,10 +421,10 @@ function Scene3MassTyranny() {
           <p className="text-sm text-white/70 leading-relaxed mb-6">
             A rocket is typically **90% propellant, 8% structure (metal tanks, engines), and only 2% payload (useful cargo)**. Because you must burn fuel to carry fuel, the relation between velocity and mass is logarithmic. Adding more fuel yields diminishing returns.
           </p>
-          <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">The Solution:</span>
-            What if we did not carry the heavy, empty fuel tanks all the way to orbit? If we discard the dead weight once it is empty, the remaining rocket becomes instantly lighter.
-          </div>
+          <ProblemSolutionAccordion
+            problem="To reach orbit, a rocket typically needs 90% propellant and 8% structure, leaving only 2% for payload. Adding more fuel creates a logarithmic penalty of weight."
+            solution="Discard dry weight! By jettisoning empty stages, the rocket becomes instantly lighter and continues accelerating without carrying dead mass."
+          />
         </div>
       </div>
     </>
@@ -500,10 +485,10 @@ function Scene4Staging() {
           <p className="text-sm text-white/70 leading-relaxed mb-6">
             Multi-stage staging drops spent propellant tanks when they run dry. By jettisoning this dead structure, the remaining rocket starts from a higher velocity with a significantly lighter frame. This is the only way chemical rockets can reach orbital speeds.
           </p>
-          <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">The Problem:</span>
-            Staging solves the mass problem, but raises a chemical one: the physical conditions at sea-level (dense air) differ completely from vacuum. Can we use the same fuel for all stages?
-          </div>
+          <ProblemSolutionAccordion
+            problem="Staging solves the mass problem, but raises a chemical one: the physical conditions at sea-level (dense air) differ completely from vacuum. Can we use the same fuel for all stages?"
+            solution="Fuel optimization. Use high-thrust solid/liquid propellants at sea level to break through atmospheric drag, and switch to highly efficient cryogenic engines in vacuum."
+          />
         </div>
       </div>
     </>
@@ -796,10 +781,11 @@ function Scene8ReusabilityEconomics() {
           <p className="text-sm text-white/70 leading-relaxed mb-6">
             Imagine purchasing a commercial Boeing 777 passenger airliner, flying it once from London to New York, and immediately throwing the airplane into the Atlantic Ocean, requiring a brand new airliner for the return trip. This was how global space flight was operated for 60 years.
           </p>
-          <div className="bg-[#0a0a14]/80 border border-white/5 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">The Challenge:</span>
-            To return a booster safely, you must keep fuel in reserve to slow down. That reserved fuel is mass that cannot be used for cargo. Landing a booster demands extreme structural and navigation precision.
-          </div>
+          <ProblemSolutionAccordion
+            isChallenge
+            problem="To return a booster safely, you must keep fuel in reserve to slow down. That reserved fuel is mass that cannot be used for cargo. Landing a booster demands extreme structural and navigation precision."
+            solution="Dynamic throttle engines, deployable landing legs, and titanium grid fins. By executing hyper-precise retro-propulsive burns and aerodynamic steering, the booster lands safely on land or at sea."
+          />
         </div>
       </div>
     </>
@@ -1369,48 +1355,45 @@ export default function LaunchVehiclesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 14 frames
-  const s0SplashOpacity = useTransform(progress, [0.0, 0.04, 0.0714], [1, 1, 0]);
-  const s0SplashScale = useTransform(progress, [0.0, 0.0714], [1, 0.96]);
+  // Scroll transforms for 13 frames (each spans 1/13 ~ 0.0769 width)
+  const s0SplashOpacity = useTransform(progress, [0.0, 0.05, 0.0769], [1, 1, 0]);
+  const s0SplashScale = useTransform(progress, [0.0, 0.0769], [1, 0.96]);
 
-  const s0Opacity = useTransform(progress, [0.05, 0.0714, 0.12, 0.1429], [0, 1, 1, 0]);
-  const s0Scale = useTransform(progress, [0.05, 0.1429], [1, 0.96]);
+  const s0Opacity = useTransform(progress, [0.05, 0.0769, 0.12, 0.1538], [0, 1, 1, 0]);
+  const s0Scale = useTransform(progress, [0.05, 0.1538], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.12, 0.1429, 0.19, 0.2143], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [0, 1, 1, 0]);
+  const s1Y = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [24, 0, 0, -24]);
 
-  const s2Opacity = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.19, 0.2143, 0.26, 0.2857], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, [0.20, 0.2308, 0.27, 0.3077], [0, 1, 1, 0]);
+  const s3Y = useTransform(progress, [0.20, 0.2308, 0.27, 0.3077], [24, 0, 0, -24]);
 
-  const s3Opacity = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.26, 0.2857, 0.33, 0.3571], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, [0.27, 0.3077, 0.35, 0.3846], [0, 1, 1, 0]);
+  const s4Y = useTransform(progress, [0.27, 0.3077, 0.35, 0.3846], [24, 0, 0, -24]);
 
-  const s4Opacity = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.33, 0.3571, 0.40, 0.4286], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [0, 1, 1, 0]);
+  const s5Y = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [24, 0, 0, -24]);
 
-  const s5Opacity = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.40, 0.4286, 0.48, 0.5000], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, [0.43, 0.4615, 0.50, 0.5385], [0, 1, 1, 0]);
+  const s6Y = useTransform(progress, [0.43, 0.4615, 0.50, 0.5385], [24, 0, 0, -24]);
 
-  const s6Opacity = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.48, 0.5000, 0.55, 0.5714], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, [0.50, 0.5385, 0.58, 0.6154], [0, 1, 1, 0]);
+  const s7Y = useTransform(progress, [0.50, 0.5385, 0.58, 0.6154], [24, 0, 0, -24]);
 
-  const s7Opacity = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.55, 0.5714, 0.62, 0.6429], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, [0.58, 0.6154, 0.65, 0.6923], [0, 1, 1, 0]);
+  const s8Y = useTransform(progress, [0.58, 0.6154, 0.65, 0.6923], [24, 0, 0, -24]);
 
-  const s8Opacity = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.62, 0.6429, 0.69, 0.7143], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, [0.65, 0.6923, 0.73, 0.7692], [0, 1, 1, 0]);
+  const s9Y = useTransform(progress, [0.65, 0.6923, 0.73, 0.7692], [24, 0, 0, -24]);
 
-  const s9Opacity = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.69, 0.7143, 0.76, 0.7857], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, [0.73, 0.7692, 0.81, 0.8462], [0, 1, 1, 0]);
+  const s10Y = useTransform(progress, [0.73, 0.7692, 0.81, 0.8462], [24, 0, 0, -24]);
 
-  const s10Opacity = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.76, 0.7857, 0.83, 0.8571], [24, 0, 0, -24]);
+  const s11Opacity = useTransform(progress, [0.81, 0.8462, 0.89, 0.9231], [0, 1, 1, 0]);
+  const s11Y = useTransform(progress, [0.81, 0.8462, 0.89, 0.9231], [24, 0, 0, -24]);
 
-  const s11Opacity = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.83, 0.8571, 0.90, 0.9286], [24, 0, 0, -24]);
-
-  const s12Opacity = useTransform(progress, [0.90, 0.9286, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [0.90, 0.9286, 1.0], [24, 0, 0]);
+  const s12Opacity = useTransform(progress, [0.89, 0.9231, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [0.89, 0.9231, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1418,7 +1401,7 @@ export default function LaunchVehiclesPage() {
       <PresentationChrome controller={p} scenes={LAUNCH_VEHICLES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1432,22 +1415,21 @@ export default function LaunchVehiclesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 6, 10].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
+                className={`${[0, 5, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
                 {currentFrameIndex === 2 && <Scene1SoundingRockets />}
-                {currentFrameIndex === 3 && <Scene2OrbitalVelocity />}
-                {currentFrameIndex === 4 && <Scene3MassTyranny />}
-                {currentFrameIndex === 5 && <Scene4Staging />}
-                {currentFrameIndex === 6 && <Scene5Chemistry />}
-                {currentFrameIndex === 7 && <Scene6TimelineMapping />}
-                {currentFrameIndex === 8 && <Scene7PSLVCaseStudy />}
-                {currentFrameIndex === 9 && <Scene8ReusabilityEconomics />}
-                {currentFrameIndex === 10 && <Scene9ReentryProfile />}
-                {currentFrameIndex === 11 && <Scene10MethaloxEra />}
-                {currentFrameIndex === 12 && <Scene11NextFrontier />}
-                {currentFrameIndex === 13 && <Scene12Climax presentationActive />}
+                {currentFrameIndex === 3 && <Scene3MassTyranny />}
+                {currentFrameIndex === 4 && <Scene4Staging />}
+                {currentFrameIndex === 5 && <Scene5Chemistry />}
+                {currentFrameIndex === 6 && <Scene6TimelineMapping />}
+                {currentFrameIndex === 7 && <Scene7PSLVCaseStudy />}
+                {currentFrameIndex === 8 && <Scene8ReusabilityEconomics />}
+                {currentFrameIndex === 9 && <Scene9ReentryProfile />}
+                {currentFrameIndex === 10 && <Scene10MethaloxEra />}
+                {currentFrameIndex === 11 && <Scene11NextFrontier />}
+                {currentFrameIndex === 12 && <Scene12Climax presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1481,18 +1463,9 @@ export default function LaunchVehiclesPage() {
               </motion.div>
 
               <motion.div
-                style={{ opacity: s2Opacity, y: s2Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <Scene2OrbitalVelocity />
-              </motion.div>
-
-              <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene3MassTyranny />
@@ -1501,7 +1474,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene4Staging />
@@ -1510,7 +1483,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
                 className={`absolute inset-0 w-full h-full z-10 text-center ${
-                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene5Chemistry />
@@ -1519,7 +1492,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene6TimelineMapping />
@@ -1528,7 +1501,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s7Opacity, y: s7Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene7PSLVCaseStudy />
@@ -1537,7 +1510,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene8ReusabilityEconomics />
@@ -1546,7 +1519,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
                 className={`absolute inset-0 w-full h-full z-10 text-center ${
-                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene9ReentryProfile />
@@ -1555,7 +1528,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene10MethaloxEra />
@@ -1564,7 +1537,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s11Opacity, y: s11Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene11NextFrontier />
@@ -1573,7 +1546,7 @@ export default function LaunchVehiclesPage() {
               <motion.div
                 style={{ opacity: s12Opacity, y: s12Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene12Climax presentationActive={false} />

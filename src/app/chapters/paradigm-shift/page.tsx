@@ -46,7 +46,7 @@ const CATALYSTS = [
     headline: "ISRO ran launches at a fraction of global cost - then SpaceX ate our lunch.",
     points: [
       "SpaceX's cost-per-kg undercut even ISRO's famously cheap launches.",
-      "ISRO became the bottleneck - historically the sole architect and executor of every mission.",
+      "historically the sole architect and executor of every mission - ISRO became the bottleneck.",
       "Private sector was limited to component fabrication under state-owned designs.",
     ],
   },
