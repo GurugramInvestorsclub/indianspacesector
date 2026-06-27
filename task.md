@@ -40,4 +40,5 @@
 - [x] Recalculate frame configs and scroll transforms for Rockets page (Launch Vehicles decreased to 13)
 - [x] Convert Problem and Solution blocks in the Rockets section into interactive hover-triggered accordions
 - [x] Use the user's uploaded image as the background cover for the Rockets page
+- [x] Swap the positions of the Case Studies and Private Ecosystem links in the global Navbar
 - [x] Verify full project compiles successfully after all additions
