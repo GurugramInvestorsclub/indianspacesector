@@ -534,7 +534,7 @@ function StandalonePLCard() {
   );
 }
 
-function StandaloneFrameShell({ label, children }: { label: string; children?: React.ReactNode }) {
+function StandaloneFrameShell({ label, children, hidePLCard = false }: { label: string; children?: React.ReactNode; hidePLCard?: boolean }) {
   return (
     <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar">
       <div className="my-auto w-full flex flex-col gap-5">
@@ -544,14 +544,20 @@ function StandaloneFrameShell({ label, children }: { label: string; children?: R
             Standalone Business
           </h2>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-start pointer-events-auto">
-          {/* Table 3 — left, identical across standalone frames */}
-          <div className="lg:col-span-7">
-            <StandalonePLCard />
+        {hidePLCard ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mx-auto items-start pointer-events-auto">
+            {children}
           </div>
-          {/* Frame-specific content — right */}
-          <div className="lg:col-span-5 flex flex-col gap-4">{children}</div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-start pointer-events-auto">
+            {/* Table 3 — left, identical across standalone frames */}
+            <div className="lg:col-span-7">
+              <StandalonePLCard />
+            </div>
+            {/* Frame-specific content — right */}
+            <div className="lg:col-span-5 flex flex-col gap-4">{children}</div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -688,7 +694,7 @@ function SceneStandaloneCapital() {
   ];
 
   return (
-    <StandaloneFrameShell label="01.10. Capital & Working Capital">
+    <StandaloneFrameShell label="01.10. Capital & Working Capital" hidePLCard={true}>
       <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto">
         <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3">
           Table 8. Standalone capital employed (Rs crore)
