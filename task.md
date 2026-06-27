@@ -41,4 +41,7 @@
 - [x] Convert Problem and Solution blocks in the Rockets section into interactive hover-triggered accordions
 - [x] Use the user's uploaded image as the background cover for the Rockets page
 - [x] Swap the positions of the Case Studies and Private Ecosystem links in the global Navbar
+- [x] Center-align cover text content on Centum Electronics Case Study page
+- [x] Integrate custom founder photo of Apparao Mallavarapu on the Centum Origins slide
+- [x] Add premium close-up product photo of Centum microelectronic module on the Centum Origins slide
 - [x] Verify full project compiles successfully after all additions

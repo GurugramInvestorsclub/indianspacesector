@@ -136,7 +136,7 @@ function SceneHero({ presentationActive }: { presentationActive: boolean }) {
         />
       </div>
 
-      <div className="relative z-20 max-w-4xl flex flex-col items-center text-center">
+      <div className="relative z-20 w-full h-full flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto">
         <SceneLabel>Research Deep Dive. Case Study</SceneLabel>
 
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6">
@@ -191,9 +191,16 @@ function SceneFounding({ active }: { active: boolean }) {
 
       <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
         <div className="md:col-span-5 flex flex-col gap-4">
-          {/* Founder Placeholder */}
+          {/* Founder Profile */}
           <div className="flex-1 bg-white/[0.02] border border-white/10 rounded-xl p-5 flex flex-col items-center justify-center text-center backdrop-blur-md min-h-[160px]">
-            <Users className="w-8 h-8 text-[#FFB800]/50 mb-3 animate-pulse" />
+            <div className="relative w-16 h-16 rounded-full overflow-hidden border border-[#FFB800]/30 mb-3 bg-[#030308]">
+              <Image
+                src="/centum/apparao.png"
+                alt="Apparao Mallavarapu"
+                fill
+                className="object-cover"
+              />
+            </div>
             <span className="text-[10px] text-white/40 font-mono uppercase tracking-wider block">
               Founder Profile
             </span>
@@ -202,15 +209,18 @@ function SceneFounding({ active }: { active: boolean }) {
             </span>
           </div>
 
-          {/* Quartz Microcircuit SVG Illustration */}
-          <div className="flex-1 bg-white/[0.01] border border-white/5 rounded-xl p-4 flex items-center justify-center min-h-[160px]">
-            <svg className="w-full h-full max-w-[130px] opacity-65" viewBox="0 0 100 100">
-              <rect x="15" y="15" width="70" height="70" rx="4" fill="none" stroke="rgba(255, 184, 0, 0.25)" strokeWidth="1.5" />
-              <circle cx="50" cy="50" r="16" fill="none" stroke="#FFB800" strokeWidth="2" strokeDasharray="3 3" />
-              <line x1="15" y1="50" x2="34" y2="50" stroke="rgba(255,255,255,0.3)" />
-              <line x1="66" y1="50" x2="85" y2="50" stroke="rgba(255,255,255,0.3)" />
-              <circle cx="50" cy="50" r="3" fill="#FFB800" className="animate-ping" />
-            </svg>
+          {/* Centum Product Image */}
+          <div className="flex-1 bg-[#0a0a14]/40 border border-white/5 rounded-xl overflow-hidden relative min-h-[160px]">
+            <Image
+              src="/centum/centum_product.png"
+              alt="Centum Space Microelectronics"
+              fill
+              className="object-cover opacity-75 hover:opacity-95 transition-opacity duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+            <span className="absolute bottom-2 left-3 font-mono text-[8px] uppercase tracking-widest text-white/55">
+              Quartz Frequency Module
+            </span>
           </div>
         </div>
 
