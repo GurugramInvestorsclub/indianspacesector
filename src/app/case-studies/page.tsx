@@ -17,6 +17,14 @@ import {
 // Local case studies list map.
 const CASE_STUDIES_OVERVIEW = [
   {
+    slug: "centum-electronics",
+    title: "Centum Electronics",
+    category: "Hardware & Payloads",
+    desc: "From hybrid microcircuits to complete satellite payloads. Three decades of climbing India's defense and space value chain.",
+    icon: Cpu,
+    highlight: "BTS Design-led Margins",
+  },
+  {
     slug: "launch-systems",
     title: "Launch Systems & Infrastructure",
     category: "Upstream Logistics",
@@ -117,14 +125,25 @@ export default function CaseStudiesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CASE_STUDIES_OVERVIEW.map((cs) => {
             const Icon = cs.icon;
+            const isCentum = cs.slug === "centum-electronics";
+            const isEcosystem = cs.slug === "private-ecosystem";
+
+            const hrefPath = isCentum 
+              ? "/chapters/centum-electronics" 
+              : isEcosystem 
+              ? "/chapters/private-ecosystem" 
+              : `/chapters/${cs.slug}`;
+
             return (
               <Link
                 key={cs.slug}
-                href={cs.slug === "private-ecosystem" ? "/chapters/private-ecosystem" : `/chapters/${cs.slug}`}
+                href={hrefPath}
                 className="group relative flex flex-col justify-between p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-[#FFB800]/40 rounded-2xl shadow-xl transition-all duration-300 pointer-events-auto cursor-pointer overflow-hidden min-h-[250px]"
               >
                 {/* Background rendering */}
-                {cs.slug === "private-ecosystem" ? (
+                {isCentum ? (
+                  <CardCentumBackground />
+                ) : isEcosystem ? (
                   <CardEarthBackground />
                 ) : (
                   <div className="absolute inset-0 rounded-2xl transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none z-0"
@@ -157,8 +176,8 @@ export default function CaseStudiesPage() {
                   <span className="text-[#FFB800]/70 group-hover:text-[#FFB800] font-bold">
                     {cs.highlight}
                   </span>
-                  <span className="inline-flex items-center gap-1">
-                    {cs.slug === "private-ecosystem" ? "Explore Ecosystem" : "Read Report"}{" "}
+                  <span className="inline-flex items-center gap-1 font-bold">
+                    {isCentum ? "Explore Case Study" : isEcosystem ? "Explore Ecosystem" : "Read Report"}{" "}
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
@@ -250,6 +269,33 @@ function CardEarthBackground() {
           strokeDasharray="3 4"
         />
       </svg>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// CENTUM ELECTRONICS BACKGROUND FOR CASE STUDY CARD
+// ---------------------------------------------------------------------------
+
+function CardCentumBackground() {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+      <img
+        src="/centum/centum_hero.png"
+        alt="Centum payload electronics blueprint"
+        className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-700 ease-out"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#030308] via-[#030308]/60 to-transparent" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
+      
+      {/* Animated sweep line */}
+      <div className="absolute top-0 bottom-0 left-0 w-px bg-[#FFB800]/25 shadow-[0_0_8px_#FFB800] animate-pulse" 
+           style={{
+             animation: "pulse 3s infinite",
+             left: "30%"
+           }} 
+      />
     </div>
   );
 }
