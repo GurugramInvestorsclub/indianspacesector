@@ -1524,22 +1524,31 @@ function Scene13Thesis({ presentationActive = false }: { presentationActive?: bo
               variant="ghost"
               direction="back"
             />
-            <Link
-              href="/"
-              className="interactive-control flex items-center justify-center gap-2 px-7 py-3.5 bg-[#FFB800] hover:bg-[#cc9300] text-[#030308] font-mono text-xs uppercase tracking-widest rounded-full font-bold shadow-lg transition-all duration-300 w-full sm:w-auto cursor-pointer"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Return to Main Deck
-            </Link>
+            <ChapterNavButton
+              href="/chapters/private-ecosystem"
+              label="Continue. Private Ecosystem"
+              variant="primary"
+              direction="forward"
+            />
           </div>
 
-          <Link
-            href="/case-studies"
-            className="interactive-control mt-4 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/45 hover:text-[#FFB800] transition-colors relative z-10 cursor-pointer font-bold"
-          >
-            Browse Chapter Case Studies
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex flex-col items-center gap-3 mt-6">
+            <Link
+              href="/"
+              className="interactive-control inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/45 hover:text-[#FFB800] transition-colors relative z-10 cursor-pointer font-bold"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Return to Main Deck
+            </Link>
+
+            <Link
+              href="/case-studies"
+              className="interactive-control inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/45 hover:text-[#FFB800] transition-colors relative z-10 cursor-pointer font-bold"
+            >
+              Browse Chapter Case Studies
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </>
       )}
     </div>

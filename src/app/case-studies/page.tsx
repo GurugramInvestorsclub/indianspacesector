@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { 
@@ -64,6 +64,15 @@ const CASE_STUDIES_OVERVIEW = [
     icon: ShieldAlert,
     highlight: "60% - 70% contract margins",
   },
+  {
+    slug: "private-ecosystem",
+    title: "Indian Private Space Ecosystem",
+    category: "Commercial Space",
+    desc: "Explore India's most promising private space startups across launch vehicles, satellites, communications, Earth observation, infrastructure, deep-tech and applications.",
+    icon: Globe,
+    highlight: "Interactive Space Stack",
+    isCustom: true,
+  },
 ];
 
 export default function CaseStudiesPage() {
@@ -111,15 +120,19 @@ export default function CaseStudiesPage() {
             return (
               <Link
                 key={cs.slug}
-                href={`/chapters/${cs.slug}`}
-                className="group relative flex flex-col justify-between p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-[#FFB800]/40 rounded-2xl shadow-xl transition-all duration-300 pointer-events-auto cursor-pointer"
+                href={cs.slug === "private-ecosystem" ? "/chapters/private-ecosystem" : `/chapters/${cs.slug}`}
+                className="group relative flex flex-col justify-between p-6 bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-[#FFB800]/40 rounded-2xl shadow-xl transition-all duration-300 pointer-events-auto cursor-pointer overflow-hidden min-h-[250px]"
               >
-                {/* Accent glow on card hover */}
-                <div className="absolute inset-0 rounded-2xl transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none z-0"
-                     style={{
-                       background: "radial-gradient(circle 120px at 80% 20%, rgba(255,184,0,0.03) 0%, transparent 100%)",
-                     }}
-                />
+                {/* Background rendering */}
+                {cs.slug === "private-ecosystem" ? (
+                  <CardEarthBackground />
+                ) : (
+                  <div className="absolute inset-0 rounded-2xl transition-all duration-300 opacity-0 group-hover:opacity-100 pointer-events-none z-0"
+                       style={{
+                         background: "radial-gradient(circle 120px at 80% 20%, rgba(255,184,0,0.03) 0%, transparent 100%)",
+                       }}
+                  />
+                )}
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-6">
@@ -145,7 +158,8 @@ export default function CaseStudiesPage() {
                     {cs.highlight}
                   </span>
                   <span className="inline-flex items-center gap-1">
-                    Read Report <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                    {cs.slug === "private-ecosystem" ? "Explore Ecosystem" : "Read Report"}{" "}
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
               </Link>
@@ -154,6 +168,88 @@ export default function CaseStudiesPage() {
         </div>
 
       </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// MINIATURE ANIMATED EARTH FOR ECOSYSTEM CARD BACKGROUND
+// ---------------------------------------------------------------------------
+
+function CardEarthBackground() {
+  const earthRef = useRef<HTMLDivElement>(null);
+  const cloudsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let animFrame: number;
+    const startTime = performance.now();
+
+    const loop = (time: number) => {
+      const elapsed = (time - startTime) / 1000;
+      const loopTime = elapsed % 24;
+
+      if (earthRef.current) {
+        const earthPos = -(loopTime / 24) * 100;
+        earthRef.current.style.backgroundPositionX = `${earthPos}%`;
+      }
+      if (cloudsRef.current) {
+        const cloudsPos = -(loopTime / 18) * 100;
+        cloudsRef.current.style.backgroundPositionX = `${cloudsPos}%`;
+      }
+
+      animFrame = requestAnimationFrame(loop);
+    };
+
+    animFrame = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animFrame);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl opacity-[0.09] group-hover:opacity-20 transition-opacity duration-500">
+      {/* Miniature Earth */}
+      <div className="absolute w-[180px] h-[180px] rounded-full overflow-hidden border border-white/5 right-[-30px] bottom-[-30px] bg-black">
+        {/* Sliding Landmass Surface Layer */}
+        <div 
+          ref={earthRef}
+          className="absolute inset-0 bg-cover bg-repeat-x grayscale-[20%]"
+          style={{
+            backgroundImage: "url('/earth_map.jpg')",
+            backgroundSize: "auto 100%",
+            willChange: "background-position"
+          }}
+        />
+        {/* Sliding Clouds Layer */}
+        <div 
+          ref={cloudsRef}
+          className="absolute inset-0 bg-cover bg-repeat-x opacity-40 mix-blend-screen"
+          style={{
+            backgroundImage: "url('/earth_clouds.png')",
+            backgroundSize: "auto 100%",
+            willChange: "background-position"
+          }}
+        />
+        {/* 3D Sphere shadow overlay */}
+        <div 
+          className="absolute inset-0 z-10"
+          style={{
+            background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.92) 80%)",
+          }}
+        />
+      </div>
+
+      {/* Orbit paths & trails */}
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 320 200">
+        <ellipse 
+          cx="290" 
+          cy="150" 
+          rx="110" 
+          ry="40" 
+          fill="none" 
+          stroke="rgba(255, 184, 0, 0.25)" 
+          strokeWidth="1" 
+          strokeDasharray="3 4"
+        />
+      </svg>
     </div>
   );
 }
