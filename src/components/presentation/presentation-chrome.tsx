@@ -28,6 +28,64 @@ export interface PresentationScene {
   endFrame: number;
 }
 
+function FirstPrinciplesLogo() {
+  return (
+    <div className="fixed bottom-6 left-6 z-50 flex items-center gap-2 select-none pointer-events-none bg-[#03030b]/60 px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-md shadow-lg">
+      {/* Icon: Gold circle with neural network brain */}
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none" className="w-4.5 h-4.5 shrink-0 opacity-90">
+        <circle cx="11" cy="11" r="10" stroke="#FFB800" strokeWidth="1" />
+        {/* Brain outline path */}
+        <path
+          d="M11 6C9.2 6 8.2 7.0 8.2 8.5C8.2 9.0 8.3 9.3 8.4 9.6C7.5 10.2 7.0 11.0 7.0 12.0C7.0 13.5 8.2 14.5 9.5 14.5C9.8 14.5 10.1 14.4 10.4 14.3C10.7 15.0 11.4 15.5 12.2 15.5C13.0 15.5 13.7 15.0 14.0 14.3C14.3 14.4 14.6 14.5 14.9 14.5C16.2 14.5 17.4 13.5 17.4 12.0C17.4 11.0 16.9 10.2 16.0 9.6C16.1 9.3 16.2 9.0 16.2 8.5C16.2 7.0 15.2 6 13.4 6H11Z"
+          stroke="#FFB800"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="opacity-70"
+        />
+        {/* Neural Network Nodes */}
+        <circle cx="10" cy="8" r="0.6" fill="#FFB800" />
+        <circle cx="12" cy="7.5" r="0.6" fill="#FFB800" />
+        <circle cx="14" cy="8" r="0.6" fill="#FFB800" />
+        <circle cx="9.5" cy="10" r="0.6" fill="#FFB800" />
+        <circle cx="11.5" cy="9.5" r="0.6" fill="#FFB800" />
+        <circle cx="13.5" cy="10" r="0.6" fill="#FFB800" />
+        <circle cx="15.5" cy="9.5" r="0.6" fill="#FFB800" />
+        <circle cx="10.5" cy="11.5" r="0.6" fill="#FFB800" />
+        <circle cx="12.5" cy="11.5" r="0.6" fill="#FFB800" />
+        <circle cx="14.5" cy="11" r="0.6" fill="#FFB800" />
+        <circle cx="11.5" cy="13.5" r="0.6" fill="#FFB800" />
+        <circle cx="13.5" cy="13" r="0.6" fill="#FFB800" />
+        {/* Node connections */}
+        <line x1="10" y1="8" x2="12" y2="7.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12" y1="7.5" x2="14" y2="8" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="10" y1="8" x2="9.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12" y1="7.5" x2="11.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14" y1="8" x2="13.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14" y1="8" x2="15.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="9.5" y1="10" x2="11.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="13.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="15.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="9.5" y1="10" x2="10.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="10.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="12.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="12.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="14.5" y2="11" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="15.5" y1="9.5" x2="14.5" y2="11" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="10.5" y1="11.5" x2="11.5" y2="13.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12.5" y1="11.5" x2="11.5" y2="13.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12.5" y1="11.5" x2="13.5" y2="13" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14.5" y1="11" x2="13.5" y2="13" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+      </svg>
+      {/* Brand Text */}
+      <span className="font-sans text-[10px] font-medium tracking-wide flex items-center gap-1 select-none">
+        <span className="text-white/90">First Principles</span>
+        <span className="text-[#FFB800] font-semibold">Investing</span>
+      </span>
+    </div>
+  );
+}
+
 export function PresentationChrome({
   controller,
 }: {
@@ -49,6 +107,9 @@ export function PresentationChrome({
 
   return (
     <>
+      {/* Brand Logo - Fixed at bottom left on all frames */}
+      <FirstPrinciplesLogo />
+
       {/* Top-right Presentation Mode toggle */}
       <div className="fixed top-20 right-6 z-40 font-mono text-xs">
         <div className="flex items-center gap-3 bg-[#030308]/75 border border-white/10 backdrop-blur-md px-4 py-2 rounded-full shadow-lg">
