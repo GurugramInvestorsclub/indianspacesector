@@ -33,25 +33,27 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 16;
+const TOTAL_FRAMES = 18;
 
 const SATELLITES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 16", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Satellite Platforms", label: "02 / 16", startFrame: 1, endFrame: 1 },
-  { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 16", startFrame: 2, endFrame: 2 },
-  { id: "high-end-bands", name: "High-End Bands", label: "04 / 16", startFrame: 3, endFrame: 3 },
-  { id: "first-principle", name: "First Principle of Design", label: "05 / 16", startFrame: 4, endFrame: 4 },
-  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 16", startFrame: 5, endFrame: 5 },
-  { id: "components", name: "Components & Architecture", label: "07 / 16", startFrame: 6, endFrame: 6 },
-  { id: "sensors", name: "Family of Sensors", label: "08 / 16", startFrame: 7, endFrame: 7 },
-  { id: "owl-bat", name: "The Owl and the Bat", label: "09 / 16", startFrame: 8, endFrame: 8 },
-  { id: "radar-work", name: "How Radar Works", label: "10 / 16", startFrame: 9, endFrame: 9 },
-  { id: "sar", name: "Synthetic Aperture Radar", label: "11 / 16", startFrame: 10, endFrame: 10 },
-  { id: "mission-config", name: "Mission Config", label: "12 / 16", startFrame: 11, endFrame: 11 },
-  { id: "nisar", name: "NISAR Mission", label: "13 / 16", startFrame: 12, endFrame: 12 },
-  { id: "payload", name: "Inside Radar Payload", label: "14 / 16", startFrame: 13, endFrame: 13 },
-  { id: "ecosystem", name: "Indian Ecosystem", label: "15 / 16", startFrame: 14, endFrame: 14 },
-  { id: "thesis", name: "The Thesis", label: "16 / 16", startFrame: 15, endFrame: 15 },
+  { id: "splash", name: "Splash Cover", label: "01 / 18", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Satellite Platforms", label: "02 / 18", startFrame: 1, endFrame: 1 },
+  { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 18", startFrame: 2, endFrame: 2 },
+  { id: "high-end-bands", name: "High-End Bands", label: "04 / 18", startFrame: 3, endFrame: 3 },
+  { id: "first-principle", name: "First Principle of Design", label: "05 / 18", startFrame: 4, endFrame: 4 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 18", startFrame: 5, endFrame: 5 },
+  { id: "components", name: "Components & Architecture", label: "07 / 18", startFrame: 6, endFrame: 6 },
+  { id: "types", name: "Types of Satellites", label: "08 / 18", startFrame: 7, endFrame: 7 },
+  { id: "systems-map", name: "Systems Stress Mapping", label: "09 / 18", startFrame: 8, endFrame: 8 },
+  { id: "sensors", name: "Family of Sensors", label: "10 / 18", startFrame: 9, endFrame: 9 },
+  { id: "owl-bat", name: "The Owl and the Bat", label: "11 / 18", startFrame: 10, endFrame: 10 },
+  { id: "radar-work", name: "How Radar Works", label: "12 / 18", startFrame: 11, endFrame: 11 },
+  { id: "sar", name: "Synthetic Aperture Radar", label: "13 / 18", startFrame: 12, endFrame: 12 },
+  { id: "mission-config", name: "Mission Config", label: "14 / 18", startFrame: 13, endFrame: 13 },
+  { id: "nisar", name: "NISAR Mission", label: "15 / 18", startFrame: 14, endFrame: 14 },
+  { id: "payload", name: "Inside Radar Payload", label: "16 / 18", startFrame: 15, endFrame: 15 },
+  { id: "ecosystem", name: "Indian Ecosystem", label: "17 / 18", startFrame: 16, endFrame: 16 },
+  { id: "thesis", name: "The Thesis", label: "18 / 18", startFrame: 17, endFrame: 17 },
 ];
 
 const SLIDE_BASE =
@@ -1046,7 +1048,373 @@ function Scene2MeetTheSatellite() {
   );
 }
 
-// 4. BUS VS PAYLOAD
+// 3. TYPES OF SATELLITES
+const SATELLITE_OPERATIONAL_TYPES = [
+  {
+    id: "geo",
+    title: "Comms — GEO/HTS",
+    desc: "Placed in Geostationary orbit (35,786 km). Stays fixed relative to a point on Earth. Best for continuous television broadcast, weather monitoring, and regional high-throughput communication beams.",
+    img: "/sat_type_geo.png",
+  },
+  {
+    id: "leo",
+    title: "Comms — LEO Constellation",
+    desc: "Operates in Low Earth Orbit (500–1,200 km). Hundreds of fast-moving nodes forming a global mesh network connected by optical laser links to deliver high-bandwidth, ultra-low latency internet worldwide.",
+    img: "/sat_type_leo.png",
+  },
+  {
+    id: "eo",
+    title: "Earth Obs (optical/SAR)",
+    desc: "Senses the planet in high detail. Employs large optical telescopy for multi-spectral/hyperspectral visible-light imaging, or active Synthetic Aperture Radar (SAR) to capture high-res data through clouds and darkness.",
+    img: "/sat_type_eo.png",
+  },
+  {
+    id: "nav",
+    title: "Navigation (NavIC)",
+    desc: "Positioned in Medium Earth (MEO) or Geosynchronous orbits. Highly precise atomic clock sync transmitting radio telemetry to calculate time, speed, and position. Powers India's NavIC and global GPS fleets.",
+    img: "/sat_type_nav.png",
+  },
+  {
+    id: "deep",
+    title: "Deep-space / sci",
+    desc: "Observatories and robotic probes sent to explore the cosmos. Houses space telescopes looking at remote galaxies, or scientific instrumentation sent to orbit other bodies (e.g. Chandrayaan, Aditya-L1).",
+    img: "/sat_type_deep.png",
+  },
+  {
+    id: "defence",
+    title: "Defence (recon/EW)",
+    desc: "Hardened spacecraft engineered for national security. Operates in secret orbits to provide optical reconnaissance (spying), passive electronic listening (SIGINT), early ballistic warnings, and secure comms.",
+    img: "/sat_type_mil.png",
+  },
+];
+
+function SceneTypesOfSatellites() {
+  return (
+    <>
+      <SceneHeading sub="03. Operational Classes" main="Types of Satellites" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl z-10 overflow-y-auto max-h-[75vh] p-2 pointer-events-auto">
+        {SATELLITE_OPERATIONAL_TYPES.map((type) => (
+          <div
+            key={type.id}
+            className="group relative bg-[#0a0a14]/80 border border-white/5 hover:border-[#FFB800]/40 rounded-2xl overflow-hidden transition-all duration-300 shadow-2xl flex flex-col min-h-[220px]"
+          >
+            {/* Image banner */}
+            <div className="relative w-full h-[110px] overflow-hidden">
+              <img
+                src={type.img}
+                alt={type.title}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a14] via-transparent to-transparent opacity-90" />
+            </div>
+
+            {/* Content info */}
+            <div className="p-4 flex flex-col flex-grow text-left justify-between">
+              <div>
+                <h3 className="text-[13px] font-bold text-white mb-1.5 uppercase font-mono tracking-wider group-hover:text-[#FFB800] transition-colors">
+                  {type.title}
+                </h3>
+                <p className="text-[10px] text-white/65 leading-relaxed font-light">
+                  {type.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+// 4. SYSTEMS STRESS MAPPING
+const MATRIX_COLS = [
+  { id: "geo", label: "Comms GEO" },
+  { id: "leo", label: "Comms LEO" },
+  { id: "eo", label: "EO" },
+  { id: "nav", label: "NavIC" },
+  { id: "deep", label: "Deep-space" },
+  { id: "def", label: "Defence" },
+];
+
+const PAYLOAD_ROWS = [
+  { id: "optical", label: "Optical / imaging" },
+  { id: "comms", label: "Comms — transponders" },
+  { id: "radar", label: "Radar & sensors" },
+];
+
+const BUS_ROWS = [
+  { id: "structure", label: "Structure & mechanisms" },
+  { id: "thermal", label: "Thermal control" },
+  { id: "propulsion", label: "Propulsion" },
+  { id: "power", label: "Electrical power" },
+  { id: "attitude", label: "Attitude control (ADCS)" },
+  { id: "computer", label: "On-board computer" },
+  { id: "telemetry", label: "Telemetry & command" },
+];
+
+const PAYLOAD_MATRIX: Record<string, Record<string, number>> = {
+  optical:   { geo: 0, leo: 0, eo: 2, nav: 0, deep: 1, def: 2 },
+  comms:     { geo: 2, leo: 2, eo: 1, nav: 0, deep: 1, def: 2 },
+  radar:     { geo: 0, leo: 0, eo: 2, nav: 0, deep: 1, def: 2 },
+};
+
+const BUS_MATRIX: Record<string, Record<string, number>> = {
+  structure: { geo: 1, leo: 1, eo: 1, nav: 0, deep: 1, def: 1 },
+  thermal:   { geo: 2, leo: 0, eo: 1, nav: 2, deep: 1, def: 1 },
+  propulsion:{ geo: 2, leo: 1, eo: 0, nav: 1, deep: 2, def: 1 },
+  power:     { geo: 2, leo: 1, eo: 1, nav: 0, deep: 1, def: 1 },
+  attitude:  { geo: 0, leo: 1, eo: 2, nav: 0, deep: 1, def: 2 },
+  computer:  { geo: 0, leo: 1, eo: 2, nav: 0, deep: 1, def: 1 },
+  telemetry: { geo: 0, leo: 0, eo: 0, nav: 1, deep: 1, def: 1 },
+};
+
+const DYNAMIC_INSIGHTS: Record<string, { title: string; summary: string; payloadDesc: string; busDesc: string }> = {
+  geo: {
+    title: "GEO Communication Profile",
+    summary: "Stationary at 35,786 km. Relies on heavy continuous power to drive transponders, demanding massive thermal and propulsion configurations.",
+    payloadDesc: "Carries high-power RF transponders as core instruments.",
+    busDesc: "High thermal stress (always in sun), high propulsion (orbital stationkeeping), and high power budgets."
+  },
+  leo: {
+    title: "LEO Constellation Profile",
+    summary: "Operates in large fleets at low altitude. Optimized for mass production, low latency, and rapid orbital passes.",
+    payloadDesc: "Core transponders for mesh communication routing.",
+    busDesc: "Elevated structure/mechanisms and propulsion for deployment and de-orbiting; standard thermal."
+  },
+  eo: {
+    title: "Earth Observation Profile",
+    summary: "Scans Earth with high-res sensors. Stresses attitude pointing precision (ADCS) and high-speed data handling (OBC).",
+    payloadDesc: "Core optical lenses and radar/SAR sensors.",
+    busDesc: "Stresses attitude control (arcsecond pointing stability) and on-board computers (heavy image processing)."
+  },
+  nav: {
+    title: "NavIC Navigation Profile",
+    summary: "Requires extremely stable orbital tracks and precision timing. Stresses thermal control for atomic clock stability.",
+    payloadDesc: "No imaging payloads. High-precision specialized navigation payload.",
+    busDesc: "Stresses thermal control (critical for clock resonance) and telemetry/command."
+  },
+  deep: {
+    title: "Deep Space / Scientific Profile",
+    summary: "Operates outside Earth's magnetic shielding. Demands extreme propulsion (interplanetary delta-V) and structure integrity.",
+    payloadDesc: "Secondary instruments for multi-wavelength astronomy or heliophysics.",
+    busDesc: "Core propulsion requirements (delta-V maneuvers) and elevated structure/mechanisms."
+  },
+  def: {
+    title: "Defence & Recon Profile",
+    summary: "Highly secure, hardened, stealth spacecraft. Demands peak capabilities across almost all payload and bus areas.",
+    payloadDesc: "Core optical spy lenses, radar payloads, and signals intelligence.",
+    busDesc: "Core attitude control (ADCS) for target tracking, and elevated requirements across all other subsystems."
+  }
+};
+
+function SceneSystemsMapping() {
+  const [activeCol, setActiveCol] = useState<string>("geo");
+
+  const currentInsight = DYNAMIC_INSIGHTS[activeCol] || DYNAMIC_INSIGHTS.geo;
+
+  return (
+    <>
+      <SceneHeading sub="04. Payload & Bus Dynamics" main="Subsystem Stress Mapping" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full max-w-6xl z-10 text-left pointer-events-auto items-stretch">
+        
+        {/* Left Column: The Interactive Matrices */}
+        <div className="lg:col-span-8 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 sm:p-5 shadow-2xl flex flex-col justify-between overflow-x-auto max-h-[72vh] overflow-y-auto">
+          <div>
+            {/* Matrix 1: Payload */}
+            <div className="mb-6">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-white/40 block mb-3 font-bold">
+                Payload &mdash; what each type carries (identity)
+              </span>
+              <table className="w-full text-left border-collapse font-mono text-[10px] sm:text-xs">
+                <thead>
+                  <tr className="text-white/30 text-[8px] uppercase tracking-wider">
+                    <th className="py-2 pr-4 font-normal">Payload Class</th>
+                    {MATRIX_COLS.map((col) => (
+                      <th
+                        key={col.id}
+                        onMouseEnter={() => setActiveCol(col.id)}
+                        className={`py-2 px-1 text-center font-normal cursor-pointer transition-colors ${
+                          activeCol === col.id ? "text-[#FFB800] font-bold" : "hover:text-white"
+                        }`}
+                      >
+                        {col.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/[0.04]">
+                  {PAYLOAD_ROWS.map((row) => (
+                    <tr key={row.id}>
+                      <td className="py-2.5 pr-4 text-white/70 text-[10px]">{row.label}</td>
+                      {MATRIX_COLS.map((col) => {
+                        const val = PAYLOAD_MATRIX[row.id][col.id];
+                        const isColActive = activeCol === col.id;
+                        return (
+                          <td
+                            key={col.id}
+                            onMouseEnter={() => setActiveCol(col.id)}
+                            className={`py-2 px-1 text-center cursor-pointer transition-all ${
+                              isColActive ? "bg-white/[0.02]" : ""
+                            }`}
+                          >
+                            <div
+                              className={`mx-auto rounded-lg py-1 px-1.5 min-w-[70px] text-center font-bold text-[8px] uppercase border transition-all ${
+                                val === 2
+                                  ? "bg-[#312e81] text-white border-indigo-500/50 flex items-center justify-center gap-1"
+                                  : val === 1
+                                  ? "bg-[#6366f1]/10 text-indigo-300 border-indigo-500/20"
+                                  : "bg-[#222230]/40 text-white/20 border-white/5"
+                              }`}
+                            >
+                              {val === 2 && <span className="w-1.5 h-1.5 rounded-full bg-white inline-block shrink-0" />}
+                              <span>{val === 2 ? "Core" : val === 1 ? "Secondary" : "-"}</span>
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Matrix 2: Bus */}
+            <div>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-white/40 block mb-3 font-bold">
+                Bus &mdash; how hard each type stresses it (re-tuning)
+              </span>
+              <table className="w-full text-left border-collapse font-mono text-[10px] sm:text-xs">
+                <thead>
+                  <tr className="text-white/30 text-[8px] uppercase tracking-wider">
+                    <th className="py-2 pr-4 font-normal">Bus Subsystem</th>
+                    {MATRIX_COLS.map((col) => (
+                      <th
+                        key={col.id}
+                        onMouseEnter={() => setActiveCol(col.id)}
+                        className={`py-2 px-1 text-center font-normal cursor-pointer transition-colors ${
+                          activeCol === col.id ? "text-[#FFB800] font-bold" : "hover:text-white"
+                        }`}
+                      >
+                        {col.label}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/[0.04]">
+                  {BUS_ROWS.map((row) => (
+                    <tr key={row.id}>
+                      <td className="py-2.5 pr-4 text-white/70 text-[10px]">{row.label}</td>
+                      {MATRIX_COLS.map((col) => {
+                        const val = BUS_MATRIX[row.id][col.id];
+                        const isColActive = activeCol === col.id;
+                        return (
+                          <td
+                            key={col.id}
+                            onMouseEnter={() => setActiveCol(col.id)}
+                            className={`py-2 px-1 text-center cursor-pointer transition-all ${
+                              isColActive ? "bg-white/[0.02]" : ""
+                            }`}
+                          >
+                            <div
+                              className={`mx-auto rounded-lg py-1 px-1.5 min-w-[70px] text-center font-bold text-[8px] uppercase border transition-all ${
+                                val === 2
+                                  ? "bg-[#064e3b] text-[#34d399] border-[#059669]/40"
+                                  : val === 1
+                                  ? "bg-[#059669]/20 text-[#a7f3d0] border-[#059669]/20"
+                                  : "bg-[#14532d]/5 text-[#a7f3d0]/30 border-white/5"
+                              }`}
+                            >
+                              <span>{val === 2 ? "Core" : val === 1 ? "Elevated" : "Standard"}</span>
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Legends */}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-3 mt-4 text-[8px] font-mono text-white/40">
+            {/* Payload Legend */}
+            <div className="flex items-center gap-3">
+              <span className="uppercase text-[7px] text-white/30 mr-1 block">Payload Carry:</span>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#222230]/40 border border-white/5 inline-block" />
+                <span>Not carried</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#6366f1]/10 border border-indigo-500/20 inline-block" />
+                <span>Secondary</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#312e81] border border-indigo-500/50 inline-block" />
+                <span>Core payload</span>
+              </div>
+            </div>
+
+            {/* Bus Legend */}
+            <div className="flex items-center gap-3">
+              <span className="uppercase text-[7px] text-white/30 mr-1 block">Bus Demand:</span>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#14532d]/5 border border-white/5 inline-block" />
+                <span>Standard</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#059669]/20 border border-[#059669]/20 inline-block" />
+                <span>Elevated</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded bg-[#064e3b] border border-[#059669]/40 inline-block" />
+                <span>Core</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Dynamic Insight Card */}
+        <div className="lg:col-span-4 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 shadow-2xl flex flex-col justify-between min-h-[350px]">
+          <div className="space-y-4">
+            <div className="border-b border-white/10 pb-3">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-1 font-bold">
+                operational matrix profile
+              </span>
+              <h3 className="text-lg font-bold text-white leading-tight font-serif uppercase tracking-wide">
+                {currentInsight.title}
+              </h3>
+            </div>
+
+            <p className="text-xs text-white/70 leading-relaxed font-light">
+              {currentInsight.summary}
+            </p>
+          </div>
+
+          <div className="space-y-3.5 border-t border-white/5 pt-4 mt-4">
+            <div className="space-y-2">
+              <div className="space-y-0.5">
+                <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-wider block">Payload Makeup</span>
+                <p className="text-[10px] text-white/60 leading-relaxed font-mono">{currentInsight.payloadDesc}</p>
+              </div>
+              <div className="space-y-0.5">
+                <span className="font-mono text-[8px] text-[#34d399] uppercase tracking-wider block">Platform Stressors</span>
+                <p className="text-[10px] text-white/60 leading-relaxed font-mono">{currentInsight.busDesc}</p>
+              </div>
+            </div>
+
+            <p className="text-[9px] text-white/40 leading-relaxed italic">
+              * Hover over columns to inspect how platform requirements shift across each mission profile.
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </>
+  );
+}
+
+// 5. BUS VS PAYLOAD
 const SATELLITE_SYSTEMS = [
   { id: "sat", name: "Satellite", sub: "payload + bus", type: "system", fill: "#27272a", stroke: "#52525b", text: "#ffffff", desc: "The integrated spacecraft combining the mission payload instruments and the host platform bus.", highlights: "Primary integration of systems" },
   { id: "payload", name: "Payload", sub: "the mission", type: "division", fill: "#3b338a", stroke: "#6366f1", text: "#ffffff", desc: "The operational instrument suite (imaging, communications, radar) that executes the spacecraft's primary commercial or scientific mission.", highlights: "Generates mission value & data" },
@@ -2029,7 +2397,7 @@ export default function SatellitesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 16 frames
+  // Scroll transforms for 18 frames
   const SEG = 1 / TOTAL_FRAMES;
   const FADE_IN = 0.25 * SEG;
   const FADE_HOLD = 0.35 * SEG;
@@ -2082,8 +2450,14 @@ export default function SatellitesPage() {
   const s13Opacity = useTransform(progress, fr(14), FADE);
   const s13Y = useTransform(progress, fr(14), RISE);
 
-  const s14Opacity = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [0, 1, 1]);
-  const s14Y = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [24, 0, 0]);
+  const s14Opacity = useTransform(progress, fr(15), FADE);
+  const s14Y = useTransform(progress, fr(15), RISE);
+
+  const s15Opacity = useTransform(progress, fr(16), FADE);
+  const s15Y = useTransform(progress, fr(16), RISE);
+
+  const s16Opacity = useTransform(progress, [17 * SEG - FADE_IN, 17 * SEG, 1.0], [0, 1, 1]);
+  const s16Y = useTransform(progress, [17 * SEG - FADE_IN, 17 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -2091,7 +2465,7 @@ export default function SatellitesPage() {
       <PresentationChrome controller={p} scenes={SATELLITES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1600vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1800vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -2105,7 +2479,7 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 6, 7].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 6, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -2114,15 +2488,17 @@ export default function SatellitesPage() {
                 {currentFrameIndex === 4 && <Scene4FirstPrinciple />}
                 {currentFrameIndex === 5 && <Scene3BusVsPayload />}
                 {currentFrameIndex === 6 && <Scene2MeetTheSatellite />}
-                {currentFrameIndex === 7 && <Scene5FamilyOfSensors />}
-                {currentFrameIndex === 8 && <Scene6OwlAndBat />}
-                {currentFrameIndex === 9 && <Scene7HowRadarWorks />}
-                {currentFrameIndex === 10 && <Scene8SyntheticApertureRadar />}
-                {currentFrameIndex === 11 && <Scene9MissionConfig />}
-                {currentFrameIndex === 12 && <Scene10NISAR />}
-                {currentFrameIndex === 13 && <Scene11InsideRadarPayload />}
-                {currentFrameIndex === 14 && <Scene12IndianEcosystem />}
-                {currentFrameIndex === 15 && <Scene13Thesis presentationActive />}
+                {currentFrameIndex === 7 && <SceneTypesOfSatellites />}
+                {currentFrameIndex === 8 && <SceneSystemsMapping />}
+                {currentFrameIndex === 9 && <Scene5FamilyOfSensors />}
+                {currentFrameIndex === 10 && <Scene6OwlAndBat />}
+                {currentFrameIndex === 11 && <Scene7HowRadarWorks />}
+                {currentFrameIndex === 12 && <Scene8SyntheticApertureRadar />}
+                {currentFrameIndex === 13 && <Scene9MissionConfig />}
+                {currentFrameIndex === 14 && <Scene10NISAR />}
+                {currentFrameIndex === 15 && <Scene11InsideRadarPayload />}
+                {currentFrameIndex === 16 && <Scene12IndianEcosystem />}
+                {currentFrameIndex === 17 && <Scene13Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -2193,11 +2569,11 @@ export default function SatellitesPage() {
 
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene5FamilyOfSensors />
+                <SceneTypesOfSatellites />
               </motion.div>
 
               <motion.div
@@ -2206,16 +2582,16 @@ export default function SatellitesPage() {
                   currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene6OwlAndBat />
+                <SceneSystemsMapping />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene7HowRadarWorks />
+                <Scene5FamilyOfSensors />
               </motion.div>
 
               <motion.div
@@ -2224,7 +2600,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene8SyntheticApertureRadar />
+                <Scene6OwlAndBat />
               </motion.div>
 
               <motion.div
@@ -2233,7 +2609,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene9MissionConfig />
+                <Scene7HowRadarWorks />
               </motion.div>
 
               <motion.div
@@ -2242,7 +2618,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene10NISAR />
+                <Scene8SyntheticApertureRadar />
               </motion.div>
 
               <motion.div
@@ -2251,7 +2627,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene11InsideRadarPayload />
+                <Scene9MissionConfig />
               </motion.div>
 
               <motion.div
@@ -2260,13 +2636,31 @@ export default function SatellitesPage() {
                   currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene12IndianEcosystem />
+                <Scene10NISAR />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s14Opacity, y: s14Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <Scene11InsideRadarPayload />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s15Opacity, y: s15Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 16 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <Scene12IndianEcosystem />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s16Opacity, y: s16Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 17 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene13Thesis presentationActive={false} />
