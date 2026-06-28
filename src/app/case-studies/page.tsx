@@ -145,6 +145,56 @@ export default function CaseStudiesPage() {
               ? "/chapters/private-ecosystem" 
               : `/chapters/${cs.slug}`;
 
+            const isUpcoming = !isCentum && !isAstra && !isEcosystem;
+
+            if (isUpcoming) {
+              return (
+                <div
+                  key={cs.slug}
+                  className="relative flex flex-col justify-between p-6 bg-white/[0.01] border border-white/5 rounded-2xl shadow-xl transition-all duration-300 min-h-[250px] opacity-60 hover:opacity-85"
+                >
+                  <div className="absolute inset-0 rounded-2xl transition-all duration-300 pointer-events-none z-0"
+                       style={{
+                         background: "radial-gradient(circle 120px at 80% 20%, rgba(255,184,0,0.01) 0%, transparent 100%)",
+                       }}
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[9px] font-mono uppercase tracking-widest text-white/30">
+                          {cs.category}
+                        </span>
+                        <span className="px-1.5 py-0.5 text-[8px] font-mono font-bold tracking-wider text-[#FFB800]/80 bg-[#FFB800]/10 border border-[#FFB800]/20 rounded uppercase">
+                          Upcoming
+                        </span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-white/[0.01] border border-white/5 text-white/30">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-lg font-bold tracking-tight text-white/50 mb-3 uppercase">
+                      {cs.title}
+                    </h3>
+
+                    <p className="text-xs text-white/40 leading-relaxed font-light mb-6">
+                      {cs.desc}
+                    </p>
+                  </div>
+
+                  <div className="relative z-10 pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-white/30">
+                    <span className="text-[#FFB800]/40 font-bold">
+                      {cs.highlight}
+                    </span>
+                    <span className="inline-flex items-center gap-1 font-bold">
+                      Upcoming
+                    </span>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={cs.slug}
