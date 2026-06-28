@@ -36,23 +36,25 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 14;
+const TOTAL_FRAMES = 16;
 
 const ASTRA_SCENES = [
-  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 14", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 14", startFrame: 1, endFrame: 1 },
-  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 14", startFrame: 2, endFrame: 2 },
-  { id: "entities", name: "Group Corporate Structure", label: "04 / 14", startFrame: 3, endFrame: 3 },
-  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 14", startFrame: 4, endFrame: 4 },
-  { id: "orderbook", name: "Standalone Order Book", label: "06 / 14", startFrame: 5, endFrame: 5 },
-  { id: "growth", name: "Key Growth Programs", label: "07 / 14", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Capital & Working Capital", label: "08 / 14", startFrame: 7, endFrame: 7 },
-  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 14", startFrame: 8, endFrame: 8 },
-  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 14", startFrame: 9, endFrame: 9 },
-  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 14", startFrame: 10, endFrame: 10 },
-  { id: "thesis-matters", name: "Why This Matters", label: "12 / 14", startFrame: 11, endFrame: 11 },
-  { id: "thesis-road", name: "The Road to Two Companies", label: "13 / 14", startFrame: 12, endFrame: 12 },
-  { id: "listed-peers", name: "Listed Peers", label: "14 / 14", startFrame: 13, endFrame: 13 },
+  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 16", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 16", startFrame: 1, endFrame: 1 },
+  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 16", startFrame: 2, endFrame: 2 },
+  { id: "entities", name: "Group Corporate Structure", label: "04 / 16", startFrame: 3, endFrame: 3 },
+  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 16", startFrame: 4, endFrame: 4 },
+  { id: "orderbook", name: "Standalone Order Book", label: "06 / 16", startFrame: 5, endFrame: 5 },
+  { id: "growth", name: "Key Growth Programs", label: "07 / 16", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Capital & Working Capital", label: "08 / 16", startFrame: 7, endFrame: 7 },
+  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 16", startFrame: 8, endFrame: 8 },
+  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 16", startFrame: 9, endFrame: 9 },
+  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 16", startFrame: 10, endFrame: 10 },
+  { id: "thesis-matters", name: "Why This Matters", label: "12 / 16", startFrame: 11, endFrame: 11 },
+  { id: "thesis-road", name: "The Road to Two Companies", label: "13 / 16", startFrame: 12, endFrame: 12 },
+  { id: "listed-peers", name: "Listed Peers", label: "14 / 16", startFrame: 13, endFrame: 13 },
+  { id: "sotp-valuation", name: "Sum of the Parts", label: "15 / 16", startFrame: 14, endFrame: 14 },
+  { id: "takeaways", name: "Key Takeaways", label: "16 / 16", startFrame: 15, endFrame: 15 },
 ];
 
 const SLIDE_BASE =
@@ -1238,6 +1240,324 @@ function SceneListedPeers() {
   );
 }
 
+// 15. SUM OF THE PARTS (SOTP) VALUATION
+const SOTP_BRIDGE_DATA = [
+  { component: "Defence parent (AMPL)", bear: "8,520", base: "10,790", bull: "12,780" },
+  { component: "ARC and JV stakes", bear: "600", base: "800", bull: "1,000" },
+  { component: "Space company (ASTPL)", bear: "2,000", base: "2,750", bull: "4,000" },
+  { component: "Implied combined EV", bear: "11,120", base: "14,340", bull: "17,780", isBold: true, hasBg: true },
+  { component: "Current EV (approx.)", bear: "16,200", base: "16,200", bull: "16,200" },
+  { component: "Upside / (downside)", bear: "(31%)", base: "(11%)", bull: "+10%", isBold: true, isUpside: true },
+];
+
+const DEFENCE_PARENT_DATA = [
+  { scenario: "Bear (below BEL)", ebitda: "284", multiple: "30", ev: "8,520" },
+  { scenario: "Base (around BEL/Astra)", ebitda: "284", multiple: "38", ev: "10,790" },
+  { scenario: "Bull (toward Paras)", ebitda: "284", multiple: "45", ev: "12,780" },
+  { scenario: "Plus: ARC + JV stake value", ebitda: "-", multiple: "-", ev: "600 to 1,000", isBold: true },
+];
+
+const SPACE_COMPANY_DATA = [
+  { lens: "EV/EBITDA premium", basis: "~50 cr EBITDA at 40x / 60x / 80x", bear: "2,000", base: "3,000", bull: "4,000" },
+  { lens: "EV/Sales cross-check", basis: "~185 cr sales at 8x / 13x / 18x", bear: "1,480", base: "2,400", bull: "3,330" },
+  { lens: "Taken for SOTP", basis: "SOTP Value Anchor", bear: "2,000", base: "2,750", bull: "4,000", isBold: true, hasBg: true },
+];
+
+function SceneSotpValuation() {
+  const [activeTab, setActiveTab] = useState<"defence" | "space">("defence");
+
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-12 flex flex-col justify-center select-text">
+        <SceneHeading sub="14. VALUATION MODEL" main="Sum of the Parts Valuation" />
+        <p className="text-xs text-white/50 text-center max-w-xl mx-auto mb-6">
+          SOTP model scenarios (Rs crore) mapping the demerger value unlocking bridge for the defence parent and space carve-out.
+        </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full pointer-events-auto mb-4">
+          
+          {/* Left Column: SOTP Bridge Table */}
+          <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-5 backdrop-blur-sm shadow-2xl text-left">
+            <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3">
+              Table 12. Sum-of-the-parts bridge versus today (Rs crore)
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left font-mono text-[10px] sm:text-xs text-white/80 border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10 text-white font-bold uppercase text-[9px] tracking-wider">
+                    <th className="py-2.5 pr-2">Component</th>
+                    <th className="py-2.5 px-2 text-right">Bear</th>
+                    <th className="py-2.5 px-2 text-right">Base</th>
+                    <th className="py-2.5 pl-2 text-right">Bull</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/[0.04]">
+                  {SOTP_BRIDGE_DATA.map((row, idx) => {
+                    const isBold = row.isBold;
+                    const hasBg = row.hasBg;
+                    const isUpside = row.isUpside;
+                    return (
+                      <tr
+                        key={idx}
+                        className={`transition-colors ${
+                          hasBg
+                            ? "bg-white/[0.03]"
+                            : isUpside
+                            ? "bg-white/[0.02]"
+                            : "hover:bg-white/[0.01]"
+                        }`}
+                      >
+                        <td className={`py-2 px-1 text-white/90 ${isBold ? "font-bold" : ""}`}>
+                          {row.component}
+                        </td>
+                        <td className={`py-2 px-1 text-right font-mono ${
+                          isBold ? "font-bold text-white" : ""
+                        } ${isUpside ? "text-red-400" : ""}`}>
+                          {row.bear}
+                        </td>
+                        <td className={`py-2 px-1 text-right font-mono ${
+                          isBold ? "font-bold text-white" : ""
+                        } ${isUpside ? "text-red-400" : ""}`}>
+                          {row.base}
+                        </td>
+                        <td className={`py-2 px-1 text-right font-mono ${
+                          isBold ? "font-bold text-white" : ""
+                        } ${isUpside ? "text-emerald-400" : ""}`}>
+                          {row.bull}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Right Column: Interactive Detail Tabs */}
+          <div className="lg:col-span-5 flex flex-col gap-4 text-left">
+            <div className="bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-5 shadow-xl relative">
+              {/* Tab Toggles */}
+              <div className="flex border-b border-white/10 pb-3 mb-4 gap-4">
+                <button
+                  onClick={() => setActiveTab("defence")}
+                  className={`font-mono text-[9px] uppercase tracking-wider pb-1 cursor-pointer transition-all border-b-2 ${
+                    activeTab === "defence"
+                      ? "text-[#FFB800] border-[#FFB800] font-bold"
+                      : "text-white/40 border-transparent hover:text-white/70"
+                  }`}
+                >
+                  Defence Parent (AMPL)
+                </button>
+                <button
+                  onClick={() => setActiveTab("space")}
+                  className={`font-mono text-[9px] uppercase tracking-wider pb-1 cursor-pointer transition-all border-b-2 ${
+                    activeTab === "space"
+                      ? "text-[#FFB800] border-[#FFB800] font-bold"
+                      : "text-white/40 border-transparent hover:text-white/70"
+                  }`}
+                >
+                  Space Company (ASTPL)
+                </button>
+              </div>
+
+              {/* Tab 1: Defence Parent details */}
+              {activeTab === "defence" && (
+                <div>
+                  <h4 className="font-mono text-[9px] text-white/40 uppercase tracking-widest mb-3">
+                    Table 10. Defence parent EV/EBITDA multiple scenarios
+                  </h4>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left font-mono text-[10px] text-white/70 border-collapse">
+                      <thead>
+                        <tr className="border-b border-white/5 text-white/40 text-[8px] uppercase tracking-wider">
+                          <th className="py-2 pr-2">Scenario</th>
+                          <th className="py-2 px-2 text-right">EBITDA</th>
+                          <th className="py-2 px-2 text-right">Mult</th>
+                          <th className="py-2 pl-2 text-right">EV</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/[0.03]">
+                        {DEFENCE_PARENT_DATA.map((row, idx) => (
+                          <tr key={idx} className={row.isBold ? "font-bold text-white" : ""}>
+                            <td className="py-2 pr-2 text-white/95">{row.scenario}</td>
+                            <td className="py-2 px-2 text-right">{row.ebitda}</td>
+                            <td className="py-2 px-2 text-right">{row.multiple}{row.multiple !== "-" ? "x" : ""}</td>
+                            <td className="py-2 pl-2 text-right text-white font-semibold">{row.ev}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-[8px] text-white/45 leading-relaxed mt-3.5 italic">
+                    * Parent EBITDA is group EBITDA less the estimated space carve-out EBITDA. Multiples are based on BEL/Astra trailing peers.
+                  </p>
+                </div>
+              )}
+
+              {/* Tab 2: Space Company details */}
+              {activeTab === "space" && (
+                <div>
+                  <h4 className="font-mono text-[9px] text-white/40 uppercase tracking-widest mb-3">
+                    Table 11. The space company (ASTPL), scenarios
+                  </h4>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left font-mono text-[9px] text-white/70 border-collapse">
+                      <thead>
+                        <tr className="border-b border-white/5 text-white/40 text-[7px] uppercase tracking-wider">
+                          <th className="py-2 pr-2">Lens</th>
+                          <th className="py-2 px-2">Basis</th>
+                          <th className="py-2 px-1 text-right">Bear</th>
+                          <th className="py-2 px-1 text-right">Base</th>
+                          <th className="py-2 pl-1 text-right">Bull</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/[0.03]">
+                        {SPACE_COMPANY_DATA.map((row, idx) => (
+                          <tr
+                            key={idx}
+                            className={`${row.isBold ? "font-bold text-white" : ""} ${
+                              row.hasBg ? "bg-white/[0.02]" : ""
+                            }`}
+                          >
+                            <td className="py-2 pr-1.5 text-white/95">{row.lens}</td>
+                            <td className="py-2 px-1 text-white/50 text-[8px] leading-tight max-w-[100px]">{row.basis}</td>
+                            <td className="py-2 px-1 text-right text-white font-semibold">{row.bear}</td>
+                            <td className="py-2 px-1 text-right text-white font-semibold">{row.base}</td>
+                            <td className="py-2 pl-1 text-right text-white font-semibold">{row.bull}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-[8px] text-white/45 leading-relaxed mt-3.5 italic">
+                    * Highlights a premium valuation lens for space assets (~50 cr EBITDA at 40x / 60x / 80x multiples) versus sales cross-checks.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Sources Footer */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-white/10 pt-4 mt-2 text-[9px] text-white/40 leading-relaxed font-light text-left pointer-events-auto">
+          <div className="lg:col-span-7 space-y-2 border-r border-white/5 pr-4">
+            <div>
+              <span className="font-mono text-white/50 font-bold">SOURCE: </span>
+              <span>Author estimates. Parent EBITDA is group EBITDA less the estimated carve-out EBITDA.</span>
+            </div>
+            <div>
+              <span className="font-mono text-white/50 font-bold">STAKES: </span>
+              <span>The Astra Rafael Comsys (ARC) stake is valued separately because it is equity-accounted and not consolidated.</span>
+            </div>
+          </div>
+          <div className="lg:col-span-5 pl-0 lg:pl-4">
+            <span className="font-mono text-white/50 font-bold block mb-1">NOTE:</span>
+            <p>
+              ARC is guided to cross ₹600 crore of sales in FY27 at an 18 to 20 percent margin, supporting a few hundred crore of additional value.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 16. KEY TAKEAWAYS
+const TAKEAWAYS_DATA = [
+  {
+    num: "01",
+    boldText: "A demerger is a pricing tool, not a value machine.",
+    bodyText: "Separating businesses lets the market value each on its own terms. It does not, by itself, create cash flow. Astra's parts may be worth more apart, but only if the spun-off piece earns a premium the blended company could not."
+  },
+  {
+    num: "02",
+    boldText: "Read what is actually in the carve-out.",
+    bodyText: "The market will call this a space listing. It is half meteorology and hydrology by order book. Mislabelling the asset is the most common error in demerger analysis."
+  },
+  {
+    num: "03",
+    boldText: "Distinguish a trend from a spike.",
+    bodyText: "The carve-out's headline FY26 growth is one strong quarter on a lumpy, project-driven base, not a steady ramp. Always pull the quarterly mix before believing an annual growth number."
+  },
+  {
+    num: "04",
+    boldText: "Mind the accounting boundaries.",
+    bodyText: "Astra's largest associated business, the ARC joint venture, is equity-accounted, so its revenue never appears in the top line and must be valued separately. Standalone and consolidated being near-identical is the tell."
+  },
+  {
+    num: "05",
+    boldText: "Be honest when the data is not there yet.",
+    bodyText: "No share-exchange ratio, no standalone accounts, no disclosed segment margin. A rigorous valuation says so and works in scenarios, rather than inventing a single answer."
+  }
+];
+
+function SceneKeyTakeaways() {
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-10 flex flex-col justify-center select-text">
+        <SceneHeading sub="THE LESSON" main="Key takeaways: what this case teaches about demergers" />
+
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 w-full pointer-events-auto mb-6">
+          {/* Row 1: 3 Cards */}
+          {TAKEAWAYS_DATA.slice(0, 3).map((item, idx) => (
+            <div
+              key={idx}
+              className="md:col-span-2 bg-[#0a0a14]/60 border-t-2 border-t-[#1B4F72] border-x border-b border-white/5 rounded-xl p-5 hover:border-t-[#FFB800] transition-colors duration-300 shadow-xl flex flex-col min-h-[220px]"
+            >
+              <span className="font-mono text-2xl font-black text-[#1B4F72] block mb-2">{item.num}</span>
+              <p className="text-xs text-white/90 font-light leading-relaxed">
+                <span className="font-bold text-white block mb-1">{item.boldText}</span>
+                {item.bodyText}
+              </p>
+            </div>
+          ))}
+
+          {/* Row 2: 2 Cards (Centered) */}
+          <div className="md:col-span-1 hidden md:block" /> {/* spacer */}
+          {TAKEAWAYS_DATA.slice(3, 5).map((item, idx) => (
+            <div
+              key={idx}
+              className="md:col-span-2 bg-[#0a0a14]/60 border-t-2 border-t-[#1B4F72] border-x border-b border-white/5 rounded-xl p-5 hover:border-t-[#FFB800] transition-colors duration-300 shadow-xl flex flex-col min-h-[220px]"
+            >
+              <span className="font-mono text-2xl font-black text-[#1B4F72] block mb-2">{item.num}</span>
+              <p className="text-xs text-white/90 font-light leading-relaxed">
+                <span className="font-bold text-white block mb-1">{item.boldText}</span>
+                {item.bodyText}
+              </p>
+            </div>
+          ))}
+          <div className="md:col-span-1 hidden md:block" /> {/* spacer */}
+        </div>
+
+        {/* Sources Footer */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-white/10 pt-4 mt-2 text-[9px] text-white/40 leading-relaxed font-light text-left pointer-events-auto">
+          <div className="lg:col-span-7 space-y-2 border-r border-white/5 pr-4">
+            <div>
+              <span className="font-mono text-white/50 font-bold">SUMMARY: </span>
+              <span>Case study synthesis on structural corporate events, listing arbitrage, and public reporting thresholds.</span>
+            </div>
+            <div>
+              <span className="font-mono text-white/50 font-bold">SECTOR BOUNDARY: </span>
+              <span>Defense contracts and government weather tenders feature long fabrication cycles and lumpy revenue recognition.</span>
+            </div>
+          </div>
+          <div className="lg:col-span-5 pl-0 lg:pl-4">
+            <span className="font-mono text-white/50 font-bold block mb-1">ANALYSIS NOTE:</span>
+            <p>
+              Conglomerate discounts resolve slowly. Asset re-rating relies on the spun-off pure-play entity executing its milestones transparently.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AstraMicrowavePage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
@@ -1288,8 +1608,14 @@ export default function AstraMicrowavePage() {
   const s12Opacity = useTransform(progress, fr(12), FADE);
   const s12Y = useTransform(progress, fr(12), RISE);
 
-  const s13Opacity = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [0, 1, 1]);
-  const s13Y = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [24, 0, 0]);
+  const s13Opacity = useTransform(progress, fr(13), FADE);
+  const s13Y = useTransform(progress, fr(13), RISE);
+
+  const s14Opacity = useTransform(progress, fr(14), FADE);
+  const s14Y = useTransform(progress, fr(14), RISE);
+
+  const s15Opacity = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [0, 1, 1]);
+  const s15Y = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1297,7 +1623,7 @@ export default function AstraMicrowavePage() {
       <PresentationChrome controller={p} scenes={ASTRA_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1600vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1310,7 +1636,7 @@ export default function AstraMicrowavePage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 8, 9, 10, 11, 12, 13].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 8, 9, 10, 11, 12, 13, 14, 15].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -1326,6 +1652,8 @@ export default function AstraMicrowavePage() {
                 {currentFrameIndex === 11 && <SceneThesisMatters presentationActive={true} />}
                 {currentFrameIndex === 12 && <SceneRoadToTwoCompanies presentationActive={true} />}
                 {currentFrameIndex === 13 && <SceneListedPeers />}
+                {currentFrameIndex === 14 && <SceneSotpValuation />}
+                {currentFrameIndex === 15 && <SceneKeyTakeaways />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1443,6 +1771,20 @@ export default function AstraMicrowavePage() {
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
               >
                 <SceneListedPeers />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s14Opacity, y: s14Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneSotpValuation />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s15Opacity, y: s15Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneKeyTakeaways />
               </motion.div>
             </>
           )}
