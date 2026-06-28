@@ -792,7 +792,7 @@ function SceneThesisCarveOut({ presentationActive = false }: { presentationActiv
               </div>
             </div>
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-8">
               <div className="bg-[#030308]/60 border border-[#FFB800]/10 rounded-xl p-3.5 text-left">
                 <span className="font-mono text-[8px] text-[#FFB800]/80 uppercase block tracking-wider mb-1">
                   Analyst Assessment
@@ -800,16 +800,6 @@ function SceneThesisCarveOut({ presentationActive = false }: { presentationActiv
                 <p className="text-[10px] text-white/50 leading-relaxed font-light">
                   Consolidated financials understate the strategic importance of Astra's space franchise. The Q4 spike to 19.5% space revenue signals a massive pivot.
                 </p>
-              </div>
-
-              <div className="pt-2 border-t border-white/5">
-                <Link
-                  href="/case-studies"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#FFB800] hover:bg-[#FFB800]/90 text-[#030308] font-bold text-xs uppercase tracking-widest transition-colors duration-200 w-full"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Return to Case Studies
-                </Link>
               </div>
             </div>
           </div>

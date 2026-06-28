@@ -30,22 +30,24 @@ import {
 // CONSTANTS & STRUCTURES
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 13;
+const TOTAL_FRAMES = 15;
 
 const LAUNCH_VEHICLES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 13", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Rocketry Evolution", label: "02 / 13", startFrame: 1, endFrame: 1 },
-  { id: "sounding", name: "Action & Reaction", label: "03 / 13", startFrame: 2, endFrame: 2 },
-  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "04 / 13", startFrame: 3, endFrame: 3 },
-  { id: "staging", name: "Multi-Stage Efficiency", label: "05 / 13", startFrame: 4, endFrame: 4 },
-  { id: "chemistry", name: "Chemistry of Rockets", label: "06 / 13", startFrame: 5, endFrame: 5 },
-  { id: "timeline", name: "ISRO Launcher Evolution", label: "07 / 13", startFrame: 6, endFrame: 6 },
-  { id: "pslv", name: "PSLV Case Study", label: "08 / 13", startFrame: 7, endFrame: 7 },
-  { id: "reusability", name: "Economics of Reusability", label: "09 / 13", startFrame: 8, endFrame: 8 },
-  { id: "reentry", name: "Reentry Profiles", label: "10 / 13", startFrame: 9, endFrame: 9 },
-  { id: "methalox", name: "The Methalox Transition", label: "11 / 13", startFrame: 10, endFrame: 10 },
-  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "12 / 13", startFrame: 11, endFrame: 11 },
-  { id: "climax", name: "The Frontier Awaits", label: "13 / 13", startFrame: 12, endFrame: 12 },
+  { id: "splash", name: "Splash Cover", label: "01 / 15", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Rocketry Evolution", label: "02 / 15", startFrame: 1, endFrame: 1 },
+  { id: "sounding", name: "Action & Reaction", label: "03 / 15", startFrame: 2, endFrame: 2 },
+  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "04 / 15", startFrame: 3, endFrame: 3 },
+  { id: "staging", name: "Multi-Stage Efficiency", label: "05 / 15", startFrame: 4, endFrame: 4 },
+  { id: "chemistry", name: "Chemistry of Rockets", label: "06 / 15", startFrame: 5, endFrame: 5 },
+  { id: "timeline", name: "ISRO Launcher Evolution", label: "07 / 15", startFrame: 6, endFrame: 6 },
+  { id: "pslv", name: "PSLV Case Study", label: "08 / 15", startFrame: 7, endFrame: 7 },
+  { id: "reusability", name: "Economics of Reusability", label: "09 / 15", startFrame: 8, endFrame: 8 },
+  { id: "reentry", name: "Reentry Profiles", label: "10 / 15", startFrame: 9, endFrame: 9 },
+  { id: "methalox", name: "The Methalox Transition", label: "11 / 15", startFrame: 10, endFrame: 10 },
+  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "12 / 15", startFrame: 11, endFrame: 11 },
+  { id: "cost", name: "Cost of Space Flight", label: "13 / 15", startFrame: 12, endFrame: 12 },
+  { id: "consequence", name: "Consequence", label: "14 / 15", startFrame: 13, endFrame: 13 },
+  { id: "climax", name: "The Frontier Awaits", label: "15 / 15", startFrame: 14, endFrame: 14 },
 ];
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
@@ -1260,7 +1262,608 @@ function Scene11NextFrontier() {
   );
 }
 
-// 13. CLIMAX HISTORICAL SEQUENCE
+const COST_DATA = [
+  { id: 1, name: "Soyuz", year: 1966, cost: 6500, nation: "USSR/Russia", flag: "🇷🇺" },
+  { id: 2, name: "Saturn V", year: 1967, cost: 5400, nation: "United States", flag: "🇺🇸" },
+  { id: 3, name: "Space Shuttle", year: 1981, cost: 54500, nation: "United States", flag: "🇺🇸" },
+  { id: 4, name: "Long March 3b", year: 1996, cost: 6000, nation: "China", flag: "🇨🇳" },
+  { id: 5, name: "Delta IV Heavy", year: 2004, cost: 11000, nation: "United States", flag: "🇺🇸" },
+  { id: 6, name: "Falcon 1", year: 2008, cost: 10000, nation: "SpaceX / US", flag: "🇺🇸" },
+  { id: 7, name: "Falcon 9", year: 2010, cost: 2600, nation: "SpaceX / US", flag: "🇺🇸" },
+  { id: 8, name: "Angara", year: 2014, cost: 4500, nation: "Russia", flag: "🇷🇺" },
+  { id: 9, name: "Falcon Heavy", year: 2018, cost: 1500, nation: "SpaceX / US", flag: "🇺🇸" },
+  { id: 10, name: "Starship (est)", year: 2026, cost: 200, nation: "SpaceX / US", flag: "🇺🇸" },
+];
+
+// 13. COST OF SPACE FLIGHT
+function SceneCostOfSpaceFlight() {
+  const [activeIdx, setActiveIdx] = useState<number>(COST_DATA.length - 1);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  const currentIdx = hoveredIdx !== null ? hoveredIdx : activeIdx;
+  const currentRocket = COST_DATA[currentIdx];
+
+  // SVG dimensions
+  const width = 500;
+  const height = 260;
+  const padding = { top: 20, right: 30, bottom: 35, left: 50 };
+
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+
+  // Log scale helpers: min cost 100, max cost 100000
+  const minCost = 100;
+  const maxCost = 100000;
+  const logMin = Math.log10(minCost);
+  const logMax = Math.log10(maxCost);
+
+  const getX = (year: number) => {
+    // Years span from 1960 to 2030
+    const minYear = 1960;
+    const maxYear = 2030;
+    return padding.left + ((year - minYear) / (maxYear - minYear)) * chartWidth;
+  };
+
+  const getY = (cost: number) => {
+    const logVal = Math.log10(cost);
+    const ratio = (logVal - logMin) / (logMax - logMin);
+    return padding.top + chartHeight - ratio * chartHeight;
+  };
+
+  // Generate paths for SpaceX family and other rockets
+  const spacexRockets = COST_DATA.filter((r) => r.name.startsWith("Falcon") || r.name.startsWith("Starship"));
+  
+  // SpaceX line coords
+  const spacexCoords = spacexRockets.map((r) => ({ x: getX(r.year), y: getY(r.cost) }));
+  
+  // Total trend line coords (sorted by year)
+  const sortedRockets = [...COST_DATA].sort((a, b) => a.year - b.year);
+  const trendCoords = sortedRockets.map((r) => ({ x: getX(r.year), y: getY(r.cost) }));
+
+  const getPathString = (coords: { x: number; y: number }[]) => {
+    return coords.reduce((acc, c, idx) => {
+      return idx === 0 ? `M ${c.x} ${c.y}` : `${acc} L ${c.x} ${c.y}`;
+    }, "");
+  };
+
+  const trendPath = getPathString(trendCoords);
+  const spacexPath = getPathString(spacexCoords);
+
+  return (
+    <>
+      <SceneHeading sub="13. LAUNCH ECONOMICS" main="The Cost of Space Flight" />
+
+      <div className="w-full max-w-5xl z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left pointer-events-auto">
+        
+        {/* Left Column: Description & Metric Cards */}
+        <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-5">
+          <div>
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-light mb-4">
+              How much does it cost to launch a spacecraft into orbit? A lot less than it used to, thanks to SpaceX.
+            </p>
+            
+            <div className="p-4 bg-[#FFB800]/[0.02] border border-[#FFB800]/20 rounded-xl space-y-1.5 mb-2">
+              <span className="font-mono text-[9px] text-[#FFB800] uppercase font-bold tracking-widest block">
+                Cost Revolution
+              </span>
+              <p className="text-xs text-white/90 font-light">
+                Today, launching a spacecraft is <strong>10x cheaper</strong> than it was a decade ago.
+              </p>
+            </div>
+          </div>
+
+          {/* Metric Details Panel */}
+          <div className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-4 space-y-3 shadow-lg">
+            <div className="flex justify-between items-center border-b border-white/[0.06] pb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">{currentRocket.flag}</span>
+                <span className="font-mono text-[10px] text-[#FFB800] uppercase font-bold tracking-widest">
+                  {currentRocket.name}
+                </span>
+              </div>
+              <span className="font-mono text-[8px] text-white/40">
+                {currentRocket.year}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+              <div className="flex flex-col p-2.5 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">Cost per kg (USD)</span>
+                <span className="text-[#FFB800] text-base font-bold mt-1">
+                  ${currentRocket.cost.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex flex-col p-2.5 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">Operator Nation</span>
+                <span className="text-white/80 text-xs font-semibold mt-1">
+                  {currentRocket.nation}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Logarithmic Line / Scatter Plot */}
+        <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-5 shadow-2xl relative">
+          
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center gap-4 font-mono text-[8px]">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-0.5 bg-[#FFB800] inline-block" />
+                <span className="text-[#FFB800]">Historical Launches</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-0.5 bg-[#38bdf8] inline-block" />
+                <span className="text-sky-400">SpaceX Family</span>
+              </div>
+            </div>
+            <span className="font-mono text-[8px] text-white/30 uppercase tracking-wider">
+              Logarithmic Scale ($ / kg)
+            </span>
+          </div>
+
+          <div className="relative w-full h-[260px]">
+            <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
+              {/* Horizontal Grid Lines (Log Scale: 100, 500, 1000, 5000, 10000, 50000) */}
+              {[100, 400, 1600, 6400, 25600, 100000].map((gridVal) => {
+                const y = getY(gridVal);
+                return (
+                  <g key={gridVal}>
+                    <line
+                      x1={padding.left}
+                      y1={y}
+                      x2={width - padding.right}
+                      y2={y}
+                      stroke="rgba(255,255,255,0.03)"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x={padding.left - 8}
+                      y={y + 3}
+                      textAnchor="end"
+                      fill="rgba(255,255,255,0.35)"
+                      className="font-mono text-[7.5px]"
+                    >
+                      ${gridVal >= 1000 ? `${gridVal/1000}k` : gridVal}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Vertical Grid Lines (Decades) */}
+              {[1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030].map((yr) => {
+                const x = getX(yr);
+                return (
+                  <g key={yr}>
+                    <line
+                      x1={x}
+                      y1={padding.top}
+                      x2={x}
+                      y2={padding.top + chartHeight}
+                      stroke="rgba(255,255,255,0.02)"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x={x}
+                      y={height - 6}
+                      textAnchor="middle"
+                      fill="rgba(255,255,255,0.3)"
+                      className="font-mono text-[8px]"
+                    >
+                      {yr}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* SpaceX gradient highlight shadow */}
+              {spacexCoords.length > 0 && (
+                <path
+                  d={`M ${spacexCoords[0].x} ${getY(100)} L ${spacexCoords[0].x} ${spacexCoords[0].y} L ${spacexCoords[1].x} ${spacexCoords[1].y} L ${spacexCoords[2].x} ${spacexCoords[2].y} L ${spacexCoords[3].x} ${spacexCoords[3].y} L ${spacexCoords[3].x} ${getY(100)} Z`}
+                  fill="url(#spacex-glow)"
+                  opacity="0.15"
+                />
+              )}
+
+              {/* Gradient Def */}
+              <defs>
+                <linearGradient id="spacex-glow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+
+              {/* Historical Trend Line path */}
+              <motion.path
+                d={trendPath}
+                fill="none"
+                stroke="rgba(255,255,255,0.15)"
+                strokeDasharray="4 4"
+                strokeWidth="1"
+              />
+
+              {/* SpaceX Line path */}
+              <motion.path
+                d={spacexPath}
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="2"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              />
+
+              {/* Scatter Nodes */}
+              {COST_DATA.map((r, idx) => {
+                const x = getX(r.year);
+                const y = getY(r.cost);
+                const isSpaceX = r.name.startsWith("Falcon") || r.name.startsWith("Starship");
+                const isSelected = currentIdx === idx;
+
+                return (
+                  <g
+                    key={r.id}
+                    className="cursor-pointer"
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    onClick={() => setActiveIdx(idx)}
+                  >
+                    {/* Hover highlight halo */}
+                    {isSelected && (
+                      <circle
+                        cx={x}
+                        cy={y}
+                        r="6.5"
+                        fill={isSpaceX ? "#38bdf8" : "#FFB800"}
+                        className="animate-ping opacity-30"
+                      />
+                    )}
+
+                    {/* Dot */}
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={isSelected ? "4.5" : "3.5"}
+                      fill={isSpaceX ? "#38bdf8" : "#FFB800"}
+                      stroke="#0a0a14"
+                      strokeWidth="1.5"
+                      className="transition-all duration-150"
+                    />
+
+                    {/* Simple text label for prominent points */}
+                    {(isSelected || r.name === "Saturn V" || r.name === "Space Shuttle" || r.name === "Starship (est)") && (
+                      <text
+                        x={x}
+                        y={y - 8}
+                        textAnchor="middle"
+                        fill={isSelected ? "#white" : "rgba(255,255,255,0.6)"}
+                        className="font-mono text-[7px] font-bold"
+                      >
+                        {r.name}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+
+          <div className="text-[8px] text-white/30 font-mono mt-3 uppercase tracking-wider text-left pl-1">
+            Prices adjusted for inflation. Source: Center for Strategic and International Studies (CSIS)
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}
+
+const CONSEQUENCE_DATA = [
+  { year: 1957, world: 2, us: 0, china: 0, india: 0 },
+  { year: 1965, world: 154, us: 92, china: 0, india: 0 },
+  { year: 1975, world: 172, us: 36, china: 1, india: 1 },
+  { year: 1985, world: 158, us: 30, china: 2, india: 1 },
+  { year: 1995, world: 104, us: 31, china: 3, india: 2 },
+  { year: 2005, world: 111, us: 27, china: 5, india: 3 },
+  { year: 2015, world: 221, us: 113, china: 23, india: 5 },
+  { year: 2018, world: 452, us: 210, china: 38, india: 9 },
+  { year: 2020, world: 1274, us: 981, china: 76, india: 12 },
+  { year: 2021, world: 1810, us: 1358, china: 114, india: 18 },
+  { year: 2022, world: 2474, us: 2015, china: 182, india: 24 },
+  { year: 2023, world: 2664, us: 2166, china: 225, india: 31 },
+];
+
+// 12. CONSEQUENCE: ANNUAL OBJECTS LAUNCHED INTO SPACE
+function SceneConsequence() {
+  const [activeYearIdx, setActiveYearIdx] = useState<number>(CONSEQUENCE_DATA.length - 1);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  const activeIdx = hoveredIdx !== null ? hoveredIdx : activeYearIdx;
+  const currentData = CONSEQUENCE_DATA[activeIdx];
+
+  // SVG dimensions
+  const width = 500;
+  const height = 260;
+  const padding = { top: 20, right: 30, bottom: 30, left: 40 };
+
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+
+  // Max value for Y scale
+  const maxVal = 2800;
+
+  // Function to calculate SVG coordinates
+  const getCoords = (data: typeof CONSEQUENCE_DATA, key: "world" | "us" | "china" | "india") => {
+    return data.map((d, idx) => {
+      const x = padding.left + (idx / (data.length - 1)) * chartWidth;
+      const y = padding.top + chartHeight - (d[key] / maxVal) * chartHeight;
+      return { x, y };
+    });
+  };
+
+  const worldCoords = getCoords(CONSEQUENCE_DATA, "world");
+  const usCoords = getCoords(CONSEQUENCE_DATA, "us");
+  const chinaCoords = getCoords(CONSEQUENCE_DATA, "china");
+  const indiaCoords = getCoords(CONSEQUENCE_DATA, "india");
+
+  // Create path string from coordinates
+  const getPathString = (coords: { x: number; y: number }[]) => {
+    return coords.reduce((acc, c, idx) => {
+      return idx === 0 ? `M ${c.x} ${c.y}` : `${acc} L ${c.x} ${c.y}`;
+    }, "");
+  };
+
+  const worldPath = getPathString(worldCoords);
+  const usPath = getPathString(usCoords);
+  const chinaPath = getPathString(chinaCoords);
+  const indiaPath = getPathString(indiaCoords);
+
+  return (
+    <>
+      <SceneHeading sub="12. CONSEQUENCE" main="Annual Number of Objects Launched into Space" />
+      
+      <div className="w-full max-w-5xl z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left pointer-events-auto">
+        {/* Left Panel: Description and active point details */}
+        <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-6">
+          <div>
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-light mb-4">
+              The rise of private space commercialization, reusable launchers, and mega-constellations has triggered an exponential surge in orbital assets, transforming the dynamics of space traffic management.
+            </p>
+            <p className="text-[11px] text-white/50 leading-relaxed font-light">
+              Hover over or tap any milestone point on the graph to inspect the launches for that year. Notice the dramatic inflection point starting post-2015.
+            </p>
+          </div>
+
+          {/* Interactive readout */}
+          <div className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-4 space-y-3 shadow-lg">
+            <div className="flex justify-between items-center border-b border-white/[0.06] pb-2">
+              <span className="font-mono text-[10px] text-[#FFB800] uppercase font-bold tracking-widest">
+                Data Readout: {currentData.year}
+              </span>
+              <span className="font-mono text-[8px] text-white/30 uppercase tracking-wider">
+                Annual Assets
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 text-xs font-mono">
+              <div className="flex flex-col p-2 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">World Launches</span>
+                <span className="text-[#FFB800] text-lg font-bold mt-1">
+                  {currentData.world.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex flex-col p-2 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">United States</span>
+                <span className="text-orange-400 text-lg font-bold mt-1">
+                  {currentData.us.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex flex-col p-2 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">China</span>
+                <span className="text-purple-400 text-lg font-bold mt-1">
+                  {currentData.china.toLocaleString()}
+                </span>
+              </div>
+              <div className="flex flex-col p-2 bg-white/[0.01] rounded-lg border border-white/[0.02]">
+                <span className="text-white/40 text-[9px] uppercase tracking-wider">India</span>
+                <span className="text-sky-400 text-lg font-bold mt-1">
+                  {currentData.india.toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Panel: Interactive Graph */}
+        <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-5 shadow-2xl relative flex flex-col justify-between">
+          
+          {/* Legend and graph labels */}
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center gap-3 font-mono text-[9px]">
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-[#FFB800]" />
+                <span className="text-[#FFB800] font-semibold">World</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-orange-400" />
+                <span className="text-orange-400">US</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-purple-400" />
+                <span className="text-purple-400">China</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-sky-400" />
+                <span className="text-sky-400">India</span>
+              </div>
+            </div>
+            <span className="font-mono text-[8px] text-white/30 uppercase tracking-wider">
+              1957 - 2023 objects
+            </span>
+          </div>
+
+          {/* SVG Graph */}
+          <div className="relative w-full h-[260px]">
+            <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
+              {/* Horizontal Grid lines */}
+              {[0, 500, 1000, 1500, 2000, 2500].map((gridVal) => {
+                const y = padding.top + chartHeight - (gridVal / maxVal) * chartHeight;
+                return (
+                  <g key={gridVal}>
+                    <line
+                      x1={padding.left}
+                      y1={y}
+                      x2={width - padding.right}
+                      y2={y}
+                      stroke="rgba(255,255,255,0.04)"
+                      strokeWidth="1"
+                    />
+                    <text
+                      x={padding.left - 8}
+                      y={y + 3}
+                      textAnchor="end"
+                      fill="rgba(255,255,255,0.3)"
+                      className="font-mono text-[8px]"
+                    >
+                      {gridVal}
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Vertical Grid lines for specific years */}
+              {CONSEQUENCE_DATA.map((d, idx) => {
+                const x = padding.left + (idx / (CONSEQUENCE_DATA.length - 1)) * chartWidth;
+                return (
+                  <line
+                    key={d.year}
+                    x1={x}
+                    y1={padding.top}
+                    x2={x}
+                    y2={padding.top + chartHeight}
+                    stroke={activeIdx === idx ? "rgba(255,184,0,0.15)" : "rgba(255,255,255,0.015)"}
+                    strokeWidth={activeIdx === idx ? "1.5" : "1"}
+                  />
+                );
+              })}
+
+              {/* Year Labels X-Axis */}
+              {[1957, 1975, 1995, 2015, 2023].map((yr) => {
+                const idx = CONSEQUENCE_DATA.findIndex((d) => d.year === yr);
+                if (idx === -1) return null;
+                const x = padding.left + (idx / (CONSEQUENCE_DATA.length - 1)) * chartWidth;
+                return (
+                  <text
+                    key={yr}
+                    x={x}
+                    y={height - 8}
+                    textAnchor="middle"
+                    fill="rgba(255,255,255,0.3)"
+                    className="font-mono text-[8px]"
+                  >
+                    {yr}
+                  </text>
+                );
+              })}
+
+              {/* SVG Lines */}
+              <motion.path
+                d={worldPath}
+                fill="none"
+                stroke="#FFB800"
+                strokeWidth="2.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+              />
+              <motion.path
+                d={usPath}
+                fill="none"
+                stroke="#fb923c"
+                strokeWidth="1.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut", delay: 0.1 }}
+              />
+              <motion.path
+                d={chinaPath}
+                fill="none"
+                stroke="#c084fc"
+                strokeWidth="1.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut", delay: 0.2 }}
+              />
+              <motion.path
+                d={indiaPath}
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="1.5"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.2, ease: "easeInOut", delay: 0.3 }}
+              />
+
+              {/* Interactive Hover Nodes */}
+              {CONSEQUENCE_DATA.map((d, idx) => {
+                const x = padding.left + (idx / (CONSEQUENCE_DATA.length - 1)) * chartWidth;
+                const yWorld = padding.top + chartHeight - (d.world / maxVal) * chartHeight;
+                
+                return (
+                  <g
+                    key={d.year}
+                    className="cursor-pointer"
+                    onMouseEnter={() => setHoveredIdx(idx)}
+                    onMouseLeave={() => setHoveredIdx(null)}
+                    onClick={() => setActiveYearIdx(idx)}
+                  >
+                    {/* Invisible hover trigger column */}
+                    <rect
+                      x={x - 12}
+                      y={padding.top}
+                      width="24"
+                      height={chartHeight}
+                      fill="transparent"
+                    />
+
+                    {/* Active highlight dot */}
+                    {activeIdx === idx && (
+                      <circle
+                        cx={x}
+                        cy={yWorld}
+                        r="5.5"
+                        fill="#FFB800"
+                        className="animate-ping opacity-35"
+                      />
+                    )}
+
+                    {/* Main data point circle */}
+                    <circle
+                      cx={x}
+                      cy={yWorld}
+                      r={activeIdx === idx ? "4" : "2"}
+                      fill={activeIdx === idx ? "#FFB800" : "#a1a1aa"}
+                      stroke="#0a0a14"
+                      strokeWidth={activeIdx === idx ? "1" : "0"}
+                      className="transition-all duration-150"
+                    />
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+
+          <div className="text-[9px] text-white/30 font-mono mt-3 uppercase tracking-wider text-left pl-1">
+            Data Source: United Nations Office for Outer Space Affairs (2024)
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}
+
+// 14. CLIMAX HISTORICAL SEQUENCE
 function Scene12Climax({ presentationActive = false }: { presentationActive?: boolean }) {
   const line = [
     "Sounding Rocket",
@@ -1355,45 +1958,58 @@ export default function LaunchVehiclesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 13 frames (each spans 1/13 ~ 0.0769 width)
-  const s0SplashOpacity = useTransform(progress, [0.0, 0.05, 0.0769], [1, 1, 0]);
-  const s0SplashScale = useTransform(progress, [0.0, 0.0769], [1, 0.96]);
+  // Scroll transforms for 15 frames
+  const SEG = 1 / TOTAL_FRAMES;
+  const FADE_IN = 0.25 * SEG;
+  const FADE_HOLD = 0.35 * SEG;
+  const fr = (i: number) => [i * SEG - FADE_IN, i * SEG, (i + 1) * SEG - FADE_HOLD, (i + 1) * SEG];
+  const FADE = [0, 1, 1, 0];
+  const RISE = [24, 0, 0, -24];
 
-  const s0Opacity = useTransform(progress, [0.05, 0.0769, 0.12, 0.1538], [0, 1, 1, 0]);
-  const s0Scale = useTransform(progress, [0.05, 0.1538], [1, 0.96]);
+  const s0SplashOpacity = useTransform(progress, [0.0, 0.05, SEG], [1, 1, 0]);
+  const s0SplashScale = useTransform(progress, [0.0, SEG], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.12, 0.1538, 0.20, 0.2308], [24, 0, 0, -24]);
+  const s0Opacity = useTransform(progress, [0.05, SEG, 2 * SEG - FADE_HOLD, 2 * SEG], FADE);
+  const s0Scale = useTransform(progress, [0.05, 2 * SEG], [1, 0.96]);
 
-  const s3Opacity = useTransform(progress, [0.20, 0.2308, 0.27, 0.3077], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.20, 0.2308, 0.27, 0.3077], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, fr(2), FADE);
+  const s1Y = useTransform(progress, fr(2), RISE);
 
-  const s4Opacity = useTransform(progress, [0.27, 0.3077, 0.35, 0.3846], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.27, 0.3077, 0.35, 0.3846], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, fr(3), FADE);
+  const s3Y = useTransform(progress, fr(3), RISE);
 
-  const s5Opacity = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.35, 0.3846, 0.43, 0.4615], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, fr(4), FADE);
+  const s4Y = useTransform(progress, fr(4), RISE);
 
-  const s6Opacity = useTransform(progress, [0.43, 0.4615, 0.50, 0.5385], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.43, 0.4615, 0.50, 0.5385], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, fr(5), FADE);
+  const s5Y = useTransform(progress, fr(5), RISE);
 
-  const s7Opacity = useTransform(progress, [0.50, 0.5385, 0.58, 0.6154], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.50, 0.5385, 0.58, 0.6154], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, fr(6), FADE);
+  const s6Y = useTransform(progress, fr(6), RISE);
 
-  const s8Opacity = useTransform(progress, [0.58, 0.6154, 0.65, 0.6923], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.58, 0.6154, 0.65, 0.6923], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, fr(7), FADE);
+  const s7Y = useTransform(progress, fr(7), RISE);
 
-  const s9Opacity = useTransform(progress, [0.65, 0.6923, 0.73, 0.7692], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.65, 0.6923, 0.73, 0.7692], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, fr(8), FADE);
+  const s8Y = useTransform(progress, fr(8), RISE);
 
-  const s10Opacity = useTransform(progress, [0.73, 0.7692, 0.81, 0.8462], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.73, 0.7692, 0.81, 0.8462], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, fr(9), FADE);
+  const s9Y = useTransform(progress, fr(9), RISE);
 
-  const s11Opacity = useTransform(progress, [0.81, 0.8462, 0.89, 0.9231], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.81, 0.8462, 0.89, 0.9231], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, fr(10), FADE);
+  const s10Y = useTransform(progress, fr(10), RISE);
 
-  const s12Opacity = useTransform(progress, [0.89, 0.9231, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [0.89, 0.9231, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, fr(11), FADE);
+  const s11Y = useTransform(progress, fr(11), RISE);
+
+  const s12Opacity = useTransform(progress, fr(12), FADE);
+  const s12Y = useTransform(progress, fr(12), RISE);
+
+  const s13Opacity = useTransform(progress, fr(13), FADE);
+  const s13Y = useTransform(progress, fr(13), RISE);
+
+  const s14Opacity = useTransform(progress, [14 * SEG - FADE_IN, 14 * SEG, 1.0], [0, 1, 1]);
+  const s14Y = useTransform(progress, [14 * SEG - FADE_IN, 14 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1401,7 +2017,7 @@ export default function LaunchVehiclesPage() {
       <PresentationChrome controller={p} scenes={LAUNCH_VEHICLES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1500vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1429,7 +2045,9 @@ export default function LaunchVehiclesPage() {
                 {currentFrameIndex === 9 && <Scene9ReentryProfile />}
                 {currentFrameIndex === 10 && <Scene10MethaloxEra />}
                 {currentFrameIndex === 11 && <Scene11NextFrontier />}
-                {currentFrameIndex === 12 && <Scene12Climax presentationActive />}
+                {currentFrameIndex === 12 && <SceneCostOfSpaceFlight />}
+                {currentFrameIndex === 13 && <SceneConsequence />}
+                {currentFrameIndex === 14 && <Scene12Climax presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1547,6 +2165,24 @@ export default function LaunchVehiclesPage() {
                 style={{ opacity: s12Opacity, y: s12Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneCostOfSpaceFlight />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s13Opacity, y: s13Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <SceneConsequence />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s14Opacity, y: s14Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene12Climax presentationActive={false} />
