@@ -38,11 +38,11 @@ const TOTAL_FRAMES = 16;
 const SATELLITES_SCENES = [
   { id: "splash", name: "Splash Cover", label: "01 / 16", startFrame: 0, endFrame: 0 },
   { id: "hero", name: "Satellite Platforms", label: "02 / 16", startFrame: 1, endFrame: 1 },
-  { id: "high-end-bands", name: "High-End Bands", label: "03 / 16", startFrame: 2, endFrame: 2 },
-  { id: "what-is", name: "What is a Satellite?", label: "04 / 16", startFrame: 3, endFrame: 3 },
-  { id: "components", name: "Components & Architecture", label: "05 / 16", startFrame: 4, endFrame: 4 },
-  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 16", startFrame: 5, endFrame: 5 },
-  { id: "orbit", name: "First Principle of Orbit", label: "07 / 16", startFrame: 6, endFrame: 6 },
+  { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 16", startFrame: 2, endFrame: 2 },
+  { id: "first-principle", name: "First Principle of Design", label: "04 / 16", startFrame: 3, endFrame: 3 },
+  { id: "high-end-bands", name: "High-End Bands", label: "05 / 16", startFrame: 4, endFrame: 4 },
+  { id: "components", name: "Components & Architecture", label: "06 / 16", startFrame: 5, endFrame: 5 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "07 / 16", startFrame: 6, endFrame: 6 },
   { id: "sensors", name: "Family of Sensors", label: "08 / 16", startFrame: 7, endFrame: 7 },
   { id: "owl-bat", name: "The Owl and the Bat", label: "09 / 16", startFrame: 8, endFrame: 8 },
   { id: "radar-work", name: "How Radar Works", label: "10 / 16", startFrame: 9, endFrame: 9 },
@@ -355,6 +355,129 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
   );
 }
 
+const MICROWAVE_BANDS = [
+  { band: "UHF", freq: "0.3-1 GHz", wave: "30-100 cm", use: "Telemetry; P-band SAR (BIOMASS)", isGold: false },
+  { band: "L", freq: "1-2 GHz", wave: "15-30 cm", use: "GPS / GNSS, NISAR (NASA), mobile-sat", isGold: true },
+  { band: "S", freq: "2-4 GHz", wave: "7.5-15 cm", use: "NISAR (ISRO), weather radar", isGold: true },
+  { band: "C", freq: "4-8 GHz", wave: "3.75-7.5 cm", use: "Sentinel-1, RISAT / EOS-04, satcom", isGold: true },
+  { band: "X", freq: "8-12 GHz", wave: "2.5-3.75 cm", use: "High-res SAR: ICEYE, Capella, TerraSAR-X", isGold: true },
+  { band: "Ku", freq: "12-18 GHz", wave: "1.67-2.5 cm", use: "DTH TV, VSAT broadband", isGold: true },
+  { band: "K", freq: "18-27 GHz", wave: "1.11-1.67 cm", use: "Limited: 22 GHz water absorption", isGold: false },
+  { band: "Ka", freq: "27-40 GHz", wave: "7.5-11 mm", use: "HTS broadband, SWOT altimeter", isGold: true },
+  { band: "V", freq: "40-75 GHz", wave: "4-7.5 mm", use: "Inter-satellite links, 5G mmwave", isGold: false },
+  { band: "W", freq: "75-110 GHz", wave: "2.7-4 mm", use: "Cloud radar, research", isGold: false },
+];
+
+function SceneMicrowaveBands() {
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+
+  return (
+    <>
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-4xl flex flex-col text-left px-6 py-4 pointer-events-auto">
+        <span className="font-mono text-[9px] font-bold tracking-widest text-[#FFB800] uppercase mb-1 block">
+          Radar & Satellite Bands &middot; IEEE
+        </span>
+
+        <h1
+          className="text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-1 uppercase"
+          style={{ fontFamily: "Georgia, serif" }}
+        >
+          The microwave spectrum, band by band
+        </h1>
+
+        <p className="text-[10px] sm:text-xs text-white/50 font-light leading-relaxed mb-4">
+          The radio and microwave region, ordered low to high frequency, where every comms and radar band lives.
+          <span className="text-white/35 ml-1">
+            Full spectrum: Radio <strong className="text-[#FFB800]">Microwave</strong> Infrared Visible Ultraviolet X-ray Gamma.
+          </span>
+        </p>
+
+        {/* Bands Table */}
+        <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl overflow-hidden shadow-2xl p-4 mb-4">
+          <div className="overflow-y-auto max-h-[320px] scrollbar-thin">
+            <table className="w-full text-left border-collapse text-xs font-mono">
+              <thead>
+                <tr className="border-b border-white/10 text-white/40 text-[9px] uppercase tracking-wider sticky top-0 bg-[#0a0a14] z-10">
+                  <th className="py-2 px-3">Band</th>
+                  <th className="py-2 px-3">Frequency</th>
+                  <th className="py-2 px-3">Wavelength</th>
+                  <th className="py-2 px-3">Use (satellite / comms)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.04]">
+                {MICROWAVE_BANDS.map((row, idx) => {
+                  const isHovered = hoveredRow === idx;
+                  return (
+                    <tr
+                      key={row.band}
+                      onMouseEnter={() => setHoveredRow(idx)}
+                      onMouseLeave={() => setHoveredRow(null)}
+                      className={`transition-colors duration-150 ${
+                        isHovered ? "bg-white/[0.03]" : "hover:bg-white/[0.01]"
+                      }`}
+                    >
+                      {/* Band Badge */}
+                      <td className="py-1.5 px-3">
+                        <span
+                          className={`inline-block text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-center min-w-[70px] ${
+                            row.isGold
+                              ? "bg-[#FFB800] text-black shadow-[0_0_8px_rgba(255,184,0,0.2)]"
+                              : "bg-[#222230] text-white/80"
+                          }`}
+                        >
+                          {row.band}
+                        </span>
+                      </td>
+
+                      {/* Frequency */}
+                      <td className="py-1.5 px-3 text-white/95 font-medium">{row.freq}</td>
+
+                      {/* Wavelength */}
+                      <td className="py-1.5 px-3 text-white/70">{row.wave}</td>
+
+                      {/* Comms Use */}
+                      <td className="py-1.5 px-3 text-white/80 leading-relaxed font-light text-[11px]">
+                        {row.use}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Footnote Warning Box */}
+        <div className="p-3 bg-white/[0.01] border border-white/10 rounded-xl mb-4 font-mono text-[9px] text-white/60 leading-relaxed">
+          K band straddles the 22 GHz water-vapour absorption line, so engineers use Ku (K-under) below it and Ka (K-above) above it.
+        </div>
+
+        {/* Legend & Footer */}
+        <div className="flex items-center justify-between text-[9px] font-mono text-white/40 mb-3 pl-1">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded bg-[#FFB800] inline-block shadow-[0_0_4px_#FFB800]" />
+            <span>gold = core satellite and radar bands</span>
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 pt-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[10px] font-mono text-white/40">
+          <div>
+            <span className="text-[#FFB800] font-bold">First Principles</span>
+            <span className="text-white/60">Investing</span>
+          </div>
+          <div className="uppercase tracking-widest text-[9px] text-white/30">
+            IEEE radar band letters
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 // 2. WHAT IS A SATELLITE (ORBIT BALLISTICS)
 const HIGH_END_BANDS = [
   { region: "EHF (Q/V)", freq: "27-75 GHz", wave: "4-11 mm", use: "Protected military SATCOM (AEHF)", isGold: true },
@@ -476,52 +599,7 @@ function SceneHighEndBands() {
   );
 }
 
-// 2. WHAT IS A SATELLITE (ORBIT BALLISTICS)
-function Scene1WhatIsASatellite() {
-  return (
-    <>
-      <SceneHeading sub="01. Orbital Ballistics" main="Why Satellites Don&apos;t Fall" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-2xl p-6 min-h-[350px]">
-          <svg viewBox="0 0 200 200" className="w-full h-full max-h-[280px]">
-            {/* Earth */}
-            <circle cx="100" cy="100" r="45" fill="rgba(255,184,0,0.06)" stroke="#FFB800" strokeWidth="1.5" />
-            
-            {/* Orbit path */}
-            <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1" strokeDasharray="3 3" />
-            
-            {/* Satellite */}
-            <circle cx="153" cy="47" r="5" fill="#FFB800" />
-            
-            {/* Gravity vector (pulling down) */}
-            <path d="M 153 47 L 122 78" stroke="#ff6b00" strokeWidth="1.5" />
-            <polygon points="122,78 129,74 125,70" fill="#ff6b00" />
-            <text x="110" y="66" fill="#ff6b00" className="font-mono text-[7px]" fontWeight="bold">GRAVITY</text>
-            
-            {/* Velocity vector (horizontal push) */}
-            <path d="M 153 47 L 188 12" stroke="#FFB800" strokeWidth="1.5" />
-            <polygon points="188,12 181,14 185,18" fill="#FFB800" />
-            <text x="180" y="27" fill="#FFB800" className="font-mono text-[7px]" fontWeight="bold">VELOCITY</text>
-          </svg>
-        </div>
-
-        <div className="lg:col-span-7 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
-            The Orbital Balance
-          </span>
-          <h3 className="text-xl font-bold text-white mb-4">Gravity vs Sideways Velocity</h3>
-          <p className="text-sm text-white/70 leading-relaxed mb-6">
-            A satellite remains in orbit by falling constantly around the Earth without hitting it. By matching its forward velocity with Earth&apos;s gravitational pull, it moves in a circular or elliptical curve. At 400km altitude, this balance requires a speed of **7.8 km/s**.
-          </p>
-          <div className="bg-[#0a0a14]/80 border border-[#FFB800]/10 p-4 rounded-xl font-mono text-xs text-white/60">
-            <span className="text-[#FFB800] font-bold block mb-1">Concept:</span>
-            Space has no air resistance to slow the satellite down, allowing it to orbit for decades on inertia alone.
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+// 3. MEET THE SATELLITE (EXPLODED ANATOMY)
 
 // 3. MEET THE SATELLITE (EXPLODED ANATOMY)
 const SUBSYSTEM_BACKGROUNDS = {
@@ -1827,15 +1905,15 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 3, 6].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 5, 7].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
-                {currentFrameIndex === 2 && <SceneHighEndBands />}
-                {currentFrameIndex === 3 && <Scene1WhatIsASatellite />}
-                {currentFrameIndex === 4 && <Scene2MeetTheSatellite />}
-                {currentFrameIndex === 5 && <Scene3BusVsPayload />}
-                {currentFrameIndex === 6 && <Scene4FirstPrinciple />}
+                {currentFrameIndex === 2 && <SceneMicrowaveBands />}
+                {currentFrameIndex === 3 && <Scene4FirstPrinciple />}
+                {currentFrameIndex === 4 && <SceneHighEndBands />}
+                {currentFrameIndex === 5 && <Scene2MeetTheSatellite />}
+                {currentFrameIndex === 6 && <Scene3BusVsPayload />}
                 {currentFrameIndex === 7 && <Scene5FamilyOfSensors />}
                 {currentFrameIndex === 8 && <Scene6OwlAndBat />}
                 {currentFrameIndex === 9 && <Scene7HowRadarWorks />}
@@ -1874,7 +1952,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneHighEndBands />
+                <SceneMicrowaveBands />
               </motion.div>
 
               <motion.div
@@ -1883,25 +1961,25 @@ export default function SatellitesPage() {
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene1WhatIsASatellite />
+                <Scene4FirstPrinciple />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene2MeetTheSatellite />
+                <SceneHighEndBands />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene3BusVsPayload />
+                <Scene2MeetTheSatellite />
               </motion.div>
 
               <motion.div
@@ -1910,12 +1988,12 @@ export default function SatellitesPage() {
                   currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene4FirstPrinciple />
+                <Scene3BusVsPayload />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
