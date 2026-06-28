@@ -200,7 +200,7 @@ function SceneLabel({ children }: { children: React.ReactNode }) {
 
 function SceneHeading({ sub, main }: { sub: string; main: React.ReactNode }) {
   return (
-    <div className="max-w-3xl mb-8 text-center">
+    <div className="max-w-3xl mx-auto mb-8 text-center">
       <SceneLabel>{sub}</SceneLabel>
       <h2
         className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight"
