@@ -33,27 +33,23 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 18;
+const TOTAL_FRAMES = 14;
 
 const SATELLITES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 18", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Satellite Platforms", label: "02 / 18", startFrame: 1, endFrame: 1 },
-  { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 18", startFrame: 2, endFrame: 2 },
-  { id: "high-end-bands", name: "High-End Bands", label: "04 / 18", startFrame: 3, endFrame: 3 },
-  { id: "first-principle", name: "First Principle of Design", label: "05 / 18", startFrame: 4, endFrame: 4 },
-  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 18", startFrame: 5, endFrame: 5 },
-  { id: "components", name: "Components & Architecture", label: "07 / 18", startFrame: 6, endFrame: 6 },
-  { id: "types", name: "Types of Satellites", label: "08 / 18", startFrame: 7, endFrame: 7 },
-  { id: "systems-map", name: "Systems Stress Mapping", label: "09 / 18", startFrame: 8, endFrame: 8 },
-  { id: "sensors", name: "Family of Sensors", label: "10 / 18", startFrame: 9, endFrame: 9 },
-  { id: "owl-bat", name: "The Owl and the Bat", label: "11 / 18", startFrame: 10, endFrame: 10 },
-  { id: "radar-work", name: "How Radar Works", label: "12 / 18", startFrame: 11, endFrame: 11 },
-  { id: "sar", name: "Synthetic Aperture Radar", label: "13 / 18", startFrame: 12, endFrame: 12 },
-  { id: "mission-config", name: "Mission Config", label: "14 / 18", startFrame: 13, endFrame: 13 },
-  { id: "nisar", name: "NISAR Mission", label: "15 / 18", startFrame: 14, endFrame: 14 },
-  { id: "payload", name: "Inside Radar Payload", label: "16 / 18", startFrame: 15, endFrame: 15 },
-  { id: "ecosystem", name: "Indian Ecosystem", label: "17 / 18", startFrame: 16, endFrame: 16 },
-  { id: "thesis", name: "The Thesis", label: "18 / 18", startFrame: 17, endFrame: 17 },
+  { id: "splash", name: "Splash Cover", label: "01 / 14", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Satellite Platforms", label: "02 / 14", startFrame: 1, endFrame: 1 },
+  { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 14", startFrame: 2, endFrame: 2 },
+  { id: "high-end-bands", name: "High-End Bands", label: "04 / 14", startFrame: 3, endFrame: 3 },
+  { id: "first-principle", name: "First Principle of Design", label: "05 / 14", startFrame: 4, endFrame: 4 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 14", startFrame: 5, endFrame: 5 },
+  { id: "components", name: "Components & Architecture", label: "07 / 14", startFrame: 6, endFrame: 6 },
+  { id: "types", name: "Types of Satellites", label: "08 / 14", startFrame: 7, endFrame: 7 },
+  { id: "systems-map", name: "Systems Stress Mapping", label: "09 / 14", startFrame: 8, endFrame: 8 },
+  { id: "radar-work", name: "How Radar Works", label: "10 / 14", startFrame: 9, endFrame: 9 },
+  { id: "sar", name: "Synthetic Aperture Radar", label: "11 / 14", startFrame: 10, endFrame: 10 },
+  { id: "payload", name: "Inside Radar Payload", label: "12 / 14", startFrame: 11, endFrame: 11 },
+  { id: "ecosystem", name: "Indian Ecosystem", label: "13 / 14", startFrame: 12, endFrame: 12 },
+  { id: "thesis", name: "The Thesis", label: "14 / 14", startFrame: 13, endFrame: 13 },
 ];
 
 const SLIDE_BASE =
@@ -2509,7 +2505,7 @@ export default function SatellitesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 18 frames
+  // Scroll transforms for 14 frames
   const SEG = 1 / TOTAL_FRAMES;
   const FADE_IN = 0.25 * SEG;
   const FADE_HOLD = 0.35 * SEG;
@@ -2556,20 +2552,8 @@ export default function SatellitesPage() {
   const s11Opacity = useTransform(progress, fr(12), FADE);
   const s11Y = useTransform(progress, fr(12), RISE);
 
-  const s12Opacity = useTransform(progress, fr(13), FADE);
-  const s12Y = useTransform(progress, fr(13), RISE);
-
-  const s13Opacity = useTransform(progress, fr(14), FADE);
-  const s13Y = useTransform(progress, fr(14), RISE);
-
-  const s14Opacity = useTransform(progress, fr(15), FADE);
-  const s14Y = useTransform(progress, fr(15), RISE);
-
-  const s15Opacity = useTransform(progress, fr(16), FADE);
-  const s15Y = useTransform(progress, fr(16), RISE);
-
-  const s16Opacity = useTransform(progress, [17 * SEG - FADE_IN, 17 * SEG, 1.0], [0, 1, 1]);
-  const s16Y = useTransform(progress, [17 * SEG - FADE_IN, 17 * SEG, 1.0], [24, 0, 0]);
+  const s12Opacity = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -2577,7 +2561,7 @@ export default function SatellitesPage() {
       <PresentationChrome controller={p} scenes={SATELLITES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1800vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -2591,7 +2575,7 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 6, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 6].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -2602,15 +2586,11 @@ export default function SatellitesPage() {
                 {currentFrameIndex === 6 && <Scene2MeetTheSatellite />}
                 {currentFrameIndex === 7 && <SceneTypesOfSatellites />}
                 {currentFrameIndex === 8 && <SceneSystemsMapping />}
-                {currentFrameIndex === 9 && <Scene5FamilyOfSensors />}
-                {currentFrameIndex === 10 && <Scene6OwlAndBat />}
-                {currentFrameIndex === 11 && <Scene7HowRadarWorks />}
-                {currentFrameIndex === 12 && <Scene8SyntheticApertureRadar />}
-                {currentFrameIndex === 13 && <Scene9MissionConfig />}
-                {currentFrameIndex === 14 && <Scene10NISAR />}
-                {currentFrameIndex === 15 && <Scene11InsideRadarPayload />}
-                {currentFrameIndex === 16 && <Scene12IndianEcosystem />}
-                {currentFrameIndex === 17 && <Scene13Thesis presentationActive />}
+                {currentFrameIndex === 9 && <Scene7HowRadarWorks />}
+                {currentFrameIndex === 10 && <Scene8SyntheticApertureRadar />}
+                {currentFrameIndex === 11 && <Scene11InsideRadarPayload />}
+                {currentFrameIndex === 12 && <Scene12IndianEcosystem />}
+                {currentFrameIndex === 13 && <Scene13Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -2699,11 +2679,11 @@ export default function SatellitesPage() {
 
               <motion.div
                 style={{ opacity: s8Opacity, y: s8Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene5FamilyOfSensors />
+                <Scene7HowRadarWorks />
               </motion.div>
 
               <motion.div
@@ -2712,7 +2692,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene6OwlAndBat />
+                <Scene8SyntheticApertureRadar />
               </motion.div>
 
               <motion.div
@@ -2721,7 +2701,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene7HowRadarWorks />
+                <Scene11InsideRadarPayload />
               </motion.div>
 
               <motion.div
@@ -2730,7 +2710,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene8SyntheticApertureRadar />
+                <Scene12IndianEcosystem />
               </motion.div>
 
               <motion.div
@@ -2739,46 +2719,15 @@ export default function SatellitesPage() {
                   currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene9MissionConfig />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s13Opacity, y: s13Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <Scene10NISAR />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s14Opacity, y: s14Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <Scene11InsideRadarPayload />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s15Opacity, y: s15Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 16 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <Scene12IndianEcosystem />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s16Opacity, y: s16Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 17 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
                 <Scene13Thesis presentationActive={false} />
               </motion.div>
             </>
           )}
+        </div>
+      </div>
+    </div>
+  );
+}
         </div>
       </div>
     </div>
