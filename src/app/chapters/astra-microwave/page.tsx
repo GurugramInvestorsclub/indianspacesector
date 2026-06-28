@@ -32,19 +32,21 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 10;
+const TOTAL_FRAMES = 12;
 
 const ASTRA_SCENES = [
-  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 10", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 10", startFrame: 1, endFrame: 1 },
-  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 10", startFrame: 2, endFrame: 2 },
-  { id: "entities", name: "Group Corporate Structure", label: "04 / 10", startFrame: 3, endFrame: 3 },
-  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 10", startFrame: 4, endFrame: 4 },
-  { id: "orderbook", name: "Standalone Order Book", label: "06 / 10", startFrame: 5, endFrame: 5 },
-  { id: "growth", name: "Key Growth Programs", label: "07 / 10", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Capital & Working Capital", label: "08 / 10", startFrame: 7, endFrame: 7 },
-  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 10", startFrame: 8, endFrame: 8 },
-  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 10", startFrame: 9, endFrame: 9 },
+  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 12", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 12", startFrame: 1, endFrame: 1 },
+  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 12", startFrame: 2, endFrame: 2 },
+  { id: "entities", name: "Group Corporate Structure", label: "04 / 12", startFrame: 3, endFrame: 3 },
+  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 12", startFrame: 4, endFrame: 4 },
+  { id: "orderbook", name: "Standalone Order Book", label: "06 / 12", startFrame: 5, endFrame: 5 },
+  { id: "growth", name: "Key Growth Programs", label: "07 / 12", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Capital & Working Capital", label: "08 / 12", startFrame: 7, endFrame: 7 },
+  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 12", startFrame: 8, endFrame: 8 },
+  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 12", startFrame: 9, endFrame: 9 },
+  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 12", startFrame: 10, endFrame: 10 },
+  { id: "thesis-matters", name: "Why This Matters", label: "12 / 12", startFrame: 11, endFrame: 11 },
 ];
 
 const SLIDE_BASE =
@@ -812,6 +814,179 @@ function SceneThesisCarveOut({ presentationActive = false }: { presentationActiv
   );
 }
 
+// 11. Demerger Carve-Out Thesis - Part 3: The Catalyst
+function SceneThesisCatalyst({ presentationActive = false }: { presentationActive?: boolean }) {
+  const timeline = [
+    { label: "2025", desc: "Demerger strategy initiated to unlock corporate equity." },
+    { label: "February 2026", desc: "Board approves in-principle demerger structure." },
+    { label: "June 2026", desc: "Shareholder approval obtained for the carve-out." },
+    { label: "Next Steps", desc: "Regulatory approvals (NCLT, SEBI clearances)." },
+    { label: "Expected Listing", desc: "Target listing by mid-FY28 (subject to clearances)." },
+  ];
+
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="10. THE CATALYST" main="The Market Is Finally Separating The Story" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full pointer-events-auto mt-4">
+          
+          {/* Left: Vertical Timeline */}
+          <div className="lg:col-span-6 relative flex flex-col pl-4 text-left">
+            <h4 className="font-mono text-[9px] text-[#FFB800] uppercase tracking-widest block mb-6 font-semibold animate-pulse">
+              Demerger Roadmap Milestones
+            </h4>
+
+            {/* Timeline container */}
+            <div className="relative border-l-2 border-white/10 pl-6 space-y-6 py-2">
+              {/* Vertical animating line */}
+              <motion.div
+                initial={{ height: 0 }}
+                animate={{ height: "100%" }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+                className="absolute left-[-2px] top-0 w-[2px] bg-gradient-to-b from-[#FFB800] via-[#1B4F72] to-transparent origin-top"
+              />
+
+              {timeline.map((t, idx) => (
+                <motion.div
+                  key={t.label}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 * idx, duration: 0.5 }}
+                  className="relative space-y-1"
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-[-31px] top-1.5 w-2.5 h-2.5 rounded-full bg-[#03030b] border-2 border-[#FFB800] shadow-[0_0_8px_#FFB800]" />
+                  
+                  <span className="font-mono text-xs text-[#FFB800] font-bold block">
+                    {t.label}
+                  </span>
+                  <p className="text-xs text-white/70 font-light leading-relaxed">
+                    {t.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Splitting image & Minimal Copy */}
+          <div className="lg:col-span-6 flex flex-col space-y-6">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a14]/60 shadow-[0_0_40px_rgba(0,0,0,0.8)] h-[220px] sm:h-[280px] group">
+              <img
+                src="/astra/astra_catalyst_split.png"
+                alt="Astra Microwave entity split illustration"
+                className="w-full h-full object-cover scale-[1.01] group-hover:scale-103 transition-transform duration-750 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03030b] via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 left-4 font-mono text-[8px] text-white/50 tracking-widest uppercase">
+                AMPL Demerger &mdash; Corporate Carve-out
+              </div>
+            </div>
+
+            <div className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 text-left space-y-3">
+              <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block font-semibold">
+                Strategic Rationale
+              </span>
+              <p className="text-xs text-white/80 leading-relaxed font-light">
+                Astra's space business will transition into <strong>Astra Space Technologies</strong>. Existing shareholders 
+                receive proportional ownership in the new pure-play entity, creating a strategic focus and allowing independent 
+                capital allocation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 12. Demerger Carve-Out Thesis - Part 4: Why This Matters
+function SceneThesisMatters({ presentationActive = false }: { presentationActive?: boolean }) {
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="11. WHY THIS MATTERS" main="Visibility Creates Value" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full pointer-events-auto mt-4">
+          
+          {/* Left Column: Quote Card & Highlighted Insight */}
+          <div className="lg:col-span-6 flex flex-col justify-between space-y-4 text-left">
+            {/* Elegant Quote Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-[#0a0a14]/60 border-l-4 border-[#FFB800] rounded-r-xl p-6 shadow-md space-y-4"
+            >
+              <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block font-semibold">
+                Management Stated Expectations
+              </span>
+              <blockquote className="text-sm text-white/90 italic font-light leading-relaxed">
+                &ldquo;The proposed restructuring aims to unlock shareholder value by positioning the space venture under 
+                a dedicated corporate structure, enabling targeted capital allocation and distinct market valuations.&rdquo;
+              </blockquote>
+              <cite className="block text-[10px] font-mono text-white/40 uppercase tracking-wider">
+                &mdash; Astra Microwave Management Commentary
+              </cite>
+            </motion.div>
+
+            {/* Highlighted Insight */}
+            <div className="bg-[#FFB800]/[0.02] border border-[#FFB800]/25 rounded-xl p-5 shadow-sm space-y-2">
+              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-wider block font-semibold">
+                Strategic Alignment
+              </span>
+              <p className="text-xs text-white/80 leading-relaxed font-light">
+                The demerger is intended to allow each business to pursue independent growth, align with distinct investor 
+                mandates, and optimize capital allocation on standalone merits.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Concept Graphic & Callout */}
+          <div className="lg:col-span-6 flex flex-col justify-between bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 shadow-2xl relative">
+            <div className="relative rounded-xl overflow-hidden border border-white/5 h-[180px] sm:h-[220px] mb-4">
+              <img
+                src="/astra/astra_valuation_lens.png"
+                alt="Astra valuation multiple lens"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03030b] via-transparent to-transparent pointer-events-none" />
+            </div>
+
+            <div className="bg-[#030308]/60 border border-white/5 rounded-xl p-4 text-left">
+              <span className="font-mono text-[8px] text-white/40 uppercase block tracking-wider mb-1">
+                Structural Thesis
+              </span>
+              <p className="text-[10px] text-white/50 leading-relaxed font-light">
+                Public markets frequently assign conglomerate discounts to blended companies. The demerger aims to resolve 
+                this by making Astra's high-margin space franchise directly visible to analysts and investors.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Ending Statement (Emotional Climax) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1.0 }}
+          className="mt-12 text-center border-t border-white/5 pt-8 max-w-2xl mx-auto space-y-2"
+        >
+          <p className="text-base sm:text-lg md:text-xl font-light text-white tracking-wide italic" style={{ fontFamily: "Georgia, serif" }}>
+            &ldquo;The business hasn&apos;t changed overnight. Only the lens through which investors may eventually view it.&rdquo;
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // MAIN CHAPTER PAGE
 // ---------------------------------------------------------------------------
@@ -854,8 +1029,14 @@ export default function AstraMicrowavePage() {
   const s8Opacity = useTransform(progress, fr(8), FADE);
   const s8Y = useTransform(progress, fr(8), RISE);
 
-  const s9Opacity = useTransform(progress, [9 * SEG - FADE_IN, 9 * SEG, 1.0], [0, 1, 1]);
-  const s9Y = useTransform(progress, [9 * SEG - FADE_IN, 9 * SEG, 1.0], [24, 0, 0]);
+  const s9Opacity = useTransform(progress, fr(9), FADE);
+  const s9Y = useTransform(progress, fr(9), RISE);
+
+  const s10Opacity = useTransform(progress, fr(10), FADE);
+  const s10Y = useTransform(progress, fr(10), RISE);
+
+  const s11Opacity = useTransform(progress, [11 * SEG - FADE_IN, 11 * SEG, 1.0], [0, 1, 1]);
+  const s11Y = useTransform(progress, [11 * SEG - FADE_IN, 11 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -863,7 +1044,7 @@ export default function AstraMicrowavePage() {
       <PresentationChrome controller={p} scenes={ASTRA_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1000vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1200vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -876,7 +1057,7 @@ export default function AstraMicrowavePage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 8, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 8, 9, 10, 11].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -888,6 +1069,8 @@ export default function AstraMicrowavePage() {
                 {currentFrameIndex === 7 && <SceneCapital />}
                 {currentFrameIndex === 8 && <SceneThesisSpace presentationActive={true} />}
                 {currentFrameIndex === 9 && <SceneThesisCarveOut presentationActive={true} />}
+                {currentFrameIndex === 10 && <SceneThesisCatalyst presentationActive={true} />}
+                {currentFrameIndex === 11 && <SceneThesisMatters presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -977,6 +1160,20 @@ export default function AstraMicrowavePage() {
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
               >
                 <SceneThesisCarveOut presentationActive={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s10Opacity, y: s10Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneThesisCatalyst presentationActive={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s11Opacity, y: s11Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneThesisMatters presentationActive={false} />
               </motion.div>
             </>
           )}
