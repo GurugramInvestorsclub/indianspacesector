@@ -2259,30 +2259,142 @@ function Scene11InsideRadarPayload() {
     { label: "TR Modules", note: "Steers and controls transmit/receive paths." },
     { label: "Phased Array", note: "Reflects and shapes the radar beam." },
   ];
+
+  const radarChainSteps = [
+    // Transmit Row (row: 1)
+    { id: "waveform", label: "Waveform", sub: "the chirp", cat: "proc", row: 1 },
+    { id: "sspa", label: "GaN SSPA", sub: "high-power amp", cat: "rf", row: 1 },
+    { id: "tr", label: "T/R modules", sub: "phased array", cat: "rf", row: 1 },
+    { id: "antenna", label: "Antenna", sub: "transmit + echo", cat: "rf", row: 1 },
+    // Receive Row (row: 2)
+    { id: "receiver", label: "Receiver", sub: "low-noise amp", cat: "proc", row: 2 },
+    { id: "digitiser", label: "Digitiser", sub: "samples", cat: "proc", row: 2 },
+    { id: "sar-proc", label: "SAR processor", sub: "synthesise image", cat: "proc", row: 2 },
+    { id: "downlink", label: "Downlink", sub: "to ground", cat: "down", row: 2 },
+  ];
+
   return (
     <>
       <SceneHeading sub="11. Hardware Stack" main="Inside the Radar Payload" />
-      <div className="w-full max-w-5xl z-10 flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="w-full max-w-5xl z-10 flex flex-col gap-4 text-left pointer-events-auto overflow-y-auto max-h-[78vh] px-1">
+        
+        {/* Synthetic-aperture radar chain Diagram */}
+        <div className="relative bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 sm:p-5 shadow-2xl overflow-hidden">
+          <div className="flex justify-between items-center mb-3">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block font-bold">
+              Synthetic-Aperture Radar Chain
+            </span>
+            <span className="font-mono text-[8px] text-white/40 tracking-wider">
+              RF FRONT-END VS SIGNAL PROCESSING PATHWAY
+            </span>
+          </div>
+
+          <div className="relative">
+            {/* Transmit Row */}
+            <div className="grid grid-cols-4 gap-4 items-center relative z-10 mb-8">
+              {radarChainSteps.filter(s => s.row === 1).map((step, idx) => (
+                <div key={step.id} className="flex items-center gap-2">
+                  <div
+                    className={`flex-grow rounded-xl p-2.5 border text-center font-mono transition-all ${
+                      step.cat === "rf"
+                        ? "bg-[#FFB800] text-black border-[#FFB800] shadow-[0_0_8px_rgba(255,184,0,0.15)]"
+                        : "bg-[#222230]/80 text-white/80 border-white/10"
+                    }`}
+                  >
+                    <div className="text-[10px] font-bold uppercase tracking-wider">{step.label}</div>
+                    <div className={`text-[7px] font-mono leading-tight ${step.cat === "rf" ? "text-black/60" : "text-white/40"}`}>
+                      {step.sub}
+                    </div>
+                  </div>
+                  {idx < 3 && <div className="text-white/20 text-xs shrink-0">&rarr;</div>}
+                </div>
+              ))}
+            </div>
+
+            {/* Connecting Loop Line */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+              <svg className="w-full h-full" viewBox="0 0 1000 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Horizontal flow line from Antenna down and back to Receiver */}
+                <path
+                  d="M 890 50 L 890 120 L 110 120 L 110 190"
+                  stroke="#FFB800"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 4"
+                  className="opacity-40"
+                />
+                {/* Arrowhead */}
+                <polygon points="110,190 105,178 115,178" fill="#FFB800" className="opacity-40" />
+                <text
+                  x="500"
+                  y="114"
+                  fill="rgba(255, 184, 0, 0.6)"
+                  className="text-[9px] font-mono"
+                  textAnchor="middle"
+                >
+                  pulse &darr; ground &uarr; echo
+                </text>
+              </svg>
+            </div>
+
+            {/* Receive Row */}
+            <div className="grid grid-cols-4 gap-4 items-center relative z-10">
+              {radarChainSteps.filter(s => s.row === 2).map((step, idx) => (
+                <div key={step.id} className="flex items-center gap-2">
+                  <div
+                    className={`flex-grow rounded-xl p-2.5 border text-center font-mono transition-all ${
+                      step.cat === "proc"
+                        ? "bg-[#222230]/80 text-white/80 border-white/10"
+                        : "bg-[#11111d] text-white/40 border-white/5"
+                    }`}
+                  >
+                    <div className="text-[10px] font-bold uppercase tracking-wider">{step.label}</div>
+                    <div className="text-[7px] text-white/40 font-mono leading-tight">{step.sub}</div>
+                  </div>
+                  {idx < 3 && <div className="text-white/20 text-xs shrink-0">&rarr;</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Legends */}
+          <div className="flex items-center justify-start gap-5 mt-4 pt-2.5 border-t border-white/5 font-mono text-[8px] uppercase text-white/40">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded bg-[#FFB800] inline-block" />
+              <span>RF front-end &mdash; the moat</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded bg-[#222230] border border-white/10 inline-block" />
+              <span>signal processing</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded bg-[#11111d] border border-white/5 inline-block" />
+              <span>downlink</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Existing Content: Detail Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {chain.map((v, i) => (
             <div
               key={v.label}
-              className="bg-[#0a0a14]/80 border border-[#FFB800]/15 rounded-2xl p-5 text-left flex flex-col justify-between min-h-[160px]"
+              className="bg-[#0a0a14]/80 border border-white/5 hover:border-[#FFB800]/20 rounded-2xl p-4 text-left flex flex-col justify-between transition-colors"
             >
               <div>
-                <span className="font-mono text-xs text-[#FFB800] block mb-2">0{i + 1}</span>
-                <h3 className="text-sm font-bold text-white mb-2">{v.label}</h3>
-                <p className="text-[10px] text-white/60 leading-relaxed">{v.note}</p>
+                <span className="font-mono text-[9px] text-[#FFB800] block mb-1 font-bold">STAGE 0{i + 1}</span>
+                <h3 className="text-xs font-bold text-white mb-1.5">{v.label}</h3>
+                <p className="text-[10px] text-white/65 leading-relaxed font-light">{v.note}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="bg-[#0a0a14]/60 border border-[#FFB800]/5 rounded-2xl p-5 text-left flex items-start gap-4">
-          <Cpu className="w-5 h-5 text-[#FFB800] shrink-0 mt-0.5" />
-          <p className="text-xs text-white/70 leading-relaxed">
-            <span className="text-white font-bold">Hardware Challenge: </span>
-            A radar payload demands extreme power. The **Power Amplifiers** must boost radar chirp signals to several kilowatts, and the **TR (Transmit/Receive) Modules** must steer the beam electronically in microseconds without moving parts.
+        {/* Existing CPU Warning Box */}
+        <div className="bg-[#0a0a14]/60 border border-[#FFB800]/5 rounded-2xl p-4 text-left flex items-start gap-4">
+          <Cpu className="w-4 h-4 text-[#FFB800] shrink-0 mt-0.5" />
+          <p className="text-[10px] sm:text-xs text-white/70 leading-relaxed font-light">
+            <span className="text-white font-bold font-mono text-[10px] uppercase tracking-wider block mb-1">Hardware Constraints</span>
+            A radar payload demands extreme power. The **Power Amplifiers** (GaN SSPA) must boost radar chirp signals to several kilowatts, and the **TR (Transmit/Receive) Modules** must steer the beam electronically in microseconds without moving parts.
           </p>
         </div>
       </div>
