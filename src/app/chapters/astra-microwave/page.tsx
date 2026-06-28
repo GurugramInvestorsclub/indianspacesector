@@ -241,9 +241,9 @@ function SceneFinancials({ active }: { active: boolean }) {
       <div className="my-auto w-full flex flex-col gap-6 select-text">
         <SceneHeading sub="02. PERFORMANCE RECORD" main="Consolidated Financial Journey" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl mx-auto items-start pointer-events-auto">
+        <div className="w-full max-w-4xl mx-auto pointer-events-auto">
           {/* Table Container */}
-          <div className="lg:col-span-8 bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left shadow-xl">
+          <div className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left shadow-xl">
             <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3">
               Table 1. Consolidated Profit &amp; Loss, last 5 years (Rs Crore)
             </h3>
@@ -260,30 +260,6 @@ function SceneFinancials({ active }: { active: boolean }) {
               </thead>
               <FinTableRows rows={plRows} />
             </table>
-          </div>
-
-          {/* Interactive Highlights Panel */}
-          <div className="lg:col-span-4 flex flex-col gap-4 text-left">
-            <div className="bg-[#0a0a14]/60 border border-[#1B4F72]/20 rounded-xl p-5 shadow-2xl relative overflow-hidden">
-              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-wider block mb-1">
-                EBITDA Margin Growth
-              </span>
-              <span className="text-4xl font-extrabold text-[#FFB800] block mt-1">
-                28.7%
-              </span>
-              <span className="text-[10px] text-white/50 leading-relaxed font-light block mt-1">
-                Triple the margin of 11.9% in FY22, as the business shifted towards high-value indigenous defense work.
-              </span>
-            </div>
-
-            <div className="bg-[#0a0a12] border border-white/5 rounded-xl p-4">
-              <span className="font-mono text-[8px] text-white/40 uppercase block tracking-wider mb-2">
-                Demerger Structuring Context
-              </span>
-              <p className="text-[10px] text-white/60 leading-relaxed font-light">
-                The gap between consolidated revenue (₹1,163 cr) and standalone revenue (₹1,156 cr) is only ₹7 crore. Wholly-owned subsidiaries are small, and the largest JV (Astra Rafael Comsys) is equity-accounted, keeping its revenues off the top line.
-              </p>
-            </div>
           </div>
         </div>
       </div>

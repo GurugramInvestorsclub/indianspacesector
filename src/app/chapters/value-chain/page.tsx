@@ -117,7 +117,7 @@ const DETAILED_STAGES = [
     id: "satellites",
     name: "Satellites",
     value: "Upstream",
-    companies: "Dhruva Space, XDLINX, PierSight",
+    companies: "Dhruva Space, XDLINX, PierSight, Astra Microwave, Centum Electronics",
     valueCreated: "Custom spacecraft bus construction and payload integration.",
     opportunity: "$32B satellite assembly pipelines globally.",
     icon: Factory,
@@ -235,7 +235,7 @@ function SceneLabel({ children }: { children: React.ReactNode }) {
 
 function SceneHeading({ sub, main }: { sub: string; main: React.ReactNode }) {
   return (
-    <div className="max-w-3xl mb-8 text-center">
+    <div className="max-w-3xl mb-8 text-center mx-auto">
       <SceneLabel>{sub}</SceneLabel>
       <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight uppercase">
         {main}
