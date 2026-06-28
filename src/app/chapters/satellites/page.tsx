@@ -39,8 +39,8 @@ const SATELLITES_SCENES = [
   { id: "splash", name: "Splash Cover", label: "01 / 16", startFrame: 0, endFrame: 0 },
   { id: "hero", name: "Satellite Platforms", label: "02 / 16", startFrame: 1, endFrame: 1 },
   { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 16", startFrame: 2, endFrame: 2 },
-  { id: "first-principle", name: "First Principle of Design", label: "04 / 16", startFrame: 3, endFrame: 3 },
-  { id: "high-end-bands", name: "High-End Bands", label: "05 / 16", startFrame: 4, endFrame: 4 },
+  { id: "high-end-bands", name: "High-End Bands", label: "04 / 16", startFrame: 3, endFrame: 3 },
+  { id: "first-principle", name: "First Principle of Design", label: "05 / 16", startFrame: 4, endFrame: 4 },
   { id: "bus-payload", name: "Bus vs Payload", label: "06 / 16", startFrame: 5, endFrame: 5 },
   { id: "components", name: "Components & Architecture", label: "07 / 16", startFrame: 6, endFrame: 6 },
   { id: "sensors", name: "Family of Sensors", label: "08 / 16", startFrame: 7, endFrame: 7 },
@@ -2110,8 +2110,8 @@ export default function SatellitesPage() {
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
                 {currentFrameIndex === 2 && <SceneMicrowaveBands />}
-                {currentFrameIndex === 3 && <Scene4FirstPrinciple />}
-                {currentFrameIndex === 4 && <SceneHighEndBands />}
+                {currentFrameIndex === 3 && <SceneHighEndBands />}
+                {currentFrameIndex === 4 && <Scene4FirstPrinciple />}
                 {currentFrameIndex === 5 && <Scene3BusVsPayload />}
                 {currentFrameIndex === 6 && <Scene2MeetTheSatellite />}
                 {currentFrameIndex === 7 && <Scene5FamilyOfSensors />}
@@ -2161,7 +2161,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene4FirstPrinciple />
+                <SceneHighEndBands />
               </motion.div>
 
               <motion.div
@@ -2170,7 +2170,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneHighEndBands />
+                <Scene4FirstPrinciple />
               </motion.div>
 
               <motion.div

@@ -30,24 +30,23 @@ import {
 // CONSTANTS & STRUCTURES
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 15;
+const TOTAL_FRAMES = 14;
 
 const LAUNCH_VEHICLES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 15", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Rocketry Evolution", label: "02 / 15", startFrame: 1, endFrame: 1 },
-  { id: "sounding", name: "Action & Reaction", label: "03 / 15", startFrame: 2, endFrame: 2 },
-  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "04 / 15", startFrame: 3, endFrame: 3 },
-  { id: "staging", name: "Multi-Stage Efficiency", label: "05 / 15", startFrame: 4, endFrame: 4 },
-  { id: "chemistry", name: "Chemistry of Rockets", label: "06 / 15", startFrame: 5, endFrame: 5 },
-  { id: "timeline", name: "ISRO Launcher Evolution", label: "07 / 15", startFrame: 6, endFrame: 6 },
-  { id: "pslv", name: "PSLV Case Study", label: "08 / 15", startFrame: 7, endFrame: 7 },
-  { id: "reusability", name: "Economics of Reusability", label: "09 / 15", startFrame: 8, endFrame: 8 },
-  { id: "reentry", name: "Reentry Profiles", label: "10 / 15", startFrame: 9, endFrame: 9 },
-  { id: "methalox", name: "The Methalox Transition", label: "11 / 15", startFrame: 10, endFrame: 10 },
-  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "12 / 15", startFrame: 11, endFrame: 11 },
-  { id: "cost", name: "Cost of Space Flight", label: "13 / 15", startFrame: 12, endFrame: 12 },
-  { id: "consequence", name: "Consequence", label: "14 / 15", startFrame: 13, endFrame: 13 },
-  { id: "climax", name: "The Frontier Awaits", label: "15 / 15", startFrame: 14, endFrame: 14 },
+  { id: "splash", name: "Splash Cover", label: "01 / 14", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Rocketry Evolution", label: "02 / 14", startFrame: 1, endFrame: 1 },
+  { id: "sounding", name: "Action & Reaction", label: "03 / 14", startFrame: 2, endFrame: 2 },
+  { id: "mass-tyranny", name: "Tyranny of Rocket Equation", label: "04 / 14", startFrame: 3, endFrame: 3 },
+  { id: "staging", name: "Multi-Stage Efficiency", label: "05 / 14", startFrame: 4, endFrame: 4 },
+  { id: "chemistry", name: "Chemistry of Rockets", label: "06 / 14", startFrame: 5, endFrame: 5 },
+  { id: "timeline", name: "ISRO Launcher Evolution", label: "07 / 14", startFrame: 6, endFrame: 6 },
+  { id: "pslv", name: "PSLV Case Study", label: "08 / 14", startFrame: 7, endFrame: 7 },
+  { id: "cost", name: "Cost of Space Flight", label: "09 / 14", startFrame: 8, endFrame: 8 },
+  { id: "consequence", name: "Consequence", label: "10 / 14", startFrame: 9, endFrame: 9 },
+  { id: "reentry", name: "Reentry Profiles", label: "11 / 14", startFrame: 10, endFrame: 10 },
+  { id: "methalox", name: "The Methalox Transition", label: "12 / 14", startFrame: 11, endFrame: 11 },
+  { id: "next-gen", name: "Next-Gen Launch Vehicle", label: "13 / 14", startFrame: 12, endFrame: 12 },
+  { id: "climax", name: "The Frontier Awaits", label: "14 / 14", startFrame: 13, endFrame: 13 },
 ];
 const SLIDE_BASE =
   "absolute inset-0 flex flex-col items-center justify-center z-10 px-4 sm:px-6 max-w-7xl mx-auto w-full h-full";
@@ -753,46 +752,7 @@ function Scene7PSLVCaseStudy() {
   );
 }
 
-// 9. REUSABILITY ECONOMICS
-function Scene8ReusabilityEconomics() {
-  return (
-    <>
-      <SceneHeading sub="08. Space Economics" main="The Cost of Throwing Rockets Away" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full max-w-6xl z-10">
-        <div className="lg:col-span-5 flex items-center justify-center bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 min-h-[350px]">
-          <div className="w-full flex flex-col gap-6">
-            <div className="bg-red-500/5 border border-red-500/20 p-5 rounded-xl text-left">
-              <span className="font-mono text-[9px] uppercase text-red-400 font-bold block mb-1">Expended Launch</span>
-              <div className="text-2xl font-black text-red-500 font-mono">$60,000,000</div>
-              <p className="text-[10px] text-white/50 leading-relaxed mt-2 font-mono">Booster discarded into the ocean. Entire rocket built from scratch for next flight.</p>
-            </div>
-            
-            <div className="bg-emerald-500/5 border border-emerald-500/20 p-5 rounded-xl text-left">
-              <span className="font-mono text-[9px] uppercase text-emerald-400 font-bold block mb-1">Reusable Launch</span>
-              <div className="text-2xl font-black text-emerald-500 font-mono">$10,000,000</div>
-              <p className="text-[10px] text-white/50 leading-relaxed mt-2 font-mono">Booster lands and is refurbished. Fuel cost is only ~$200,000.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7 text-left flex flex-col justify-center">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-2 font-bold">
-            The Airliner Metaphor
-          </span>
-          <h3 className="text-xl font-bold text-white mb-4">Why Reusability Matters</h3>
-          <p className="text-sm text-white/70 leading-relaxed mb-6">
-            Imagine purchasing a commercial Boeing 777 passenger airliner, flying it once from London to New York, and immediately throwing the airplane into the Atlantic Ocean, requiring a brand new airliner for the return trip. This was how global space flight was operated for 60 years.
-          </p>
-          <ProblemSolutionAccordion
-            isChallenge
-            problem="To return a booster safely, you must keep fuel in reserve to slow down. That reserved fuel is mass that cannot be used for cargo. Landing a booster demands extreme structural and navigation precision."
-            solution="Dynamic throttle engines, deployable landing legs, and titanium grid fins. By executing hyper-precise retro-propulsive burns and aerodynamic steering, the booster lands safely on land or at sea."
-          />
-        </div>
-      </div>
-    </>
-  );
-}
+// 10. REUSABLE REENTRY
 
 // 10. REUSABLE REENTRY
 const REENTRY_BACKGROUNDS = [
@@ -1958,7 +1918,7 @@ export default function LaunchVehiclesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 15 frames
+  // Scroll transforms for 14 frames
   const SEG = 1 / TOTAL_FRAMES;
   const FADE_IN = 0.25 * SEG;
   const FADE_HOLD = 0.35 * SEG;
@@ -1966,7 +1926,7 @@ export default function LaunchVehiclesPage() {
   const FADE = [0, 1, 1, 0];
   const RISE = [24, 0, 0, -24];
 
-  const s0SplashOpacity = useTransform(progress, [0.0, 0.05, SEG], [1, 1, 0]);
+  const s0SplashOpacity = useTransform(progress, [0.0, 0.04, SEG], [1, 1, 0]);
   const s0SplashScale = useTransform(progress, [0.0, SEG], [1, 0.96]);
 
   const s0Opacity = useTransform(progress, [0.05, SEG, 2 * SEG - FADE_HOLD, 2 * SEG], FADE);
@@ -2005,11 +1965,8 @@ export default function LaunchVehiclesPage() {
   const s12Opacity = useTransform(progress, fr(12), FADE);
   const s12Y = useTransform(progress, fr(12), RISE);
 
-  const s13Opacity = useTransform(progress, fr(13), FADE);
-  const s13Y = useTransform(progress, fr(13), RISE);
-
-  const s14Opacity = useTransform(progress, [14 * SEG - FADE_IN, 14 * SEG, 1.0], [0, 1, 1]);
-  const s14Y = useTransform(progress, [14 * SEG - FADE_IN, 14 * SEG, 1.0], [24, 0, 0]);
+  const s13Opacity = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [0, 1, 1]);
+  const s13Y = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -2017,7 +1974,7 @@ export default function LaunchVehiclesPage() {
       <PresentationChrome controller={p} scenes={LAUNCH_VEHICLES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1500vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -2031,7 +1988,7 @@ export default function LaunchVehiclesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 5, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
+                className={`${[0, 5, 10].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
@@ -2041,13 +1998,12 @@ export default function LaunchVehiclesPage() {
                 {currentFrameIndex === 5 && <Scene5Chemistry />}
                 {currentFrameIndex === 6 && <Scene6TimelineMapping />}
                 {currentFrameIndex === 7 && <Scene7PSLVCaseStudy />}
-                {currentFrameIndex === 8 && <Scene8ReusabilityEconomics />}
-                {currentFrameIndex === 9 && <Scene9ReentryProfile />}
-                {currentFrameIndex === 10 && <Scene10MethaloxEra />}
-                {currentFrameIndex === 11 && <Scene11NextFrontier />}
-                {currentFrameIndex === 12 && <SceneCostOfSpaceFlight />}
-                {currentFrameIndex === 13 && <SceneConsequence />}
-                {currentFrameIndex === 14 && <Scene12Climax presentationActive />}
+                {currentFrameIndex === 8 && <SceneCostOfSpaceFlight />}
+                {currentFrameIndex === 9 && <SceneConsequence />}
+                {currentFrameIndex === 10 && <Scene9ReentryProfile />}
+                {currentFrameIndex === 11 && <Scene10MethaloxEra />}
+                {currentFrameIndex === 12 && <Scene11NextFrontier />}
+                {currentFrameIndex === 13 && <Scene12Climax presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -2131,25 +2087,25 @@ export default function LaunchVehiclesPage() {
                   currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene8ReusabilityEconomics />
+                <SceneCostOfSpaceFlight />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s9Opacity, y: s9Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene9ReentryProfile />
+                <SceneConsequence />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s10Opacity, y: s10Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene10MethaloxEra />
+                <Scene9ReentryProfile />
               </motion.div>
 
               <motion.div
@@ -2158,7 +2114,7 @@ export default function LaunchVehiclesPage() {
                   currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene11NextFrontier />
+                <Scene10MethaloxEra />
               </motion.div>
 
               <motion.div
@@ -2167,22 +2123,13 @@ export default function LaunchVehiclesPage() {
                   currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <SceneCostOfSpaceFlight />
+                <Scene11NextFrontier />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s13Opacity, y: s13Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <SceneConsequence />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s14Opacity, y: s14Y }}
-                className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene12Climax presentationActive={false} />
