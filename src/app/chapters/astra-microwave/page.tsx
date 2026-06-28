@@ -36,22 +36,23 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 13;
+const TOTAL_FRAMES = 14;
 
 const ASTRA_SCENES = [
-  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 13", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 13", startFrame: 1, endFrame: 1 },
-  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 13", startFrame: 2, endFrame: 2 },
-  { id: "entities", name: "Group Corporate Structure", label: "04 / 13", startFrame: 3, endFrame: 3 },
-  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 13", startFrame: 4, endFrame: 4 },
-  { id: "orderbook", name: "Standalone Order Book", label: "06 / 13", startFrame: 5, endFrame: 5 },
-  { id: "growth", name: "Key Growth Programs", label: "07 / 13", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Capital & Working Capital", label: "08 / 13", startFrame: 7, endFrame: 7 },
-  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 13", startFrame: 8, endFrame: 8 },
-  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 13", startFrame: 9, endFrame: 9 },
-  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 13", startFrame: 10, endFrame: 10 },
-  { id: "thesis-matters", name: "Why This Matters", label: "12 / 13", startFrame: 11, endFrame: 11 },
-  { id: "thesis-road", name: "The Road to Two Companies", label: "13 / 13", startFrame: 12, endFrame: 12 },
+  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 14", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 14", startFrame: 1, endFrame: 1 },
+  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 14", startFrame: 2, endFrame: 2 },
+  { id: "entities", name: "Group Corporate Structure", label: "04 / 14", startFrame: 3, endFrame: 3 },
+  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 14", startFrame: 4, endFrame: 4 },
+  { id: "orderbook", name: "Standalone Order Book", label: "06 / 14", startFrame: 5, endFrame: 5 },
+  { id: "growth", name: "Key Growth Programs", label: "07 / 14", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Capital & Working Capital", label: "08 / 14", startFrame: 7, endFrame: 7 },
+  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 14", startFrame: 8, endFrame: 8 },
+  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 14", startFrame: 9, endFrame: 9 },
+  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 14", startFrame: 10, endFrame: 10 },
+  { id: "thesis-matters", name: "Why This Matters", label: "12 / 14", startFrame: 11, endFrame: 11 },
+  { id: "thesis-road", name: "The Road to Two Companies", label: "13 / 14", startFrame: 12, endFrame: 12 },
+  { id: "listed-peers", name: "Listed Peers", label: "14 / 14", startFrame: 13, endFrame: 13 },
 ];
 
 const SLIDE_BASE =
@@ -1138,6 +1139,105 @@ function SceneRoadToTwoCompanies({ presentationActive = false }: { presentationA
   );
 }
 
+// 14. LISTED PEERS
+const PEER_MULTIPLE_DATA = [
+  { company: "Hindustan Aeronautics (HAL)", multiple: "17.3", isBold: false },
+  { company: "Mazagon Dock", multiple: "24.1", isBold: false },
+  { company: "Cochin Shipyard", multiple: "31.1", isBold: false },
+  { company: "Bharat Electronics (BEL)", multiple: "33.8", isBold: false },
+  { company: "Astra Microwave (blended, today)", multiple: "36.4", isGold: true },
+  { company: "Aerospace & Defence, sector median", multiple: "47.6", isBold: true, isMedian: true },
+  { company: "Zen Technologies", multiple: "48.3", isBold: false },
+  { company: "Paras Defence", multiple: "51.1", isBold: false },
+  { company: "Apollo Micro", multiple: "68.5", isBold: false },
+  { company: "Avantel", multiple: "93.3", isBold: false },
+  { company: "MTAR Technologies", multiple: "127.1", isBold: false },
+];
+
+function SceneListedPeers() {
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-4xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="13. COMPARABLE VALUATIONS" main="Listed Peers" />
+        <p className="text-xs text-white/50 text-center max-w-xl mx-auto mb-6">
+          Comparing Astra's current blended trailing multiple with listed defense, aerospace, and space technology peers.
+        </p>
+
+        <div className="bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 backdrop-blur-sm shadow-2xl text-left pointer-events-auto max-w-2xl mx-auto w-full mb-6">
+          <div className="overflow-x-auto max-h-[48vh] overflow-y-auto pr-1">
+            <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-4">
+              Table 9. Listed peer EV/EBITDA, the anchor (trailing, x)
+            </h3>
+            <table className="w-full text-left font-mono text-[11px] text-white/80 border-collapse">
+              <thead>
+                <tr className="border-b border-white/10 text-white font-bold uppercase text-[9px] tracking-wider">
+                  <th className="py-2.5 pr-4">Company</th>
+                  <th className="py-2.5 pl-4 text-right">EV/EBITDA (TTM)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.04]">
+                {PEER_MULTIPLE_DATA.map((row, idx) => {
+                  const isGold = row.isGold;
+                  const isMedian = row.isMedian;
+                  return (
+                    <tr
+                      key={idx}
+                      className={`transition-colors ${
+                        isGold
+                          ? "bg-[#FFB800]/[0.08] text-white font-bold"
+                          : isMedian
+                          ? "bg-white/[0.03] text-white font-semibold"
+                          : "hover:bg-white/[0.01]"
+                      }`}
+                    >
+                      <td className="py-2 px-1 text-white/90">
+                        {isGold ? (
+                          <span className="text-[#FFB800] font-bold">{row.company}</span>
+                        ) : (
+                          row.company
+                        )}
+                      </td>
+                      <td
+                        className={`py-2 px-1 text-right font-bold ${
+                          isGold ? "text-[#FFB800]" : "text-white"
+                        }`}
+                      >
+                        {row.multiple}x
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Sources Footer */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-white/10 pt-4 mt-2 text-[9px] text-white/40 leading-relaxed font-light text-left pointer-events-auto">
+          <div className="lg:col-span-7 space-y-2 border-r border-white/5 pr-4">
+            <div>
+              <span className="font-mono text-white/50 font-bold">SOURCE: </span>
+              <span>Publicly available market valuations and Bloomberg/CapitalIQ trailing multiples.</span>
+            </div>
+            <div>
+              <span className="font-mono text-white/50 font-bold">METRIC: </span>
+              <span>EV/EBITDA is calculated using trailing twelve months (TTM) enterprise value and EBITDA.</span>
+            </div>
+          </div>
+          <div className="lg:col-span-5 pl-0 lg:pl-4">
+            <span className="font-mono text-white/50 font-bold block mb-1">NOTE:</span>
+            <p>
+              Aerospace & Defence sector median is calculated across listed Indian enterprises. Trailing multiples reflect trailing earnings as of mid-2026.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AstraMicrowavePage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
@@ -1185,8 +1285,11 @@ export default function AstraMicrowavePage() {
   const s11Opacity = useTransform(progress, fr(11), FADE);
   const s11Y = useTransform(progress, fr(11), RISE);
 
-  const s12Opacity = useTransform(progress, [12 * SEG - FADE_IN, 12 * SEG, 1.0], [0, 1, 1]);
-  const s12Y = useTransform(progress, [12 * SEG - FADE_IN, 12 * SEG, 1.0], [24, 0, 0]);
+  const s12Opacity = useTransform(progress, fr(12), FADE);
+  const s12Y = useTransform(progress, fr(12), RISE);
+
+  const s13Opacity = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [0, 1, 1]);
+  const s13Y = useTransform(progress, [13 * SEG - FADE_IN, 13 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1194,7 +1297,7 @@ export default function AstraMicrowavePage() {
       <PresentationChrome controller={p} scenes={ASTRA_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1400vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1207,7 +1310,7 @@ export default function AstraMicrowavePage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 8, 9, 10, 11, 12].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 8, 9, 10, 11, 12, 13].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -1222,6 +1325,7 @@ export default function AstraMicrowavePage() {
                 {currentFrameIndex === 10 && <SceneThesisCatalyst presentationActive={true} />}
                 {currentFrameIndex === 11 && <SceneThesisMatters presentationActive={true} />}
                 {currentFrameIndex === 12 && <SceneRoadToTwoCompanies presentationActive={true} />}
+                {currentFrameIndex === 13 && <SceneListedPeers />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1332,6 +1436,13 @@ export default function AstraMicrowavePage() {
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
               >
                 <SceneRoadToTwoCompanies presentationActive={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s13Opacity, y: s13Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneListedPeers />
               </motion.div>
             </>
           )}
