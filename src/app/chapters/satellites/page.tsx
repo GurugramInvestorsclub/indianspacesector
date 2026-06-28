@@ -33,24 +33,25 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 15;
+const TOTAL_FRAMES = 16;
 
 const SATELLITES_SCENES = [
-  { id: "splash", name: "Splash Cover", label: "01 / 15", startFrame: 0, endFrame: 0 },
-  { id: "hero", name: "Satellite Platforms", label: "02 / 15", startFrame: 1, endFrame: 1 },
-  { id: "what-is", name: "What is a Satellite?", label: "03 / 15", startFrame: 2, endFrame: 2 },
-  { id: "components", name: "Components & Architecture", label: "04 / 15", startFrame: 3, endFrame: 3 },
-  { id: "bus-payload", name: "Bus vs Payload", label: "05 / 15", startFrame: 4, endFrame: 4 },
-  { id: "orbit", name: "First Principle of Orbit", label: "06 / 15", startFrame: 5, endFrame: 5 },
-  { id: "sensors", name: "Family of Sensors", label: "07 / 15", startFrame: 6, endFrame: 6 },
-  { id: "owl-bat", name: "The Owl and the Bat", label: "08 / 15", startFrame: 7, endFrame: 7 },
-  { id: "radar-work", name: "How Radar Works", label: "09 / 15", startFrame: 8, endFrame: 8 },
-  { id: "sar", name: "Synthetic Aperture Radar", label: "10 / 15", startFrame: 9, endFrame: 9 },
-  { id: "mission-config", name: "Mission Config", label: "11 / 15", startFrame: 10, endFrame: 10 },
-  { id: "nisar", name: "NISAR Mission", label: "12 / 15", startFrame: 11, endFrame: 11 },
-  { id: "payload", name: "Inside Radar Payload", label: "13 / 15", startFrame: 12, endFrame: 12 },
-  { id: "ecosystem", name: "Indian Ecosystem", label: "14 / 15", startFrame: 13, endFrame: 13 },
-  { id: "thesis", name: "The Thesis", label: "15 / 15", startFrame: 14, endFrame: 14 },
+  { id: "splash", name: "Splash Cover", label: "01 / 16", startFrame: 0, endFrame: 0 },
+  { id: "hero", name: "Satellite Platforms", label: "02 / 16", startFrame: 1, endFrame: 1 },
+  { id: "high-end-bands", name: "High-End Bands", label: "03 / 16", startFrame: 2, endFrame: 2 },
+  { id: "what-is", name: "What is a Satellite?", label: "04 / 16", startFrame: 3, endFrame: 3 },
+  { id: "components", name: "Components & Architecture", label: "05 / 16", startFrame: 4, endFrame: 4 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 16", startFrame: 5, endFrame: 5 },
+  { id: "orbit", name: "First Principle of Orbit", label: "07 / 16", startFrame: 6, endFrame: 6 },
+  { id: "sensors", name: "Family of Sensors", label: "08 / 16", startFrame: 7, endFrame: 7 },
+  { id: "owl-bat", name: "The Owl and the Bat", label: "09 / 16", startFrame: 8, endFrame: 8 },
+  { id: "radar-work", name: "How Radar Works", label: "10 / 16", startFrame: 9, endFrame: 9 },
+  { id: "sar", name: "Synthetic Aperture Radar", label: "11 / 16", startFrame: 10, endFrame: 10 },
+  { id: "mission-config", name: "Mission Config", label: "12 / 16", startFrame: 11, endFrame: 11 },
+  { id: "nisar", name: "NISAR Mission", label: "13 / 16", startFrame: 12, endFrame: 12 },
+  { id: "payload", name: "Inside Radar Payload", label: "14 / 16", startFrame: 13, endFrame: 13 },
+  { id: "ecosystem", name: "Indian Ecosystem", label: "15 / 16", startFrame: 14, endFrame: 14 },
+  { id: "thesis", name: "The Thesis", label: "16 / 16", startFrame: 15, endFrame: 15 },
 ];
 
 const SLIDE_BASE =
@@ -227,8 +228,26 @@ function Scene0Splash({ presentationActive }: { presentationActive: boolean }) {
   );
 }
 
-// 1. HERO
+// 1. HERO / SPECTRUM
 function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
+  const [activeBand, setActiveBand] = useState<string>("Microwave");
+
+  const bands = [
+    { name: "Radio", isHighlight: false, desc: "Long-range communication and deep space telemetry." },
+    { name: "Microwave", isHighlight: true, desc: "Talk to the ground, GPS, and radar that sees through cloud." },
+    { name: "Infrared", isHighlight: true, desc: "Heat and thermal sensing, atmospheric profiling." },
+    { name: "Visible", isHighlight: true, desc: "Ordinary optical cameras, panchromatic and multispectral imaging." },
+    { name: "UV", isHighlight: false, desc: "Solar radiation monitoring and stellar atmosphere studies." },
+    { name: "X-ray", isHighlight: false, desc: "High-energy astrophysics and cosmic source detection." },
+    { name: "Gamma", isHighlight: false, desc: "Nuclear detection, solar flare events, cosmic burst alerts." },
+  ];
+
+  const highlights = [
+    { label: "Microwave", text: "talk to the ground, GPS, and radar that sees through cloud" },
+    { label: "Infrared", text: "heat and thermal sensing" },
+    { label: "Visible light", text: "ordinary optical cameras" },
+  ];
+
   return (
     <>
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -242,47 +261,216 @@ function Scene0Hero({ presentationActive }: { presentationActive: boolean }) {
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl flex flex-col items-center text-center">
-        <SceneLabel>Chapter XIV. Satellites</SceneLabel>
+      <div className="relative z-10 max-w-4xl flex flex-col text-left px-6 py-8 pointer-events-auto w-full">
+        {/* Subtitle / Category */}
+        <span className="font-mono text-[9px] font-bold tracking-widest text-[#FFB800] uppercase mb-2 block">
+          First Principle &middot; One Wave, Many Slices
+        </span>
 
+        {/* Title */}
         <h1
-          className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white leading-none uppercase mb-6"
+          className="text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-2 uppercase"
           style={{ fontFamily: "Georgia, serif" }}
         >
-          The Machines
-          <br />
-          <span className="text-[#FFB800]">That Never Blink</span>
+          It is all electromagnetic waves
         </h1>
 
-        <p className="text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed mb-10 font-light">
-          Every weather forecast, navigation system, disaster warning, military image and communication network begins with a silent machine orbiting hundreds of kilometres above Earth.
+        {/* Lead text */}
+        <p className="text-xs sm:text-sm text-white/60 font-light leading-relaxed mb-6">
+          A satellite just picks a slice of the spectrum to send, reflect, or listen to.
         </p>
 
-        <div className="grid grid-cols-2 gap-0 border border-[#FFB800]/10 rounded-2xl overflow-hidden font-mono mb-10 w-full max-w-sm">
-          {[
-            { val: "Chapter XIV", label: "Satellite Engineering" },
-            { val: "12 Days", label: "NISAR Global Mapping" },
-          ].map((s, i) => (
-            <div
-              key={s.label}
-              className={`text-center py-4 px-3 ${i !== 1 ? "border-r border-[#FFB800]/10" : ""}`}
-            >
-              <span className="text-xl font-extrabold text-[#FFB800] block">{s.val}</span>
-              <span className="text-[9px] uppercase text-white/55 tracking-wider">
-                {s.label}
+        {/* Interactive Spectrum Slider */}
+        <div className="bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 shadow-xl space-y-4 mb-6">
+          {/* Horizon grid */}
+          <div className="grid grid-cols-7 border border-white/10 rounded-lg overflow-hidden bg-black/40">
+            {bands.map((b) => {
+              const isActive = activeBand === b.name;
+              return (
+                <button
+                  key={b.name}
+                  onClick={() => setActiveBand(b.name)}
+                  className={`py-4 text-[10px] font-mono font-bold uppercase transition-all border-r border-white/5 last:border-0 ${
+                    isActive
+                      ? "bg-[#FFB800] text-black shadow-[0_0_15px_#FFB800]"
+                      : b.isHighlight
+                      ? "bg-[#FFB800]/20 text-[#FFB800] hover:bg-[#FFB800]/30"
+                      : "text-white/40 hover:text-white/70 bg-[#0d0d17]/40"
+                  }`}
+                >
+                  {b.name}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Long wave/Short wave labels */}
+          <div className="flex justify-between items-center text-[8px] font-mono text-white/40 uppercase tracking-widest px-1 relative">
+            <span className="flex items-center gap-1">long wave &middot; low energy</span>
+            <div className="absolute left-[20%] right-[30%] top-1/2 -translate-y-1/2 h-[1px] bg-gradient-to-r from-white/10 via-white/20 to-white/10" />
+            <span className="flex items-center gap-1">short wave &middot; high energy &middot; more data</span>
+          </div>
+
+          {/* Dynamic description box for the selected band */}
+          <div className="mt-4 pt-3 border-t border-white/[0.04] text-xs font-mono text-white/70 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-[#FFB800] font-bold uppercase">{activeBand}:</span>
+              <span className="font-light text-[11px] text-white/60">
+                {bands.find((b) => b.name === activeBand)?.desc}
               </span>
+            </div>
+            {bands.find((b) => b.name === activeBand)?.isHighlight && (
+              <span className="text-[8px] uppercase tracking-widest text-[#FFB800] border border-[#FFB800]/20 px-2 py-0.5 rounded bg-[#FFB800]/5 font-bold">
+                Commercial LEO Slice
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Detail Bullet List */}
+        <div className="space-y-3 pl-1 mb-8">
+          {highlights.map((h, i) => (
+            <div key={i} className="flex items-start gap-3.5 text-xs">
+              <span className="w-3 h-3 rounded bg-[#FFB800] mt-0.5 shadow-[0_0_6px_#FFB800] shrink-0 block" />
+              <p className="text-white/80 font-light leading-relaxed">
+                <strong className="text-white font-semibold uppercase tracking-wide mr-1.5">{h.label}:</strong> 
+                {h.text}
+              </p>
             </div>
           ))}
         </div>
 
-        {!presentationActive && (
-          <div className="flex flex-col items-center gap-2 font-mono text-[9px] text-[#FFB800]/70 tracking-[0.25em] uppercase">
-            <span>Scroll to begin</span>
-            <span className="w-px h-8 bg-[#FFB800]/30 relative overflow-hidden rounded-full block">
-              <span className="absolute top-0 inset-x-0 h-3 bg-[#FFB800] rounded-full animate-bounce" />
-            </span>
+        {/* Footer info line */}
+        <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[10px] font-mono text-white/40">
+          <div>
+            <span className="text-[#FFB800] font-bold">First Principles</span>
+            <span className="text-white/60">Investing</span>
           </div>
-        )}
+          <div className="uppercase tracking-widest text-[9px] text-white/30">
+            Everyone rents a lane of the same highway
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// 2. WHAT IS A SATELLITE (ORBIT BALLISTICS)
+const HIGH_END_BANDS = [
+  { region: "EHF (Q/V)", freq: "27-75 GHz", wave: "4-11 mm", use: "Protected military SATCOM (AEHF)", isGold: true },
+  { region: "W band", freq: "75-110 GHz", wave: "2.7-4 mm", use: "Cloud and precipitation radar", isGold: false },
+  { region: "Sub-mm (G)", freq: "0.1-0.3 THz", wave: "1-3 mm", use: "Concealed-object security imaging", isGold: false },
+  { region: "Terahertz", freq: "0.3-10 THz", wave: "30-1000 um", use: "Emerging sensing and spectroscopy", isGold: false },
+  { region: "Infrared", freq: "20-400 THz", wave: "0.75-15 um", use: "Missile-warning, night/thermal recon", isGold: true },
+  { region: "Laser comms", freq: "193 THz", wave: "1.55 um", use: "Secure high-data inter-satellite links", isGold: true },
+  { region: "Visible / EO", freq: "400-770 THz", wave: "0.4-0.7 um", use: "Electro-optical spy imaging (KH-11 class)", isGold: true },
+  { region: "Ultraviolet", freq: "0.8-30 PHz", wave: "10-400 nm", use: "Plume detection, space science", isGold: false },
+];
+
+function SceneHighEndBands() {
+  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+
+  return (
+    <>
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0 bg-grid-pattern opacity-[0.02]"
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-4xl flex flex-col text-left px-6 py-6 pointer-events-auto">
+        <span className="font-mono text-[9px] font-bold tracking-widest text-[#FFB800] uppercase mb-1.5 block">
+          Beyond the Workhorse Bands &middot; High-End & Recon
+        </span>
+
+        <h1
+          className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-1.5 uppercase"
+          style={{ fontFamily: "Georgia, serif" }}
+        >
+          Where the spies and the heavy data live
+        </h1>
+
+        <p className="text-xs text-white/50 font-light leading-relaxed mb-5">
+          Climbing past Ka into protected comms, imaging, and light itself. Figures approximate.
+        </p>
+
+        {/* Bands Table */}
+        <div className="bg-[#0a0a14]/70 border border-white/5 rounded-2xl overflow-hidden shadow-2xl p-4 mb-4">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs font-mono">
+              <thead>
+                <tr className="border-b border-white/10 text-white/40 text-[9px] uppercase tracking-wider">
+                  <th className="py-2.5 px-3">Region</th>
+                  <th className="py-2.5 px-3">Frequency</th>
+                  <th className="py-2.5 px-3">Wavelength</th>
+                  <th className="py-2.5 px-3">High-end / reconnaissance use</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.04]">
+                {HIGH_END_BANDS.map((row, idx) => {
+                  const isHovered = hoveredRow === idx;
+                  return (
+                    <tr
+                      key={row.region}
+                      onMouseEnter={() => setHoveredRow(idx)}
+                      onMouseLeave={() => setHoveredRow(null)}
+                      className={`transition-colors duration-150 ${
+                        isHovered ? "bg-white/[0.03]" : "hover:bg-white/[0.01]"
+                      }`}
+                    >
+                      {/* Region Badge */}
+                      <td className="py-2 px-3">
+                        <span
+                          className={`inline-block text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-center min-w-[90px] ${
+                            row.isGold
+                              ? "bg-[#FFB800] text-black shadow-[0_0_8px_rgba(255,184,0,0.2)]"
+                              : "bg-[#222230] text-white/80"
+                          }`}
+                        >
+                          {row.region}
+                        </span>
+                      </td>
+
+                      {/* Frequency */}
+                      <td className="py-2 px-3 text-white/95 font-medium">{row.freq}</td>
+
+                      {/* Wavelength */}
+                      <td className="py-2 px-3 text-white/70">{row.wave}</td>
+
+                      {/* Recon Use */}
+                      <td className="py-2 px-3 text-white/80 leading-relaxed font-light">
+                        {row.use}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* SIGINT Highlight Box */}
+        <div className="p-3 bg-[#FFB800]/[0.01] border border-[#FFB800]/20 rounded-xl mb-4 font-mono text-[10px] text-white/80 leading-relaxed">
+          <strong className="text-[#FFB800] uppercase font-bold mr-2">SIGINT:</strong>
+          recon satellites also listen across HF to Ka, collecting other people&apos;s signals rather than transmitting.
+        </div>
+
+        {/* Legend */}
+        <div className="flex items-center gap-2 text-[9px] font-mono text-white/40 mb-6 pl-1">
+          <span className="w-2.5 h-2.5 rounded bg-[#FFB800] inline-block shadow-[0_0_4px_#FFB800]" />
+          <span>gold = core reconnaissance and high-end bands</span>
+        </div>
+
+        {/* Footer info line */}
+        <div className="border-t border-white/10 pt-3.5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-[10px] font-mono text-white/40">
+          <div>
+            <span className="text-[#FFB800] font-bold">First Principles</span>
+            <span className="text-white/60">Investing</span>
+          </div>
+          <div className="uppercase tracking-widest text-[9px] text-white/30">
+            Recon spans the whole spectrum: RF to light
+          </div>
+        </div>
       </div>
     </>
   );
@@ -1563,51 +1751,61 @@ export default function SatellitesPage() {
   const p = usePresentation(TOTAL_FRAMES);
   const { progress, presentationActive, currentFrameIndex, containerRef } = p;
 
-  // Scroll transforms for 15 frames
-  const s0SplashOpacity = useTransform(progress, [0.0, 0.04, 0.0667], [1, 1, 0]);
-  const s0SplashScale = useTransform(progress, [0.0, 0.0667], [1, 0.96]);
+  // Scroll transforms for 16 frames
+  const SEG = 1 / TOTAL_FRAMES;
+  const FADE_IN = 0.25 * SEG;
+  const FADE_HOLD = 0.35 * SEG;
+  const fr = (i: number) => [i * SEG - FADE_IN, i * SEG, (i + 1) * SEG - FADE_HOLD, (i + 1) * SEG];
+  const FADE = [0, 1, 1, 0];
+  const RISE = [24, 0, 0, -24];
 
-  const s0Opacity = useTransform(progress, [0.045, 0.0667, 0.11, 0.1333], [0, 1, 1, 0]);
-  const s0Scale = useTransform(progress, [0.045, 0.1333], [1, 0.96]);
+  const s0SplashOpacity = useTransform(progress, [0.0, 0.04, SEG], [1, 1, 0]);
+  const s0SplashScale = useTransform(progress, [0.0, SEG], [1, 0.96]);
 
-  const s1Opacity = useTransform(progress, [0.11, 0.1333, 0.18, 0.2000], [0, 1, 1, 0]);
-  const s1Y = useTransform(progress, [0.11, 0.1333, 0.18, 0.2000], [24, 0, 0, -24]);
+  const s0Opacity = useTransform(progress, [0.045, SEG, 2 * SEG - FADE_HOLD, 2 * SEG], FADE);
+  const s0Scale = useTransform(progress, [0.045, 2 * SEG], [1, 0.96]);
 
-  const s2Opacity = useTransform(progress, [0.18, 0.2000, 0.25, 0.2667], [0, 1, 1, 0]);
-  const s2Y = useTransform(progress, [0.18, 0.2000, 0.25, 0.2667], [24, 0, 0, -24]);
+  const s1Opacity = useTransform(progress, fr(2), FADE);
+  const s1Y = useTransform(progress, fr(2), RISE);
 
-  const s3Opacity = useTransform(progress, [0.25, 0.2667, 0.31, 0.3333], [0, 1, 1, 0]);
-  const s3Y = useTransform(progress, [0.25, 0.2667, 0.31, 0.3333], [24, 0, 0, -24]);
+  const s2Opacity = useTransform(progress, fr(3), FADE);
+  const s2Y = useTransform(progress, fr(3), RISE);
 
-  const s4Opacity = useTransform(progress, [0.31, 0.3333, 0.38, 0.4000], [0, 1, 1, 0]);
-  const s4Y = useTransform(progress, [0.31, 0.3333, 0.38, 0.4000], [24, 0, 0, -24]);
+  const s3Opacity = useTransform(progress, fr(4), FADE);
+  const s3Y = useTransform(progress, fr(4), RISE);
 
-  const s5Opacity = useTransform(progress, [0.38, 0.4000, 0.45, 0.4667], [0, 1, 1, 0]);
-  const s5Y = useTransform(progress, [0.38, 0.4000, 0.45, 0.4667], [24, 0, 0, -24]);
+  const s4Opacity = useTransform(progress, fr(5), FADE);
+  const s4Y = useTransform(progress, fr(5), RISE);
 
-  const s6Opacity = useTransform(progress, [0.45, 0.4667, 0.51, 0.5333], [0, 1, 1, 0]);
-  const s6Y = useTransform(progress, [0.45, 0.4667, 0.51, 0.5333], [24, 0, 0, -24]);
+  const s5Opacity = useTransform(progress, fr(6), FADE);
+  const s5Y = useTransform(progress, fr(6), RISE);
 
-  const s7Opacity = useTransform(progress, [0.51, 0.5333, 0.58, 0.6000], [0, 1, 1, 0]);
-  const s7Y = useTransform(progress, [0.51, 0.5333, 0.58, 0.6000], [24, 0, 0, -24]);
+  const s6Opacity = useTransform(progress, fr(7), FADE);
+  const s6Y = useTransform(progress, fr(7), RISE);
 
-  const s8Opacity = useTransform(progress, [0.58, 0.6000, 0.65, 0.6667], [0, 1, 1, 0]);
-  const s8Y = useTransform(progress, [0.58, 0.6000, 0.65, 0.6667], [24, 0, 0, -24]);
+  const s7Opacity = useTransform(progress, fr(8), FADE);
+  const s7Y = useTransform(progress, fr(8), RISE);
 
-  const s9Opacity = useTransform(progress, [0.65, 0.6667, 0.71, 0.7333], [0, 1, 1, 0]);
-  const s9Y = useTransform(progress, [0.65, 0.6667, 0.71, 0.7333], [24, 0, 0, -24]);
+  const s8Opacity = useTransform(progress, fr(9), FADE);
+  const s8Y = useTransform(progress, fr(9), RISE);
 
-  const s10Opacity = useTransform(progress, [0.71, 0.7333, 0.78, 0.8000], [0, 1, 1, 0]);
-  const s10Y = useTransform(progress, [0.71, 0.7333, 0.78, 0.8000], [24, 0, 0, -24]);
+  const s9Opacity = useTransform(progress, fr(10), FADE);
+  const s9Y = useTransform(progress, fr(10), RISE);
 
-  const s11Opacity = useTransform(progress, [0.78, 0.8000, 0.85, 0.8667], [0, 1, 1, 0]);
-  const s11Y = useTransform(progress, [0.78, 0.8000, 0.85, 0.8667], [24, 0, 0, -24]);
+  const s10Opacity = useTransform(progress, fr(11), FADE);
+  const s10Y = useTransform(progress, fr(11), RISE);
 
-  const s12Opacity = useTransform(progress, [0.85, 0.8667, 0.91, 0.9333], [0, 1, 1, 0]);
-  const s12Y = useTransform(progress, [0.85, 0.8667, 0.91, 0.9333], [24, 0, 0, -24]);
+  const s11Opacity = useTransform(progress, fr(12), FADE);
+  const s11Y = useTransform(progress, fr(12), RISE);
 
-  const s13Opacity = useTransform(progress, [0.91, 0.9333, 1.0], [0, 1, 1]);
-  const s13Y = useTransform(progress, [0.91, 0.9333, 1.0], [24, 0, 0]);
+  const s12Opacity = useTransform(progress, fr(13), FADE);
+  const s12Y = useTransform(progress, fr(13), RISE);
+
+  const s13Opacity = useTransform(progress, fr(14), FADE);
+  const s13Y = useTransform(progress, fr(14), RISE);
+
+  const s14Opacity = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [0, 1, 1]);
+  const s14Y = useTransform(progress, [15 * SEG - FADE_IN, 15 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative">
@@ -1615,7 +1813,7 @@ export default function SatellitesPage() {
       <PresentationChrome controller={p} scenes={SATELLITES_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1500vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1600vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
           <OrbitalRingBg />
@@ -1633,19 +1831,20 @@ export default function SatellitesPage() {
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
-                {currentFrameIndex === 2 && <Scene1WhatIsASatellite />}
-                {currentFrameIndex === 3 && <Scene2MeetTheSatellite />}
-                {currentFrameIndex === 4 && <Scene3BusVsPayload />}
-                {currentFrameIndex === 5 && <Scene4FirstPrinciple />}
-                {currentFrameIndex === 6 && <Scene5FamilyOfSensors />}
-                {currentFrameIndex === 7 && <Scene6OwlAndBat />}
-                {currentFrameIndex === 8 && <Scene7HowRadarWorks />}
-                {currentFrameIndex === 9 && <Scene8SyntheticApertureRadar />}
-                {currentFrameIndex === 10 && <Scene9MissionConfig />}
-                {currentFrameIndex === 11 && <Scene10NISAR />}
-                {currentFrameIndex === 12 && <Scene11InsideRadarPayload />}
-                {currentFrameIndex === 13 && <Scene12IndianEcosystem />}
-                {currentFrameIndex === 14 && <Scene13Thesis presentationActive />}
+                {currentFrameIndex === 2 && <SceneHighEndBands />}
+                {currentFrameIndex === 3 && <Scene1WhatIsASatellite />}
+                {currentFrameIndex === 4 && <Scene2MeetTheSatellite />}
+                {currentFrameIndex === 5 && <Scene3BusVsPayload />}
+                {currentFrameIndex === 6 && <Scene4FirstPrinciple />}
+                {currentFrameIndex === 7 && <Scene5FamilyOfSensors />}
+                {currentFrameIndex === 8 && <Scene6OwlAndBat />}
+                {currentFrameIndex === 9 && <Scene7HowRadarWorks />}
+                {currentFrameIndex === 10 && <Scene8SyntheticApertureRadar />}
+                {currentFrameIndex === 11 && <Scene9MissionConfig />}
+                {currentFrameIndex === 12 && <Scene10NISAR />}
+                {currentFrameIndex === 13 && <Scene11InsideRadarPayload />}
+                {currentFrameIndex === 14 && <Scene12IndianEcosystem />}
+                {currentFrameIndex === 15 && <Scene13Thesis presentationActive />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1675,25 +1874,25 @@ export default function SatellitesPage() {
                   currentFrameIndex === 2 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene1WhatIsASatellite />
+                <SceneHighEndBands />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s2Opacity, y: s2Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 3 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene2MeetTheSatellite />
+                <Scene1WhatIsASatellite />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s3Opacity, y: s3Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 4 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene3BusVsPayload />
+                <Scene2MeetTheSatellite />
               </motion.div>
 
               <motion.div
@@ -1702,25 +1901,25 @@ export default function SatellitesPage() {
                   currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene4FirstPrinciple />
+                <Scene3BusVsPayload />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s5Opacity, y: s5Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene5FamilyOfSensors />
+                <Scene4FirstPrinciple />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene6OwlAndBat />
+                <Scene5FamilyOfSensors />
               </motion.div>
 
               <motion.div
@@ -1729,7 +1928,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 8 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene7HowRadarWorks />
+                <Scene6OwlAndBat />
               </motion.div>
 
               <motion.div
@@ -1738,7 +1937,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 9 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene8SyntheticApertureRadar />
+                <Scene7HowRadarWorks />
               </motion.div>
 
               <motion.div
@@ -1747,7 +1946,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 10 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene9MissionConfig />
+                <Scene8SyntheticApertureRadar />
               </motion.div>
 
               <motion.div
@@ -1756,7 +1955,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 11 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene10NISAR />
+                <Scene9MissionConfig />
               </motion.div>
 
               <motion.div
@@ -1765,7 +1964,7 @@ export default function SatellitesPage() {
                   currentFrameIndex === 12 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene11InsideRadarPayload />
+                <Scene10NISAR />
               </motion.div>
 
               <motion.div
@@ -1774,13 +1973,22 @@ export default function SatellitesPage() {
                   currentFrameIndex === 13 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
-                <Scene12IndianEcosystem />
+                <Scene11InsideRadarPayload />
               </motion.div>
 
               <motion.div
                 style={{ opacity: s13Opacity, y: s13Y }}
                 className={`${SLIDE_BASE} text-center ${
                   currentFrameIndex === 14 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <Scene12IndianEcosystem />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s14Opacity, y: s14Y }}
+                className={`${SLIDE_BASE} text-center ${
+                  currentFrameIndex === 15 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene13Thesis presentationActive={false} />
