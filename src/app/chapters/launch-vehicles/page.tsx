@@ -1270,7 +1270,7 @@ function Scene12Climax({ presentationActive = false }: { presentationActive?: bo
     "GSLV",
     "LVM3",
     "Reusable Boosters",
-    "Starship",
+    "NGLV",
     "Future Systems",
   ];
   return (
