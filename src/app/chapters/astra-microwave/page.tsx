@@ -32,18 +32,19 @@ import {
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 9;
+const TOTAL_FRAMES = 10;
 
 const ASTRA_SCENES = [
-  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 09", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 09", startFrame: 1, endFrame: 1 },
-  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 09", startFrame: 2, endFrame: 2 },
-  { id: "entities", name: "Group Corporate Structure", label: "04 / 09", startFrame: 3, endFrame: 3 },
-  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 09", startFrame: 4, endFrame: 4 },
-  { id: "orderbook", name: "Standalone Order Book", label: "06 / 09", startFrame: 5, endFrame: 5 },
-  { id: "growth", name: "Key Growth Programs", label: "07 / 09", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Capital & Working Capital", label: "08 / 09", startFrame: 7, endFrame: 7 },
-  { id: "thesis", name: "Demerger Carve-Out Thesis", label: "09 / 09", startFrame: 8, endFrame: 8 },
+  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 10", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 10", startFrame: 1, endFrame: 1 },
+  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 10", startFrame: 2, endFrame: 2 },
+  { id: "entities", name: "Group Corporate Structure", label: "04 / 10", startFrame: 3, endFrame: 3 },
+  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 10", startFrame: 4, endFrame: 4 },
+  { id: "orderbook", name: "Standalone Order Book", label: "06 / 10", startFrame: 5, endFrame: 5 },
+  { id: "growth", name: "Key Growth Programs", label: "07 / 10", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Capital & Working Capital", label: "08 / 10", startFrame: 7, endFrame: 7 },
+  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 10", startFrame: 8, endFrame: 8 },
+  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 10", startFrame: 9, endFrame: 9 },
 ];
 
 const SLIDE_BASE =
@@ -548,47 +549,261 @@ function SceneCapital() {
   );
 }
 
-// 9. Demerger Carve-Out Thesis
-function SceneThesis({ presentationActive = false }: { presentationActive?: boolean }) {
-  const points = [
-    { title: "Pure-Play Value Split", desc: "Separating defense from space and meteorology allows AMPL to attract distinct strategic investor pools." },
-    { title: "Valuation Arbitrage", desc: "Space-tech assets historically command high growth multiples (30-40x EV/EBITDA) compared to traditional defense firms." },
-    { title: "Carve-Out Spine", desc: "The core question remains: What is a space carve-out worth before any share-exchange ratio or standalone P&L exists?" },
+function ThesisBackground() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 bg-[#03030b]">
+      {/* Blueprint Grid */}
+      <div 
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(27, 79, 114, 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(27, 79, 114, 0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px"
+        }}
+      />
+      {/* Subtle radial blueprint glow */}
+      <div 
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle at 50% 50%, rgba(27, 79, 114, 0.15) 0%, transparent 80%)"
+        }}
+      />
+      
+      {/* Slow pulsing/drifting constellation particles */}
+      <div className="absolute inset-0 opacity-40">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-[#FFB800] animate-pulse"
+            style={{
+              width: (i % 3 === 0 ? "2px" : "1.5px"),
+              height: (i % 3 === 0 ? "2px" : "1.5px"),
+              top: `${(i * 7 + 13) % 100}%`,
+              left: `${(i * 13 + 7) % 100}%`,
+              animationDuration: `${3 + (i % 4) * 1.5}s`,
+              animationDelay: `${(i % 5) * 0.5}s`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 9. Demerger Carve-Out Thesis - Part 1: The Hidden Space Company
+function SceneThesisSpace({ presentationActive = false }: { presentationActive?: boolean }) {
+  const capabilityChips = [
+    "Satellite Payload Electronics",
+    "Radar Systems",
+    "Communication Systems",
   ];
 
   return (
-    <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar">
-      <div className="my-auto w-full flex flex-col gap-6 select-text">
-        <SceneHeading sub="08. INVESTMENT CLIMAX" main="The Demerger Carve-Out Thesis" />
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full pointer-events-auto">
-          {/* Left Column: Thesis Points */}
-          <div className="lg:col-span-7 space-y-4">
-            {points.map((p, idx) => (
-              <div key={p.title} className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 text-left shadow-lg">
-                <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-1">Thesis {idx + 1}</span>
-                <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-2">{p.title}</h4>
-                <p className="text-xs text-white/50 leading-relaxed font-light">{p.desc}</p>
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="08. INVESTMENT THESIS I" main="The Market Sees Defence. We See Space." />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full pointer-events-auto mt-4">
+          {/* Left: Cinematic Artwork */}
+          <div className="lg:col-span-6 relative flex flex-col justify-center">
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a14]/60 shadow-[0_0_40px_rgba(0,0,0,0.8)] h-[260px] sm:h-[340px] md:h-[400px] group">
+              <img
+                src="/astra/astra_space_hidden.png"
+                alt="Astra Microwave space electronics lab blueprint"
+                className="w-full h-full object-cover scale-[1.01] group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03030b] via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(3,3,11,0.6))] pointer-events-none" />
+              
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 font-mono text-[9px] text-[#FFB800] uppercase tracking-widest bg-[#03030b]/80 border border-white/5 px-2.5 py-1 rounded-md backdrop-blur-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFB800] animate-pulse" />
+                SATELLITE &amp; RF DEVELOPMENT LAB
               </div>
-            ))}
+            </div>
           </div>
 
-          {/* Right Column: CTA / Climax */}
-          <div className="lg:col-span-5 bg-[#0a0a14]/80 border border-[#FFB800]/25 rounded-2xl p-6 text-center shadow-[0_0_32px_rgba(255,184,0,0.04)] relative">
-            <Satellite className="w-10 h-10 text-[#FFB800] mx-auto mb-4 animate-pulse" />
-            <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-2">Space Demerger</h3>
-            <p className="text-xs text-white/50 font-light leading-relaxed mb-6">
-              ASTPL serves as the dedicated carve-out vehicle housing high-frequency space assets to unlock corporate equity.
+          {/* Right: Content Card */}
+          <div className="lg:col-span-6 flex flex-col text-left space-y-6 lg:pl-4">
+            <div className="space-y-3">
+              <span className="font-mono text-[10px] text-[#FFB800]/80 uppercase tracking-widest block font-semibold">
+                Strategic Franchise
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight leading-snug">
+                A 25-year space franchise hidden inside a defence company.
+              </h3>
+            </div>
+
+            <p className="text-sm text-white/70 leading-relaxed font-light max-w-lg">
+              Astra Microwave's space capabilities are not a speculative future venture, but a 25-year established franchise. 
+              The company supplies mission-critical RF payloads, satellite electronics, and launch infrastructure, serving as 
+              an essential subsystem partner for ISRO's most strategic programs.
             </p>
 
-            <div className="pt-4 border-t border-white/5">
-              <Link
-                href="/case-studies"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#FFB800] hover:bg-[#FFB800]/90 text-[#030308] font-bold text-xs uppercase tracking-widest transition-colors duration-200 w-full"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Return to Case Studies
-              </Link>
+            <div className="space-y-4">
+              <span className="font-mono text-[9px] text-white/40 uppercase block tracking-wider">
+                Key Space Segments:
+              </span>
+              <div className="flex flex-col gap-2.5 max-w-md">
+                {capabilityChips.map((chip, idx) => (
+                  <motion.div
+                    key={chip}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 * idx, duration: 0.4 }}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#FFB800]/30 hover:bg-white/[0.04] transition-all duration-300"
+                  >
+                    <span className="w-4 h-4 rounded-full bg-[#FFB800]/10 border border-[#FFB800]/30 flex items-center justify-center text-[#FFB800] font-bold text-[10px]">
+                      ✓
+                    </span>
+                    <span className="text-xs font-semibold text-white/90 uppercase tracking-wider">{chip}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 10. Demerger Carve-Out Thesis - Part 2: The Carve-Out Investors Ignore
+function SceneThesisCarveOut({ presentationActive = false }: { presentationActive?: boolean }) {
+  const chartData = [
+    { quarter: "Q1 FY26", space: 2.4, weather: 0.4, total: "2.8%" },
+    { quarter: "Q2 FY26", space: 2.0, weather: 5.8, total: "7.8%" },
+    { quarter: "Q3 FY26", space: 2.6, weather: 3.4, total: "6.0%" },
+    { quarter: "Q4 FY26", space: 19.5, weather: 4.9, total: "24.4%" },
+  ];
+
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="09. INVESTMENT THESIS II" main="The Numbers Hide The Opportunity" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full pointer-events-auto mt-4">
+          {/* Left Column: Visual split & Cards */}
+          <div className="lg:col-span-6 flex flex-col gap-4 text-left">
+            <div className="relative rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a14]/60 h-[140px] sm:h-[180px] group shadow-lg">
+              <img
+                src="/astra/astra_carveout_mix.png"
+                alt="Astra space and meteorology split concept"
+                className="w-full h-full object-cover scale-[1.01] group-hover:scale-103 transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03030b]/90 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 left-4 font-mono text-[8px] text-white/50 tracking-widest uppercase">
+                Dual Domain Capability: Space vs Meteorology
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-[#0a0a14]/60 border border-[#FFB800]/10 rounded-xl p-4 text-left shadow-md">
+                <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block mb-1">
+                  Space Business
+                </span>
+                <ul className="text-xs text-white/70 font-light space-y-1">
+                  <li className="flex items-center gap-1.5">• High technology</li>
+                  <li className="flex items-center gap-1.5">• Long project cycles</li>
+                  <li className="flex items-center gap-1.5">• Higher strategic value</li>
+                </ul>
+              </div>
+
+              <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-4 text-left shadow-md">
+                <span className="font-mono text-[9px] text-white/40 tracking-wider block mb-1">
+                  Weather Business
+                </span>
+                <ul className="text-xs text-white/55 font-light space-y-1">
+                  <li className="flex items-center gap-1.5">• Doppler radars</li>
+                  <li className="flex items-center gap-1.5">• Meteorology infrastructure</li>
+                  <li className="flex items-center gap-1.5">• Government contracts</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-[#FFB800]/[0.02] border border-[#FFB800]/20 rounded-xl p-4 shadow-sm">
+              <p className="text-xs text-white/75 leading-relaxed font-light">
+                <strong>Segment reporting combines both businesses:</strong> The reported Space + Meteorology segment makes it difficult for public markets to isolate the superior economics of the core space business.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Chart & Callout */}
+          <div className="lg:col-span-6 flex flex-col justify-between bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 shadow-2xl relative">
+            <div>
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 mb-5">
+                <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider">
+                  Quarterly Revenue Mix (Space vs Meteorology)
+                </span>
+                <span className="font-mono text-[8px] text-white/40">FY26 REPORTED</span>
+              </div>
+
+              <div className="space-y-4 py-2">
+                {chartData.map((data, idx) => {
+                  const maxVal = 24.4;
+                  const spacePercent = (data.space / maxVal) * 100;
+                  const weatherPercent = (data.weather / maxVal) * 100;
+
+                  return (
+                    <div key={data.quarter} className="space-y-1.5">
+                      <div className="flex justify-between items-center text-[10px] font-mono">
+                        <span className="text-white/60 font-semibold">{data.quarter}</span>
+                        <span className="text-[#FFB800] font-bold">Total: {data.total}</span>
+                      </div>
+                      
+                      <div className="h-6 w-full bg-white/[0.02] border border-white/5 rounded-lg overflow-hidden flex relative">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${spacePercent}%` }}
+                          transition={{ duration: 0.8, delay: 0.1 * idx, ease: "easeOut" }}
+                          className="bg-[#FFB800] h-full flex items-center justify-start pl-2 shadow-[0_0_12px_#FFB800]"
+                        >
+                          <span className="text-[9px] text-[#030308] font-bold whitespace-nowrap">
+                            Space ({data.space}%)
+                          </span>
+                        </motion.div>
+                        
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${weatherPercent}%` }}
+                          transition={{ duration: 0.8, delay: 0.1 * idx + 0.2, ease: "easeOut" }}
+                          className="bg-[#1B4F72] h-full flex items-center justify-start pl-2"
+                        >
+                          <span className="text-[9px] text-white/90 font-semibold whitespace-nowrap">
+                            Weather ({data.weather}%)
+                          </span>
+                        </motion.div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-4">
+              <div className="bg-[#030308]/60 border border-[#FFB800]/10 rounded-xl p-3.5 text-left">
+                <span className="font-mono text-[8px] text-[#FFB800]/80 uppercase block tracking-wider mb-1">
+                  Analyst Assessment
+                </span>
+                <p className="text-[10px] text-white/50 leading-relaxed font-light">
+                  Consolidated financials understate the strategic importance of Astra's space franchise. The Q4 spike to 19.5% space revenue signals a massive pivot.
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-white/5">
+                <Link
+                  href="/case-studies"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#FFB800] hover:bg-[#FFB800]/90 text-[#030308] font-bold text-xs uppercase tracking-widest transition-colors duration-200 w-full"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Return to Case Studies
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -636,8 +851,11 @@ export default function AstraMicrowavePage() {
   const s7Opacity = useTransform(progress, fr(7), FADE);
   const s7Y = useTransform(progress, fr(7), RISE);
 
-  const s8Opacity = useTransform(progress, [8 * SEG - FADE_IN, 8 * SEG, 1.0], [0, 1, 1]);
-  const s8Y = useTransform(progress, [8 * SEG - FADE_IN, 8 * SEG, 1.0], [24, 0, 0]);
+  const s8Opacity = useTransform(progress, fr(8), FADE);
+  const s8Y = useTransform(progress, fr(8), RISE);
+
+  const s9Opacity = useTransform(progress, [9 * SEG - FADE_IN, 9 * SEG, 1.0], [0, 1, 1]);
+  const s9Y = useTransform(progress, [9 * SEG - FADE_IN, 9 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -645,7 +863,7 @@ export default function AstraMicrowavePage() {
       <PresentationChrome controller={p} scenes={ASTRA_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[900vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1000vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -658,7 +876,7 @@ export default function AstraMicrowavePage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 8].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 8, 9].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -668,7 +886,8 @@ export default function AstraMicrowavePage() {
                 {currentFrameIndex === 5 && <SceneOrderBook />}
                 {currentFrameIndex === 6 && <SceneGrowthPrograms />}
                 {currentFrameIndex === 7 && <SceneCapital />}
-                {currentFrameIndex === 8 && <SceneThesis presentationActive={true} />}
+                {currentFrameIndex === 8 && <SceneThesisSpace presentationActive={true} />}
+                {currentFrameIndex === 9 && <SceneThesisCarveOut presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -750,7 +969,14 @@ export default function AstraMicrowavePage() {
                 style={{ opacity: s8Opacity, y: s8Y }}
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
               >
-                <SceneThesis presentationActive={false} />
+                <SceneThesisSpace presentationActive={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s9Opacity, y: s9Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneThesisCarveOut presentationActive={false} />
               </motion.div>
             </>
           )}
