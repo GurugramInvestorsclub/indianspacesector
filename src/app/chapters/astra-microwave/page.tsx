@@ -319,8 +319,6 @@ function SceneEntities() {
 
 // 5. Revenue Mix
 function SceneRevenueMix() {
-  const [activeSegment, setActiveSegment] = useState<number | null>(null);
-
   const segments = [
     { name: "Defence", share: "58.4%", q425: "84.0%", q126: "86.4%", q226: "77.4%", q326: "81.8%", desc: "DRDO and defense PSU contractor-led high margin orders." },
     { name: "Space", share: "19.5%", q425: "5.2%", q126: "2.4%", q226: "2.0%", q326: "2.6%", desc: "ISRO payloads and satellite assembly contracts (demerger target)." },
@@ -332,11 +330,11 @@ function SceneRevenueMix() {
   return (
     <div className="max-w-6xl w-full px-4 z-10 flex flex-col h-full py-8 overflow-y-auto no-scrollbar">
       <div className="my-auto w-full flex flex-col gap-6 select-text">
-        <SceneHeading sub="04. REVENUE MIX" main="Segment Quarterly Revenue Architecture" />
+        <SceneHeading sub="04. REVENUE MIX" main="Revenue mix by segment FY26" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full pointer-events-auto">
+        <div className="w-full max-w-4xl mx-auto pointer-events-auto">
           {/* Table Mix */}
-          <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left shadow-xl">
+          <div className="bg-[#0a0a14]/60 border border-white/5 rounded-xl p-5 backdrop-blur-sm overflow-x-auto text-left shadow-xl">
             <h3 className="font-mono text-[10px] text-[#FFB800] uppercase tracking-wider mb-3">
               Table 3. Revenue mix by segment, quarterly FY26 (% of revenue)
             </h3>
@@ -352,12 +350,10 @@ function SceneRevenueMix() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {segments.map((s, idx) => (
+                {segments.map((s) => (
                   <tr
                     key={s.name}
-                    className="cursor-pointer transition-colors hover:bg-white/[0.02]"
-                    onMouseEnter={() => setActiveSegment(idx)}
-                    onMouseLeave={() => setActiveSegment(null)}
+                    className="transition-colors hover:bg-white/[0.02]"
                   >
                     <td className="py-2 pr-2 text-white font-semibold">{s.name}</td>
                     <td className="py-2 px-2 text-right text-white/65">{s.q425}</td>
@@ -377,33 +373,6 @@ function SceneRevenueMix() {
                 </tr>
               </tbody>
             </table>
-          </div>
-
-          {/* Interactive Donut Graphic details */}
-          <div className="lg:col-span-5 flex flex-col gap-4 text-left">
-            <div className="bg-[#0a0a14]/75 border border-white/10 rounded-2xl p-5 relative overflow-hidden flex flex-col justify-center h-[240px]">
-              <span className="font-mono text-[8px] text-[#FFB800] uppercase tracking-wider block mb-2">Segment Highlight</span>
-              {activeSegment !== null ? (
-                <div>
-                  <h4 className="text-lg font-bold text-white uppercase mb-2">{segments[activeSegment].name}</h4>
-                  <p className="text-xs text-white/70 leading-relaxed font-light mb-4">{segments[activeSegment].desc}</p>
-                  <div className="font-mono text-[10px] flex gap-4">
-                    <div>
-                      <span className="text-white/40 block">Q4 FY26 SHARE:</span>
-                      <span className="text-[#FFB800] font-bold">{segments[activeSegment].share}</span>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-6">
-                  <Radio className="w-8 h-8 text-[#FFB800] mx-auto mb-3 animate-pulse" />
-                  <p className="text-xs text-white/50 font-light">Hover over segment rows in Table 3 to view details.</p>
-                </div>
-              )}
-            </div>
-            <div className="bg-[#030308] border border-white/5 rounded-xl p-3 text-[10px] text-white/50 leading-relaxed">
-              *The Combined **Space + Meteorological** segment spikes to **24.4%** in Q4 FY26, highlighting the core value driver for the demerger franchise.
-            </div>
           </div>
         </div>
       </div>
