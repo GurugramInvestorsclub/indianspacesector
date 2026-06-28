@@ -26,27 +26,32 @@ import {
   DollarSign,
   Briefcase,
   Percent,
+  CheckCircle2,
+  Clock,
+  Hourglass,
+  Calendar,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // DATA & CONSTANTS
 // ---------------------------------------------------------------------------
 
-const TOTAL_FRAMES = 12;
+const TOTAL_FRAMES = 13;
 
 const ASTRA_SCENES = [
-  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 12", startFrame: 0, endFrame: 0 },
-  { id: "founding", name: "The Founding Story", label: "02 / 12", startFrame: 1, endFrame: 1 },
-  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 12", startFrame: 2, endFrame: 2 },
-  { id: "entities", name: "Group Corporate Structure", label: "04 / 12", startFrame: 3, endFrame: 3 },
-  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 12", startFrame: 4, endFrame: 4 },
-  { id: "orderbook", name: "Standalone Order Book", label: "06 / 12", startFrame: 5, endFrame: 5 },
-  { id: "growth", name: "Key Growth Programs", label: "07 / 12", startFrame: 6, endFrame: 6 },
-  { id: "capital", name: "Capital & Working Capital", label: "08 / 12", startFrame: 7, endFrame: 7 },
-  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 12", startFrame: 8, endFrame: 8 },
-  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 12", startFrame: 9, endFrame: 9 },
-  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 12", startFrame: 10, endFrame: 10 },
-  { id: "thesis-matters", name: "Why This Matters", label: "12 / 12", startFrame: 11, endFrame: 11 },
+  { id: "hero", name: "Astra Microwave Products Case Study", label: "01 / 13", startFrame: 0, endFrame: 0 },
+  { id: "founding", name: "The Founding Story", label: "02 / 13", startFrame: 1, endFrame: 1 },
+  { id: "financials", name: "Consolidated P&L Journey", label: "03 / 13", startFrame: 2, endFrame: 2 },
+  { id: "entities", name: "Group Corporate Structure", label: "04 / 13", startFrame: 3, endFrame: 3 },
+  { id: "revenue-mix", name: "Segment Revenue Mix", label: "05 / 13", startFrame: 4, endFrame: 4 },
+  { id: "orderbook", name: "Standalone Order Book", label: "06 / 13", startFrame: 5, endFrame: 5 },
+  { id: "growth", name: "Key Growth Programs", label: "07 / 13", startFrame: 6, endFrame: 6 },
+  { id: "capital", name: "Capital & Working Capital", label: "08 / 13", startFrame: 7, endFrame: 7 },
+  { id: "thesis-space", name: "The Hidden Space Company", label: "09 / 13", startFrame: 8, endFrame: 8 },
+  { id: "thesis-carveout", name: "The Carve-Out Investors Ignore", label: "10 / 13", startFrame: 9, endFrame: 9 },
+  { id: "thesis-catalyst", name: "The Catalyst", label: "11 / 13", startFrame: 10, endFrame: 10 },
+  { id: "thesis-matters", name: "Why This Matters", label: "12 / 13", startFrame: 11, endFrame: 11 },
+  { id: "thesis-road", name: "The Road to Two Companies", label: "13 / 13", startFrame: 12, endFrame: 12 },
 ];
 
 const SLIDE_BASE =
@@ -987,9 +992,161 @@ function SceneThesisMatters({ presentationActive = false }: { presentationActive
   );
 }
 
-// ---------------------------------------------------------------------------
-// MAIN CHAPTER PAGE
-// ---------------------------------------------------------------------------
+// 13. Demerger Carve-Out Thesis - Part 5: The Road to Two Companies
+function SceneRoadToTwoCompanies({ presentationActive = false }: { presentationActive?: boolean }) {
+  const rows = [
+    { milestone: "In-principle board approval to demerge", date: "27 Feb 2026", status: "DONE" },
+    { milestone: "Managing Director transition announced", date: "3 Apr 2026", status: "DONE" },
+    { milestone: "FY26 results, demerger progress confirmed", date: "26 May 2026", status: "DONE" },
+    { milestone: "Q4 FY26 earnings call, \"scheme in a few weeks\"", date: "27 May 2026", status: "DONE" },
+    { milestone: "Board takes up draft Scheme of Arrangement", date: "10 Jun 2026", status: "TRIGGER" },
+    { milestone: "Registered valuer report, share-exchange ratio", date: "After board", status: "AWAITED" },
+    { milestone: "Shareholder, creditor, SEBI, exchange, NCLT approvals", date: "Subsequent", status: "AWAITED" },
+    { milestone: "Completion and listing of the space company", date: "Target Q1 FY28 (~mid-2027)", status: "AWAITED" },
+  ];
+
+  return (
+    <div className="relative w-full h-full min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#03030b]">
+      <ThesisBackground />
+
+      <div className="relative z-10 max-w-6xl w-full px-6 md:px-12 py-16 flex flex-col justify-center select-text">
+        <SceneHeading sub="12. DEMERGER TIMELINE" main="The Road to Two Companies" />
+        <p className="text-xs text-white/50 text-center max-w-xl mx-auto mb-6">
+          Astra's space, meteorology and hydrology business is on track to become Astra Space Technologies. Here is where things stand.
+        </p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full pointer-events-auto">
+          
+          {/* Left Column: Timeline Table */}
+          <div className="lg:col-span-8 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 backdrop-blur-sm shadow-2xl text-left">
+            <div className="flex justify-between items-center text-[9px] font-mono uppercase tracking-widest text-[#FFB800] mb-4 border-b border-white/10 pb-2 pl-6">
+              <span>Milestone</span>
+              <div className="flex gap-24 pr-4">
+                <span>Date</span>
+                <span className="w-16 text-right">Status</span>
+              </div>
+            </div>
+
+            <div className="relative border-l border-white/10 pl-6 space-y-4 py-1">
+              {rows.map((r, idx) => (
+                <div 
+                  key={idx} 
+                  className="grid grid-cols-12 gap-4 items-center relative py-1 border-b border-white/[0.03] last:border-0 pb-2 last:pb-0"
+                >
+                  {/* Timeline Node Dot */}
+                  <div className={`absolute left-[-30.5px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#03030b] border ${
+                    r.status === "DONE"
+                      ? "border-[#FFB800] shadow-[0_0_8px_#FFB800]"
+                      : r.status === "TRIGGER"
+                      ? "border-yellow-400 shadow-[0_0_8px_#eab308]"
+                      : "border-sky-500/40"
+                  }`} />
+
+                  {/* Milestone name */}
+                  <div className="col-span-7 pr-2">
+                    <span className="text-xs font-semibold text-white/90">{r.milestone}</span>
+                  </div>
+
+                  {/* Date */}
+                  <div className="col-span-3 text-xs font-mono text-white/60 text-right">
+                    {r.date}
+                  </div>
+
+                  {/* Status */}
+                  <div className="col-span-2 flex justify-end">
+                    <span className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold uppercase tracking-wider ${
+                      r.status === "DONE"
+                        ? "text-[#FFB800] bg-[#FFB800]/10 border border-[#FFB800]/25"
+                        : r.status === "TRIGGER"
+                        ? "text-yellow-400 bg-yellow-500/10 border border-yellow-400/25 animate-pulse"
+                        : "text-sky-400 bg-sky-500/10 border border-sky-500/25"
+                    }`}>
+                      {r.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: What this means & Legend */}
+          <div className="lg:col-span-4 flex flex-col gap-4 text-left">
+            {/* What this means card */}
+            <div className="bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-5 shadow-xl relative">
+              <div className="flex items-center gap-2 border-b border-white/[0.06] pb-3 mb-4">
+                <Calendar className="w-4 h-4 text-[#FFB800]" />
+                <span className="font-mono text-[9px] text-[#FFB800] uppercase tracking-wider block font-semibold">
+                  What This Means
+                </span>
+              </div>
+              <div className="space-y-4 text-xs text-white/70 font-light leading-relaxed">
+                <p>The demerger process is moving forward in clear stages.</p>
+                <p>The next key trigger is the board taking up the draft Scheme of Arrangement.</p>
+                <p>Subject to approvals, the new space company is targeted to become operational and listed by Q1 FY28.</p>
+              </div>
+            </div>
+
+            {/* Legend card */}
+            <div className="bg-[#0a0a14]/40 border border-white/5 rounded-xl p-4 space-y-2.5">
+              <span className="font-mono text-[9px] text-white/40 uppercase block tracking-wider mb-2">
+                Status Legend
+              </span>
+              <div className="flex flex-col gap-2 font-mono text-[9px]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3 h-3 text-[#FFB800]" />
+                    <span className="text-[#FFB800] font-bold">DONE</span>
+                  </div>
+                  <span className="text-white/60">Completed</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="w-3 h-3 text-yellow-400" />
+                    <span className="text-yellow-400 font-bold">TRIGGER</span>
+                  </div>
+                  <span className="text-white/60">Upcoming Key Trigger</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <Hourglass className="w-3 h-3 text-sky-400" />
+                    <span className="text-sky-400 font-bold">AWAITED</span>
+                  </div>
+                  <span className="text-white/60">Pending Approvals</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Sources Footer */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 border-t border-white/10 pt-4 mt-8 text-[9px] text-white/40 leading-relaxed font-light text-left pointer-events-auto">
+          <div className="lg:col-span-7 space-y-2 border-r border-white/5 pr-4">
+            <div>
+              <span className="font-mono text-white/50 font-bold">SOURCE: </span>
+              <span>Company filings and earnings-call commentary, February to June 2026.</span>
+            </div>
+            <div>
+              <span className="font-mono text-white/50 font-bold">SECTIONS: </span>
+              <span>Sections 230 to 232 of the Companies Act, 2013 govern schemes of arrangement.</span>
+            </div>
+            <div>
+              <span className="font-mono text-white/50 font-bold">REGULATORS: </span>
+              <span>SEBI: Securities and Exchange Board of India. NCLT: National Company Law Tribunal.</span>
+            </div>
+          </div>
+          <div className="lg:col-span-5 pl-0 lg:pl-4">
+            <span className="font-mono text-white/50 font-bold block mb-1">SECTION SOURCES:</span>
+            <p>
+              Company press release, 27 February 2026; board-meeting intimations, April to June 2026; Q2 FY26 earnings call (value-gap quote); 
+              Q4 FY26 earnings call (rationale, timeline). The share-exchange ratio and the carve-out's standalone financials were not public as of this writing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function AstraMicrowavePage() {
   const p = usePresentation(TOTAL_FRAMES);
@@ -1035,8 +1192,11 @@ export default function AstraMicrowavePage() {
   const s10Opacity = useTransform(progress, fr(10), FADE);
   const s10Y = useTransform(progress, fr(10), RISE);
 
-  const s11Opacity = useTransform(progress, [11 * SEG - FADE_IN, 11 * SEG, 1.0], [0, 1, 1]);
-  const s11Y = useTransform(progress, [11 * SEG - FADE_IN, 11 * SEG, 1.0], [24, 0, 0]);
+  const s11Opacity = useTransform(progress, fr(11), FADE);
+  const s11Y = useTransform(progress, fr(11), RISE);
+
+  const s12Opacity = useTransform(progress, [12 * SEG - FADE_IN, 12 * SEG, 1.0], [0, 1, 1]);
+  const s12Y = useTransform(progress, [12 * SEG - FADE_IN, 12 * SEG, 1.0], [24, 0, 0]);
 
   return (
     <div className="min-h-screen bg-[#030308] text-white font-sans selection:bg-[#FFB800] selection:text-[#030308] relative overflow-x-hidden">
@@ -1044,7 +1204,7 @@ export default function AstraMicrowavePage() {
       <PresentationChrome controller={p} scenes={ASTRA_SCENES} />
 
       {/* Scroll track + sticky viewport */}
-      <div ref={containerRef} className="relative w-full h-[1200vh] bg-[#030308]">
+      <div ref={containerRef} className="relative w-full h-[1300vh] bg-[#030308]">
         <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center bg-[#030308] z-10">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.025] pointer-events-none z-0" />
 
@@ -1057,7 +1217,7 @@ export default function AstraMicrowavePage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 8, 9, 10, 11].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
+                className={`${[0, 8, 9, 10, 11, 12].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto h-full`}
               >
                 {currentFrameIndex === 0 && <SceneHero presentationActive={true} />}
                 {currentFrameIndex === 1 && <SceneFounding active={true} />}
@@ -1071,6 +1231,7 @@ export default function AstraMicrowavePage() {
                 {currentFrameIndex === 9 && <SceneThesisCarveOut presentationActive={true} />}
                 {currentFrameIndex === 10 && <SceneThesisCatalyst presentationActive={true} />}
                 {currentFrameIndex === 11 && <SceneThesisMatters presentationActive={true} />}
+                {currentFrameIndex === 12 && <SceneRoadToTwoCompanies presentationActive={true} />}
               </motion.div>
             </AnimatePresence>
           )}
@@ -1174,6 +1335,13 @@ export default function AstraMicrowavePage() {
                 className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
               >
                 <SceneThesisMatters presentationActive={false} />
+              </motion.div>
+
+              <motion.div
+                style={{ opacity: s12Opacity, y: s12Y }}
+                className="absolute inset-0 w-full h-full z-10 pointer-events-none animate-none"
+              >
+                <SceneRoadToTwoCompanies presentationActive={false} />
               </motion.div>
             </>
           )}
