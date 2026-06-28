@@ -282,13 +282,15 @@ export default function Home() {
 
   const nextState = useCallback(() => {
     if (currentFrameIndex < FRAMES.length - 1) {
-      scrollToFrame(currentFrameIndex + 1);
+      const nextIndex = currentFrameIndex + 1 === 34 ? 35 : currentFrameIndex + 1;
+      scrollToFrame(nextIndex);
     }
   }, [currentFrameIndex]);
 
   const previousState = useCallback(() => {
     if (currentFrameIndex > 0) {
-      scrollToFrame(currentFrameIndex - 1);
+      const prevIndex = currentFrameIndex - 1 === 34 ? 33 : currentFrameIndex - 1;
+      scrollToFrame(prevIndex);
     }
   }, [currentFrameIndex]);
 
