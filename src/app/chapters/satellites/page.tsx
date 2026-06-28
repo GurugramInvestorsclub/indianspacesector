@@ -41,8 +41,8 @@ const SATELLITES_SCENES = [
   { id: "microwave-bands", name: "Microwave Spectrum", label: "03 / 16", startFrame: 2, endFrame: 2 },
   { id: "first-principle", name: "First Principle of Design", label: "04 / 16", startFrame: 3, endFrame: 3 },
   { id: "high-end-bands", name: "High-End Bands", label: "05 / 16", startFrame: 4, endFrame: 4 },
-  { id: "components", name: "Components & Architecture", label: "06 / 16", startFrame: 5, endFrame: 5 },
-  { id: "bus-payload", name: "Bus vs Payload", label: "07 / 16", startFrame: 6, endFrame: 6 },
+  { id: "bus-payload", name: "Bus vs Payload", label: "06 / 16", startFrame: 5, endFrame: 5 },
+  { id: "components", name: "Components & Architecture", label: "07 / 16", startFrame: 6, endFrame: 6 },
   { id: "sensors", name: "Family of Sensors", label: "08 / 16", startFrame: 7, endFrame: 7 },
   { id: "owl-bat", name: "The Owl and the Bat", label: "09 / 16", startFrame: 8, endFrame: 8 },
   { id: "radar-work", name: "How Radar Works", label: "10 / 16", startFrame: 9, endFrame: 9 },
@@ -1047,34 +1047,234 @@ function Scene2MeetTheSatellite() {
 }
 
 // 4. BUS VS PAYLOAD
+const SATELLITE_SYSTEMS = [
+  { id: "sat", name: "Satellite", sub: "payload + bus", type: "system", fill: "#27272a", stroke: "#52525b", text: "#ffffff", desc: "The integrated spacecraft combining the mission payload instruments and the host platform bus.", highlights: "Primary integration of systems" },
+  { id: "payload", name: "Payload", sub: "the mission", type: "division", fill: "#3b338a", stroke: "#6366f1", text: "#ffffff", desc: "The operational instrument suite (imaging, communications, radar) that executes the spacecraft's primary commercial or scientific mission.", highlights: "Generates mission value & data" },
+  { id: "bus", name: "Bus / platform", sub: "supports payload", type: "division", fill: "#2d2d39", stroke: "#71717a", text: "#ffffff", desc: "The engineering chassis that houses all host subsystems, keeping the payload operational and maintaining orbital position.", highlights: "Housekeeping, power & navigation" },
+  
+  // Payloads
+  { id: "optical", name: "Optical / imaging", type: "payload-sub", fill: "#1e1b4b", stroke: "#4338ca", text: "#ddd6fe", desc: "Optical telescopes, panchromatic cameras, and multispectral scanners that capture visible light and infrared imagery.", highlights: "Used by: Cartosat, KH-11 spies" },
+  { id: "comms", name: "Comms — transponders", type: "payload-sub", fill: "#1e1b4b", stroke: "#4338ca", text: "#ddd6fe", desc: "Radio frequency repeaters and amplifiers that receive signals from Earth and retransmit them (TV broadcast, satellite internet).", highlights: "Used by: GSAT series, Starlink" },
+  { id: "radar", name: "Radar & sensors", type: "payload-sub", fill: "#1e1b4b", stroke: "#4338ca", text: "#ddd6fe", desc: "Active microwave transceivers (like Synthetic Aperture Radar) and passive radiometers that measure Earth's surface characteristics through clouds.", highlights: "Used by: RISAT, NISAR (NASA-ISRO)" },
+  
+  // Bus Struct/Prop
+  { id: "structure", name: "Structure & mechanisms", type: "bus-struct", fill: "#78350f", stroke: "#b45309", text: "#fef3c7", desc: "The mechanical skeletal frame, launch vehicle adapters, and deployable booms/hinges supporting solar panels and antennas.", highlights: "Aluminum alloys, carbon composite" },
+  { id: "thermal", name: "Thermal control", type: "bus-struct", fill: "#78350f", stroke: "#b45309", text: "#fef3c7", desc: "Radiative louvers, heat pipes, multi-layer insulation (MLI) blankets, and heaters that keep instruments within safe operational temperatures.", highlights: "Survives +120°C sun to -150°C eclipse" },
+  { id: "propulsion", name: "Propulsion", type: "bus-struct", fill: "#78350f", stroke: "#b45309", text: "#fef3c7", desc: "Hydrazine monopropellant thrusters or electric ion propulsion systems used for stationkeeping, orbit raising, and collision avoidance.", highlights: "Chemical monopropellant / Ion hall thruster" },
+  
+  // Bus Avionics
+  { id: "power", name: "Electrical power", type: "bus-avionics", fill: "#064e3b", stroke: "#059669", text: "#d1fae5", desc: "Solar array wings, lithium-ion battery cells, and power conditioning units (PCU) that distribute electrical power to the satellite.", highlights: "Triple-junction solar cells, battery blocks" },
+  { id: "attitude", name: "Attitude control (ADCS)", type: "bus-avionics", fill: "#064e3b", stroke: "#059669", text: "#d1fae5", desc: "Star trackers, sun sensors, gyroscopes, reaction wheels, and magnetorquers that orient the satellite and point sensors precisely.", highlights: "Arcsecond-level pointing stability" },
+  { id: "computer", name: "On-board computer", type: "bus-avionics", fill: "#064e3b", stroke: "#059669", text: "#d1fae5", desc: "The central processor (OBC) running flight software, managing command execution, data storage, and autonomous fault recovery.", highlights: "Radiation-hardened processors, memory" },
+  { id: "telemetry", name: "Telemetry & command", type: "bus-avionics", fill: "#064e3b", stroke: "#059669", text: "#d1fae5", desc: "S-band or X-band receivers and transmitters that receive uplinked ground commands and send downlink status diagnostics.", highlights: "Ground telemetry, tracking & command (TT&C)" },
+];
+
 function Scene3BusVsPayload() {
+  const [activeId, setActiveId] = useState<string>("sat");
+
+  const currentSystem = SATELLITE_SYSTEMS.find((s) => s.id === activeId) || SATELLITE_SYSTEMS[0];
+
+  // Node rendering positions
+  const getPos = (id: string) => {
+    switch (id) {
+      case "sat": return { x: 55, y: 155 };
+      case "payload": return { x: 185, y: 75 };
+      case "bus": return { x: 185, y: 220 };
+      
+      // Payloads
+      case "optical": return { x: 335, y: 35 };
+      case "comms": return { x: 335, y: 75 };
+      case "radar": return { x: 335, y: 115 };
+      
+      // Bus structural
+      case "structure": return { x: 335, y: 150 };
+      case "thermal": return { x: 335, y: 178 };
+      case "propulsion": return { x: 335, y: 206 };
+      
+      // Bus avionics
+      case "power": return { x: 335, y: 234 };
+      case "attitude": return { x: 335, y: 262 };
+      case "computer": return { x: 335, y: 290 };
+      case "telemetry": return { x: 335, y: 318 };
+      default: return { x: 0, y: 0 };
+    }
+  };
+
+  // Dimensions
+  const nodeW = { root: 95, div: 100, sub: 150 };
+  const nodeH = { root: 28, div: 28, sub: 21 };
+
   return (
     <>
       <SceneHeading sub="03. Core Division" main="Satellite Bus vs Payload" />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch w-full max-w-6xl z-10">
-        <div className="lg:col-span-6 bg-[#0a0a14]/70 border border-[#FFB800]/15 p-6 rounded-2xl text-left flex flex-col justify-between">
-          <div>
-            <span className="font-mono text-[9px] uppercase text-[#FFB800] font-bold block mb-2">The Platform</span>
-            <h3 className="text-lg font-bold text-white mb-3">The Satellite Bus</h3>
-            <p className="text-xs text-white/70 leading-relaxed mb-4">
-              The Bus is the vehicle. It provides power generation, temperature regulation, data routing, thrust, and orientation stabilization. It acts as the utility chassis that keeps the payload alive in orbit.
-            </p>
+
+      <div className="w-full max-w-6xl z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center text-left pointer-events-auto">
+        {/* Left Column: Interactive Node Tree SVG */}
+        <div className="lg:col-span-7 bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-4 shadow-2xl relative">
+          <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest block mb-2 text-right pr-2">
+            Click nodes to explore subsystems
+          </span>
+
+          <div className="relative w-full overflow-x-auto">
+            <svg viewBox="0 0 500 350" className="w-[500px] h-[350px] mx-auto block">
+              {/* CONNECTING PATHS (BEZIERS) */}
+              {/* Sat -> Payload */}
+              <path
+                d="M 150 155 C 165 155, 170 75, 185 75"
+                fill="none"
+                stroke="rgba(255,255,255,0.12)"
+                strokeWidth="1.5"
+              />
+              {/* Sat -> Bus */}
+              <path
+                d="M 150 155 C 165 155, 170 220, 185 220"
+                fill="none"
+                stroke="rgba(255,255,255,0.12)"
+                strokeWidth="1.5"
+              />
+
+              {/* Payload -> Sub subsystems */}
+              {["optical", "comms", "radar"].map((id) => (
+                <path
+                  key={id}
+                  d={`M 285 75 C 305 75, 315 ${getPos(id).y}, 335 ${getPos(id).y}`}
+                  fill="none"
+                  stroke="rgba(255,255,255,0.1)"
+                  strokeWidth="1.2"
+                />
+              ))}
+
+              {/* Bus -> Sub subsystems */}
+              {["structure", "thermal", "propulsion", "power", "attitude", "computer", "telemetry"].map((id) => (
+                <path
+                  key={id}
+                  d={`M 285 220 C 305 220, 315 ${getPos(id).y}, 335 ${getPos(id).y}`}
+                  fill="none"
+                  stroke="rgba(255,255,255,0.1)"
+                  strokeWidth="1.2"
+                />
+              ))}
+
+              {/* DRAW NODES */}
+              {SATELLITE_SYSTEMS.map((sys) => {
+                const pos = getPos(sys.id);
+                const isRoot = sys.type === "system";
+                const isDiv = sys.type === "division";
+                const isActive = activeId === sys.id;
+                const width = isRoot ? nodeW.root : isDiv ? nodeW.div : nodeW.sub;
+                const height = isRoot ? nodeH.root : isDiv ? nodeH.div : nodeH.sub;
+
+                // Adjust positioning to center-align box on coordinates
+                const boxX = pos.x;
+                const boxY = pos.y - height / 2;
+
+                return (
+                  <g
+                    key={sys.id}
+                    className="cursor-pointer group"
+                    onClick={() => setActiveId(sys.id)}
+                  >
+                    {/* Glow outline on hover/active */}
+                    <rect
+                      x={boxX - 2}
+                      y={boxY - 2}
+                      width={width + 4}
+                      height={height + 4}
+                      rx={6}
+                      fill="none"
+                      stroke={isActive ? "#FFB800" : "rgba(255,255,255,0.15)"}
+                      strokeWidth={isActive ? 2 : 0}
+                      className="group-hover:stroke-white/30 transition-all"
+                    />
+
+                    {/* Main Node Box */}
+                    <rect
+                      x={boxX}
+                      y={boxY}
+                      width={width}
+                      height={height}
+                      rx={4}
+                      fill={sys.fill}
+                      stroke={sys.stroke}
+                      strokeWidth="1"
+                      className="transition-colors"
+                    />
+
+                    {/* Node Text */}
+                    <text
+                      x={boxX + width / 2}
+                      y={boxY + height / 2 + (sys.sub ? -3 : 3)}
+                      textAnchor="middle"
+                      fill={sys.text}
+                      className="font-sans font-bold text-[9px] pointer-events-none"
+                    >
+                      {sys.name}
+                    </text>
+
+                    {sys.sub && (
+                      <text
+                        x={boxX + width / 2}
+                        y={boxY + height / 2 + 7}
+                        textAnchor="middle"
+                        fill="rgba(255,255,255,0.4)"
+                        className="font-sans text-[7px] pointer-events-none"
+                      >
+                        {sys.sub}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+            </svg>
           </div>
-          <div className="border-t border-[#FFB800]/5 pt-3 mt-4 text-[9px] font-mono text-white/40 uppercase">
-            Includes: Batteries, solar arrays, thrusters, computer bus.
+
+          {/* Legend row */}
+          <div className="flex justify-center items-center gap-6 border-t border-white/5 pt-3.5 mt-2 font-mono text-[8px] text-white/40">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded bg-[#312e81] inline-block" />
+              <span>Payload</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded bg-[#78350f] inline-block" />
+              <span>Structural / Propulsion</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded bg-[#064e3b] inline-block" />
+              <span>Avionics / Electronics</span>
+            </div>
           </div>
         </div>
 
-        <div className="lg:col-span-6 bg-[#FFB800]/5 border border-[#FFB800]/30 p-6 rounded-2xl text-left flex flex-col justify-between">
-          <div>
-            <span className="font-mono text-[9px] uppercase text-[#FFB800] font-bold block mb-2">The Mission</span>
-            <h3 className="text-lg font-bold text-white mb-3">The Payload</h3>
-            <p className="text-xs text-white/70 leading-relaxed mb-4">
-              The Payload is the functional utility. It performs the specific operational mission, such as capturing pictures, firing radar waves, or broadcasting telecommunication signals. The payload dictates the design of the entire satellite.
+        {/* Right Column: Editorial Detail Card */}
+        <div className="lg:col-span-5 flex flex-col justify-between h-full bg-[#0a0a14]/60 border border-white/5 rounded-2xl p-6 shadow-2xl relative min-h-[350px]">
+          <div className="space-y-4">
+            <div className="border-b border-white/10 pb-3">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#FFB800] block mb-1 font-bold">
+                {currentSystem.type.replace("-", " ")} definition
+              </span>
+              <h3 className="text-xl font-bold text-white leading-tight font-serif uppercase tracking-wide">
+                {currentSystem.name}
+              </h3>
+            </div>
+
+            <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-light">
+              {currentSystem.desc}
             </p>
           </div>
-          <div className="border-t border-[#FFB800]/10 pt-3 mt-4 text-[9px] font-mono text-[#FFB800]/60 uppercase">
-            Includes: Multispectral cameras, active radar, communication transceivers.
+
+          <div className="space-y-3.5 border-t border-white/5 pt-4 mt-4">
+            <div className="p-3 bg-white/[0.01] border border-white/10 rounded-xl space-y-1">
+              <span className="font-mono text-[8px] text-[#FFB800] uppercase font-bold tracking-widest block">
+                Engineering Insight
+              </span>
+              <p className="text-[11px] font-mono text-white/80 leading-relaxed">
+                {currentSystem.highlights}
+              </p>
+            </div>
+
+            <p className="text-[10px] text-white/40 leading-relaxed italic">
+              * Click on different boxes in the diagram to inspect their system parameters and functions.
+            </p>
           </div>
         </div>
       </div>
@@ -1905,15 +2105,15 @@ export default function SatellitesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -20, scale: 1.01 }}
                 transition={{ duration: 0.48, ease: [0.25, 1, 0.5, 1] }}
-                className={`${[0, 5, 7].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
+                className={`${[0, 6, 7].includes(currentFrameIndex) ? "absolute inset-0 w-full h-full z-10 pointer-events-auto" : SLIDE_BASE} text-center pointer-events-auto`}
               >
                 {currentFrameIndex === 0 && <Scene0Splash presentationActive />}
                 {currentFrameIndex === 1 && <Scene0Hero presentationActive />}
                 {currentFrameIndex === 2 && <SceneMicrowaveBands />}
                 {currentFrameIndex === 3 && <Scene4FirstPrinciple />}
                 {currentFrameIndex === 4 && <SceneHighEndBands />}
-                {currentFrameIndex === 5 && <Scene2MeetTheSatellite />}
-                {currentFrameIndex === 6 && <Scene3BusVsPayload />}
+                {currentFrameIndex === 5 && <Scene3BusVsPayload />}
+                {currentFrameIndex === 6 && <Scene2MeetTheSatellite />}
                 {currentFrameIndex === 7 && <Scene5FamilyOfSensors />}
                 {currentFrameIndex === 8 && <Scene6OwlAndBat />}
                 {currentFrameIndex === 9 && <Scene7HowRadarWorks />}
@@ -1975,25 +2175,25 @@ export default function SatellitesPage() {
 
               <motion.div
                 style={{ opacity: s4Opacity, y: s4Y }}
-                className={`absolute inset-0 w-full h-full z-10 text-center ${
-                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
-                }`}
-              >
-                <Scene2MeetTheSatellite />
-              </motion.div>
-
-              <motion.div
-                style={{ opacity: s5Opacity, y: s5Y }}
                 className={`${SLIDE_BASE} text-center ${
-                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                  currentFrameIndex === 5 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
                 <Scene3BusVsPayload />
               </motion.div>
 
               <motion.div
+                style={{ opacity: s5Opacity, y: s5Y }}
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
+                  currentFrameIndex === 6 ? "pointer-events-auto" : "pointer-events-none"
+                }`}
+              >
+                <Scene2MeetTheSatellite />
+              </motion.div>
+
+              <motion.div
                 style={{ opacity: s6Opacity, y: s6Y }}
-                className={`${SLIDE_BASE} text-center ${
+                className={`absolute inset-0 w-full h-full z-10 text-center ${
                   currentFrameIndex === 7 ? "pointer-events-auto" : "pointer-events-none"
                 }`}
               >
