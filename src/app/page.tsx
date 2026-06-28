@@ -163,6 +163,64 @@ const SECTIONS = [
   { name: "NewEra", frames: [30, 31, 32, 33, 34, 35, 36, 37] }
 ];
 
+function FirstPrinciplesLogo() {
+  return (
+    <div className="fixed bottom-6 left-6 z-40 flex items-center gap-2 select-none pointer-events-none bg-[#030308]/60 px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-md shadow-lg">
+      {/* Icon: Gold circle with neural network brain */}
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none" className="w-4.5 h-4.5 shrink-0 opacity-90">
+        <circle cx="11" cy="11" r="10" stroke="#FFB800" strokeWidth="1" />
+        {/* Brain outline path */}
+        <path
+          d="M11 6C9.2 6 8.2 7.0 8.2 8.5C8.2 9.0 8.3 9.3 8.4 9.6C7.5 10.2 7.0 11.0 7.0 12.0C7.0 13.5 8.2 14.5 9.5 14.5C9.8 14.5 10.1 14.4 10.4 14.3C10.7 15.0 11.4 15.5 12.2 15.5C13.0 15.5 13.7 15.0 14.0 14.3C14.3 14.4 14.6 14.5 14.9 14.5C16.2 14.5 17.4 13.5 17.4 12.0C17.4 11.0 16.9 10.2 16.0 9.6C16.1 9.3 16.2 9.0 16.2 8.5C16.2 7.0 15.2 6 13.4 6H11Z"
+          stroke="#FFB800"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="opacity-70"
+        />
+        {/* Neural Network Nodes */}
+        <circle cx="10" cy="8" r="0.6" fill="#FFB800" />
+        <circle cx="12" cy="7.5" r="0.6" fill="#FFB800" />
+        <circle cx="14" cy="8" r="0.6" fill="#FFB800" />
+        <circle cx="9.5" cy="10" r="0.6" fill="#FFB800" />
+        <circle cx="11.5" cy="9.5" r="0.6" fill="#FFB800" />
+        <circle cx="13.5" cy="10" r="0.6" fill="#FFB800" />
+        <circle cx="15.5" cy="9.5" r="0.6" fill="#FFB800" />
+        <circle cx="10.5" cy="11.5" r="0.6" fill="#FFB800" />
+        <circle cx="12.5" cy="11.5" r="0.6" fill="#FFB800" />
+        <circle cx="14.5" cy="11" r="0.6" fill="#FFB800" />
+        <circle cx="11.5" cy="13.5" r="0.6" fill="#FFB800" />
+        <circle cx="13.5" cy="13" r="0.6" fill="#FFB800" />
+        {/* Node connections */}
+        <line x1="10" y1="8" x2="12" y2="7.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12" y1="7.5" x2="14" y2="8" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="10" y1="8" x2="9.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12" y1="7.5" x2="11.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14" y1="8" x2="13.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14" y1="8" x2="15.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="9.5" y1="10" x2="11.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="13.5" y2="10" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="15.5" y2="9.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="9.5" y1="10" x2="10.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="10.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="11.5" y1="9.5" x2="12.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="12.5" y2="11.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="13.5" y1="10" x2="14.5" y2="11" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="15.5" y1="9.5" x2="14.5" y2="11" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="10.5" y1="11.5" x2="11.5" y2="13.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12.5" y1="11.5" x2="11.5" y2="13.5" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="12.5" y1="11.5" x2="13.5" y2="13" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+        <line x1="14.5" y1="11" x2="13.5" y2="13" stroke="#FFB800" strokeWidth="0.4" className="opacity-40" />
+      </svg>
+      {/* Brand Text */}
+      <span className="font-sans text-[10px] font-medium tracking-wide flex items-center gap-1 select-none">
+        <span className="text-white/90">First Principles</span>
+        <span className="text-[#FFB800] font-semibold">Investing</span>
+      </span>
+    </div>
+  );
+}
+
 export default function Home() {
   const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
   const [presentationActive, setPresentationActive] = useState(false);
@@ -563,26 +621,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Floating Presentation Mode Toggle Badge (Bottom-Left) */}
-      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-2 font-mono">
-        <button
-          onClick={() => {
-            const nextActive = !presentationActive;
-            setPresentationActive(nextActive);
-            if (!nextActive) {
-              setHudOpen(false);
-            }
-          }}
-          className={`interactive-control px-4 py-2 rounded-full border text-[10px] font-bold tracking-wider transition-all duration-300 flex items-center gap-2 backdrop-blur-md shadow-lg cursor-pointer ${
-            presentationActive
-              ? "bg-[#FFB800]/15 border-[#FFB800] text-[#FFB800] shadow-[#FFB800]/10"
-              : "bg-[#030308]/80 border-white/10 text-white/60 hover:text-white hover:border-white/20"
-          }`}
-        >
-          <MonitorPlay className={`w-3.5 h-3.5 ${presentationActive ? "animate-pulse" : ""}`} />
-          <span>PRESENTER CLICKER: {presentationActive ? "ACTIVE" : "ON"}</span>
-        </button>
-      </div>
+      {/* Floating Brand Logo (Bottom-Left) */}
+      <FirstPrinciplesLogo />
 
 
       {/* Presenter Mode Speaker Notes Console Overlay */}
