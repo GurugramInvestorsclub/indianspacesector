@@ -2728,8 +2728,3 @@ export default function SatellitesPage() {
     </div>
   );
 }
-        </div>
-      </div>
-    </div>
-  );
-}

@@ -1,32 +1,32 @@
-# Scroll-Independent Presenter Mode Crash Resolution Walkthrough
+# Frame Removal & Code Compilation Walkthrough: Satellites Section
 
-We have successfully resolved the client-side crash and slide transition glitches in presenter mode. The site now runs, compiles, and builds flawlessly, with premium animated transitions on presentation click.
+We have successfully cleaned up the Satellites chapter, removing frames 10, 11, 14, and 15 as requested, and resolving the syntax duplication error that was causing Next.js build compilation failures.
 
-## Root Cause of the Crash
-Framer Motion's DOM renderer crashes with a fatal JavaScript exception when a component dynamically toggles its `style` prop between a `MotionValue` object and `undefined` (or toggles `animate` between a style object and `undefined`) at runtime during a state change (such as enabling/disabling presenter mode).
+## Actions Completed
 
-## Final Fixes Implemented
+### 1. Frame Removal in Satellites Section
+We verified the removal of the following frames (by their original 1-based indexing in `SATELLITES_SCENES` labels):
+- **10th Frame**: `sensors` / "Family of Sensors" (`Scene5FamilyOfSensors`)
+- **11th Frame**: `owl-bat` / "The Owl and the Bat" (`Scene6OwlAndBat`)
+- **14th Frame**: `mission-config` / "Mission Config" (`Scene9MissionConfig`)
+- **15th Frame**: `nisar` / "NISAR Mission" (`Scene10NISAR`)
 
-### 1. 100% Static style Bindings (Zero style/animate Swaps)
-We refactored all remaining components that had conditional styles (`style={presentationActive ? undefined : ...}`) and conditional animate overrides (`animate={presentationActive ? ... : undefined}`):
-* **[beginning.tsx](file:///c:/Users/Rakshith/OneDrive/Desktop/freelancing/indianspacesector/src/components/sections/beginning.tsx)**: Removed conditional styles/animations in Scenes 4 and 5 (INCOSPAR and Thumba launch).
-* **[launch-evolution.tsx](file:///c:/Users/Rakshith/OneDrive/Desktop/freelancing/indianspacesector/src/components/sections/launch-evolution.tsx)**: Removed conditional styles/animations across all 8 slides.
-* **[exploration.tsx](file:///c:/Users/Rakshith/OneDrive/Desktop/freelancing/indianspacesector/src/components/sections/exploration.tsx)**: Removed conditional styles/animations in the Moon, Mars, and Sun slides.
-* **[new-era.tsx](file:///c:/Users/Rakshith/OneDrive/Desktop/freelancing/indianspacesector/src/components/sections/new-era.tsx)**: Removed conditional styles/animations across all 8 slides.
+### 2. Syntax/Closing Bracket Cleanup
+We resolved the duplicate syntax structure at the end of [page.tsx](file:///c:/Users/Rakshith/OneDrive/Desktop/freelancing/indianspacesector/src/app/chapters/satellites/page.tsx) (lines 2731-2735) that resulted in double closing `div`s, brackets, and `export default function` declarations.
 
-All elements are now statically bound to their respective transforms of the unified `progress` MotionValue, eliminating property-swapping crashes entirely.
-
-### 2. Smooth Programmatic Slide Transitions
-Rather than instantly snapping values (which caused layout flashes or overlapping renders), we updated all presenter mode triggers to drive the `progress` MotionValue smoothly:
-* Inside the `useEffect` hooks of `beginning.tsx`, `exploration.tsx`, `launch-evolution.tsx`, and `new-era.tsx`, we now transition progress via Framer Motion's `animate(progress, targetProgress, { duration: 0.6, ease: [0.25, 1, 0.5, 1] })`.
-* This automatically runs all dependent `useTransform` animations (opacities, scales, positions, and rotations) smoothly during slide transitions, exactly matching the scroll-scrubbing feel.
-* We properly clean up the animation controls in the effect's return cleanup block (`return () => controls.stop()`) to prevent concurrent animations.
+### 3. Scroll Transforms Calibration
+The remaining 14 frames have been successfully re-indexed and their scroll interpolations (`s8Opacity`, `s9Opacity`, `s10Opacity`, `s11Opacity`, `s12Opacity`) mapped correctly onto the remaining scenes:
+- `Scene7HowRadarWorks` (Frame index 9 / label "10 / 14")
+- `Scene8SyntheticApertureRadar` (Frame index 10 / label "11 / 14")
+- `Scene11InsideRadarPayload` (Frame index 11 / label "12 / 14")
+- `Scene12IndianEcosystem` (Frame index 12 / label "13 / 14")
+- `Scene13Thesis` (Frame index 13 / label "14 / 14")
 
 ---
 
 ## Verification & Compilation Run
 
-1. **TypeScript Type Safety Check**:
+1. **TypeScript Compilation Check**:
    ```bash
    npx tsc --noEmit
    ```
@@ -36,12 +36,4 @@ Rather than instantly snapping values (which caused layout flashes or overlappin
    ```bash
    npm run build
    ```
-   **Result**: Compiled successfully, generated all static pages, optimized production assets, and exited with code `0`.
-
----
-
-## How to Test
-1. Run `npm run dev` to start the local development server.
-2. Click **PRESENTER CLICKER: ON** (or press the toggle at the top right of the page).
-3. Use the **Right Arrow / Spacebar** to go forward and **Left Arrow / Shift+Click** to go backward.
-4. Verify that slide transitions are buttery-smooth, do not overlap, and do not crash the page.
+   **Result**: Successfully compiled and built all static paths including `/chapters/satellites`.
